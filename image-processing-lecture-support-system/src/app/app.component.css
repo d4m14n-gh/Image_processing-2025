@@ -1,0 +1,9 @@
+/* @import "@angular/material/prebuilt-themes/azure-blue.css"; */
+
+mat-sidenav-content {
+    padding: 20px;
+}
+mat-sidenav-container{
+    height: 100%;
+    background-color: var(--mat-sys-primary-container);
+}

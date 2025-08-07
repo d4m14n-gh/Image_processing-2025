@@ -1,0 +1,81 @@
+mat-card {
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+table {
+    width: fit-content;
+    border-collapse: collapse;
+    user-select: none;
+}
+
+td {
+    border: none;
+}
+
+
+
+.cell {
+    min-width: 3ch;        
+    width: 4ch;           
+    height: 4ch;            
+    aspect-ratio: 1 / 1;  
+    text-align: center;
+    vertical-align: middle;
+    font-family: "Roboto Mono", monospace;
+    padding: 0.2ch;
+    box-sizing: border-box;
+}
+
+
+.cell.header {
+    background-color: white;
+    background-color: var(--mat-sys-secondary-container);
+    color: var(--mat-sys-on-secondary-container);
+    font-weight: bold;
+}
+
+:host {
+    --selected-border: 1px solid var(--mat-sys-primary);
+    --default-border: 1px solid #111;
+}
+
+
+.bordered td{
+    border: var(--default-border);
+}
+.cell.data {
+    background-color: white;
+    filter: brightness(1);
+    transition: filter 0.3s ease; 
+}
+.cell.data:hover {
+    filter: brightness(0.7);
+}
+.cell.data.border-bottom::before {
+    border-bottom: var(--selected-border);
+}
+.cell.data.border-right::before {
+    border-right: var(--selected-border);
+}
+.cell.data.border-left::before {
+    border-left: var(--selected-border);
+}
+.cell.data.border-top::before {
+    border-top: var(--selected-border);
+}
+.cell.data {
+    /* filter: brightness(1.5); */
+    transition: all 0.5s ease;
+    position: relative;
+    isolation: isolate;
+}
+.cell.data::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+}
+.cell.data.selected::before {
+  background-color: rgba(0, 123, 255, 0.1); 
+}

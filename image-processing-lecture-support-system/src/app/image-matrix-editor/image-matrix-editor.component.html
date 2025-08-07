@@ -1,0 +1,54 @@
+<section>
+
+    <mat-card>
+        <label>Height:</label>
+        <mat-slider showTickMarks min="5" max="20" step="1" discrete="thumbLabel" showTickMarks="showTicks"
+            style="width: fit-content;">
+            <input matSliderThumb value="10" (dragEnd)="setHeight($event.value)">
+        </mat-slider>
+
+        <label>Width:</label>
+        <mat-slider showTickMarks min="5" max="20" step="1" discrete="thumbLabel" showTickMarks="showTicks"
+            style="width: fit-content;">
+            <input matSliderThumb value="10" (dragEnd)="setWidth($event.value)">
+        </mat-slider>
+
+        <mat-checkbox [(ngModel)] ="showNumberValues">Show Number Values</mat-checkbox>
+        <mat-checkbox [(ngModel)] ="showBorders">Show Grid</mat-checkbox>
+        <mat-checkbox [(ngModel)] ="showColorScale">Show Color Scale</mat-checkbox>
+
+
+    </mat-card>
+
+    <mat-card>
+        <table [class.bordered]="showBorders">
+            <tr>
+                <td class="cell"></td>
+                @for (col of getCols(); track $index) {
+                    <td class="cell header">{{ col + 1 }}</td>
+                }
+            </tr>
+            
+            <!-- (click)="setValue(row, col, (getValue(row, col) + 32) % 256)" -->
+            @for (row of getRows(); track $index) {
+                <tr>
+                    <td class="cell header">{{ row + 1 }}</td>
+                    @for (col of getCols(); track $index) {
+                    <td 
+                        class="cell data" 
+                        [ngClass]="getBorderClass(row, col)"
+                        [style.backgroundColor]="showColorScale ? getColor(row, col) : 'white'"
+                        (click)="selectElement(row, col)"
+                    >
+                        @if (showNumberValues) {
+                            {{ getValue(row, col) }}
+                        }
+                    </td>
+                    }
+                </tr>
+            }
+        </table>
+    </mat-card>
+
+   
+</section>
