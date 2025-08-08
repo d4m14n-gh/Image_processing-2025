@@ -17,14 +17,10 @@ import { MatListModule } from '@angular/material/list';
     MatSidenavModule,
     MatCardModule,
     MatListModule,
+    
   ],    
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'image-processing-lecture-support-system';
-   isOpen = true;
-  toggle() {
-    this.isOpen = !this.isOpen;
-  }
 }

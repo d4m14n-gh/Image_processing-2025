@@ -1,19 +1,34 @@
 
 
 
-
+<header
+  [style.backgroundColor]="'var(--mat-sys-primary)'"
+  [style.color]="'var(--mat-sys-on-primary)'"
+  [style.padding.px]="10"
+  >
+  <h3 style="margin: 0;">
+    Header
+  </h3>
+</header>
 
 <mat-sidenav-container>
   
-  <mat-sidenav mode="side" opened>
-    <mat-nav-list>
-      <a mat-list-item routerLink="/editor">Image Matrix Editor</a>
-    </mat-nav-list>
+  <mat-sidenav #sidenav 
+    mode="side" 
+    opened 
+    (mouseenter)="sidenav.open()"
+    (mouseleave)="sidenav.close()"
+  >
+    @if (sidenav.opened) {
+
+      <mat-nav-list>
+        <a mat-list-item routerLink="/editor">Image Matrix Editor</a>
+      </mat-nav-list>
+    }
   </mat-sidenav>
-  
-  
-  
-  <mat-sidenav-content>  
+
+  <mat-sidenav-content>
+    <div class="hover-zone" (mouseenter)="sidenav.open()"></div>
     <router-outlet />
   </mat-sidenav-content>
 

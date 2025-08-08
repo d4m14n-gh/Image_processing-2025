@@ -1,9 +1,19 @@
 /* @import "@angular/material/prebuilt-themes/azure-blue.css"; */
 
+.hover-zone {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 5px;     
+  height: 100vh;
+  background: transparent;
+  z-index: 1000;
+}
+
 mat-sidenav-content {
-    padding: 20px;
+    padding: 10px;
 }
 mat-sidenav-container{
     height: 100%;
-    background-color: var(--mat-sys-primary-container);
+    background-color: var(--mat-sys-surface-container);
 }

@@ -1,4 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+  --selection-border-color: #00b3ff;
+  --selection-border-color: #00b3ff;
+  --selection-background-color: rgba(218, 226, 249, 0.5);
+  --selected-border: 2px solid var(--selection-border-color);
+  --default-border: 1px solid var(--mat-sys-outline);
+}
 
 .roboto {
   font-family: "Roboto", sans-serif;
