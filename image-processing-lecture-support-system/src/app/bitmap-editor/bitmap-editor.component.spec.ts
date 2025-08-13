@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ImageMatrixEditorComponent } from './image-matrix-editor.component';
+import { BitmapEditorComponent } from './bitmap-editor.component';
 
 describe('ImageMatrixEditorComponent', () => {
-  let component: ImageMatrixEditorComponent;
-  let fixture: ComponentFixture<ImageMatrixEditorComponent>;
+  let component: BitmapEditorComponent;
+  let fixture: ComponentFixture<BitmapEditorComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ImageMatrixEditorComponent]
+      imports: [BitmapEditorComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ImageMatrixEditorComponent);
+    fixture = TestBed.createComponent(BitmapEditorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

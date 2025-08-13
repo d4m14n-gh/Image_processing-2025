@@ -1,0 +1,56 @@
+.app-layout {
+  height: 100%;
+}
+
+.top-toolbar {
+    height: 64px;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.main-grid {
+  /* flex: 1; */
+  display: grid;
+  grid-template-columns: 275px 1fr 275px;
+  gap: 10px;
+  padding: 10px;
+  height: calc(100% - 20px); 
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.bitmap-wrapper {
+  margin: auto;
+  background-color: var(--mat-sys-outline-variant);
+  border-radius: 1px;
+  outline: 1px solid var(--mat-sys-outline-variant);
+}
+
+mat-nav-list > * {
+  border-radius: 5px;
+  padding: 5px;
+  margin: 0;
+  height: fit-content;
+}
+
+mat-card {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  max-height: 100%;
+  user-select: none;
+}
+
+
+mat-card-subtitle {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 5px;
+}

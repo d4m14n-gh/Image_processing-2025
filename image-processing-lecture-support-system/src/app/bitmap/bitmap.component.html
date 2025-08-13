@@ -1,0 +1,9 @@
+<div class="canvas-container">
+    <canvas #canvas [style.width]="getWidth() + 'px'"
+        [style.height]="getHeight() + 'px'" 
+        (mousemove)="onCanvasMouseMove($event)"
+        (mousedown)="onCanvasMouseDown($event)"
+        (mouseup)="onCanvasMouseUp($event)"
+        > 
+    </canvas>
+</div>

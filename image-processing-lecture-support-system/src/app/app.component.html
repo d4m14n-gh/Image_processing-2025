@@ -1,34 +1,25 @@
-
-
-
-<header
-  [style.backgroundColor]="'var(--mat-sys-primary)'"
-  [style.color]="'var(--mat-sys-on-primary)'"
-  [style.padding.px]="10"
-  >
+<header>
+  <mat-icon class="menu-icon" fontIcon="menu" (click)="sidenav.toggle()"></mat-icon>
   <h3 style="margin: 0;">
-    Header
+    {{title}}
   </h3>
+  <span class="spacer"></span>
+  <mat-icon class="menu-icon" [fontIcon]="themeService.getTheme()=='light'?'light_mode':'dark_mode'"
+    (click)="themeService.toggleTheme()"></mat-icon>
 </header>
 
 <mat-sidenav-container>
-  
-  <mat-sidenav #sidenav 
-    mode="side" 
-    opened 
-    (mouseenter)="sidenav.open()"
-    (mouseleave)="sidenav.close()"
-  >
-    @if (sidenav.opened) {
 
-      <mat-nav-list>
-        <a mat-list-item routerLink="/editor">Image Matrix Editor</a>
-      </mat-nav-list>
+  <mat-sidenav #sidenav mode="side" closed (mouseenter)="sidenav.open()" (mouseleave)="sidenav.close()">
+    @if (sidenav.opened) {
+    <mat-nav-list>
+      <a mat-list-item routerLink="/">Home</a>
+      <a mat-list-item routerLink="/editor">Bitmap Editor</a>
+    </mat-nav-list>
     }
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <div class="hover-zone" (mouseenter)="sidenav.open()"></div>
     <router-outlet />
   </mat-sidenav-content>
 

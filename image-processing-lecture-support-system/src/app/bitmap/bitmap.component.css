@@ -1,0 +1,10 @@
+canvas {
+    image-rendering: pixelated;
+    display: block;
+}
+.canvas-container {
+    overflow: hidden;
+    width: fit-content;
+    height: fit-content;
+    user-select: none;
+}

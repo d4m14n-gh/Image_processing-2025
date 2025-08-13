@@ -1,19 +1,56 @@
 /* @import "@angular/material/prebuilt-themes/azure-blue.css"; */
 
-.hover-zone {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 5px;     
-  height: 100vh;
-  background: transparent;
-  z-index: 1000;
+mat-card{
+  border-radius: 5px;
 }
 
-mat-sidenav-content {
-    padding: 10px;
+mat-sidenav {
+  padding: 5px;
 }
+
+mat-sidenav {
+  border-radius: 0;
+  width: fit-content;
+  min-width: 250px;
+  border-right: var(--default-border);
+}
+
 mat-sidenav-container{
-    height: 100%;
-    background-color: var(--mat-sys-surface-container);
+  height: calc(100vh - 50px);
+  background-color: var(--mat-sys-surface-container);
 }
+
+header {
+  height: 50px;
+  box-sizing: border-box;
+  background-color: var(--mat-sys-secondary);
+  color: var(--mat-sys-on-secondary);
+  padding: 10px;
+  border-bottom: var(--default-border);
+  
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+mat-nav-list{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+mat-nav-list > a {
+  border-radius: 5px;
+}
+
+.menu-icon {
+  cursor: pointer;
+}
+.menu-icon:hover {
+  transform: scale(1.3);
+  transition: transform 0.2s ease-in-out;
+}
+.spacer{
+  flex-grow: 1;
+}
+

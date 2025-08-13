@@ -1,21 +1,14 @@
+import { DragArea } from "./drag-area";
+
 export class Bitmap{
   private width: number;
   private height: number;
   private matrix: number[][];
-  private selected: Set<string>;
 
-  constructor(width: number = 10, height: number = 10, oldMatrix?: Bitmap) {
+  constructor(width: number = 10, height: number = 10, oldMatrix?: Bitmap, defaultValue: number = 0) {
     this.width = width;
     this.height = height;
-    this.matrix = Array.from({ length: height }, () => Array(width).fill(0));
-    this.selected = new Set();
-
-    // Fill with random values between 0 and 255
-    for (let r = 0; r < height; r++) {
-      for (let c = 0; c < width; c++) {
-        this.matrix[r][c] = Math.floor(Math.random() * 256);
-      }
-    }
+    this.matrix = Array.from({ length: height }, () => Array(width).fill(defaultValue));
 
     oldMatrix?.matrix.forEach((row, r) => {
       row.forEach((value, c) => {
@@ -24,33 +17,67 @@ export class Bitmap{
         }
       });
     });
-    
-
   }
 
-  public getWidth(): number {
+  getWidth(): number {
     return this.width;
   }
-  public getHeight(): number {
+  getHeight(): number {
     return this.height;
   }
-  public getElement(row: number, col: number): number {
-    return this.matrix[row]?.[col] ?? 0;
+  get(row: number, col: number): number {
+    return this.matrix[row]?.[col] ?? NaN;
   }
-  public isSelected(row: number, col: number): boolean {
-    return this.selected.has(`${row},${col}`);
+  isOut(row: number, col: number): boolean {
+    return row < 0 || row >= this.height || col < 0 || col >= this.width;
   }
-  
-  public selectElement(row: number, col: number): void {
-    this.selected.add(`${row},${col}`);
+  set(row: number, col: number, value: number): void {
+    this.matrix[row][col] = value;
   }
-  public unselectElement(row: number, col: number): void {
-    this.selected.delete(`${row},${col}`);
+}
+
+
+
+export class InteractiveBitmap extends Bitmap {
+  private _selected: Set<string>;
+  private _drag_area: DragArea;
+
+  constructor(width: number, height: number, oldMatrix?: Bitmap, defaultValue: number = 0) {
+    super(width, height, oldMatrix, defaultValue);
+    this._selected = new Set();
+    this._drag_area = new DragArea();
+  }
+
+  isDragged(row: number, col: number): boolean {
+    return this._drag_area.dragging&&this._drag_area.includes(row, col);
+  }
+  get dragArea(): DragArea {
+    return this._drag_area;
+  }
+  set dragArea(drag_area: DragArea) {
+    this._drag_area = drag_area;
+  }
+
+  isSelected(row: number, col: number): boolean {
+    if (row < 0 || row >= this.getHeight() || col < 0 || col >= this.getWidth()) {
+      return false;
+    }
+    return this._selected.has(`${row},${col}`);
+  }
+
+  select(row: number, col: number): void {
+    this._selected.add(`${row},${col}`);
+  }
+  unselect(row: number, col: number): void {
+    this._selected.delete(`${row},${col}`);
+  }
+  setSelection(row: number, col: number, value: boolean): void {
+    if (value) 
+      this.select(row, col);
+    else 
+      this.unselect(row, col);
   }
   clearSelection() {
-    this.selected.clear();
-  }
-  public setElement(row: number, col: number, value: number): void {
-    this.matrix[row][col] = value;
+    this._selected.clear();
   }
 }

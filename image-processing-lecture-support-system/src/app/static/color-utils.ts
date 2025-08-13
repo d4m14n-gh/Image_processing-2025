@@ -1,12 +1,5 @@
 import chroma from "chroma-js";
-
-export enum ColorScale {
-    None = 'none',
-    Grayscale = 'grayscale',
-    Heatmap = 'heatmap',
-    Spectral = 'spectral',
-    Viridis = 'viridis'
-}
+import { ColorScale } from "./enums";
 
 export function colorScaleFromString(value: string): ColorScale {
   if (Object.values(ColorScale).includes(value as ColorScale)) {
@@ -15,9 +8,14 @@ export function colorScaleFromString(value: string): ColorScale {
   return ColorScale.Grayscale;
 }
 
-export function getContrastTextColor(bgColor: string): string {
-  const luminance = chroma(bgColor).luminance();
-  return luminance > 0.27 ? 'rgb(26, 27, 31)' : 'rgb(249, 248, 244)';
+export function isDark(color: string): boolean{
+  const luminance = chroma(color).luminance();
+  return luminance > 0.215;
+}
+
+export function getContrastColor(color: string): string {
+  const luminance = chroma(color).luminance();
+  return luminance > 0.215 ? 'rgb(26, 27, 31)' : 'rgb(249, 248, 244)';
 }
 
 export function scaleColor(value: number, colorScale: ColorScale): string {
