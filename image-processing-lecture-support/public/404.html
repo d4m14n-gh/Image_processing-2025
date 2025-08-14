@@ -6,9 +6,6 @@
     var search = window.location.search || '';
     var hash = window.location.hash || '';
     var target = base + '/#' + path + search + hash;
-    if (!hash) {
-        setTimeout(() => {
-            window.location.replace("https://d4m14n-gh.github.io" + target);
-        }, 500);
-    }
+    if (!hash) 
+        window.location.replace(target);
 </script>

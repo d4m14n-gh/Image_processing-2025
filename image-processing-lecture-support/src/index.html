@@ -19,11 +19,28 @@
   <link id="theme-link" href="themes/azure-blue-dark.css" rel="stylesheet">
   
   <link rel="manifest" href="manifest.webmanifest">
-  <link rel="manifest" href="manifest.webmanifest">
-  <link rel="manifest" href="manifest.webmanifest">
 </head>
 <body>
   <app-root></app-root>
+  <script>
+    let base = document.querySelector('base')?.getAttribute('href') || '';
+    if(base.endsWith('/')) 
+        base = base.slice(0, -1);
+      
+
+    let path = window.location.pathname;
+    if (path.startsWith(base)) 
+        path = path.slice(base.length);
+    if (!path.startsWith('/')) path = '/' + path;
+    
+    const search = window.location.search || '';
+    const hash = window.location.hash || '';
+    const target = base + '/#' + path + search + hash;
+
+    if (!hash) {
+        window.location.replace(target);
+    }
+  </script>
   <noscript>Please enable JavaScript to continue using this application.</noscript>
 </body>
 </html>
