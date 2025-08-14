@@ -7,5 +7,5 @@
     var hash = window.location.hash || '';
     var target = base + '/#' + path + search + hash;
     if (!hash) 
-        window.location.replace(target);
+        window.location.href = target;
 </script>
