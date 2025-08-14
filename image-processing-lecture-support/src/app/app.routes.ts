@@ -6,6 +6,6 @@ import { HomeComponent } from './home/home.component';
 export const routes: Routes = [
     { path: 'editor', component: BitmapEditorComponent },
     { path: 'home', component: HomeComponent },
-    { path: '', redirectTo: '/home', pathMatch: 'full' },
+    { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: '**', component: PageNotFoundComponent }
 ];
