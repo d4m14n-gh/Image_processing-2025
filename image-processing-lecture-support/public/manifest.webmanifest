@@ -1,6 +1,6 @@
 {
-  "name": "image-processing-lecture-support-system",
-  "short_name": "image-processing-lecture-support-system",
+  "name": "image-processing-lecture-support",
+  "short_name": "image-processing-lecture-support",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",

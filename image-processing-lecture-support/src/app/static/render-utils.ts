@@ -179,25 +179,25 @@ export class BitmapRenderer {
                         
                     ctx.beginPath();
                     ctx.moveTo(((col * pixelSize + offsetX) * scale)+0.5, Math.round((row * pixelSize + offsetY) * scale)+0.5);
-                    ctx.lineTo(((col * pixelSize + offsetX + pixelSize) * scale)+0.5, Math.round((row * pixelSize + offsetY) * scale)+0.5);
+                    ctx.lineTo(((col * pixelSize + offsetX + pixelSize) * scale)-0.5, Math.round((row * pixelSize + offsetY) * scale)+0.5);
                     ctx.stroke();
                 }
                 if((isSel(row, col)&&!isSel(row+1, col)) || (isDragged(row, col)&&!isDragged(row+1, col))) {
                     ctx.beginPath();
-                    ctx.moveTo(Math.round((col * pixelSize + offsetX) * scale)-0.5, Math.round((row * pixelSize + offsetY + pixelSize) * scale)+0.5);
-                    ctx.lineTo(Math.round((col * pixelSize + pixelSize + offsetX) * scale)-0.5, Math.round((row * pixelSize + offsetY + pixelSize) * scale)+0.5);
+                    ctx.moveTo(Math.round((col * pixelSize + offsetX) * scale)+0.5, Math.round((row * pixelSize + offsetY + pixelSize) * scale)-0.5);
+                    ctx.lineTo(Math.round((col * pixelSize + pixelSize + offsetX) * scale)-0.5, Math.round((row * pixelSize + offsetY + pixelSize) * scale)-0.5);
                     ctx.stroke();
                 }
                 if((isSel(row, col)&&!isSel(row, col-1)) || (isDragged(row, col)&&!isDragged(row, col-1))) {
                     ctx.beginPath();
                     ctx.moveTo(Math.round((col * pixelSize + offsetX) * scale)+0.5, Math.round((row * pixelSize + offsetY) * scale)+0.5);
-                    ctx.lineTo(Math.round((col * pixelSize + offsetX) * scale)+0.5, Math.round((row * pixelSize + pixelSize + offsetY) * scale)+0.5);
+                    ctx.lineTo(Math.round((col * pixelSize + offsetX) * scale)+0.5, Math.round((row * pixelSize + pixelSize + offsetY) * scale)-0.5);
                     ctx.stroke();
                 }
                 if((isSel(row, col)&&!isSel(row, col+1)) || (isDragged(row, col)&&!isDragged(row, col+1))) {
                     ctx.beginPath();
                     ctx.moveTo(Math.round((col * pixelSize + offsetX + pixelSize) * scale)-0.5, Math.round((row * pixelSize + offsetY) * scale)+0.5);
-                    ctx.lineTo(Math.round((col * pixelSize + offsetX + pixelSize) * scale)-0.5, Math.round((row * pixelSize + offsetY + pixelSize) * scale)+0.5);
+                    ctx.lineTo(Math.round((col * pixelSize + offsetX + pixelSize) * scale)-0.5, Math.round((row * pixelSize + offsetY + pixelSize) * scale)-0.5);
                     ctx.stroke();
                 }
 

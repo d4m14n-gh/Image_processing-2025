@@ -8,7 +8,7 @@
     }
   },
   "projects": {
-    "image-processing-lecture-support-system": {
+    "image-processing-lecture-support": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -18,7 +18,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/image-processing-lecture-support-system",
+            "outputPath": "dist/image-processing-lecture-support",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -65,10 +65,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "image-processing-lecture-support-system:build:production"
+              "buildTarget": "image-processing-lecture-support:build:production"
             },
             "development": {
-              "buildTarget": "image-processing-lecture-support-system:build:development"
+              "buildTarget": "image-processing-lecture-support:build:development"
             }
           },
           "defaultConfiguration": "development"

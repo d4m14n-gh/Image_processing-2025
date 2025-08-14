@@ -14,16 +14,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have the 'image-processing-lecture-support-system' title`, () => {
+  it(`should have the 'image-processing-lecture-support' title`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('image-processing-lecture-support-system');
+    expect(app.title).toEqual('image-processing-lecture-support');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, image-processing-lecture-support-system');
+    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, image-processing-lecture-support');
   });
 });
