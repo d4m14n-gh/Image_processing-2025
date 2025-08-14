@@ -1,5 +1,5 @@
 :root, :host {
-  --mat-sys-primary: #005cbb;
+  --mat-sys-primary: #4a5f84;
   --mat-sys-on-primary: #ffffff;
   --mat-sys-primary-container: #d7e2ff;
   --mat-sys-on-primary-container: #001b3f;
@@ -8,7 +8,7 @@
   --mat-sys-primary-fixed-dim: #abc7ff;
   --mat-sys-on-primary-fixed: #001b3f;
   --mat-sys-on-primary-fixed-variant: #00458f;
-  --mat-sys-secondary: #4a5f84;
+  --mat-sys-secondary: #005cbb;
   --mat-sys-on-secondary: #ffffff;
   --mat-sys-secondary-container: #d7e3ff;
   --mat-sys-on-secondary-container: #011b3d;
@@ -84,9 +84,11 @@
   --mat-sys-on-tertiary-fixed-variant: #004f55;
   --mat-sys-background: #131314;
   --mat-sys-on-background: #e5e2e2;
-  --mat-sys-surface: #131314;
+  --mat-sys-surface: 
+  #131314;
   --mat-sys-surface-dim: #131314;
-  --mat-sys-surface-bright: #3a3939;
+  --mat-sys-surface-bright: 
+  #3a3939;
   --mat-sys-surface-container-lowest: #0e0e0f;
   --mat-sys-surface-container-low: #1c1b1c;
   --mat-sys-surface-container: #201f20;
@@ -113,6 +115,26 @@
   --mat-sys-inverse-secondary: #4a5f84;
   --mat-sys-inverse-tertiary: #006971;
 }
+
+/* body.dark *::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+body.dark *::-webkit-scrollbar-track {
+    background: #2e2e2e;
+}
+
+body.dark *::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 5px;
+    border: 2px solid #2e2e2e;
+}
+
+body.dark *::-webkit-scrollbar-thumb:hover {
+    background: #888;
+} */
+
 
 html {
     --mat-sys-level0: 0px 0px 0px 0px rgba(0, 0, 0, 0.2), 0px 0px 0px 0px rgba(0, 0, 0, 0.14), 0px 0px 0px 0px rgba(0, 0, 0, 0.12)
