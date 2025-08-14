@@ -1,0 +1,64 @@
+# Simple workflow for deploying static content to GitHub Pages
+name: build-and-deploy
+
+on:
+  push: 
+    branches: ["main"] # Runs on pushes targeting the default branch
+  workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: write
+  pages: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:        
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 18
+        cache: 'npm'
+        cache-dependency-path: src/package-lock.json
+    - name: Install dependencies
+      run: |
+        cd src  # Przechodzimy do katalogu z aplikacją
+        npm ci
+    - name: Build Angular app
+      run: |
+        cd src
+        npm run build -- --configuration=production --base-href "/Tank_Game-Angular/"
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: github-pages
+        path: src/dist/projekt-angular/browser/
+        if-no-files-found: error
+  
+  deploy:
+      needs: build
+      runs-on: ubuntu-latest
+      steps: 
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: github-pages
+          path: dist
+          if-no-files-found: error
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: dist       
+      
