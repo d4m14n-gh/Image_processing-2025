@@ -23,8 +23,8 @@ mat-sidenav-container{
 header {
   height: 50px;
   box-sizing: border-box;
-  background-color: var(--mat-sys-secondary);
-  color: var(--mat-sys-on-secondary);
+  background-color: var(--mat-sys-primary);
+  color: var(--mat-sys-on-primary);
   padding: 10px;
   border-bottom: var(--default-border);
   
@@ -45,6 +45,8 @@ mat-nav-list > a {
 
 .menu-icon {
   cursor: pointer;
+  margin: 0 5px;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,.25));
 }
 .menu-icon:hover {
   transform: scale(1.3);

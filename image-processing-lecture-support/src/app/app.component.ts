@@ -25,7 +25,7 @@ import { ThemeService } from './theme/theme.service';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'Image Processing';
+  title = 'Image Processing Course Support';
 
   constructor(public themeService: ThemeService) {}
 }

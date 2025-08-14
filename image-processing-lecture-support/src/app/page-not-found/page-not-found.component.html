@@ -1,0 +1,31 @@
+<mat-card class="not-found-card" appearance="outlined">
+    <div class="icon-wrap" aria-hidden="true">
+        <mat-icon class="not-found-icon" fontIcon="search_off"></mat-icon>
+    </div>
+
+    <mat-card-title class="code">404</mat-card-title>
+    <mat-card-subtitle class="subtitle">Page Not Found</mat-card-subtitle>
+
+    <p class="message">
+        We could not find this page. It may have been moved, removed, or the address is incorrect.
+    </p>
+
+    <mat-divider></mat-divider>
+
+    <mat-card-actions class="actions">
+        <button mat-stroked-button routerLink="/">
+            <mat-icon>home</mat-icon>
+            <span>Home</span>
+        </button>
+        <button mat-stroked-button style="color: var(--mat-sys-error)" (click)="goBack()" aria-label="Go back to previous page">
+            <mat-icon>arrow_back</mat-icon>
+            <span>Back</span>
+        </button>
+
+    </mat-card-actions>
+
+    <div class="tips">
+        <mat-icon>tips_and_updates</mat-icon>
+        <span>Tip: Check the URL or refresh the page if you believe this is an error.</span>
+    </div>
+</mat-card>

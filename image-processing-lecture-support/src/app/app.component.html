@@ -1,11 +1,16 @@
 <header>
-  <mat-icon class="menu-icon" fontIcon="menu" (click)="sidenav.toggle()"></mat-icon>
+  <mat-icon class="menu-icon" fontIcon="menu" (click)="sidenav.toggle()">
+  </mat-icon>
+  
   <h3 style="margin: 0;">
     {{title}}
   </h3>
+  
   <span class="spacer"></span>
+  
   <mat-icon class="menu-icon" [fontIcon]="themeService.getTheme()=='light'?'light_mode':'dark_mode'"
-    (click)="themeService.toggleTheme()"></mat-icon>
+    (click)="themeService.toggleTheme()">
+  </mat-icon>
 </header>
 
 <mat-sidenav-container>

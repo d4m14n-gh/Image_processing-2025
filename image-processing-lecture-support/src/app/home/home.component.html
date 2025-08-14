@@ -1,0 +1,101 @@
+<mat-card class="home-card" appearance="outlined">
+    <mat-card-title style="display: flex;">
+        Bitmap Editor
+        <mat-icon inline class="menu-icon" [routerLink]="['/editor']">open_in_new</mat-icon>
+    </mat-card-title>
+
+    <mat-card-subtitle>
+        <br>
+        Bitmap element controls
+    </mat-card-subtitle>
+    <mat-card-content>
+        The Bitmap Editor allows you to manipulate pixel data in a grid format. You can:
+        <ul>
+            <li>
+                Left-click on a cell: Selects the clicked cell.
+            </li>
+            <li>
+                Right-click on a selected cell: Deselects the clicked cell.
+            </li>
+            <li>
+                Ctrl + Left-click: Adds the clicked cell to the current selection without deselecting other cells.
+            </li>
+            <li>
+                Click on a column header: Selects or deselects the entire column.
+            </li>
+            <li>
+                Click on a row header: Selects or deselects the entire row.
+            </li>
+            <li>
+                Ctrl + A: Selects all cells in the editor.
+            </li>
+            <li>
+                Ctrl + C: Copies the currently selected cells to a CSV-formatted clipboard.
+            </li>
+        </ul>
+        <br>
+    </mat-card-content>
+
+
+    <mat-card-subtitle>
+        Expression
+    </mat-card-subtitle>
+    <mat-card-content>
+        The editor includes support for mathematical expressions using the <strong>expr-eval</strong> library, enabling
+        advanced manipulation of pixel values.
+        You can write formulas to apply color transformations, perform calculations for each pixel, or generate
+        procedural effects.
+        
+        <br>
+        
+        Each pixel's position is accessible through the variables <strong>x</strong> (column index) and <strong>y</strong> (row
+        index).
+        You can also access the function <strong>b(x, y)</strong>, which returns the value of the pixel at the specified
+        coordinates,
+        as well as constants <strong>WIDTH</strong> and <strong>HEIGHT</strong> that represent the dimensions of the bitmap.
+        
+        <br>
+        Expressions can use these variables and functions together with built-in math functions such as
+        <strong>sin()</strong>, <strong>cos()</strong>, <strong>max()</strong>, and <strong>random()</strong>
+        to create dynamic and complex image modifications.
+
+        <br>
+        <br>
+    </mat-card-content>
+
+    <mat-card-subtitle>
+        Expression Examples
+    </mat-card-subtitle>
+
+    <mat-card-content>
+        <ul>
+            <li>
+                <code>
+                    255
+                </code>
+            </li>
+            <li>
+                <code>
+                    b(x, y)*1.1
+                </code>
+            </li>
+            <li>
+                <code>
+                    b(y, min(WIDTH, HEIGHT)-1-x)
+                </code>
+            </li>
+            <li>
+                <code>
+                    x/WIDTH*255
+                </code>
+            </li>
+            <li>
+                <code>
+                    simplex(x, y, 0) * 128 + 128
+                </code>
+            </li>
+        </ul>
+        <br>
+    </mat-card-content>
+
+</mat-card>

@@ -4,7 +4,7 @@ import { OutOfBoundsHandling, OutOfRangeHandling, QuantizationMode } from "./enu
 import { Parser } from "expr-eval";
 import * as fastNoise from 'fast-simplex-noise';
 
-export function outOfBoundsHandle(value: number, mode: OutOfBoundsHandling, defaultValue: number): number {
+export function outOfBoundsHandle(mode: OutOfBoundsHandling, defaultValue: number): number {
     if (mode == OutOfBoundsHandling.None)
         return NaN;
     else if (mode == OutOfBoundsHandling.DefaultValue)
@@ -21,6 +21,7 @@ export function quantizationHandle(value: number, mode: QuantizationMode): numbe
 }
 
 export function outOfRangeHandle(value: number, mode: OutOfRangeHandling): number {
+    if (value >= 0 && value <= 255) return value;
     if (mode === OutOfRangeHandling.None)
         return NaN;
     else if (mode === OutOfRangeHandling.Modulo)
@@ -43,8 +44,7 @@ export function expressionValidator() {
 export function validateExpression(expression: string): [boolean, string?, string?] {
     const parser = new Parser();
 
-    parser.functions.b = (x: number, y: number) => 0;
-    parser.functions.simplex = (x: number, y: number, seed: number) => 0;
+    declareCustomFunctions(parser, new InteractiveBitmap(10, 10), OutOfBoundsHandling.DefaultValue, 0);
 
     const allowedVariables = ['x', 'y'];
     try {
@@ -70,15 +70,16 @@ export function declareCustomFunctions(
     defaultValue: number
 ){
     parser.functions.b = (x: number, y: number) => {
-        const value = bitmap.get(y, x);
         if (bitmap.isOut(y, x))
-            return outOfBoundsHandle(value, outOfBoundsHandling, defaultValue);
-        return value;
+            return outOfBoundsHandle(outOfBoundsHandling, defaultValue);
+        return bitmap.get(y, x);
     }
     parser.functions.simplex = (x: number, y: number, seed: number) => {
         const gen = fastNoise.makeNoise2D(() => seed);
         return gen(x / 10, y / 10);
     };
+    parser.consts.WIDTH = bitmap.getWidth();
+    parser.consts.HEIGHT = bitmap.getHeight();
 }
 
 export function parseAndApply(

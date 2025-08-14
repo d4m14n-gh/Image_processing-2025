@@ -1,0 +1,76 @@
+:host {
+  display: grid;
+  place-items: center;
+  height: 100%;
+}
+
+.not-found-card {
+  max-width: 560px;
+  width: 100%;
+  padding: 32px 28px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: auto;
+}
+
+.icon-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 4px;
+}
+
+.not-found-icon {
+  font-size: 72px;
+  width: 72px;
+  height: 72px;
+  color: var(--mat-sys-primary, #1976d2);
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,.25));
+}
+
+.code {
+  font-size: clamp(2.5rem, 7vw, 3.75rem);
+  line-height: 1;
+  text-align: center;
+  font-weight: 600;
+  letter-spacing: -2px;
+  margin: 0;
+}
+
+.subtitle {
+  text-align: center;
+  font-size: 1.2rem;
+  margin-top: -4px;
+  font-weight: 500;
+}
+
+.message {
+  margin: 0;
+  text-align: center;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  button mat-icon {
+    margin-right: 4px;
+  }
+}
+
+.tips {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  font-size: .8rem;
+  margin-top: 4px;
+  opacity: .8;
+
+  mat-icon {
+    font-size: 18px;
+    height: 18px;
+    width: 18px;
+  }
+}

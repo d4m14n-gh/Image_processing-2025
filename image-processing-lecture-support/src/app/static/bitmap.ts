@@ -57,6 +57,12 @@ export class InteractiveBitmap extends Bitmap {
   set dragArea(drag_area: DragArea) {
     this._drag_area = drag_area;
   }
+  get selected(): {row: number, col: number}[] {
+    return Array.from(this._selected).map(pos => {
+      const [row, col] = pos.split(',').map(Number);
+      return {row, col};
+    });
+  }
 
   isSelected(row: number, col: number): boolean {
     if (row < 0 || row >= this.getHeight() || col < 0 || col >= this.getWidth()) {

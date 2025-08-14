@@ -17,27 +17,25 @@ export class BitmapComponent implements OnInit, OnDestroy{
   private bitmapRenderer: BitmapRenderer = new BitmapRenderer();
   
   bitmap = input.required<InteractiveBitmap>();
-  tick =  input<number>(0);  
-
+  tick = input<number>(0);
   pixelSize =  input<number>(40);  
   showNumbers =  input<boolean>(true);
   showGrid =  input<boolean>(true);
   showHeaders =  input<boolean>(false);
   showColorScale =  input<boolean>(true);
+  selectedColorScale =  input<ColorScale>(ColorScale.Grayscale);
 
-  dragStart = output<DragArea>();
-  dragMove = output<DragArea>();
-  dragEnd = output<DragArea>();
-  
+  bitmapChanged = output<InteractiveBitmap>();
+  dragStarted = output<DragArea>();
+  dragMoved = output<DragArea>();
+  dragEnded = output<DragArea>();
   rowClicked = output<{row: number, event: MouseEvent}>();
   colClicked = output<{col: number, event: MouseEvent}>();
 
-  selectedColorScale =  input<ColorScale>(ColorScale.Grayscale);
   @ViewChild('canvas', { static: false }) canvasRef?: ElementRef<HTMLCanvasElement> = undefined;
 
   //private
   private _drag_area: DragArea = new DragArea();
-  private _drag_area_right: DragArea = new DragArea();
   private _subscription: Subscription = new Subscription();
 
   constructor(private ngZone: NgZone, private themeService: ThemeService) {
@@ -54,7 +52,6 @@ export class BitmapComponent implements OnInit, OnDestroy{
     this.bitmapRenderer.headers = this.showHeaders();
     this.bitmapRenderer.numbers = this.showNumbers();
     this.bitmapRenderer.pixelSize = this.pixelSize();
-
     this.draw();
   }
   @HostListener('window:resize', ['$event'])
@@ -75,6 +72,7 @@ export class BitmapComponent implements OnInit, OnDestroy{
     this.onCanvasMouseMove(event);
   }
 
+
   getCursorPosition(event: MouseEvent): {x: number, y: number} {
     if (!this.canvasRef) return {x: -1, y: -1};
 
@@ -91,10 +89,14 @@ export class BitmapComponent implements OnInit, OnDestroy{
     let {x, y} = this.getCursorPosition(event);
     const {row, col} = this.bitmapRenderer.getCursorCell(x, y);
 
-    if (this.bitmapRenderer.isCursorOnColHeader(x, y, this.bitmap()))
+    if (this.bitmapRenderer.isCursorOnColHeader(x, y, this.bitmap())){
       this.colClicked.emit({col, event});
-    else if (this.bitmapRenderer.isCursorOnRowHeader(x, y, this.bitmap()))
+      this.selectColumn(col, event);
+    }
+    else if (this.bitmapRenderer.isCursorOnRowHeader(x, y, this.bitmap())){
       this.rowClicked.emit({row, event});
+      this.selectRow(row, event);
+    }
     else if (this.bitmapRenderer.isCursorOnCell(x, y, this.bitmap())){
       if (!this._drag_area.dragging) {
         this._drag_area.dragging = true;
@@ -103,7 +105,9 @@ export class BitmapComponent implements OnInit, OnDestroy{
         this._drag_area.dragStart = {row, col};
         this._drag_area.dragEnd = {row, col};
         
-        this.dragStart.emit(this._drag_area);
+        this.dragStarted.emit(this._drag_area);
+        this.dragStart(this._drag_area);
+
       }
     }
   }
@@ -120,7 +124,8 @@ export class BitmapComponent implements OnInit, OnDestroy{
 
       if(this._drag_area.dragEnd.row!=row || this._drag_area.dragEnd.col!=col){
         this._drag_area.dragEnd = {row, col};
-        this.dragMove.emit(this._drag_area);
+        this.dragMoved.emit(this._drag_area);
+        this.dragMove(this._drag_area);
       }
     }
   }
@@ -128,11 +133,91 @@ export class BitmapComponent implements OnInit, OnDestroy{
   onCanvasMouseUp(event: MouseEvent): void {
     if (this._drag_area.dragging && this._drag_area.button === event.button) {
       this._drag_area.dragging = false;
-      this.dragEnd.emit(this._drag_area);
+      this.dragEnded.emit(this._drag_area);
+      this.dragEnd(this._drag_area);
     }
   }
 
 
+  dragStart(drag_area: DragArea) {
+    if(!drag_area.ctrlKey&&drag_area.button != 2) 
+      this.bitmap().clearSelection();
+    this.bitmap().dragArea = drag_area;
+    this.syncBitmap(); 
+  }
+  dragMove(drag_area: DragArea){
+    if(drag_area.dragging){
+      this.bitmap().dragArea = drag_area;
+      this.syncBitmap(); 
+    }
+  }
+  dragEnd(drag_area: DragArea){
+    this.bitmap().dragArea = drag_area;
+    for(let pos of drag_area.getAreaCells())
+      this.bitmap().setSelection(pos.row, pos.col, drag_area.button != 2);
+    this.syncBitmap(); 
+  }
+  keyDown(event: KeyboardEvent) {
+    const key = event.key.toLowerCase();
+    if (event.ctrlKey && key === 'a') {
+      event.preventDefault();
+      this.selectAll();
+    }
+    else if (event.ctrlKey && key === 'c') {
+      event.preventDefault();
+      this.copyToCsv();
+    }
+  }
+  
+
+  selectAll() {
+    for (let row = 0; row < this.bitmap().getHeight(); row++) 
+      for (let col = 0; col < this.bitmap().getWidth(); col++) 
+        this.bitmap().select(row, col);
+    this.syncBitmap(); 
+  }
+  selectRow(row: number, event: MouseEvent) {
+    if(!event.ctrlKey&&event.button != 2) this.bitmap().clearSelection();
+    for (let col = 0; col < this.bitmap().getWidth(); col++) 
+      this.bitmap().setSelection(row, col, event.button != 2);
+    this.syncBitmap(); 
+  }
+  selectColumn(col: number, event: MouseEvent) {
+    if(!event.ctrlKey&&event.button != 2) this.bitmap().clearSelection();
+    for (let row = 0; row < this.bitmap().getHeight(); row++)
+      this.bitmap().setSelection(row, col, event.button != 2);
+    this.syncBitmap(); 
+  }
+
+  copyToCsv() {
+    const selection = this.bitmap().selected;
+    
+    const minCell = {row: this.bitmap().getHeight(), col: this.bitmap().getWidth()};
+    const maxCell = {row: 0, col: 0};
+    for(let cell of selection) {
+      minCell.row = Math.min(minCell.row, cell.row);
+      minCell.col = Math.min(minCell.col, cell.col);
+      maxCell.row = Math.max(maxCell.row, cell.row);
+      maxCell.col = Math.max(maxCell.col, cell.col);
+    }
+
+    let data = "";
+    for(let row = minCell.row; row <= maxCell.row; row++) {
+      for(let col = minCell.col; col <= maxCell.col; col++) {
+        if(this.bitmap().isSelected(row, col))
+          data += this.bitmap().get(row, col).toString()
+        if(col < maxCell.col) data += ",";
+      }
+      data += "\n";
+    }
+
+    navigator.clipboard.writeText(data);
+  }
+
+  syncBitmap(){
+    this.bitmapChanged.emit(this.bitmap());
+    this.draw();
+  }
   getPixelRatio(): number {
      return (window.devicePixelRatio || 1);
   }
@@ -156,12 +241,11 @@ export class BitmapComponent implements OnInit, OnDestroy{
         }
     )});
   }
-
   private setStyles(){
     const style = getComputedStyle(document.body);
     const headerColor = style.getPropertyValue('--mat-sys-surface-container').trim();
     const gridColor = "#2e2e2eff";
-    const selectionColor = style.getPropertyValue('--mat-sys-primary').trim();
+    const selectionColor = style.getPropertyValue('--mat-sys-secondary').trim();
 
     if(gridColor)
       this.bitmapRenderer.gridColor = gridColor;
