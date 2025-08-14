@@ -31,11 +31,11 @@ jobs:
         cache-dependency-path: image-processing-lecture-support/package-lock.json
     - name: Install dependencies
       run: |
-        cd src  # Przechodzimy do katalogu z aplikacją
+        cd image-processing-lecture-support
         npm ci
     - name: Build Angular app
       run: |
-        cd src
+        cd image-processing-lecture-support
         npm run build -- --configuration=production --base-href "/image-processing-lecture-support/"
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
