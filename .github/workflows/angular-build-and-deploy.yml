@@ -28,7 +28,7 @@ jobs:
       with:
         node-version: 18
         cache: 'npm'
-        cache-dependency-path: src/package-lock.json
+        cache-dependency-path: image-processing-lecture-support/package-lock.json
     - name: Install dependencies
       run: |
         cd src  # Przechodzimy do katalogu z aplikacją
@@ -36,12 +36,12 @@ jobs:
     - name: Build Angular app
       run: |
         cd src
-        npm run build -- --configuration=production --base-href "/Tank_Game-Angular/"
+        npm run build -- --configuration=production --base-href "/image-processing-lecture-support/"
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
       with:
         name: github-pages
-        path: src/dist/projekt-angular/browser/
+        path: image-processing-lecture-support/dist/image-processing-lecture-support/browser/
         if-no-files-found: error
   
   deploy:
