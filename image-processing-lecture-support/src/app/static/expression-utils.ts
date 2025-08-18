@@ -80,6 +80,7 @@ export function declareCustomFunctions(
     };
     parser.consts.WIDTH = bitmap.getWidth();
     parser.consts.HEIGHT = bitmap.getHeight();
+    parser.consts.RANDOM = Math.random();
 }
 
 export function parseAndApply(

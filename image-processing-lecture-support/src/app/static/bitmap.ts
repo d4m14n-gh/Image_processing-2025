@@ -29,7 +29,7 @@ export class Bitmap{
     return this.matrix[row]?.[col] ?? NaN;
   }
   isOut(row: number, col: number): boolean {
-    return row < 0 || row >= this.height || col < 0 || col >= this.width;
+    return row < 0 || row >= this.height || col < 0 || col >= this.width || !Number.isInteger(row) || !Number.isInteger(col);
   }
   set(row: number, col: number, value: number): void {
     this.matrix[row][col] = value;
