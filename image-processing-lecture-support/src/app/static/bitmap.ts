@@ -34,6 +34,16 @@ export class Bitmap{
   set(row: number, col: number, value: number): void {
     this.matrix[row][col] = value;
   }
+  histogram(groupSize: number = 1): number[]{
+    let histogram = Array(Math.trunc(256/groupSize)).fill(0);
+    this.matrix.forEach((row, r) => {
+      row.forEach((value, c) => {
+        if (value >= 0 && value < 256) 
+          histogram[Math.trunc(value/groupSize)]++;
+      });
+    });
+    return histogram;
+  }
 }
 
 

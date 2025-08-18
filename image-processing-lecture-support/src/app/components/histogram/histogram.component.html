@@ -1,0 +1,45 @@
+<mat-card appearance="outlined" style="margin: 10px auto; width: fit-content">
+    <div style="width: fit-content; margin: auto;">
+        <mat-card style="padding: 10px;">
+            <app-bitmap [bitmap]="bitmap" [showHeaders]="true" [showGrid]="true" >
+
+            </app-bitmap>
+            <div style="display: flex; justify-content: space-evenly; margin-top: 10px;">
+                <button mat-flat-button
+                    [routerLink]="['/edit', bitmapKey]"
+                    >
+                    <mat-icon>edit</mat-icon>
+                    Edit
+                </button>
+                <button mat-flat-button>
+                    <mat-icon>refresh</mat-icon>
+                    Reset
+                </button>
+                <button mat-flat-button>
+                    <mat-icon>flare</mat-icon>
+                    Generate
+                </button>
+            </div>
+        </mat-card>
+
+        <mat-card style="padding: 10px;">
+            <div>
+                <canvas #histogram id="histogram" style="max-height: 250px;">
+                    
+                </canvas>
+            </div>
+            
+        <!-- </mat-card> -->
+        <!-- <mat-card style="padding: 10px;"> -->
+            
+            <mat-slider showTickMarks min="1" max="32" step="1" discrete="thumbLabel">
+                <input matSliderThumb [value]="this.groupSize" (dragEnd)="setGroupSize($event.value)" />
+            </mat-slider>
+            <mat-slider showTickMarks min="0" max="256" step="8" discrete="thumbLabel">
+                <input matSliderStartThumb [value]="this.rangeStart" (dragStart)="setRangeStart($event.value)"/>
+                <input matSliderEndThumb [value]="this.rangeEnd" (dragEnd)="setRangeEnd($event.value)"/>
+            </mat-slider>
+        </mat-card>
+    </div>
+
+</mat-card>

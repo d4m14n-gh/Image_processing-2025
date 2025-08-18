@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Themes } from '../static/enums';
+import { Themes } from '../../static/enums';
 import { Subject } from 'rxjs/internal/Subject';
 
 @Injectable({

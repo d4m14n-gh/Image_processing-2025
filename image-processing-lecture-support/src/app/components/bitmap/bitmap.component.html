@@ -1,4 +1,4 @@
-<div class="canvas-container">
+<div class="canvas-container" (contextmenu)="$event.preventDefault()">
     <canvas #canvas [style.width]="getWidth() + 'px'" [style.height]="getHeight() + 'px'"
         (mousemove)="onCanvasMouseMove($event)" 
         (mousedown)="onCanvasMouseDown($event)"

@@ -7,7 +7,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 import {MatIconModule} from '@angular/material/icon';
-import { ThemeService } from './theme/theme.service';
+import { ThemeService } from './services/theme/theme.service';
 
 @Component({
   selector: 'app-root',

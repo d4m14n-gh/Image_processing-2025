@@ -1,11 +1,12 @@
 import { Component, ElementRef, HostListener, input, NgZone, OnDestroy, OnInit, output, SimpleChanges, ViewChild } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
-import { BitmapRenderer } from '../static/render-utils';
-import { InteractiveBitmap } from '../static/bitmap';
-import { ColorScale } from '../static/enums';
-import { DragArea } from '../static/drag-area';
-import { ThemeService } from '../theme/theme.service';
+import { BitmapRenderer } from '../../static/render-utils';
+import { InteractiveBitmap } from '../../static/bitmap';
+import { ColorScale } from '../../static/enums';
+import { DragArea } from '../../static/drag-area';
+import { ThemeService } from '../../services/theme/theme.service';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { getVar } from '../../static/style-utils';
 
 @Component({
   selector: 'app-bitmap',
@@ -44,6 +45,9 @@ export class BitmapComponent implements OnInit, OnDestroy{
     });
   }
   ngOnInit(){
+    document.fonts.ready.then(() => {
+      this.draw();
+    });
     this.draw();
   }
   ngOnChanges(ch: SimpleChanges) {
@@ -242,10 +246,9 @@ export class BitmapComponent implements OnInit, OnDestroy{
     )});
   }
   private setStyles(){
-    const style = getComputedStyle(document.body);
-    const headerColor = style.getPropertyValue('--mat-sys-surface-container').trim();
+    const headerColor = getVar('--mat-sys-surface-container');
+    const selectionColor = getVar('--mat-sys-secondary');
     const gridColor = "#2e2e2eff";
-    const selectionColor = style.getPropertyValue('--mat-sys-secondary').trim();
 
     if(gridColor)
       this.bitmapRenderer.gridColor = gridColor;
