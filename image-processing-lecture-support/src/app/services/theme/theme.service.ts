@@ -34,6 +34,10 @@ export class ThemeService {
     return localStorage.getItem(this.storageKey) as Themes;
   }
 
+  getThemeClass(): string {
+    return `${this.getTheme()}`;
+  }
+
   toggleTheme() {
     const current = this.getTheme();
     this.setTheme(current === Themes.Light ? Themes.Dark : Themes.Light);

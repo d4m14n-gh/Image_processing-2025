@@ -3,7 +3,7 @@ import { DragArea } from "./drag-area";
 export class Bitmap{
   private width: number;
   private height: number;
-  private matrix: number[][];
+  protected matrix: number[][];
 
   constructor(width: number = 10, height: number = 10, oldMatrix?: Bitmap, defaultValue: number = 0) {
     this.width = width;
@@ -34,15 +34,16 @@ export class Bitmap{
   set(row: number, col: number, value: number): void {
     this.matrix[row][col] = value;
   }
-  histogram(groupSize: number = 1): number[]{
-    let histogram = Array(Math.trunc(256/groupSize)).fill(0);
+  cells(): {row: number, col: number, value: number}[]{
+    let values: {row: number, col: number, value: number}[] = [];
+
     this.matrix.forEach((row, r) => {
       row.forEach((value, c) => {
-        if (value >= 0 && value < 256) 
-          histogram[Math.trunc(value/groupSize)]++;
+        values.push({row: r, col: c, value});
       });
     });
-    return histogram;
+    
+    return values;
   }
 }
 
@@ -95,5 +96,16 @@ export class InteractiveBitmap extends Bitmap {
   }
   clearSelection() {
     this._selected.clear();
+  }
+  histogram(groupSize: number = 1, selectedOnly: boolean): number[]{
+    let histogram = Array(Math.ceil(256/groupSize)).fill(0);
+    this.matrix.forEach((row, r) => {
+      row.forEach((value, c) => {
+        if(!selectedOnly || (selectedOnly && this.isSelected(r, c)))
+          if (!Number.isNaN(value) && value!=null && value >= 0 && value < 256) 
+            histogram[Math.trunc(value/groupSize)]++;
+      });
+    });
+    return histogram;
   }
 }

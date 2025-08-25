@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, ViewChild, ElementRef, OnInit } from '@angular/core';
+import { Component, AfterViewInit, ViewChild, ElementRef, OnInit, HostListener } from '@angular/core';
 import { Chart, BarController, BarElement, CategoryScale, LinearScale, Tooltip, Legend } from "chart.js";
 import { BitmapComponent } from "../bitmap/bitmap.component";
 import { InteractiveBitmap } from '../../static/bitmap';
@@ -9,6 +9,14 @@ import { RouterModule } from '@angular/router';
 import { BitmapStorageService } from '../../services/bitmap-storage/bitmap-storage.service';
 import { getVar } from '../../static/style-utils';
 import { MatSlider, MatSliderModule } from "@angular/material/slider";
+import { AnimationControllerComponent } from '../animation-controller/animation-controller.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { getContrastColor, scaleColor } from '../../static/color-utils';
+import { ColorScale } from '../../static/enums';
+import { MatMenuModule } from "@angular/material/menu";
+import { MatSelectModule } from '@angular/material/select';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-histogram',
@@ -21,20 +29,35 @@ import { MatSlider, MatSliderModule } from "@angular/material/slider";
     MatIconModule,
     MatSliderModule,
     RouterModule,
-    MatSlider
+    MatSlider,
+    AnimationControllerComponent,
+    MatFormFieldModule,
+    MatMenuModule,
+    MatSelectModule,
+    MatCheckboxModule,
+    FormsModule
 ]  
 })
 export class HistogramComponent implements AfterViewInit, OnInit {
   @ViewChild('histogram') histogramCanvas!: ElementRef<HTMLCanvasElement>;
   bitmap: InteractiveBitmap = new InteractiveBitmap(16, 9);
   bitmapKey: string = "histogram-bitmap";
+
+  showGrid: boolean = true;
+  showHeaders: boolean = true;
+  showNumberValues: boolean = true;
+  selectedColorScale: ColorScale = ColorScale.Grayscale;
+  pixelSize: number = 40;
   
-  groupSize: number = 8;
+  histogramBinSize: number = 5;
   rangeStart: number = 0;
   rangeEnd: number = 256;
-  
+  bitmapComponentTick: number = 0;
+
   chart?: Chart; 
   private _labels: string[] = [];
+  private _colors: string[] = [];
+  private _border_colors: string[] = [];
   private _data: number[] = [];
 
   constructor(private bitmapStorage: BitmapStorageService) {}
@@ -45,6 +68,10 @@ export class HistogramComponent implements AfterViewInit, OnInit {
       this.bitmap = new InteractiveBitmap(bitmap.getWidth(), bitmap.getHeight(), bitmap, 255);
     else
       this.bitmapStorage.save(this.bitmapKey, this.bitmap);
+  }
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event) {
+    this.updateChart();
   }
 
   setRangeStart(value: number) {
@@ -60,25 +87,60 @@ export class HistogramComponent implements AfterViewInit, OnInit {
   }
 
   setGroupSize(value: number) {
-    this.groupSize = value;
+    this.histogramBinSize = value;
     this.prepareChartData();
     this.updateChart();
   }
 
-  prepareChartData(){
+  prepareChartData(selectedOnly: boolean=true){
     this._labels = [];
-    for (let i = this.rangeStart; i < this.rangeEnd; i+=this.groupSize) 
-      this._labels.push(`${i.toString()}-${Math.min(i + this.groupSize - 1, this.rangeEnd - 1).toString()}`);
-    this._data = this.bitmap.histogram(this.groupSize);
+    this._colors = [];
+    this._border_colors = [];
+
+    for (let i = this.rangeStart; i < this.rangeEnd; i+=this.histogramBinSize) {
+      if(this.histogramBinSize == 1)
+        this._labels.push(`${i.toString()}`);
+      else  
+        this._labels.push(`${i.toString()}-${Math.min(i + this.histogramBinSize - 1, this.rangeEnd - 1).toString()}`);
+
+      let color = scaleColor(i, this.selectedColorScale);
+      this._colors.push(color);
+      this._border_colors.push(getContrastColor("f6f3f3"));
+    }
+    this._data = this.bitmap.histogram(this.histogramBinSize, selectedOnly);
   }
 
   updateChart(){
     if(this.chart){
       this.chart.data.datasets[0].data = this._data;
       this.chart.data.labels = this._labels;
-      this.chart.data.datasets[0].backgroundColor = getVar();
+      // this.chart.data.datasets[0].backgroundColor = getVar();
+      // if(this.histogramBinSize>2){
+        this.chart.data.datasets[0].backgroundColor = this._colors;
+        // this.chart.data.datasets[0].borderColor = this._border_colors;
+        this.chart.data.datasets[0].borderWidth = 0;
+
+        // this.chart.data.datasets[0].borderWidth = 1;
+      // }
+      // else{
+      //   this.chart.data.datasets[0].backgroundColor = getVar();
+      //   this.chart.data.datasets[0].borderWidth = 0;
+      // }
       this.chart.update();
     }
+  }
+
+  animate(t: number) {
+    this.bitmap.clearSelection();
+    this.bitmap.cells().filter(c => c.value <= t && !isNaN(c.value) && c.value != null).forEach(
+      c => {
+        this.bitmap.select(c.row, c.col);
+      }
+    );
+  
+    this.prepareChartData(true);
+    this.bitmapComponentTick++;
+    this.updateChart();
   }
 
   ngAfterViewInit(): void {
@@ -98,11 +160,22 @@ export class HistogramComponent implements AfterViewInit, OnInit {
             label: "Histogram",
             data: this._data,
             backgroundColor: bgColor,
+            categoryPercentage: 0.9,
+            barPercentage: 1,
+            borderWidth: 1,
+            borderColor: bgColor,
           },
         ],
       },
       options: {
+        devicePixelRatio: 2,
         responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false 
+          }
+        },
         animation: {
           duration: 500,
           easing: "easeOutQuart",

@@ -23,6 +23,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { DragArea } from '../../static/drag-area';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { BitmapStorageService } from '../../services/bitmap-storage/bitmap-storage.service';
+import { concatWith } from 'rxjs';
 
 @Component({
   selector: 'app-bitmap-editor',
@@ -74,17 +75,18 @@ export class BitmapEditorComponent {
     expressionValidator(),
   ]);
 
-  private _bitmap: InteractiveBitmap = new InteractiveBitmap(this.width, this.height, undefined, this.defaultValue);
   private _defaultValue: number = 255;
+  private _bitmap: InteractiveBitmap = new InteractiveBitmap(this.width, this.height, undefined, this.defaultValue);
   private _id: string | null = null;
 
   constructor(private historyService: HistoryService, private route: ActivatedRoute, private bitmap_storage: BitmapStorageService, private router: Router) {
     this._id = this.route.snapshot.paramMap.get('id');
-    if (this._id !== null) {
+    if (this._id) {
       let bitmap: Bitmap | null = this.bitmap_storage.load(this._id);
-      if(bitmap !== null)
+      if(bitmap)
         this.bitmap = new InteractiveBitmap(bitmap.getWidth(), bitmap.getHeight(), bitmap, this.defaultValue);
-    } 
+    }
+    this.expressionControl.setValue(historyService.getHistory().slice().reverse()[0] ?? this.expressionControl.value);
   }
 
   set bitmap(value: InteractiveBitmap){

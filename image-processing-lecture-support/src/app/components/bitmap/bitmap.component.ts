@@ -24,6 +24,7 @@ export class BitmapComponent implements OnInit, OnDestroy{
   showGrid =  input<boolean>(true);
   showHeaders =  input<boolean>(false);
   showColorScale =  input<boolean>(true);
+  userSelect =  input<boolean>(true);
   selectedColorScale =  input<ColorScale>(ColorScale.Grayscale);
 
   bitmapChanged = output<InteractiveBitmap>();
@@ -87,6 +88,7 @@ export class BitmapComponent implements OnInit, OnDestroy{
   }
 
   onCanvasMouseDown(event: MouseEvent): void {
+    if(!this.userSelect()) return;
     if(event.button !== 0 && event.button !== 2) return; 
     window.getSelection()?.removeAllRanges();
 
@@ -162,6 +164,7 @@ export class BitmapComponent implements OnInit, OnDestroy{
     this.syncBitmap(); 
   }
   keyDown(event: KeyboardEvent) {
+    if(!this.userSelect()) return;
     const key = event.key.toLowerCase();
     if (event.ctrlKey && key === 'a') {
       event.preventDefault();

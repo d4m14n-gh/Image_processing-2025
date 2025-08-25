@@ -1,17 +1,21 @@
-
 mat-card {
-    margin: 10px;
-    padding: 20px;
+    padding: 10px;
     user-select: none;
 }
 
-app-bitmap {
+.bitmap-container  app-bitmap {
     border: var(--default-border);
-    overflow: hidden;
-    /* box-shadow: 0 0 10px black; */
+    margin: auto;
 }
 
+.top-right-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 10;
+}
 
-button {
-    width: fit-content;
+button[mat-mini-fab] {
+  background-color: var(--mat-sys-primary);
+  color: var(--mat-sys-on-primary);
 }

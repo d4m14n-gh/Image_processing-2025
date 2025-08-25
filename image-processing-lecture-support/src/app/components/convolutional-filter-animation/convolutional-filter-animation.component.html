@@ -1,0 +1,21 @@
+<mat-card class="main-card" appearance="outlined">
+    <div class="flex-col">
+        <div class="flex-row" style="flex: 1; height: 100%;">
+            <div style="min-width: 250px; padding: 10px; background-color: darkkhaki;">
+                <button mat-raised-button (click)="openDialog()">Open Kernel Dialog</button>
+            </div>
+
+            <div style="flex: 1 1 auto; background-color: bisque; overflow: auto;">
+                <app-bitmap [bitmap]="bitmap" [showHeaders]="true">
+
+                </app-bitmap>
+            </div>
+
+            <div style="flex: 1 1 auto; background-color: cornflowerblue; overflow: auto;">
+                <app-bitmap [bitmap]="bitmap" [showHeaders]="true" [userSelect]="false">
+
+                </app-bitmap>
+            </div>
+        </div>
+    </div>
+</mat-card>
