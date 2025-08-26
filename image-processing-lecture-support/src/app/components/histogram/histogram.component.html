@@ -1,8 +1,8 @@
 <!-- <mat-card appearance="outlined" class="main-card" style="height: calc(100% - 20px); overflow-y: auto;"> -->
 <div
-    style="height: calc(100% - 20px); display: flex; flex-direction: column; justify-content: start; gap: 10px; padding: 10px;">
+    style="height: calc(100% - 16px); display: flex; flex-direction: column; justify-content: start; gap: 8px; padding: 8px;">
 
-    <div style="flex: 1 1 auto; min-height: 250px; display: flex; gap: 10px; overflow: auto;">
+    <div style="flex: 1 1 auto; min-height: 250px; display: flex; gap: 8px; overflow: auto;">
 
         <mat-card class="bitmap-container" style="flex: 1; overflow: auto;" appearance="outlined">
             <app-bitmap [bitmap]="bitmap" [tick]="bitmapComponentTick" [pixelSize]="pixelSize"
@@ -17,7 +17,7 @@
             <mat-card-content>
                 <mat-label>Pixel Size</mat-label>
                 <br>
-                <mat-slider showTickMarks min="25" max="100" step="1" discrete="thumbLabel" style="width: 120px;">
+                <mat-slider min="25" max="100" step="1" discrete="thumbLabel" style="width: 120px;">
                     <input matSliderThumb [(ngModel)]="pixelSize">
                 </mat-slider>
                 <!-- <mat-divider style="margin: 5px 0;"></mat-divider> -->

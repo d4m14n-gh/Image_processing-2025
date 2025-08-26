@@ -14,9 +14,9 @@
   /* flex: 1; */
   display: grid;
   grid-template-columns: 275px 1fr 275px;
-  gap: 10px;
-  padding: 10px;
-  height: calc(100% - 20px); 
+  gap: 8px;
+  padding: 8px;
+  height: calc(100% - 16px); 
 }
 
 .sidebar {

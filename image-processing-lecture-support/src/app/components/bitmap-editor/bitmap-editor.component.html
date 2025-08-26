@@ -31,7 +31,7 @@
             <mat-card-content>
                 <mat-label>Height</mat-label>
                 <br>
-                <mat-slider showTickMarks min="5" max="40" step="1" discrete="thumbLabel" style="width: 120px;">
+                <mat-slider min="5" max="40" step="1" discrete="thumbLabel" style="width: 120px;">
                     <input matSliderThumb [value]="height" (dragEnd)="height = $event.value; resize()">
                 </mat-slider>
 
@@ -39,14 +39,14 @@
 
                 <mat-label>Width</mat-label>
                 <br>
-                <mat-slider showTickMarks min="5" max="40" step="1" discrete="thumbLabel" style="width: 120px;">
+                <mat-slider min="5" max="40" step="1" discrete="thumbLabel" style="width: 120px;">
                     <input matSliderThumb [value]="width" (dragEnd)="width = $event.value; resize()">
                 </mat-slider>
             </mat-card-content>
 
             <mat-card-content>
-                <mat-label>Default value</mat-label>
                 <mat-form-field class="example-full-width">
+                    <mat-label>Default value</mat-label>
                     <input matInput type="number" placeholder="Ex. 10" [(ngModel)]="defaultValue" min="0" max="255"
                         step="1">
                 </mat-form-field>
@@ -56,7 +56,7 @@
             <mat-card-content>
                 <mat-label>Pixel Size</mat-label>
                 <br>
-                <mat-slider showTickMarks min="25" max="100" step="1" discrete="thumbLabel" style="width: 120px;">
+                <mat-slider min="25" max="100" step="1" discrete="thumbLabel" style="width: 120px;">
                     <input matSliderThumb [(ngModel)]="pixelSize">
                 </mat-slider>
                 <!-- <mat-divider style="margin: 5px 0;"></mat-divider> -->
@@ -78,8 +78,8 @@
             </mat-card-content>
 
             <mat-card-content>
-                <mat-label>Color Scale</mat-label>
                 <mat-form-field>
+                    <mat-label>Color Scale</mat-label>
                     <mat-select [(ngModel)]="selectedColorScale">
                         <mat-option value="none">None</mat-option>
                         <mat-option value="grayscale">Grayscale</mat-option>
@@ -136,6 +136,7 @@
 
 
                 <mat-card-content>
+                    <br>
                     <mat-card-subtitle>
                         <mat-icon inline>dashboard_customize</mat-icon>
                         Behavior

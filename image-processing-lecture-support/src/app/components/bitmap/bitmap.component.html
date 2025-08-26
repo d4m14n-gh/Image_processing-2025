@@ -1,9 +1,8 @@
-<div class="canvas-container" (contextmenu)="$event.preventDefault()">
-    <canvas #canvas [style.width]="getWidth() + 'px'" [style.height]="getHeight() + 'px'"
-        (mousemove)="onCanvasMouseMove($event)" 
-        (mousedown)="onCanvasMouseDown($event)"
-        (mouseup)="onCanvasMouseUp($event)" 
-        (keydown)="keyDown($event)" 
-        tabindex="0">
-    </canvas>
-</div>
+<canvas #canvas [style.width]="getWidth() + 'px'" [style.height]="getHeight() + 'px'"
+    (mousemove)="onCanvasMouseMove($event)" 
+    (mousedown)="onCanvasMouseDown($event)"
+    (mouseup)="onCanvasMouseUp($event)" 
+    (keydown)="keyDown($event)" 
+    (contextmenu)="$event.preventDefault()"
+    tabindex="0">
+</canvas>

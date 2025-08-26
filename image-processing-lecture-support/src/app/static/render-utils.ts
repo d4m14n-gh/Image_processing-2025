@@ -143,9 +143,9 @@ export class BitmapRenderer {
 
 
         //selection
-        const patternCanvas = this.createDiagonalPattern(10*scale, scale, selectionColor);
+        const patternCanvas = this.createDiagonalPattern(12*scale, scale, selectionColor);
         const pattern = ctx.createPattern(patternCanvas, 'repeat');
-        const darkPatternCanvas = this.createDiagonalPattern(10*scale, scale, getContrastColor(selectionColor));
+        const darkPatternCanvas = this.createDiagonalPattern(12*scale, scale, getContrastColor(selectionColor));
         const darkPattern = ctx.createPattern(darkPatternCanvas, 'repeat');
         if (!pattern) throw new Error('Pattern creation failed');
         if (!darkPattern) throw new Error('Dark pattern creation failed');

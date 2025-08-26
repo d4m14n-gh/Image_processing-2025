@@ -22,6 +22,9 @@ body {
   --selected-border: 2px solid var(--selection-border-color);
   --default-border: 1px solid var(--mdc-outlined-card-outline-color, var(--mat-sys-outline-variant, crimson));
 }
+header, button[mat-flat-button] {
+  font-family: "Montserrat", sans-serif !important;
+}
 
 .main-card {
     margin: 10px;

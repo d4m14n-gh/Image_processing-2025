@@ -43,11 +43,11 @@ export class HistogramComponent implements AfterViewInit, OnInit {
   bitmap: InteractiveBitmap = new InteractiveBitmap(16, 9);
   bitmapKey: string = "histogram-bitmap";
 
+  pixelSize: number = 50;
   showGrid: boolean = true;
   showHeaders: boolean = true;
   showNumberValues: boolean = true;
   selectedColorScale: ColorScale = ColorScale.Grayscale;
-  pixelSize: number = 40;
   
   histogramBinSize: number = 5;
   rangeStart: number = 0;

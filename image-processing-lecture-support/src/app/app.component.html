@@ -2,28 +2,37 @@
   <mat-icon class="menu-icon" fontIcon="menu" (click)="sidenav.toggle()">
   </mat-icon>
   
-  <h3 style="margin: 0;">
-    {{title}}
-  </h3>
-  
+  <ng-content select="[header]">
+      <h4 style="margin: 0;">
+        {{title}}
+      </h4>
+    </ng-content>
   <span class="spacer"></span>
+  
+  <mat-icon class="menu-icon" [routerLink]="['/home']">
+    <mat-icon>help</mat-icon>
+  </mat-icon>
   
   <mat-icon class="menu-icon" [fontIcon]="themeService.getTheme()=='light'?'light_mode':'dark_mode'"
     (click)="themeService.toggleTheme()">
   </mat-icon>
+
 </header>
 
 <mat-sidenav-container>
 
   <mat-sidenav #sidenav mode="side" closed (mouseenter)="sidenav.open()" (mouseleave)="sidenav.close()">
-    @if (sidenav.opened) {
-    <mat-nav-list>
-      <a mat-list-item routerLink="/">Home</a>
+    <div>
+
+      @if (sidenav.opened) {
+        <mat-nav-list>
+          <a mat-list-item routerLink="/">Home</a>
       <a mat-list-item routerLink="/editor">Bitmap Editor</a>
       <a mat-list-item routerLink="/histogram">Histogram</a>
       <a mat-list-item routerLink="/convolutional-filter">Convolutional Filters</a>
     </mat-nav-list>
     }
+  </div>
   </mat-sidenav>
 
   <mat-sidenav-content>

@@ -24,6 +24,7 @@ import { DragArea } from '../../static/drag-area';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { BitmapStorageService } from '../../services/bitmap-storage/bitmap-storage.service';
 import { concatWith } from 'rxjs';
+import { AppComponent } from '../../app.component';
 
 @Component({
   selector: 'app-bitmap-editor',
@@ -46,7 +47,7 @@ import { concatWith } from 'rxjs';
     MatListModule,
     ReactiveFormsModule,
     MatMenuModule,
-    RouterModule
+    RouterModule,
 ],
   templateUrl: './bitmap-editor.component.html',
   styleUrl: './bitmap-editor.component.css'

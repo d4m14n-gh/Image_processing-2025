@@ -71,6 +71,8 @@ export class ConvolutionalFilterAnimationComponent{
       this.kernel = kernel;    
     else
       localStorage.setItem("kernel", this.kernel.save());
+
+    this.resultBitmap = new InteractiveBitmap(this.bitmap.getWidth(), this.bitmap.getHeight(), undefined, 255);
   }
   openDialog() {
     const dialogRef = this.dialog.open(KernelDialogComponent, {
@@ -101,7 +103,7 @@ export class ConvolutionalFilterAnimationComponent{
       return;
     }
     
-    const size = 3;
+    const size = this.kernel.size;
     const r = Math.trunc((size-1)/2);
     const x = Math.trunc(value / this.bitmap.getWidth());
     const y = value % this.bitmap.getWidth();
