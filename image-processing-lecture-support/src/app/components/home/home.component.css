@@ -2,7 +2,6 @@
 mat-card {
     margin: 10px;
     padding: 20px;
-    height: calc(100% - 20px);
 }
 
 mat-card > mat-card-content {

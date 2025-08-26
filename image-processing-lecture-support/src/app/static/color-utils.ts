@@ -18,15 +18,20 @@ export function getContrastColor(color: string): string {
   return luminance > 0.215 ? 'rgb(26, 27, 31)' : 'rgb(249, 248, 244)';
 }
 
+const chromaScale = chroma.scale(['black', 'white']);
+const heatmapScale = chroma.scale("YlOrRd");
+const spectralScale = chroma.scale("Spectral");
+const viridisScale = chroma.scale(['#440154', '#3b528b', '#21908d', '#5dc963', '#fde725']);
+
 export function scaleColor(value: number, colorScale: ColorScale): string {
     const ratio = value / 255;
     if (colorScale === ColorScale.Grayscale) 
-      return chroma.scale(['black', 'white'])(ratio).css();
+      return chromaScale(ratio).css();
     else if (colorScale === ColorScale.Heatmap) 
-      return  chroma.scale("YlOrRd")(ratio).css();
+      return  heatmapScale(ratio).css();
     else if (colorScale === ColorScale.Spectral) 
-      return  chroma.scale("Spectral")(ratio).css();
+      return  spectralScale(ratio).css();
     else if (colorScale === ColorScale.Viridis) 
-      return chroma.scale(['#440154', '#3b528b', '#21908d', '#5dc963', '#fde725'])(ratio).css();
+      return viridisScale(ratio).css();
     return '#ffffff';
   }

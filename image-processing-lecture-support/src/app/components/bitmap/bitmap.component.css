@@ -1,3 +1,8 @@
+:host{
+    width: fit-content;
+    height: fit-content;
+    display: block;
+}
 canvas {
     image-rendering: pixelated;
     display: block;

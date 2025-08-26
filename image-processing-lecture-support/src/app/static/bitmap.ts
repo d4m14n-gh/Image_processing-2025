@@ -3,7 +3,7 @@ import { DragArea } from "./drag-area";
 export class Bitmap{
   private width: number;
   private height: number;
-  private matrix: number[][];
+  protected matrix: number[][];
 
   constructor(width: number = 10, height: number = 10, oldMatrix?: Bitmap, defaultValue: number = 0) {
     this.width = width;
@@ -29,10 +29,21 @@ export class Bitmap{
     return this.matrix[row]?.[col] ?? NaN;
   }
   isOut(row: number, col: number): boolean {
-    return row < 0 || row >= this.height || col < 0 || col >= this.width;
+    return row < 0 || row >= this.height || col < 0 || col >= this.width || !Number.isInteger(row) || !Number.isInteger(col);
   }
   set(row: number, col: number, value: number): void {
     this.matrix[row][col] = value;
+  }
+  cells(): {row: number, col: number, value: number}[]{
+    let values: {row: number, col: number, value: number}[] = [];
+
+    this.matrix.forEach((row, r) => {
+      row.forEach((value, c) => {
+        values.push({row: r, col: c, value});
+      });
+    });
+    
+    return values;
   }
 }
 
@@ -72,6 +83,8 @@ export class InteractiveBitmap extends Bitmap {
   }
 
   select(row: number, col: number): void {
+    if (row < 0 || row >= this.getHeight() || col < 0 || col >= this.getWidth()) 
+      return;
     this._selected.add(`${row},${col}`);
   }
   unselect(row: number, col: number): void {
@@ -85,5 +98,16 @@ export class InteractiveBitmap extends Bitmap {
   }
   clearSelection() {
     this._selected.clear();
+  }
+  histogram(groupSize: number = 1, selectedOnly: boolean): number[]{
+    let histogram = Array(Math.ceil(256/groupSize)).fill(0);
+    this.matrix.forEach((row, r) => {
+      row.forEach((value, c) => {
+        if(!selectedOnly || (selectedOnly && this.isSelected(r, c)))
+          if (!Number.isNaN(value) && value!=null && value >= 0 && value < 256) 
+            histogram[Math.trunc(value/groupSize)]++;
+      });
+    });
+    return histogram;
   }
 }

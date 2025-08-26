@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Themes } from '../static/enums';
+import { Themes } from '../../static/enums';
 import { Subject } from 'rxjs/internal/Subject';
 
 @Injectable({
@@ -32,6 +32,10 @@ export class ThemeService {
 
   getTheme(): Themes {
     return localStorage.getItem(this.storageKey) as Themes;
+  }
+
+  getThemeClass(): string {
+    return `${this.getTheme()}`;
   }
 
   toggleTheme() {

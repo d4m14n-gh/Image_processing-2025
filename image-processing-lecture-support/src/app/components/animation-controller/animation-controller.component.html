@@ -1,0 +1,51 @@
+<div style="display: flex; align-items: center; gap: 0px">
+
+    <button mat-icon-button matTooltip="First Frame" (click)="stepFirst()">
+        <mat-icon>first_page</mat-icon>
+    </button>
+    
+    <button mat-icon-button matTooltip="Previous Frame" (click)="stepBackward()">
+        <mat-icon>skip_previous</mat-icon>
+    </button>
+    
+    <button mat-icon-button color="primary" matTooltip="Play / Pause" (click)="togglePlay()">
+        <mat-icon>{{ playing ? 'pause' : 'play_arrow' }}</mat-icon>
+    </button>
+    
+    <button mat-icon-button matTooltip="Next Frame" (click)="stepForward()">
+        <mat-icon>skip_next</mat-icon>
+    </button>
+    
+        <button mat-icon-button matTooltip="Last Frame" (click)="stepLast()">
+        <mat-icon>last_page</mat-icon>
+    </button>
+
+
+
+    <button mat-icon-button [color]="loop ? 'accent' : ''" matTooltip="Loop" (click)="toggleLoop()">
+        <mat-icon>{{ loop ? 'repeat_on' : 'repeat' }}</mat-icon>
+    </button>
+
+    @if(showValue()){
+        <div style="padding: 5px; margin: 0; width: 3ch; border: var(--default-border); border-radius: 5px; text-align: center;">
+            {{value}}
+        </div>
+    }
+    
+    <div
+    style="flex: 1;"
+    >
+
+    <mat-slider
+        style="width: calc(100% - 50px); margin: 0 25px;"
+        [max]="max()"
+        [min]="min()"
+        [step]="step()"
+        [discrete]="showValue()"
+        >
+            <input matSliderThumb
+                [(ngModel)]="value"
+            >
+        </mat-slider>
+    </div>
+</div>

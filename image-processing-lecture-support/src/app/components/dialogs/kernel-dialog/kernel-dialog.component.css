@@ -1,0 +1,40 @@
+mat-label, h3 {
+    color: var(--mat-sys-on-surface);
+}
+
+.kernel-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.kernel-row {
+    display: flex;
+    gap: 4px;
+}
+
+.kernel-cell {
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    border-radius: 5px;
+    border: var(--default-border);
+    background-color: var(--mat-sys-surface-variant);
+    color: var(--mat-sys-on-surface-variant);
+    font-size: 1.2em;
+}
+
+.kernel-cell:focus {
+    outline: var(--default-border);
+}
+
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    appearance: none;
+    -moz-appearance: textfield;
+}

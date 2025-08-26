@@ -1,0 +1,101 @@
+<!-- <mat-card appearance="outlined" class="main-card" style="height: calc(100% - 20px); overflow-y: auto;"> -->
+<div
+    style="height: calc(100% - 20px); display: flex; flex-direction: column; justify-content: start; gap: 10px; padding: 10px;">
+
+    <div style="flex: 1 1 auto; min-height: 250px; display: flex; gap: 10px; overflow: auto;">
+
+        <mat-card class="bitmap-container" style="flex: 1; overflow: auto;" appearance="outlined">
+            <app-bitmap [bitmap]="bitmap" [tick]="bitmapComponentTick" [pixelSize]="pixelSize"
+                [showHeaders]="showHeaders&&pixelSize>=40" [showNumbers]="showNumberValues&&pixelSize>=40"
+                [showGrid]="showGrid" [selectedColorScale]="selectedColorScale"
+                (bitmapChanged)="prepareChartData(); updateChart()">
+            </app-bitmap>
+        </mat-card>
+
+        <mat-card appearance="outlined" style="overflow: auto;">
+
+            <mat-card-content>
+                <mat-label>Pixel Size</mat-label>
+                <br>
+                <mat-slider showTickMarks min="25" max="100" step="1" discrete="thumbLabel" style="width: 120px;">
+                    <input matSliderThumb [(ngModel)]="pixelSize">
+                </mat-slider>
+                <!-- <mat-divider style="margin: 5px 0;"></mat-divider> -->
+            </mat-card-content>
+            <mat-card-content>
+                <div>
+                    <mat-label style="text-wrap: nowrap;">Bin Size </mat-label>
+                    <br>
+                    <mat-slider min="1" max="32" step="1" discrete="thumbLabel" >
+                        <input matSliderThumb [value]="this.histogramBinSize" (dragEnd)="setGroupSize($event.value)" />
+                    </mat-slider>
+                </div>
+            </mat-card-content>
+
+
+            <mat-card-content>
+                <mat-checkbox [(ngModel)]="showNumberValues" [disabled]="pixelSize<40">
+                    Show Numbers
+                </mat-checkbox>
+                <br>
+                <mat-checkbox [(ngModel)]="showHeaders" [disabled]="pixelSize<40">
+                    Show Headers
+                </mat-checkbox>
+                <br>
+                <mat-checkbox [(ngModel)]="showGrid">
+                    Show Grid
+                </mat-checkbox>
+            </mat-card-content>
+
+            
+
+
+            <mat-card-content>
+                <br>
+                <mat-label>Color Scale</mat-label>
+                <br>
+                <mat-form-field>
+                    <mat-select [(ngModel)]="selectedColorScale">
+                        <mat-option value="none">None</mat-option>
+                        <mat-option value="grayscale">Grayscale</mat-option>
+                        <mat-option value="heatmap">YellowOrangeRed</mat-option>
+                        <mat-option value="spectral">Spectral</mat-option>
+                        <mat-option value="viridis">Viridis</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </mat-card-content>
+
+          
+
+            <mat-card-content>
+                <button mat-flat-button [routerLink]="['/edit', bitmapKey]" style="width: 100%;">
+                    <mat-icon>edit</mat-icon>
+                    Edit
+                </button>
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+    <mat-card appearance="outlined" style="overflow: hidden; flex: 0 0 auto;">
+        <div style="height: 200px;">
+            <canvas #histogram id="histogram" style="width: 100%;">
+            </canvas>
+        </div>
+        <!-- <div style="display: flex; align-items: center; gap: 10px">
+                    <mat-label style="text-wrap: nowrap;">Range </mat-label>
+                    <mat-slider min="0" max="256" step="1" discrete="thumbLabel" style="width: 100%;">
+                        <input matSliderStartThumb [value]="this.rangeStart" (dragStart)="setRangeStart($event.value)"/>
+                        <input matSliderEndThumb [value]="this.rangeEnd" (dragEnd)="setRangeEnd($event.value)"/>
+                    </mat-slider>
+                </div> -->
+    </mat-card>
+
+    <mat-card appearance="outlined">
+        <app-animation-controller (valueChanged)="animate($event)">
+        </app-animation-controller>
+    </mat-card>
+
+
+</div>
+
+<!-- </mat-card> -->

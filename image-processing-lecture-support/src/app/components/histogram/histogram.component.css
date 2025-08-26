@@ -1,0 +1,21 @@
+mat-card {
+    padding: 10px;
+    user-select: none;
+}
+
+.bitmap-container  app-bitmap {
+    border: var(--default-border);
+    margin: auto;
+}
+
+.top-right-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 10;
+}
+
+button[mat-mini-fab] {
+  background-color: var(--mat-sys-primary);
+  color: var(--mat-sys-on-primary);
+}
