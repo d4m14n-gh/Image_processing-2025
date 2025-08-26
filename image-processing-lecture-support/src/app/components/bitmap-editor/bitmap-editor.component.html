@@ -56,8 +56,8 @@
             <mat-card-content>
                 <mat-label>Pixel Size</mat-label>
                 <br>
-                <mat-slider showTickMarks min="25" max="100" step="5" discrete="thumbLabel" style="width: 120px;">
-                    <input matSliderThumb [value]="pixelSize" (dragEnd)="pixelSize = $event.value">
+                <mat-slider showTickMarks min="25" max="100" step="1" discrete="thumbLabel" style="width: 120px;">
+                    <input matSliderThumb [(ngModel)]="pixelSize">
                 </mat-slider>
                 <!-- <mat-divider style="margin: 5px 0;"></mat-divider> -->
             </mat-card-content>

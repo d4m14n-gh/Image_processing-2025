@@ -1,21 +1,66 @@
-<mat-card class="main-card" appearance="outlined">
-    <div class="flex-col">
-        <div class="flex-row" style="flex: 1; height: 100%;">
-            <div style="min-width: 250px; padding: 10px; background-color: darkkhaki;">
-                <button mat-raised-button (click)="openDialog()">Open Kernel Dialog</button>
-            </div>
+<mat-card class="main-card" appearance="outlined" style="padding: 0; overflow: hidden;">
+    <div class="flex-col" style="gap: 30px;">
+        
+        <!-- <mat-card appearance="raised" style="border-radius: 0;"> -->
+        <mat-card appearance="raised" style="border-radius: 0; box-shadow: none;">
+        <div class="flex-row" style="min-width: 250px; padding: 10px; justify-content: start; align-items: center;">
+            <button mat-button [routerLink]="['/edit', bitmapKey]">
+                <mat-icon>edit</mat-icon>
+                Edit
+            </button>
+            <button mat-button (click)="openDialog()">
+                <mat-icon>grid_on</mat-icon>
+                Kernel
+            </button>
+            <button mat-button (click)="clear()">
+                <mat-icon>clear</mat-icon>
+                Clear
+            </button>
 
-            <div style="flex: 1 1 auto; background-color: bisque; overflow: auto;">
-                <app-bitmap [bitmap]="bitmap" [showHeaders]="true">
+            <mat-slider min="25" max="100" step="1" discrete="false" style="width: 120px;">
+                <input matSliderThumb [(ngModel)]="pixelSize">
+            </mat-slider>
+            <mat-label style="font-weight: 400; font-size: 14px; line-height: 20px;">
+                Pixel Size
+            </mat-label>
+
+            <mat-checkbox [(ngModel)]="showNumberValues" [disabled]="pixelSize<40">
+                Show Numbers
+            </mat-checkbox>
+            <br>
+            <mat-checkbox [(ngModel)]="showHeaders" [disabled]="pixelSize<40">
+                Show Headers
+            </mat-checkbox>
+            <br>
+            <mat-checkbox [(ngModel)]="showGrid">
+                Show Grid
+            </mat-checkbox>
+          
+        </div>
+        <!-- <mat-card appearance="outlined"> -->
+            <app-animation-controller [showValue]="false" (valueChanged)="animate($event)" [startValue]="-1" [min]="-1"
+                [max]="length()">
+            </app-animation-controller>
+        <!-- </mat-card> -->
+        </mat-card>
+
+        
+
+        <div class="flex-row" style="flex: 1; height: 100%;">
+            <div style="flex: 1 1 auto; max-width: 50%; overflow: auto">
+                <app-bitmap [bitmap]="bitmap" [pixelSize]="pixelSize" [showHeaders]="showHeaders&&pixelSize>=40" [showGrid]="showGrid" [showNumbers]="showNumberValues&&pixelSize>=40" [tick]="bitmapTick" [userSelect]="false"
+                    style="margin: auto;">
 
                 </app-bitmap>
             </div>
 
-            <div style="flex: 1 1 auto; background-color: cornflowerblue; overflow: auto;">
-                <app-bitmap [bitmap]="bitmap" [showHeaders]="true" [userSelect]="false">
+            <div style="flex: 1 1 auto; max-width: 50%; overflow: auto;">
+                <app-bitmap [bitmap]="resultBitmap" [pixelSize]="pixelSize" [showHeaders]="showHeaders&&pixelSize>=40" [showGrid]="showGrid" [showNumbers]="showNumberValues&&pixelSize>=40" [tick]="bitmapTick" [userSelect]="false"
+                    style="margin: auto;">
 
                 </app-bitmap>
             </div>
         </div>
+
     </div>
 </mat-card>

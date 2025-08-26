@@ -83,6 +83,8 @@ export class InteractiveBitmap extends Bitmap {
   }
 
   select(row: number, col: number): void {
+    if (row < 0 || row >= this.getHeight() || col < 0 || col >= this.getWidth()) 
+      return;
     this._selected.add(`${row},${col}`);
   }
   unselect(row: number, col: number): void {

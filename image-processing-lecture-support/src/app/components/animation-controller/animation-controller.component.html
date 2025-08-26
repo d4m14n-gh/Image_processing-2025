@@ -26,10 +26,11 @@
         <mat-icon>{{ loop ? 'repeat_on' : 'repeat' }}</mat-icon>
     </button>
 
-
-    <div style="padding: 5px; margin: 0; width: 3ch; border: var(--default-border); border-radius: 5px; text-align: center;">
-        {{value}}
-    </div>
+    @if(showValue()){
+        <div style="padding: 5px; margin: 0; width: 3ch; border: var(--default-border); border-radius: 5px; text-align: center;">
+            {{value}}
+        </div>
+    }
     
     <div
     style="flex: 1;"
@@ -40,7 +41,7 @@
         [max]="max()"
         [min]="min()"
         [step]="step()"
-        [discrete]="true"
+        [discrete]="showValue()"
         >
             <input matSliderThumb
                 [(ngModel)]="value"

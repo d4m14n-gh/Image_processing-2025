@@ -17,11 +17,11 @@
         </div>
 
         <div class="flex-col" style="margin: auto; width: fit-content; gap: 5px;">
-            @for (row of kernel; track $index; let i=$index) {
+            @for (row of kernel.kernel; track $index; let i=$index) {
             <div class="flex-row" style="gap: 5px">
                 @for (value of row; track $index; let j=$index) {
                 <!-- <mat-form-field class="example-full-width" appearance="outline" style="width: 50px; height: 50px;"> -->
-                <input class="kernel-cell" type="number" [(ngModel)]="kernel[i][j]" style="text-align: center;"
+                <input class="kernel-cell" type="number" [(ngModel)]="kernel.kernel[i][j]" style="text-align: center;"
                     step="1">
                 <!-- </mat-form-field> -->
                 }
@@ -34,7 +34,7 @@
 
 <mat-dialog-actions class="flex-row">
 
-    <button mat-flat-button (click)="close()">Close</button>
+    <button mat-flat-button (click)="close()" style="background-color: var(--mat-sys-error);">Cancel</button>
     <button mat-flat-button style="background-color: var(--mat-sys-tertiary)" (click)="submit()">
         <mat-icon>save</mat-icon>
         OK

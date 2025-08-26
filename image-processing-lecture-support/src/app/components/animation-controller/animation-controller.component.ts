@@ -29,9 +29,11 @@ export class AnimationControllerComponent implements OnInit, OnDestroy {
   
   speed: number = 1;
   
+  showValue = input<boolean>(true);
   min = input<number>(1);
   max = input<number>(255);
   step = input<number>(1);
+  startValue = input<number>(0);
 
   valueChanged = output<number>();
 
@@ -70,6 +72,7 @@ export class AnimationControllerComponent implements OnInit, OnDestroy {
 
   intervalId: any;
   ngOnInit() {
+    this._value = this.startValue();
     this.intervalId = setInterval(() => {
       if(this.playing){
         if(this.value<this.max())
@@ -77,7 +80,7 @@ export class AnimationControllerComponent implements OnInit, OnDestroy {
         else if(this.loop)
           this.value = this.min();
       }
-    }, 10); 
+    }, 250); 
   }
 
   ngOnDestroy() {
