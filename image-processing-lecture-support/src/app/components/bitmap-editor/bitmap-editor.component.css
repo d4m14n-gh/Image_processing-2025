@@ -1,7 +1,3 @@
-.app-layout {
-  height: 100%;
-}
-
 .top-toolbar {
     height: 64px;
 }
@@ -17,19 +13,6 @@
   gap: 8px;
   padding: 8px;
   height: calc(100% - 16px); 
-}
-
-.sidebar {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.bitmap-wrapper {
-  margin: auto;
-  background-color: var(--mat-sys-outline-variant);
-  border-radius: 1px;
-  outline: 1px solid var(--mat-sys-outline-variant);
 }
 
 mat-nav-list > * {

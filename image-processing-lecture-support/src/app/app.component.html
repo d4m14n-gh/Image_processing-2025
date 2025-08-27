@@ -1,5 +1,6 @@
 <header>
-  <mat-icon class="menu-icon" fontIcon="menu" (click)="sidenav.toggle()">
+  <mat-icon class="menu-icon" (click)="sidenav.toggle()">
+    menu
   </mat-icon>
   
   <ng-content select="[header]">
@@ -13,15 +14,16 @@
     <mat-icon>help</mat-icon>
   </mat-icon>
   
-  <mat-icon class="menu-icon" [fontIcon]="themeService.getTheme()=='light'?'light_mode':'dark_mode'"
+  <mat-icon class="menu-icon"
     (click)="themeService.toggleTheme()">
+    {{themeService.getTheme()=='light'?'light_mode':'dark_mode'}}
   </mat-icon>
 
 </header>
 
 <mat-sidenav-container>
 
-  <mat-sidenav #sidenav mode="side" closed (mouseenter)="sidenav.open()" (mouseleave)="sidenav.close()">
+  <mat-sidenav #sidenav mode="over" [autoFocus]="false" closed (mouseenter)="sidenav.open()" (mouseleave)="sidenav.close()">
     <div>
 
       @if (sidenav.opened) {

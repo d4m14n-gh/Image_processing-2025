@@ -89,7 +89,8 @@ export function parseAndApply(
     outOfBoundsHandling: OutOfBoundsHandling,
     outOfRangeHandling: OutOfRangeHandling,
     quantizationMode: QuantizationMode,
-    defaultValue: number
+    defaultValue: number,
+    selectedOnly: boolean
 ) {
     const parser = new Parser();
 
@@ -100,7 +101,7 @@ export function parseAndApply(
 
     for (let row = 0; row < bitmap.getHeight(); row++) {
         for (let col = 0; col < bitmap.getWidth(); col++) {
-            if (bitmap.isSelected(row, col)) {
+            if (!selectedOnly || bitmap.isSelected(row, col)) {
                 let newValue = compiled.evaluate({ x: col, y: row });
                 let quantizedValue = quantizationHandle(newValue, quantizationMode);
                 let clippedValue = outOfRangeHandle(quantizedValue, outOfRangeHandling);

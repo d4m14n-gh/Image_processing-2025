@@ -27,10 +27,10 @@ header, button[mat-flat-button] {
 }
 
 .main-card {
-    margin: 10px;
+    margin: 8px;
     padding: 20px;
-    min-height: calc(100% - 20px);
-    width: calc(100% - 20px);
+    min-height: calc(100% - 16px);
+    width: calc(100% - 16px);
 }
 
 .flex-row {
@@ -42,4 +42,17 @@ header, button[mat-flat-button] {
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+
+
+.bitmap {
+  margin: auto;
+  background-color: var(--mat-sys-outline-variant);
+  border-radius: 1px;
+  outline: 1px solid var(--mat-sys-outline-variant);
+}
+.scrollable {
+  height: 100%;
+  overflow: auto;
+  display: flex;
 }

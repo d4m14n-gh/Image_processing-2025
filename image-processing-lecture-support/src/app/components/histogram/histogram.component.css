@@ -3,11 +3,6 @@ mat-card {
     user-select: none;
 }
 
-.bitmap-container  app-bitmap {
-    border: var(--default-border);
-    margin: auto;
-}
-
 .top-right-btn {
   position: absolute;
   top: 10px;

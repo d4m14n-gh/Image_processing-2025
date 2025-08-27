@@ -4,12 +4,14 @@
 
     <div style="flex: 1 1 auto; min-height: 250px; display: flex; gap: 8px; overflow: auto;">
 
-        <mat-card class="bitmap-container" style="flex: 1; overflow: auto;" appearance="outlined">
-            <app-bitmap [bitmap]="bitmap" [tick]="bitmapComponentTick" [pixelSize]="pixelSize"
-                [showHeaders]="showHeaders&&pixelSize>=40" [showNumbers]="showNumberValues&&pixelSize>=40"
-                [showGrid]="showGrid" [selectedColorScale]="selectedColorScale"
-                (bitmapChanged)="prepareChartData(); updateChart()">
-            </app-bitmap>
+        <mat-card style="flex: 1; overflow: hidden; padding: 0;" appearance="outlined">
+            <div class="scrollable">
+                <app-bitmap class="bitmap" [bitmap]="bitmap" [tick]="bitmapComponentTick" [pixelSize]="pixelSize"
+                    [showHeaders]="showHeaders&&pixelSize>=40" [showNumbers]="showNumberValues&&pixelSize>=40"
+                    [showGrid]="showGrid" [selectedColorScale]="selectedColorScale"
+                    (bitmapChanged)="prepareChartData(); updateChart()">
+                </app-bitmap>
+            </div>
         </mat-card>
 
         <mat-card appearance="outlined" style="overflow: auto;">
@@ -38,12 +40,12 @@
                     Show Numbers
                 </mat-checkbox>
                 <br>
-                <mat-checkbox [(ngModel)]="showHeaders" [disabled]="pixelSize<40">
-                    Show Headers
-                </mat-checkbox>
-                <br>
                 <mat-checkbox [(ngModel)]="showGrid">
                     Show Grid
+                </mat-checkbox>
+                <br>
+                <mat-checkbox [(ngModel)]="showHeaders" [disabled]="pixelSize<40">
+                    Show Headers
                 </mat-checkbox>
             </mat-card-content>
 
@@ -52,9 +54,8 @@
 
             <mat-card-content>
                 <br>
-                <mat-label>Color Scale</mat-label>
-                <br>
                 <mat-form-field>
+                    <mat-label>Color Scale</mat-label>
                     <mat-select [(ngModel)]="selectedColorScale">
                         <mat-option value="none">None</mat-option>
                         <mat-option value="grayscale">Grayscale</mat-option>

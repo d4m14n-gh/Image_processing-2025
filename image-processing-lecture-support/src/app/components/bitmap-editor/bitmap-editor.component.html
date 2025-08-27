@@ -1,26 +1,10 @@
-<section class="app-layout">
+<div class="main-grid">
 
-    <!-- TOP TOOLBAR -->
-    <!-- <mat-toolbar class="top-toolbar" color="primary">
-        <mat-toolbar-row>
-
-            <mat-form-field>
-                <mat-label>f(x)=</mat-label>
-                <input matInput placeholder="Ex. Pizza" value="Sushi">
-            </mat-form-field>
-
-            <span class="spacer"></span>
+    <!-- LEFT SIDEBAR -->
+    <mat-card appearance="outlined">
+        <div class="scrollable flex-col" style="gap: 0">
 
 
-        </mat-toolbar-row>
-    </mat-toolbar> -->
-
-
-    <!-- MAIN AREA -->
-    <div class="main-grid">
-
-        <!-- LEFT SIDEBAR -->
-        <mat-card class="sidebar" appearance="outlined">
             <mat-card-header>
                 <mat-card-title>
                     <mat-icon inline style="vertical-align: middle;">tune</mat-icon>
@@ -67,12 +51,12 @@
                     Show Numbers
                 </mat-checkbox>
                 <br>
-                <mat-checkbox [(ngModel)]="showHeaders" [disabled]="pixelSize<40">
-                    Show Headers
-                </mat-checkbox>
-                <br>
                 <mat-checkbox [(ngModel)]="showGrid">
                     Show Grid
+                </mat-checkbox>
+                <br>
+                <mat-checkbox [(ngModel)]="showHeaders" [disabled]="pixelSize<40">
+                    Show Headers
                 </mat-checkbox>
                 <!-- <mat-divider style="margin: 5px 0;"></mat-divider> -->
             </mat-card-content>
@@ -96,120 +80,102 @@
                 <p>Height: {{height}}px</p>
                 <p>Pixel size: {{pixelSize}}px</p>
             </mat-card-content>
-        </mat-card>
+        </div>
+    </mat-card>
 
-        <!-- CENTER CANVAS -->
-        <mat-card class="bitmap" appearance="outlined" (contextmenu)="$event.preventDefault()">
-            <div class="bitmap-wrapper">
+    <!-- CENTER CANVAS -->
+    <mat-card appearance="outlined" style="overflow: hidden;">
+        <div class="scrollable">
+            <app-bitmap class="bitmap" [bitmap]="bitmap" [pixelSize]="pixelSize"
+                [selectedColorScale]="selectedColorScale" [showColorScale]="showColorScale" [showGrid]="showGrid"
+                [showNumbers]="showNumberValues&&pixelSize>=40" [showHeaders]="showHeaders&&pixelSize>=40"
+                [tick]="tick">
+            </app-bitmap>
+        </div>
+    </mat-card>
 
-                <app-bitmap [bitmap]="bitmap" [pixelSize]="pixelSize" [selectedColorScale]="selectedColorScale"
-                    [showColorScale]="showColorScale" [showGrid]="showGrid"
-                    [showNumbers]="showNumberValues&&pixelSize>=40" [showHeaders]="showHeaders&&pixelSize>=40"
-                    [tick]="tick">
-                </app-bitmap>
-            </div>
-        </mat-card>
+    <!-- RIGHT SIDEBAR -->
+    <mat-card class="sidebar" appearance="outlined">
+        <div class="scrollable flex-col" style="gap: 0">
 
-        <!-- RIGHT SIDEBAR -->
-        <mat-card class="sidebar" appearance="outlined">
-            <div>
+            <mat-card-header>
+                <mat-card-title>
+                    <mat-icon inline style="vertical-align: middle;">build</mat-icon>
+                    Tools
+                </mat-card-title>
+            </mat-card-header>
 
-                <mat-card-header>
-                    <mat-card-title>
-                        <mat-icon inline style="vertical-align: middle;">build</mat-icon>
-                        Tools
-                    </mat-card-title>
-                </mat-card-header>
+            <mat-card-content>
+                <br>
+                <mat-card-subtitle>
+                    <mat-icon inline>dashboard_customize</mat-icon>
+                    Behavior
+                </mat-card-subtitle>
 
+                <mat-form-field>
+                    <mat-label>Quantization</mat-label>
+                    <mat-select [(ngModel)]="quantizationMode">
+                        <mat-option value="round">Round</mat-option>
+                        <mat-option value="floor">Floor</mat-option>
+                        <mat-option value="ceil">Ceil</mat-option>
+                    </mat-select>
+                </mat-form-field>
 
+                <mat-form-field>
+                    <mat-label>Out of Range</mat-label>
+                    <mat-select [(ngModel)]="outOfRangeHandling">
+                        <mat-option value="none">None</mat-option>
+                        <mat-option value="clipping">Clipping</mat-option>
+                        <mat-option value="modulo">Modulo</mat-option>
+                    </mat-select>
+                </mat-form-field>
 
-                <!-- <mat-card-content>
-                    <mat-card-subtitle>
-                        <mat-icon inline>dashboard_customize</mat-icon>
-                        Selection
-                    </mat-card-subtitle>
-                    <mat-button-toggle-group [(ngModel)]="selectionMode" style="margin: 0;">
-                        <mat-button-toggle value="selected">Selected</mat-button-toggle>
-                        <mat-button-toggle value="all">All</mat-button-toggle>
-                    </mat-button-toggle-group>
-                </mat-card-content> -->
+                <mat-form-field>
+                    <mat-label>Out of Bounds</mat-label>
+                    <mat-select [(ngModel)]="outOfBoundsHandling">
+                        <mat-option value="none">None</mat-option>
+                        <mat-option value="zero">Zero</mat-option>
+                        <mat-option value="default">Default value</mat-option>
+                    </mat-select>
+                </mat-form-field>
 
+            </mat-card-content>
 
-                <mat-card-content>
-                    <br>
-                    <mat-card-subtitle>
-                        <mat-icon inline>dashboard_customize</mat-icon>
-                        Behavior
-                    </mat-card-subtitle>
-
-                    <mat-form-field>
-                        <mat-label>Quantization</mat-label>
-                        <mat-select [(ngModel)]="quantizationMode">
-                            <mat-option value="round">Round</mat-option>
-                            <mat-option value="floor">Floor</mat-option>
-                            <mat-option value="ceil">Ceil</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-
-                    <mat-form-field>
-                        <mat-label>Out of Range</mat-label>
-                        <mat-select [(ngModel)]="outOfRangeHandling">
-                            <mat-option value="none">None</mat-option>
-                            <mat-option value="saturation">Saturation</mat-option>
-                            <mat-option value="modulo">Modulo</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-
-                    <mat-form-field>
-                        <mat-label>Out of Bounds</mat-label>
-                        <mat-select [(ngModel)]="outOfBoundsHandling">
-                            <mat-option value="none">None</mat-option>
-                            <mat-option value="zero">Zero</mat-option>
-                            <mat-option value="default">Default value</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-
-                </mat-card-content>
-
-                <mat-card-content>
-                    <mat-card-subtitle style="display: flex; align-items: center;">
-                        <mat-icon inline>functions</mat-icon>
-                        Expression
-                        <span class="spacer"></span>
-                        <button mat-button [matMenuTriggerFor]="menu" [disabled]="getHistory().length == 0">
-                            <mat-icon style="margin: 0;">history</mat-icon>
-                        </button>
-                    </mat-card-subtitle>
-
-                    <mat-form-field style="width: 100%; margin-bottom: 10px;">
-                        <mat-label>b'(x, y)=</mat-label>
-                        <textarea matInput [formControl]="expressionControl" placeholder="Ex. b(x, y) * 2"></textarea>
-                        @if (expressionControl.hasError('required')) {
-                        <mat-error>
-                            Expression is required
-                        </mat-error>
-                        }
-                        @else if (expressionControl.hasError('expression')) {
-                        <mat-error style="padding-bottom: 10px; height: fit-content;">
-                            Syntax error
-                            <!-- {{ expressionControl.getError('expression')?.message }} -->
-                        </mat-error>
-                        }
-                        <!-- <mat-error *ngIf="expressionControl.hasError('required')">Expression is required</mat-error> -->
-                    </mat-form-field>
-
-                    <button mat-flat-button style="width: 100%;" [disabled]="expressionControl.invalid"
-                        (click)="apply()">
-                        <mat-icon>check</mat-icon>
-                        <!-- <mat-icon>functions</mat-icon> -->
-                        Apply
+            <mat-card-content>
+                <mat-card-subtitle style="display: flex; align-items: center;">
+                    <mat-icon inline>functions</mat-icon>
+                    Expression
+                    <span class="spacer"></span>
+                    <button mat-button [matMenuTriggerFor]="menu" [disabled]="getHistory().length == 0">
+                        <mat-icon style="margin: 0;">history</mat-icon>
                     </button>
+                </mat-card-subtitle>
+
+                <mat-form-field style="width: 100%; margin-bottom: 10px;">
+                    <mat-label>b'(x, y)=</mat-label>
+                    <textarea matInput [formControl]="expressionControl" placeholder="Ex. b(x, y) * 2"></textarea>
+                    @if (expressionControl.hasError('required')) {
+                    <mat-error>
+                        Expression is required
+                    </mat-error>
+                    }
+                    @else if (expressionControl.hasError('expression')) {
+                    <mat-error style="padding-bottom: 10px; height: fit-content;">
+                        Syntax error
+                    </mat-error>
+                    }
+                </mat-form-field>
+
+                <button mat-flat-button style="width: 100%;" [disabled]="expressionControl.invalid"
+                    (click)="apply()">
+                    <mat-icon>check</mat-icon>
+                    Apply
+                </button>
 
 
 
-                </mat-card-content>
-            </div>
-            
+            </mat-card-content>
+
             <div style="flex: 1;"> </div>
 
             <div>
@@ -245,39 +211,10 @@
                         {{ action }}
                     </a>
                     }
-                    <!-- <a mat-list-item (click)="clearHistory()">
-            clear history
-        </a> -->
                 </mat-nav-list>
             </mat-menu>
+        </div>
 
+    </mat-card>
 
-            <!-- <mat-tab-group>
-    <mat-tab label="Import">
-        <mat-card-content>
-            <mat-card-subtitle>
-                Todo
-            </mat-card-subtitle>
-            <p>
-                todo
-            </p>
-        </mat-card-content>
-    </mat-tab>
-    
-    <mat-tab label="Export">
-        <mat-card-content>
-            <mat-card-subtitle>
-                Todo
-            </mat-card-subtitle>
-            <p>
-                todo
-                        </p>
-                    </mat-card-content>
-                </mat-tab>
-
-            </mat-tab-group> -->
-        </mat-card>
-
-    </div>
-
-</section>
+</div>

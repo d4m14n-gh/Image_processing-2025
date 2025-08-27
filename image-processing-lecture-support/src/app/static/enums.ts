@@ -13,7 +13,7 @@ export enum SelectionMode {
 
 export enum OutOfRangeHandling {
     None = 'none',
-    Saturation = 'saturation',
+    Clipping = 'clipping',
     Modulo = 'modulo'
 }
 

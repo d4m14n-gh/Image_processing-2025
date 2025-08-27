@@ -21,7 +21,7 @@ mat-label, h3 {
     border: var(--default-border);
     background-color: var(--mat-sys-surface-variant);
     color: var(--mat-sys-on-surface-variant);
-    font-size: 1.2em;
+    font-size: 1.5em;
 }
 
 .kernel-cell:focus {

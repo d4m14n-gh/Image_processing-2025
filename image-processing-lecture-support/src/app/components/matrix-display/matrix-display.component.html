@@ -1,0 +1,14 @@
+<div class="flex-col">
+    @for (row of enumerator(); track $index;) {
+
+    <div class="flex-row">
+        @for (col of enumerator(); track $index) {
+        <div class="frame">
+            {{kernel().kernel[row-1][col-1]}}
+        </div>
+        }
+    </div>
+
+    }
+
+</div>

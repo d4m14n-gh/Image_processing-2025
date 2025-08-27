@@ -20,13 +20,13 @@ export const appConfig: ApplicationConfig = {
       enabled: !isDevMode(),
       registrationStrategy: 'registerWhenStable:30000'
     }),
-    // provideAnimationsAsync(),
-    // {
-    //   provide: MAT_ICON_DEFAULT_OPTIONS,
-    //   useValue: {
-    //     fontSet: 'material-icons-round'
-    //   }
-    // }
+    provideAnimationsAsync(),
+    {
+      provide: MAT_ICON_DEFAULT_OPTIONS,
+      useValue: {
+        fontSet: 'material-symbols-rounded'
+      }
+    }
   ]
 };
 

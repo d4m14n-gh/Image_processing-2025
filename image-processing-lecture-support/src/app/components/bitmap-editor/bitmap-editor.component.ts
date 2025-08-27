@@ -65,7 +65,7 @@ export class BitmapEditorComponent {
   pixelSize: number = 50;
 
   selectionMode: SelectionMode = SelectionMode.Selected;
-  outOfRangeHandling: OutOfRangeHandling = OutOfRangeHandling.Saturation;
+  outOfRangeHandling: OutOfRangeHandling = OutOfRangeHandling.Clipping;
   outOfBoundsHandling: OutOfBoundsHandling = OutOfBoundsHandling.Zero;
   selectedColorScale: ColorScale = ColorScale.Grayscale;
   quantizationMode: QuantizationMode = QuantizationMode.Round;
@@ -123,7 +123,8 @@ export class BitmapEditorComponent {
       this.outOfBoundsHandling,
       this.outOfRangeHandling,
       this.quantizationMode,
-      this.defaultValue
+      this.defaultValue,
+      this.bitmap.selected.length > 0
     );
     this.historyService.addToHistory(this.expressionControl.value);
     this.tick++;

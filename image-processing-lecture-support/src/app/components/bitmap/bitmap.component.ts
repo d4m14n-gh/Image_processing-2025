@@ -38,6 +38,7 @@ export class BitmapComponent implements OnInit, OnDestroy{
 
   //private
   private _drag_area: DragArea = new DragArea();
+  private _disableContext: boolean = false;
   private _subscription: Subscription = new Subscription();
 
   constructor(private ngZone: NgZone, private themeService: ThemeService) {
@@ -76,6 +77,12 @@ export class BitmapComponent implements OnInit, OnDestroy{
   onMouseMove(event: MouseEvent) {
     this.onCanvasMouseMove(event);
   }
+  @HostListener('document:contextmenu', ['$event'])
+  onRightClick(event: MouseEvent) {
+    if (this._disableContext) {
+      event.preventDefault();
+    }
+  }
 
 
   getCursorPosition(event: MouseEvent): {x: number, y: number} {
@@ -106,6 +113,7 @@ export class BitmapComponent implements OnInit, OnDestroy{
     else if (this.bitmapRenderer.isCursorOnCell(x, y, this.bitmap())){
       if (!this._drag_area.dragging) {
         this._drag_area.dragging = true;
+        this._disableContext = true;
         this._drag_area.button = event.button;
         this._drag_area.ctrlKey = event.ctrlKey;
         this._drag_area.dragStart = {row, col};
@@ -139,6 +147,7 @@ export class BitmapComponent implements OnInit, OnDestroy{
   onCanvasMouseUp(event: MouseEvent): void {
     if (this._drag_area.dragging && this._drag_area.button === event.button) {
       this._drag_area.dragging = false;
+      setTimeout(() => this._disableContext = false, 0);
       this.dragEnded.emit(this._drag_area);
       this.dragEnd(this._drag_area);
     }

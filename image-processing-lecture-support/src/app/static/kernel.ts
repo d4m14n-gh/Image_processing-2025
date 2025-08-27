@@ -1,6 +1,6 @@
 import { Bitmap } from "./bitmap";
-import { OutOfRangeHandling, QuantizationMode } from "./enums";
-import { outOfRangeHandle, quantizationHandle } from "./expression-utils";
+import { OutOfBoundsHandling, OutOfRangeHandling, QuantizationMode } from "./enums";
+import { outOfBoundsHandle, outOfRangeHandle, quantizationHandle } from "./expression-utils";
 
 export class Kernel {
     private _kernel: number[][] = [];
@@ -15,13 +15,15 @@ export class Kernel {
         );
     }
 
-    apply(bitmap: Bitmap, row: number, col: number, quantization: QuantizationMode, outOfRange: OutOfRangeHandling): number {
+    apply(bitmap: Bitmap, row: number, col: number, quantization: QuantizationMode, outOfRange: OutOfRangeHandling, outOfBounds: OutOfBoundsHandling): number {
         const r = Math.trunc((this._size - 1) / 2);
         let sum = 0;
         for (let oy = -r; oy <= r; oy++)
             for (let ox = -r; ox <= r; ox++) {
                 if (!bitmap.isOut(row + oy, col + ox))
                     sum += bitmap.get(row + oy, col + ox) * this._kernel[oy + r][ox + r];
+                else
+                    sum += outOfBoundsHandle(outOfBounds, 255) * this._kernel[oy + r][ox + r];
             }
         return outOfRangeHandle(quantizationHandle(sum, quantization), outOfRange);
     }
