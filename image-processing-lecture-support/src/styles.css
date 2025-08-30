@@ -22,12 +22,15 @@ body {
   --selected-border: 2px solid var(--selection-border-color);
   --default-border: 1px solid var(--mdc-outlined-card-outline-color, var(--mat-sys-outline-variant, crimson));
 }
+header, button[mat-flat-button] {
+  font-family: "Montserrat", sans-serif !important;
+}
 
 .main-card {
-    margin: 10px;
+    margin: 8px;
     padding: 20px;
-    min-height: calc(100% - 20px);
-    width: calc(100% - 20px);
+    min-height: calc(100% - 16px);
+    width: calc(100% - 16px);
 }
 
 .flex-row {
@@ -39,4 +42,17 @@ body {
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+
+
+.bitmap {
+  margin: auto;
+  background-color: var(--mat-sys-outline-variant);
+  border-radius: 1px;
+  outline: 1px solid var(--mat-sys-outline-variant);
+}
+.scrollable {
+  height: 100%;
+  overflow: auto;
+  display: flex;
 }

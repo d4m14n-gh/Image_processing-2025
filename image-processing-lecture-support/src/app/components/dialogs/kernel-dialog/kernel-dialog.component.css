@@ -21,7 +21,7 @@ mat-label, h3 {
     border: var(--default-border);
     background-color: var(--mat-sys-surface-variant);
     color: var(--mat-sys-on-surface-variant);
-    font-size: 1.2em;
+    font-size: 1.5em;
 }
 
 .kernel-cell:focus {
@@ -38,3 +38,5 @@ input[type=number] {
     appearance: none;
     -moz-appearance: textfield;
 }
+
+/* <div class="mat-mdc-form-field-subscript-wrapper mat-mdc-form-field-bottom-align"><div aria-atomic="true" aria-live="polite" class="mat-mdc-form-field-hint-wrapper"><!--container--><!--container--><div class="mat-mdc-form-field-hint-spacer"></div><!--container--></div></div> */

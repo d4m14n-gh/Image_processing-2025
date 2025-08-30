@@ -3,7 +3,6 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
-import { MatChipsModule } from '@angular/material/chips';
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -14,7 +13,6 @@ import { RouterModule } from '@angular/router';
     MatIconModule,
     MatListModule,
     RouterModule,
-    MatChipsModule
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'

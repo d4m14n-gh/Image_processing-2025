@@ -1,7 +1,3 @@
-.app-layout {
-  height: 100%;
-}
-
 .top-toolbar {
     height: 64px;
 }
@@ -14,22 +10,9 @@
   /* flex: 1; */
   display: grid;
   grid-template-columns: 275px 1fr 275px;
-  gap: 10px;
-  padding: 10px;
-  height: calc(100% - 20px); 
-}
-
-.sidebar {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.bitmap-wrapper {
-  margin: auto;
-  background-color: var(--mat-sys-outline-variant);
-  border-radius: 1px;
-  outline: 1px solid var(--mat-sys-outline-variant);
+  gap: 8px;
+  padding: 8px;
+  height: calc(100% - 16px); 
 }
 
 mat-nav-list > * {
@@ -53,4 +36,8 @@ mat-card-subtitle {
   align-items: center;
   gap: 5px;
   margin-bottom: 5px;
+}
+
+mat-form-field {
+  margin-bottom: 15px;
 }

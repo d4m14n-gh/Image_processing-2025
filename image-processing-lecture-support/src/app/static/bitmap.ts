@@ -1,13 +1,15 @@
 import { DragArea } from "./drag-area";
+import { Padding } from "./enums";
+import { Point } from "./point";
 
 export class Bitmap{
-  private width: number;
-  private height: number;
+  private _width: number;
+  private _height: number;
   protected matrix: number[][];
 
   constructor(width: number = 10, height: number = 10, oldMatrix?: Bitmap, defaultValue: number = 0) {
-    this.width = width;
-    this.height = height;
+    this._width = width;
+    this._height = height;
     this.matrix = Array.from({ length: height }, () => Array(width).fill(defaultValue));
 
     oldMatrix?.matrix.forEach((row, r) => {
@@ -19,18 +21,44 @@ export class Bitmap{
     });
   }
 
-  getWidth(): number {
-    return this.width;
+  get width(): number {
+    return this._width;
   }
-  getHeight(): number {
-    return this.height;
+  get height(): number {
+    return this._height;
   }
+
+
+  isOut(row: number, col: number): boolean {
+    return row < 0 || row >= this._height || col < 0 || col >= this._width || !Number.isInteger(row) || !Number.isInteger(col);
+  }
+
   get(row: number, col: number): number {
     return this.matrix[row]?.[col] ?? NaN;
   }
-  isOut(row: number, col: number): boolean {
-    return row < 0 || row >= this.height || col < 0 || col >= this.width || !Number.isInteger(row) || !Number.isInteger(col);
+  getWithPadding(point: Point, mode: Padding) {
+    if (!this.isOut(point.row, point.col))
+      return this.get(point.row, point.col);
+
+    if (mode == Padding.Edge) {
+      let row = point.col;
+      let col = point.row;
+
+      if (row < 0)
+        row = 0;
+      else if (row >= this.width)
+        row = this.width - 1;
+
+      if (col < 0)
+        col = 0;
+      else if (col >= this.height)
+        col = this.height - 1;
+      return this.get(col, row);
+    }
+    return 0;
   }
+
+
   set(row: number, col: number, value: number): void {
     this.matrix[row][col] = value;
   }
@@ -76,14 +104,14 @@ export class InteractiveBitmap extends Bitmap {
   }
 
   isSelected(row: number, col: number): boolean {
-    if (row < 0 || row >= this.getHeight() || col < 0 || col >= this.getWidth()) {
+    if (row < 0 || row >= this.height || col < 0 || col >= this.width) {
       return false;
     }
     return this._selected.has(`${row},${col}`);
   }
 
   select(row: number, col: number): void {
-    if (row < 0 || row >= this.getHeight() || col < 0 || col >= this.getWidth()) 
+    if (row < 0 || row >= this.height || col < 0 || col >= this.width) 
       return;
     this._selected.add(`${row},${col}`);
   }

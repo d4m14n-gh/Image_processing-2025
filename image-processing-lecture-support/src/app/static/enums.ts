@@ -13,7 +13,7 @@ export enum SelectionMode {
 
 export enum OutOfRangeHandling {
     None = 'none',
-    Saturation = 'saturation',
+    Clipping = 'clipping',
     Modulo = 'modulo'
 }
 
@@ -33,4 +33,9 @@ export enum QuantizationMode {
 export enum Themes{
     Light = 'light',
     Dark = 'dark'
+}
+
+export enum Padding{
+    Zero = 'zero',
+    Edge = 'edge'
 }

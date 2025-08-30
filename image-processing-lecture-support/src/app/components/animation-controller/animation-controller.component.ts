@@ -26,8 +26,8 @@ import { MatSliderModule } from '@angular/material/slider';
 export class AnimationControllerComponent implements OnInit, OnDestroy {
   loop: boolean = false;
   playing: boolean = false;
-  
   speed: number = 1;
+  
   
   showValue = input<boolean>(true);
   min = input<number>(1);
@@ -38,6 +38,7 @@ export class AnimationControllerComponent implements OnInit, OnDestroy {
   valueChanged = output<number>();
 
   private _value: number = 0;
+  private _timeoutId: any;
   set value(newValue: number) {
     if(this._value !== newValue)
       this.valueChanged.emit(newValue);
@@ -46,7 +47,11 @@ export class AnimationControllerComponent implements OnInit, OnDestroy {
   get value(): number {
     return this._value;
   }
-
+  
+  ngOnInit() {
+    this._value = this.startValue();
+    this.animate();
+  }
   stepFirst() {
     this.value = this.min();
   }
@@ -55,6 +60,7 @@ export class AnimationControllerComponent implements OnInit, OnDestroy {
   }
   togglePlay() {
     this.playing = !this.playing;
+    this.animate();
   }
   stepForward() {
     this.value = Math.min(this.max(), this.value + this.step());
@@ -70,20 +76,40 @@ export class AnimationControllerComponent implements OnInit, OnDestroy {
     console.log(arg0);
   }
 
-  intervalId: any;
-  ngOnInit() {
-    this._value = this.startValue();
-    this.intervalId = setInterval(() => {
-      if(this.playing){
-        if(this.value<this.max())
-          this.value++;
-        else if(this.loop)
-          this.value = this.min();
-      }
-    }, 250); 
+  //speedControl
+  private _speeds = [0.1, 0.25, 0.5, 0.75, 1, 2, 5, 10];
+  private _currentSpeedIndex = 4;
+  speedDown(){
+    this._currentSpeedIndex = Math.max(0, this._currentSpeedIndex - 1);
+    this.speed = this._speeds[this._currentSpeedIndex];
+  }
+  speedUp(){
+    this._currentSpeedIndex = Math.min(this._speeds.length - 1, this._currentSpeedIndex + 1);
+    this.speed = this._speeds[this._currentSpeedIndex];
+  }
+  maxSpeed(){
+    return this._speeds[this._speeds.length - 1];
+  }
+  minSpeed(){
+    return this._speeds[0];
+  }
+
+  
+  animate(){
+    if(this.playing){
+      if(this.value<this.max())
+        this.value++;
+      else if(this.loop)
+        this.value = this.min();
+
+
+      this._timeoutId = setTimeout(() => {
+        this.animate();
+      }, 100 / this.speed);
+    }
   }
 
   ngOnDestroy() {
-    clearInterval(this.intervalId);
+    clearTimeout(this._timeoutId);
   }
 }

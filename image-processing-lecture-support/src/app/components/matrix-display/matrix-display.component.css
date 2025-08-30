@@ -1,0 +1,21 @@
+.frame{
+    background-color: var(--mat-sys-surface-container);
+    border: var(--default-border);
+    border-radius: 5px;
+    padding: 5px;
+    width: 3ch;
+    height: 3ch;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+:host {
+    display: block;
+}
+
+.flex-row, .flex-col {
+    gap: 8px;
+    font-size: 1.1rem;
+}

@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, ViewChild, ElementRef, OnInit, HostListener } from '@angular/core';
+import { Component, AfterViewInit, ViewChild, ElementRef, OnInit, HostListener, OnDestroy } from '@angular/core';
 import { Chart, BarController, BarElement, CategoryScale, LinearScale, Tooltip, Legend } from "chart.js";
 import { BitmapComponent } from "../bitmap/bitmap.component";
 import { InteractiveBitmap } from '../../static/bitmap';
@@ -17,6 +17,8 @@ import { MatMenuModule } from "@angular/material/menu";
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
+import { ThemeService } from '../../services/theme/theme.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-histogram',
@@ -38,16 +40,17 @@ import { FormsModule } from '@angular/forms';
     FormsModule
 ]  
 })
-export class HistogramComponent implements AfterViewInit, OnInit {
+export class HistogramComponent implements AfterViewInit, OnInit, OnDestroy {
   @ViewChild('histogram') histogramCanvas!: ElementRef<HTMLCanvasElement>;
   bitmap: InteractiveBitmap = new InteractiveBitmap(16, 9);
   bitmapKey: string = "histogram-bitmap";
 
+  pixelSize: number = 50;
   showGrid: boolean = true;
   showHeaders: boolean = true;
   showNumberValues: boolean = true;
+  enableHistogramColorscale: boolean = true;
   selectedColorScale: ColorScale = ColorScale.Grayscale;
-  pixelSize: number = 40;
   
   histogramBinSize: number = 5;
   rangeStart: number = 0;
@@ -59,13 +62,18 @@ export class HistogramComponent implements AfterViewInit, OnInit {
   private _colors: string[] = [];
   private _border_colors: string[] = [];
   private _data: number[] = [];
+  private _themeSubscription: Subscription = new Subscription();
 
-  constructor(private bitmapStorage: BitmapStorageService) {}
+  constructor(private bitmapStorage: BitmapStorageService, private themeService: ThemeService) {
+    this._themeSubscription = this.themeService.themeChanged$.subscribe(theme => {
+      this.updateChart();
+    });
+  }
 
   ngOnInit(): void {
     let bitmap = this.bitmapStorage.load(this.bitmapKey);
     if(bitmap !== null)
-      this.bitmap = new InteractiveBitmap(bitmap.getWidth(), bitmap.getHeight(), bitmap, 255);
+      this.bitmap = new InteractiveBitmap(bitmap.width, bitmap.height, bitmap, 255);
     else
       this.bitmapStorage.save(this.bitmapKey, this.bitmap);
   }
@@ -114,12 +122,17 @@ export class HistogramComponent implements AfterViewInit, OnInit {
     if(this.chart){
       this.chart.data.datasets[0].data = this._data;
       this.chart.data.labels = this._labels;
+
+      if(this.enableHistogramColorscale)
+        this.chart.data.datasets[0].backgroundColor = this._colors;
+      else
+        this.chart.data.datasets[0].backgroundColor = getVar();
+      
+      this.chart.data.datasets[0].borderWidth = 0;
+      
       // this.chart.data.datasets[0].backgroundColor = getVar();
       // if(this.histogramBinSize>2){
-        this.chart.data.datasets[0].backgroundColor = this._colors;
-        // this.chart.data.datasets[0].borderColor = this._border_colors;
-        this.chart.data.datasets[0].borderWidth = 0;
-
+      // this.chart.data.datasets[0].borderColor = this._border_colors;
         // this.chart.data.datasets[0].borderWidth = 1;
       // }
       // else{
@@ -142,7 +155,9 @@ export class HistogramComponent implements AfterViewInit, OnInit {
     this.bitmapComponentTick++;
     this.updateChart();
   }
-
+  ngOnDestroy() {
+    this._themeSubscription.unsubscribe();
+  }
   ngAfterViewInit(): void {
     Chart.register(BarController, BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 

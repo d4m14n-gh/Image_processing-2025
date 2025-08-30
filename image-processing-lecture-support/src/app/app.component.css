@@ -26,7 +26,6 @@ header {
   background-color: var(--mat-sys-primary);
   color: var(--mat-sys-on-primary);
   padding: 10px;
-  border-bottom: var(--default-border);
   
   display: flex;
   align-items: center;

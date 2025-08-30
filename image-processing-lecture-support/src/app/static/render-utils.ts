@@ -38,9 +38,9 @@ export class BitmapRenderer {
        let cell = this.getCursorCell(x, y);
        return (
            cell.row >= 0 &&
-           cell.row < bitmap.getHeight() &&
+           cell.row < bitmap.height &&
            cell.col >= 0 &&
-           cell.col < bitmap.getWidth()
+           cell.col < bitmap.width
        );
     }
     getCursorCell(x: number, y: number): { row: number, col: number } {
@@ -57,13 +57,13 @@ export class BitmapRenderer {
         const offsetX = this.getOffsetX();
         const offsetY = this.getOffsetY();
 
-        return y < offsetY && x >= offsetX && x <= offsetX + pixelSize * bitmap.getWidth();
+        return y < offsetY && x >= offsetX && x <= offsetX + pixelSize * bitmap.width;
     }
     isCursorOnRowHeader(x: number, y: number, bitmap: Bitmap): boolean {
         const { pixelSize } = this;
         const offsetX = this.getOffsetX();
         const offsetY = this.getOffsetY();
-        return x < offsetX && y >= offsetY && y <= offsetY + pixelSize * bitmap.getHeight();
+        return x < offsetX && y >= offsetY && y <= offsetY + pixelSize * bitmap.height;
     }
 
     drawGrid(ctx: CanvasRenderingContext2D, scale: number, bitmap: InteractiveBitmap, color: string): void {
@@ -75,16 +75,16 @@ export class BitmapRenderer {
         ctx.lineWidth = 1;
         ctx.strokeStyle = color;
 
-        for (let row = 1; row <= bitmap.getHeight()-1; row++) {
+        for (let row = 1; row <= bitmap.height-1; row++) {
             ctx.beginPath();
             ctx.moveTo(Math.round(offsetX*scale), Math.round((row * pixelSize + offsetY)*scale) + 0.5);
-            ctx.lineTo(Math.round((bitmap.getWidth() * pixelSize + offsetX)*scale), Math.round((row * pixelSize + offsetY)*scale) + 0.5);
+            ctx.lineTo(Math.round((bitmap.width * pixelSize + offsetX)*scale), Math.round((row * pixelSize + offsetY)*scale) + 0.5);
             ctx.stroke();
         }
-        for (let col = 1; col <= bitmap.getWidth()-1; col++) {
+        for (let col = 1; col <= bitmap.width-1; col++) {
             ctx.beginPath();
             ctx.moveTo(Math.round((col * pixelSize + offsetX)*scale) + 0.5, Math.round(offsetY*scale));
-            ctx.lineTo(Math.round((col * pixelSize + offsetX)*scale) + 0.5, Math.round((bitmap.getHeight() * pixelSize + offsetY)*scale));
+            ctx.lineTo(Math.round((col * pixelSize + offsetX)*scale) + 0.5, Math.round((bitmap.height * pixelSize + offsetY)*scale));
             ctx.stroke();
         }
     }
@@ -122,8 +122,8 @@ export class BitmapRenderer {
 
 
         ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-        for (let row = 0; row < bitmap.getHeight(); row++) {
-            for (let col = 0; col < bitmap.getWidth(); col++) {
+        for (let row = 0; row < bitmap.height; row++) {
+            for (let col = 0; col < bitmap.width; col++) {
                 const value = bitmap.get(row, col);
                 const fillColor =  isNaN(value) ? 'white' : scaleColor(value, colorScale); 
                 
@@ -143,9 +143,9 @@ export class BitmapRenderer {
 
 
         //selection
-        const patternCanvas = this.createDiagonalPattern(10*scale, scale, selectionColor);
+        const patternCanvas = this.createDiagonalPattern(12*scale, scale, selectionColor);
         const pattern = ctx.createPattern(patternCanvas, 'repeat');
-        const darkPatternCanvas = this.createDiagonalPattern(10*scale, scale, getContrastColor(selectionColor));
+        const darkPatternCanvas = this.createDiagonalPattern(12*scale, scale, getContrastColor(selectionColor));
         const darkPattern = ctx.createPattern(darkPatternCanvas, 'repeat');
         if (!pattern) throw new Error('Pattern creation failed');
         if (!darkPattern) throw new Error('Dark pattern creation failed');
@@ -154,8 +154,8 @@ export class BitmapRenderer {
         ctx.lineCap = 'square';
         ctx.lineJoin = "miter";
         ctx.strokeStyle = selectionColor;
-        for (let row = 0; row < bitmap.getHeight(); row++) {
-            for (let col = 0; col < bitmap.getWidth(); col++) {
+        for (let row = 0; row < bitmap.height; row++) {
+            for (let col = 0; col < bitmap.width; col++) {
                 const isDragged = (r: number, c: number) => bitmap.isDragged(r, c);
                 const isSel = (r: number, c: number) => bitmap.isSelected(r, c) || bitmap.isDragged(r, c);
 
@@ -210,8 +210,8 @@ export class BitmapRenderer {
         ctx.textBaseline = 'middle';
         ctx.lineJoin = 'round';
         if (numbers) {
-            for (let row = 0; row < bitmap.getHeight(); row++) {
-                for (let col = 0; col < bitmap.getWidth(); col++) {
+            for (let row = 0; row < bitmap.height; row++) {
+                for (let col = 0; col < bitmap.width; col++) {
                     const value = bitmap.get(row, col);
                     const fillColor = isNaN(value) ? 'white' : scaleColor(value, colorScale);
                     const textColor = getContrastColor(fillColor);
@@ -231,9 +231,9 @@ export class BitmapRenderer {
             ctx.fillRect(0, offsetY * scale, Math.ceil(offsetX * scale), Math.ceil(ctx.canvas.height));
             ctx.fillRect(offsetX*scale, 0, Math.ceil(ctx.canvas.width), Math.ceil(offsetY*scale));
             const color = getContrastColor(headerColor); 
-            for (let col = 0; col < bitmap.getWidth(); col++) 
+            for (let col = 0; col < bitmap.width; col++) 
                 this.drawString(ctx, scale, (col).toString(), col * pixelSize + offsetX + pixelSize / 2,  offsetY / 2, color);
-            for (let row = 0; row < bitmap.getHeight(); row++) 
+            for (let row = 0; row < bitmap.height; row++) 
                 this.drawString(ctx, scale, (row).toString(), offsetX / 2, row * pixelSize + offsetY + pixelSize / 2, color);
         }
 

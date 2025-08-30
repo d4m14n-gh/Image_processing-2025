@@ -1,4 +1,11 @@
-app-bitmap {
-    border: var(--default-border);
+.sign {
+    font-size: 1.8rem;
+    width: fit-content;
+    height: fit-content;
 }
 
+
+mjx-container, 
+mjx-container * {
+  font-family: 'Roboto', 'Helvetica Neue', sans-serif !important;
+}

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormControl, FormsModule, Validators } from '@angular/forms';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
-import { MatCard, MatCardModule } from '@angular/material/card';
-import { MatCheckbox, MatCheckboxModule } from '@angular/material/checkbox';
+import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatToolbarModule } from "@angular/material/toolbar";
@@ -20,10 +20,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HistoryService } from '../../services/history/history.service';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
-import { DragArea } from '../../static/drag-area';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { BitmapStorageService } from '../../services/bitmap-storage/bitmap-storage.service';
-import { concatWith } from 'rxjs';
 
 @Component({
   selector: 'app-bitmap-editor',
@@ -46,7 +44,7 @@ import { concatWith } from 'rxjs';
     MatListModule,
     ReactiveFormsModule,
     MatMenuModule,
-    RouterModule
+    RouterModule,
 ],
   templateUrl: './bitmap-editor.component.html',
   styleUrl: './bitmap-editor.component.css'
@@ -64,7 +62,7 @@ export class BitmapEditorComponent {
   pixelSize: number = 50;
 
   selectionMode: SelectionMode = SelectionMode.Selected;
-  outOfRangeHandling: OutOfRangeHandling = OutOfRangeHandling.Saturation;
+  outOfRangeHandling: OutOfRangeHandling = OutOfRangeHandling.Clipping;
   outOfBoundsHandling: OutOfBoundsHandling = OutOfBoundsHandling.Zero;
   selectedColorScale: ColorScale = ColorScale.Grayscale;
   quantizationMode: QuantizationMode = QuantizationMode.Round;
@@ -84,15 +82,15 @@ export class BitmapEditorComponent {
     if (this._id) {
       let bitmap: Bitmap | null = this.bitmap_storage.load(this._id);
       if(bitmap)
-        this.bitmap = new InteractiveBitmap(bitmap.getWidth(), bitmap.getHeight(), bitmap, this.defaultValue);
+        this.bitmap = new InteractiveBitmap(bitmap.width, bitmap.height, bitmap, this.defaultValue);
     }
     this.expressionControl.setValue(historyService.getHistory().slice().reverse()[0] ?? this.expressionControl.value);
   }
 
   set bitmap(value: InteractiveBitmap){
     this._bitmap = value;
-    this.width = value.getWidth();
-    this.height = value.getHeight();
+    this.width = value.width;
+    this.height = value.height;
   }
   get bitmap(): InteractiveBitmap {
     return this._bitmap;
@@ -122,7 +120,8 @@ export class BitmapEditorComponent {
       this.outOfBoundsHandling,
       this.outOfRangeHandling,
       this.quantizationMode,
-      this.defaultValue
+      this.defaultValue,
+      this.bitmap.selected.length > 0
     );
     this.historyService.addToHistory(this.expressionControl.value);
     this.tick++;
