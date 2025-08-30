@@ -13,7 +13,7 @@
                 </app-bitmap>
             </div>
         </mat-card>
-
+ 
         <mat-card appearance="outlined" style="overflow: auto;">
 
             <mat-card-content>
@@ -37,15 +37,19 @@
 
             <mat-card-content>
                 <mat-checkbox [(ngModel)]="showNumberValues" [disabled]="pixelSize<40">
-                    Show Numbers
+                    Numbers
                 </mat-checkbox>
                 <br>
                 <mat-checkbox [(ngModel)]="showGrid">
-                    Show Grid
+                    Grid
                 </mat-checkbox>
                 <br>
                 <mat-checkbox [(ngModel)]="showHeaders" [disabled]="pixelSize<40">
-                    Show Headers
+                    Headers
+                </mat-checkbox>
+                <br>
+                <mat-checkbox [(ngModel)]="enableHistogramColorscale" (ngModelChange)="updateChart(); this.chart?.update('none');">
+                    Histogram Colorscale
                 </mat-checkbox>
             </mat-card-content>
 

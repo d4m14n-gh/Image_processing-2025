@@ -39,10 +39,10 @@ export class BitmapComponent implements OnInit, OnDestroy{
   //private
   private _drag_area: DragArea = new DragArea();
   private _disableContext: boolean = false;
-  private _subscription: Subscription = new Subscription();
+  private _themeSubscription: Subscription = new Subscription();
 
   constructor(private ngZone: NgZone, private themeService: ThemeService) {
-    this._subscription = this.themeService.themeChanged$.subscribe(theme => {
+    this._themeSubscription = this.themeService.themeChanged$.subscribe(theme => {
       this.draw();
     });
   }
@@ -132,9 +132,9 @@ export class BitmapComponent implements OnInit, OnDestroy{
       let {row, col} = this.bitmapRenderer.getCursorCell(x, y);
       
       if(row < 0) row = 0;
-      if(row >= this.bitmap().getHeight()) row = this.bitmap().getHeight() - 1;
+      if(row >= this.bitmap().height) row = this.bitmap().height - 1;
       if(col < 0) col = 0;
-      if(col >= this.bitmap().getWidth()) col = this.bitmap().getWidth() - 1;
+      if(col >= this.bitmap().width) col = this.bitmap().width - 1;
 
       if(this._drag_area.dragEnd.row!=row || this._drag_area.dragEnd.col!=col){
         this._drag_area.dragEnd = {row, col};
@@ -187,28 +187,28 @@ export class BitmapComponent implements OnInit, OnDestroy{
   
 
   selectAll() {
-    for (let row = 0; row < this.bitmap().getHeight(); row++) 
-      for (let col = 0; col < this.bitmap().getWidth(); col++) 
+    for (let row = 0; row < this.bitmap().height; row++) 
+      for (let col = 0; col < this.bitmap().width; col++) 
         this.bitmap().select(row, col);
     this.syncBitmap(); 
   }
   selectRow(row: number, event: MouseEvent) {
     if(!event.ctrlKey&&event.button != 2) this.bitmap().clearSelection();
-    for (let col = 0; col < this.bitmap().getWidth(); col++) 
+    for (let col = 0; col < this.bitmap().width; col++) 
       this.bitmap().setSelection(row, col, event.button != 2);
     this.syncBitmap(); 
   }
   selectColumn(col: number, event: MouseEvent) {
     if(!event.ctrlKey&&event.button != 2) this.bitmap().clearSelection();
-    for (let row = 0; row < this.bitmap().getHeight(); row++)
+    for (let row = 0; row < this.bitmap().height; row++)
       this.bitmap().setSelection(row, col, event.button != 2);
     this.syncBitmap(); 
   }
 
   copyToCsv() {
     const selection = this.bitmap().selected;
-    
-    const minCell = {row: this.bitmap().getHeight(), col: this.bitmap().getWidth()};
+
+    const minCell = {row: this.bitmap().height, col: this.bitmap().width};
     const maxCell = {row: 0, col: 0};
     for(let cell of selection) {
       minCell.row = Math.min(minCell.row, cell.row);
@@ -238,10 +238,10 @@ export class BitmapComponent implements OnInit, OnDestroy{
      return (window.devicePixelRatio || 1);
   }
   getHeight(): number {
-    return this.bitmap().getHeight() * this.pixelSize() + (this.showHeaders() ? 30 : 0);
+    return this.bitmap().height * this.pixelSize() + (this.showHeaders() ? 30 : 0);
   }
   getWidth(): number {
-    return this.bitmap().getWidth() * this.pixelSize() + (this.showHeaders() ? 30 : 0);
+    return this.bitmap().width * this.pixelSize() + (this.showHeaders() ? 30 : 0);
   }
   draw(): void {
     this.ngZone.runOutsideAngular(() => {
@@ -271,6 +271,6 @@ export class BitmapComponent implements OnInit, OnDestroy{
   }
 
   ngOnDestroy() {
-    this._subscription.unsubscribe();
+    this._themeSubscription.unsubscribe();
   }
 }

@@ -3,6 +3,9 @@
     height: fit-content;
     display: block;
 }
+canvas:focus {
+    outline: none;
+}
 canvas {
     image-rendering: pixelated;
     user-select: none;

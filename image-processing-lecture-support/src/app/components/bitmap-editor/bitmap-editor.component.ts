@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormControl, FormsModule, Validators } from '@angular/forms';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
-import { MatCard, MatCardModule } from '@angular/material/card';
-import { MatCheckbox, MatCheckboxModule } from '@angular/material/checkbox';
+import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatToolbarModule } from "@angular/material/toolbar";
@@ -20,11 +20,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HistoryService } from '../../services/history/history.service';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
-import { DragArea } from '../../static/drag-area';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { BitmapStorageService } from '../../services/bitmap-storage/bitmap-storage.service';
-import { concatWith } from 'rxjs';
-import { AppComponent } from '../../app.component';
 
 @Component({
   selector: 'app-bitmap-editor',
@@ -85,15 +82,15 @@ export class BitmapEditorComponent {
     if (this._id) {
       let bitmap: Bitmap | null = this.bitmap_storage.load(this._id);
       if(bitmap)
-        this.bitmap = new InteractiveBitmap(bitmap.getWidth(), bitmap.getHeight(), bitmap, this.defaultValue);
+        this.bitmap = new InteractiveBitmap(bitmap.width, bitmap.height, bitmap, this.defaultValue);
     }
     this.expressionControl.setValue(historyService.getHistory().slice().reverse()[0] ?? this.expressionControl.value);
   }
 
   set bitmap(value: InteractiveBitmap){
     this._bitmap = value;
-    this.width = value.getWidth();
-    this.height = value.getHeight();
+    this.width = value.width;
+    this.height = value.height;
   }
   get bitmap(): InteractiveBitmap {
     return this._bitmap;

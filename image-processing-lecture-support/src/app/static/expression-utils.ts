@@ -1,8 +1,9 @@
 import { AbstractControl, ValidationErrors } from "@angular/forms";
 import { Bitmap, InteractiveBitmap } from "./bitmap";
-import { OutOfBoundsHandling, OutOfRangeHandling, QuantizationMode } from "./enums";
+import { OutOfBoundsHandling, OutOfRangeHandling, Padding, QuantizationMode } from "./enums";
 import { Parser } from "expr-eval";
 import * as fastNoise from 'fast-simplex-noise';
+import { Point } from "./point";
 
 export function outOfBoundsHandle(mode: OutOfBoundsHandling, defaultValue: number): number {
     if (mode == OutOfBoundsHandling.None)
@@ -78,8 +79,8 @@ export function declareCustomFunctions(
         const gen = fastNoise.makeNoise2D(() => seed);
         return gen(x / 10, y / 10);
     };
-    parser.consts.WIDTH = bitmap.getWidth();
-    parser.consts.HEIGHT = bitmap.getHeight();
+    parser.consts.WIDTH = bitmap.width;
+    parser.consts.HEIGHT = bitmap.height;
     parser.consts.RANDOM = Math.random();
 }
 
@@ -97,10 +98,10 @@ export function parseAndApply(
     declareCustomFunctions(parser, bitmap, outOfBoundsHandling, defaultValue);
 
     const compiled = parser.parse(expression);
-    const resultBitmap = new Bitmap(bitmap.getWidth(), bitmap.getHeight(), bitmap);
+    const resultBitmap = new Bitmap(bitmap.width, bitmap.height, bitmap);
 
-    for (let row = 0; row < bitmap.getHeight(); row++) {
-        for (let col = 0; col < bitmap.getWidth(); col++) {
+    for (let row = 0; row < bitmap.height; row++) {
+        for (let col = 0; col < bitmap.width; col++) {
             if (!selectedOnly || bitmap.isSelected(row, col)) {
                 let newValue = compiled.evaluate({ x: col, y: row });
                 let quantizedValue = quantizationHandle(newValue, quantizationMode);
@@ -110,8 +111,8 @@ export function parseAndApply(
         }
     }
 
-    for (let row = 0; row < bitmap.getHeight(); row++) {
-        for (let col = 0; col < bitmap.getWidth(); col++) {
+    for (let row = 0; row < bitmap.height; row++) {
+        for (let col = 0; col < bitmap.width; col++) {
             bitmap.set(row, col, resultBitmap.get(row, col));
         }
     }

@@ -38,3 +38,5 @@ input[type=number] {
     appearance: none;
     -moz-appearance: textfield;
 }
+
+/* <div class="mat-mdc-form-field-subscript-wrapper mat-mdc-form-field-bottom-align"><div aria-atomic="true" aria-live="polite" class="mat-mdc-form-field-hint-wrapper"><!--container--><!--container--><div class="mat-mdc-form-field-hint-spacer"></div><!--container--></div></div> */

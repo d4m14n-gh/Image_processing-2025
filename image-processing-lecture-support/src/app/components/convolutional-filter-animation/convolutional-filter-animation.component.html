@@ -13,21 +13,31 @@
                     <mat-icon>grid_on</mat-icon>
                     Kernel
                 </button>
-                
 
+                <div style="border-left: var(--default-border); padding-left: 15px;">
+
+                    <mat-form-field subscriptSizing="dynamic" style="height: 50px; border: none;">
+                        <mat-label>Padding</mat-label>
+                        <mat-select [(ngModel)]="padding" (ngModelChange)="applayFilter(length(), filteredBitmap, bitmap); animate()">
+                            <mat-option value="zero">Zero</mat-option>
+                            <mat-option value="edge">Edge</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                    
                 <div class="flex-row" style="border-left: var(--default-border); padding-left: 15px; align-items: center;">
                     
                     
                     <mat-checkbox [(ngModel)]="showNumberValues" [disabled]="pixelSize<40">
-                        Show Numbers
+                        Numbers
                     </mat-checkbox>
                     <br>
                     <mat-checkbox [(ngModel)]="showGrid">
-                        Show Grid
+                        Grid
                     </mat-checkbox>
                     <br>
                     <mat-checkbox [(ngModel)]="showHeaders" [disabled]="pixelSize<40">
-                        Show Headers
+                        Headers
                     </mat-checkbox>
                     
                     <mat-slider min="25" max="100" step="1" discrete="false" style="width: 120px;">
@@ -41,8 +51,8 @@
 
 
                 <div style="flex: 1; border-left: var(--default-border); margin-left: 15px;">
-                    <app-animation-controller [showValue]="false" (valueChanged)="animate($event)" [startValue]="-1" [min]="-1"
-                        [max]="length()">
+                    <app-animation-controller [showValue]="false" (valueChanged)="animationIndex=$event" [startValue]="0" [min]="0"
+                        [max]="length()-1">
                     </app-animation-controller>
                 </div>
             </div>
@@ -78,19 +88,20 @@
 
     <mat-card appearance="outlined" style="overflow: hidden; min-height: fit-content;">
         <div class="scrollable flex-row" style="padding: 10px; justify-content: center; align-items: center;">
-            <app-matrix-display [kernel]="sourceKernel"></app-matrix-display>
-          
+            <!-- <app-matrix-display [kernel]="sourceKernel"></app-matrix-display> -->
+<!--           
             <mat-icon class="sign">
                 asterisk
-            </mat-icon>
-
-            <app-matrix-display [kernel]="kernel"></app-matrix-display>
-          
+            </mat-icon> -->
+           
+            <!-- <app-matrix-display [kernel]="kernel"></app-matrix-display> -->
+            <div [mathjax]="getEquation()" style="font-size: 1.2rem; color: var(--mat-sys-on-surface); font-family: Roboto, 'Helvetica Neue', sans-serif;"></div>
+<!--           
             <mat-icon class="sign">
                 equal
-            </mat-icon>
+            </mat-icon> -->
 
-            <app-matrix-display [kernel]="resultKernel"></app-matrix-display>
+            <!-- <app-matrix-display [kernel]="resultKernel"></app-matrix-display> -->
         </div>
     </mat-card>
 

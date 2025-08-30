@@ -29,12 +29,12 @@
             </mat-card-content>
 
             <mat-card-content>
-                <mat-form-field class="example-full-width">
+                <mat-form-field class="example-full-width" subscriptSizing="dynamic">
                     <mat-label>Default value</mat-label>
                     <input matInput type="number" placeholder="Ex. 10" [(ngModel)]="defaultValue" min="0" max="255"
                         step="1">
                 </mat-form-field>
-                <mat-divider style="margin: 5px 0;"></mat-divider>
+                <mat-divider style="margin-bottom: 15px;"></mat-divider>
             </mat-card-content>
 
             <mat-card-content>
@@ -48,21 +48,21 @@
 
             <mat-card-content>
                 <mat-checkbox [(ngModel)]="showNumberValues" [disabled]="pixelSize<40">
-                    Show Numbers
+                    Numbers
                 </mat-checkbox>
                 <br>
                 <mat-checkbox [(ngModel)]="showGrid">
-                    Show Grid
+                    Grid
                 </mat-checkbox>
                 <br>
                 <mat-checkbox [(ngModel)]="showHeaders" [disabled]="pixelSize<40">
-                    Show Headers
+                    Headers
                 </mat-checkbox>
                 <!-- <mat-divider style="margin: 5px 0;"></mat-divider> -->
             </mat-card-content>
 
             <mat-card-content>
-                <mat-form-field>
+                <mat-form-field subscriptSizing="dynamic">
                     <mat-label>Color Scale</mat-label>
                     <mat-select [(ngModel)]="selectedColorScale">
                         <mat-option value="none">None</mat-option>
@@ -112,7 +112,7 @@
                     Behavior
                 </mat-card-subtitle>
 
-                <mat-form-field>
+                <mat-form-field subscriptSizing="dynamic">
                     <mat-label>Quantization</mat-label>
                     <mat-select [(ngModel)]="quantizationMode">
                         <mat-option value="round">Round</mat-option>
@@ -120,8 +120,8 @@
                         <mat-option value="ceil">Ceil</mat-option>
                     </mat-select>
                 </mat-form-field>
-
-                <mat-form-field>
+                
+                <mat-form-field subscriptSizing="dynamic">
                     <mat-label>Out of Range</mat-label>
                     <mat-select [(ngModel)]="outOfRangeHandling">
                         <mat-option value="none">None</mat-option>
@@ -129,8 +129,8 @@
                         <mat-option value="modulo">Modulo</mat-option>
                     </mat-select>
                 </mat-form-field>
-
-                <mat-form-field>
+                
+                <mat-form-field subscriptSizing="dynamic">
                     <mat-label>Out of Bounds</mat-label>
                     <mat-select [(ngModel)]="outOfBoundsHandling">
                         <mat-option value="none">None</mat-option>
@@ -151,7 +151,7 @@
                     </button>
                 </mat-card-subtitle>
 
-                <mat-form-field style="width: 100%; margin-bottom: 10px;">
+                <mat-form-field style="width: 100%;" subscriptSizing="dynamic">
                     <mat-label>b'(x, y)=</mat-label>
                     <textarea matInput [formControl]="expressionControl" placeholder="Ex. b(x, y) * 2"></textarea>
                     @if (expressionControl.hasError('required')) {

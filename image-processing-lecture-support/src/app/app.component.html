@@ -2,20 +2,19 @@
   <mat-icon class="menu-icon" (click)="sidenav.toggle()">
     menu
   </mat-icon>
-  
+
   <ng-content select="[header]">
-      <h4 style="margin: 0;">
-        {{title}}
-      </h4>
-    </ng-content>
+    <h4 style="margin: 0;">
+      {{title}}
+    </h4>
+  </ng-content>
   <span class="spacer"></span>
-  
+
   <mat-icon class="menu-icon" [routerLink]="['/home']">
     <mat-icon>help</mat-icon>
   </mat-icon>
-  
-  <mat-icon class="menu-icon"
-    (click)="themeService.toggleTheme()">
+
+  <mat-icon class="menu-icon" (click)="themeService.toggleTheme()">
     {{themeService.getTheme()=='light'?'light_mode':'dark_mode'}}
   </mat-icon>
 
@@ -23,18 +22,20 @@
 
 <mat-sidenav-container>
 
-  <mat-sidenav #sidenav mode="over" [autoFocus]="false" closed (mouseenter)="sidenav.open()" (mouseleave)="sidenav.close()">
+  <mat-sidenav #sidenav mode="over" [autoFocus]="false" closed (mouseenter)="sidenav.open()"
+    (mouseleave)="sidenav.close()">
     <div>
 
       @if (sidenav.opened) {
-        <mat-nav-list>
-          <a mat-list-item routerLink="/">Home</a>
-      <a mat-list-item routerLink="/editor">Bitmap Editor</a>
-      <a mat-list-item routerLink="/histogram">Histogram</a>
-      <a mat-list-item routerLink="/convolutional-filter">Convolutional Filters</a>
-    </mat-nav-list>
-    }
-  </div>
+      <mat-nav-list>
+        <a mat-list-item routerLink="/home">Home</a>
+        <!-- <a mat-list-item routerLink="/help">Help</a> -->
+        <a mat-list-item routerLink="/editor">Bitmap Editor</a>
+        <a mat-list-item routerLink="/histogram">Histogram</a>
+        <a mat-list-item routerLink="/convolutional-filter">Convolutional Filters</a>
+      </mat-nav-list>
+      }
+    </div>
   </mat-sidenav>
 
   <mat-sidenav-content>

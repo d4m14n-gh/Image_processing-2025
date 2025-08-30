@@ -3,3 +3,9 @@
     width: fit-content;
     height: fit-content;
 }
+
+
+mjx-container, 
+mjx-container * {
+  font-family: 'Roboto', 'Helvetica Neue', sans-serif !important;
+}
