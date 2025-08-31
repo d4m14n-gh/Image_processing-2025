@@ -43,7 +43,10 @@
         <input matInput type="number" placeholder="Ex. 9" [(ngModel)]="kernel.divider" step="1">
     </mat-form-field>
     <span style="flex: 1"></span>
-    <button mat-flat-button (click)="close()" style="background-color: var(--mat-sys-error);">Cancel</button>
+    <button mat-flat-button (click)="close()" style="background-color: var(--mat-sys-neutral); color: var(--mat-sys-on-primary);">
+        <mat-icon>cancel</mat-icon>
+        Cancel
+    </button>
     <button mat-flat-button style="background-color: var(--mat-sys-tertiary)" (click)="submit()">
         <mat-icon>save</mat-icon>
         OK
