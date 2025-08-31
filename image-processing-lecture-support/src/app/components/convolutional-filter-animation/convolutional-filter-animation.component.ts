@@ -14,7 +14,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { KernelDialogComponent } from '../dialogs/kernel-dialog/kernel-dialog.component';
 import { BitmapStorageService } from '../../services/bitmap-storage/bitmap-storage.service';
 import { Kernel } from '../../static/kernel';
-import { OutOfBoundsHandling, OutOfRangeHandling, Padding, QuantizationMode } from '../../static/enums';
+import { ColorScale, OutOfBoundsHandling, OutOfRangeHandling, Padding, QuantizationMode } from '../../static/enums';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { Point } from '../../static/point';
 import { MatrixDisplayComponent } from "../matrix-display/matrix-display.component";
@@ -62,6 +62,8 @@ export class ConvolutionalFilterAnimationComponent {
   showGrid: boolean = true;
   showHeaders: boolean = true;
   showNumberValues: boolean = true;
+  selectedColorScale: ColorScale = ColorScale.Grayscale;
+  
   
   
   private _animationIndex: number = 0;
