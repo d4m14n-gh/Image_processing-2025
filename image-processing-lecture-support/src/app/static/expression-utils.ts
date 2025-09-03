@@ -71,9 +71,10 @@ export function declareCustomFunctions(
     defaultValue: number
 ){
     parser.functions.b = (x: number, y: number) => {
-        if (bitmap.isOut(y, x))
+        const cell = new Point(y, x);
+        if (bitmap.isOut(cell))
             return outOfBoundsHandle(outOfBoundsHandling, defaultValue);
-        return bitmap.get(y, x);
+        return bitmap.get(cell);
     }
     parser.functions.simplex = (x: number, y: number, seed: number) => {
         const gen = fastNoise.makeNoise2D(() => seed);
@@ -102,18 +103,21 @@ export function parseAndApply(
 
     for (let row = 0; row < bitmap.height; row++) {
         for (let col = 0; col < bitmap.width; col++) {
-            if (!selectedOnly || bitmap.isSelected(row, col)) {
+            const cell = new Point(row, col);
+            if (!selectedOnly || bitmap.isSelected(cell)) {
+                const cell = new Point(row, col);
                 let newValue = compiled.evaluate({ x: col, y: row });
                 let quantizedValue = quantizationHandle(newValue, quantizationMode);
                 let clippedValue = outOfRangeHandle(quantizedValue, outOfRangeHandling);
-                resultBitmap.set(row, col, clippedValue);
+                resultBitmap.set(cell, clippedValue);
             }
         }
     }
 
     for (let row = 0; row < bitmap.height; row++) {
         for (let col = 0; col < bitmap.width; col++) {
-            bitmap.set(row, col, resultBitmap.get(row, col));
+            const cell = new Point(row, col);
+            bitmap.set(cell, resultBitmap.get(cell)!);
         }
     }
 }

@@ -13,7 +13,12 @@ export class BitmapStorageService {
     localStorage.setItem(this._storageKey + id, JSON.stringify(bitmap));
   }
 
-  load(id: string): Bitmap | null {
+  has(id: string): boolean {
+    return this.load(this._storageKey + id) !== null;
+  }
+
+  load(id: string | null): Bitmap | null {
+    if (!id) return null;
     const raw = localStorage.getItem(this._storageKey + id);
     if (!raw) return null;
 

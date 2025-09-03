@@ -3,7 +3,8 @@ export enum ColorScale {
     Grayscale = 'grayscale',
     Heatmap = 'heatmap',
     Spectral = 'spectral',
-    Viridis = 'viridis'
+    Viridis = 'viridis',
+    Binary = 'binary',
 }
 
 export enum SelectionMode {
@@ -38,4 +39,11 @@ export enum Themes{
 export enum Padding{
     Zero = 'zero',
     Edge = 'edge'
+}
+
+export enum MorphologicalOperations {
+    Erosion = 'erosion',
+    Dilation = 'dilation',
+    Opening = 'opening',
+    Closing = 'closing'
 }

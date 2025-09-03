@@ -2,84 +2,80 @@
 
     <!-- LEFT SIDEBAR -->
     <mat-card appearance="outlined">
-        <div class="scrollable flex-col" style="gap: 0">
+        <div class="scrollable flex-col sidebar">
+            <mat-card-title class="end">
+                <mat-icon inline>tune</mat-icon>
+                Properties
+            </mat-card-title>
+        
+            <mat-label>Height</mat-label>
+            <mat-slider min="5" max="40" step="1" discrete="thumbLabel">
+                <input matSliderThumb [value]="height" (dragEnd)="height = $event.value; resize()">
+            </mat-slider>
+            <mat-label>Width</mat-label>
+            <mat-slider class="end" min="5" max="40" step="1" discrete="thumbLabel">
+                <input matSliderThumb [value]="width" (dragEnd)="width = $event.value; resize()">
+            </mat-slider>
+
+            <mat-form-field subscriptSizing="dynamic" appearance="outline">
+                <mat-label>Default value</mat-label>
+                <input matInput type="number" placeholder="Ex. 10" [(ngModel)]="defaultValue" min="0" max="255" step="1">
+            </mat-form-field>
+        
+
+            <mat-divider></mat-divider>
+        
+
+            <mat-card-title class="end">
+                <mat-icon inline>visibility</mat-icon>
+                View
+            </mat-card-title>
+        
+            <mat-checkbox [(ngModel)]="showNumberValues" [disabled]="pixelSize<40">
+                Numbers
+            </mat-checkbox>
+            <mat-checkbox [(ngModel)]="showGrid">
+                Grid
+            </mat-checkbox>
+            <mat-checkbox class="end" [(ngModel)]="showHeaders" [disabled]="pixelSize<40">
+                Headers
+            </mat-checkbox>
+
+            <mat-label>Pixel Size</mat-label>
+            <mat-slider class="end" min="25" max="100" step="1" discrete="thumbLabel">
+                <input matSliderThumb [(ngModel)]="pixelSize">
+            </mat-slider>
+        
+        
+            <mat-form-field class="end" subscriptSizing="dynamic" appearance="outline">
+                <mat-label>Color Scale</mat-label>
+                <mat-select [(ngModel)]="selectedColorScale">
+                    <mat-option value="none">None</mat-option>
+                    <mat-option value="grayscale">Grayscale</mat-option>
+                    <mat-option value="heatmap">YellowOrangeRed</mat-option>
+                    <mat-option value="spectral">Spectral</mat-option>
+                    <mat-option value="viridis">Viridis</mat-option>
+                </mat-select>
+            </mat-form-field>
+        
+
+            <div class="spacer"></div>
 
 
-            <mat-card-header>
-                <mat-card-title>
-                    <mat-icon inline style="vertical-align: middle;">tune</mat-icon>
-                    Properties
-                </mat-card-title>
-            </mat-card-header>
-
-            <mat-card-content>
-                <mat-label>Height</mat-label>
-                <br>
-                <mat-slider min="5" max="40" step="1" discrete="thumbLabel" style="width: 120px;">
-                    <input matSliderThumb [value]="height" (dragEnd)="height = $event.value; resize()">
-                </mat-slider>
-
-                <br>
-
-                <mat-label>Width</mat-label>
-                <br>
-                <mat-slider min="5" max="40" step="1" discrete="thumbLabel" style="width: 120px;">
-                    <input matSliderThumb [value]="width" (dragEnd)="width = $event.value; resize()">
-                </mat-slider>
-            </mat-card-content>
-
-            <mat-card-content>
-                <mat-form-field class="example-full-width" subscriptSizing="dynamic">
-                    <mat-label>Default value</mat-label>
-                    <input matInput type="number" placeholder="Ex. 10" [(ngModel)]="defaultValue" min="0" max="255"
-                        step="1">
-                </mat-form-field>
-                <mat-divider style="margin-bottom: 15px;"></mat-divider>
-            </mat-card-content>
-
-            <mat-card-content>
-                <mat-label>Pixel Size</mat-label>
-                <br>
-                <mat-slider min="25" max="100" step="1" discrete="thumbLabel" style="width: 120px;">
-                    <input matSliderThumb [(ngModel)]="pixelSize">
-                </mat-slider>
-                <!-- <mat-divider style="margin: 5px 0;"></mat-divider> -->
-            </mat-card-content>
-
-            <mat-card-content>
-                <mat-checkbox [(ngModel)]="showNumberValues" [disabled]="pixelSize<40">
-                    Numbers
-                </mat-checkbox>
-                <br>
-                <mat-checkbox [(ngModel)]="showGrid">
-                    Grid
-                </mat-checkbox>
-                <br>
-                <mat-checkbox [(ngModel)]="showHeaders" [disabled]="pixelSize<40">
-                    Headers
-                </mat-checkbox>
-                <!-- <mat-divider style="margin: 5px 0;"></mat-divider> -->
-            </mat-card-content>
-
-            <mat-card-content>
-                <mat-form-field subscriptSizing="dynamic">
-                    <mat-label>Color Scale</mat-label>
-                    <mat-select [(ngModel)]="selectedColorScale">
-                        <mat-option value="none">None</mat-option>
-                        <mat-option value="grayscale">Grayscale</mat-option>
-                        <mat-option value="heatmap">YellowOrangeRed</mat-option>
-                        <mat-option value="spectral">Spectral</mat-option>
-                        <mat-option value="viridis">Viridis</mat-option>
-                    </mat-select>
-                </mat-form-field>
-                <mat-divider></mat-divider>
-            </mat-card-content>
-
-            <mat-card-content>
-                <p>Width: {{width}}px</p>
-                <p>Height: {{height}}px</p>
-                <p>Pixel size: {{pixelSize}}px</p>
-            </mat-card-content>
+            <div>
+                <p>
+                    <!-- <mat-icon inline="true" style="vertical-align: middle;">arrow_range</mat-icon> -->
+                    Width: {{width}}px
+                </p>
+                <p>
+                    <!-- <mat-icon inline="true" style="vertical-align: middle;">height</mat-icon> -->
+                    Height: {{height}}px
+                </p>
+                <p>
+                    <!-- <mat-icon inline="true" style="vertical-align: middle;">open_in_full</mat-icon> -->
+                    Pixel size: {{pixelSize}}px
+                </p>
+            </div>
         </div>
     </mat-card>
 
@@ -95,8 +91,8 @@
     </mat-card>
 
     <!-- RIGHT SIDEBAR -->
-    <mat-card class="sidebar" appearance="outlined">
-        <div class="scrollable flex-col" style="gap: 0">
+    <mat-card appearance="outlined">
+        <div class="scrollable flex-col" style="gap: 16px">
 
             <mat-card-header>
                 <mat-card-title>
@@ -106,13 +102,15 @@
             </mat-card-header>
 
             <mat-card-content>
-                <br>
                 <mat-card-subtitle>
                     <mat-icon inline>dashboard_customize</mat-icon>
                     Behavior
                 </mat-card-subtitle>
+            </mat-card-content>
+            
 
-                <mat-form-field subscriptSizing="dynamic">
+            <mat-card-content>
+                <mat-form-field subscriptSizing="dynamic" appearance="outline">
                     <mat-label>Quantization</mat-label>
                     <mat-select [(ngModel)]="quantizationMode">
                         <mat-option value="round">Round</mat-option>
@@ -120,8 +118,11 @@
                         <mat-option value="ceil">Ceil</mat-option>
                     </mat-select>
                 </mat-form-field>
+            </mat-card-content>
+            
                 
-                <mat-form-field subscriptSizing="dynamic">
+            <mat-card-content>
+                <mat-form-field subscriptSizing="dynamic" appearance="outline">
                     <mat-label>Out of Range</mat-label>
                     <mat-select [(ngModel)]="outOfRangeHandling">
                         <mat-option value="none">None</mat-option>
@@ -129,8 +130,11 @@
                         <mat-option value="modulo">Modulo</mat-option>
                     </mat-select>
                 </mat-form-field>
+            </mat-card-content>
+
                 
-                <mat-form-field subscriptSizing="dynamic">
+            <mat-card-content>
+                <mat-form-field subscriptSizing="dynamic" appearance="outline">
                     <mat-label>Out of Bounds</mat-label>
                     <mat-select [(ngModel)]="outOfBoundsHandling">
                         <mat-option value="none">None</mat-option>
@@ -138,7 +142,6 @@
                         <mat-option value="default">Default value</mat-option>
                     </mat-select>
                 </mat-form-field>
-
             </mat-card-content>
 
             <mat-card-content>
@@ -151,7 +154,7 @@
                     </button>
                 </mat-card-subtitle>
 
-                <mat-form-field style="width: 100%;" subscriptSizing="dynamic">
+                <mat-form-field style="width: 100%; margin-bottom: 16px;" subscriptSizing="dynamic"  appearance="outline">
                     <mat-label>b'(x, y)=</mat-label>
                     <textarea matInput [formControl]="expressionControl" placeholder="Ex. b(x, y) * 2"></textarea>
                     @if (expressionControl.hasError('required')) {

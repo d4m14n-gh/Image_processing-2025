@@ -22,6 +22,7 @@ const chromaScale = chroma.scale(['black', 'white']);
 const heatmapScale = chroma.scale("YlOrRd");
 const spectralScale = chroma.scale("Spectral");
 const viridisScale = chroma.scale(['#440154', '#3b528b', '#21908d', '#5dc963', '#fde725']);
+const binaryScale = chroma.scale(['#000', '#333', '#e9f0ffff', '#ccc', '#fff']);
 
 export function scaleColor(value: number, colorScale: ColorScale): string {
     const ratio = value / 255;
@@ -33,5 +34,7 @@ export function scaleColor(value: number, colorScale: ColorScale): string {
       return  spectralScale(ratio).css();
     else if (colorScale === ColorScale.Viridis) 
       return viridisScale(ratio).css();
+    else if (colorScale === ColorScale.Binary)
+      return binaryScale(ratio).css();
     return '#ffffff';
   }

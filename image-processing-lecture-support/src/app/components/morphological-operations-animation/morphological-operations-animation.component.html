@@ -3,25 +3,40 @@
     <mat-card appearance="outlined" style="overflow: hidden; min-height: fit-content;">
         <div class="flex-col" style="gap: 0px;">
             <!-- <mat-card appearance="raised" style="border-radius: 0;"> -->
-            <div class="flex-row" style="min-width: 250px; padding: 10px; justify-content: start; align-items: center;">
+            <div class="flex-row" style="min-width: 250px; padding: 10px; justify-content: start; align-items: center; user-select: none;">
 
-                <button mat-button [routerLink]="['/edit', bitmapKey]" style="color: var(--mat-sys-on-surface);">
+                <button mat-button [routerLink]="['/binary-edit', bitmapKey]" style="color: var(--mat-sys-on-surface);">
                     <mat-icon style="min-width: fit-content;">edit</mat-icon>
                     Edit
                 </button>
-                <button mat-button (click)="openDialog()" style="color: var(--mat-sys-on-surface);">
+
+                <button mat-button [routerLink]="['/structuring-element']" style="color: var(--mat-sys-on-surface);">
                     <mat-icon style="min-width: fit-content;">grid_on</mat-icon>
-                    Kernel
+                    Structuring Element
                 </button>
+
+                <button mat-button (click)="apply(true)" style="color: var(--mat-sys-on-surface);">
+                    <mat-icon style="min-width: fit-content;">check</mat-icon>
+                    Apply
+                </button>
+
+                <button mat-button (click)="apply(false)" style="color: var(--mat-sys-on-surface);">
+                    <mat-icon style="min-width: fit-content;">cleaning_services</mat-icon>
+                    Reset
+                </button>
+
+
+                
 
                 <div>
 
                     <mat-form-field subscriptSizing="dynamic" class="slim-form-field" appearance="outline">
-                        <mat-label>Padding</mat-label>
-                        <mat-select [(ngModel)]="padding"
-                            (ngModelChange)="refresh();">
-                            <mat-option value="zero">Zero</mat-option>
-                            <mat-option value="edge">Edge</mat-option>
+                        <mat-label>Operation</mat-label>
+                        <mat-select [(ngModel)]="operation" (ngModelChange)="refresh()">
+                            <mat-option value="erosion">Erosion</mat-option>
+                            <mat-option value="dilation">Dilation</mat-option>
+                            <mat-option value="opening">Opening</mat-option>
+                            <mat-option value="closing">Closing</mat-option>
                         </mat-select>
                     </mat-form-field>
                 </div>
@@ -30,30 +45,20 @@
                     style="border-left: var(--default-border); padding-left: 10px; margin-left: 10px; align-items: center;">
 
 
-                    <mat-checkbox [(ngModel)]="showNumberValues" [disabled]="pixelSize<40">
-                        Numbers
-                    </mat-checkbox>
-                    <br>
+                  
                     <mat-checkbox [(ngModel)]="showGrid">
                         Grid
                     </mat-checkbox>
-                    <br>
                     <mat-checkbox [(ngModel)]="showHeaders" [disabled]="pixelSize<40">
                         Headers
                     </mat-checkbox>
+                    <mat-checkbox [(ngModel)]="showDifference" (ngModelChange)="refresh()">
+                        Difference
+                    </mat-checkbox>
+                     <mat-checkbox [(ngModel)]="base" (ngModelChange)="refresh()">
+                        Base
+                    </mat-checkbox>
                     
-<!--                     
-                    <mat-form-field subscriptSizing="dynamic" class="slim-form-field" appearance="outline">
-                        <mat-label>Color Scale</mat-label>
-                        <mat-select [(ngModel)]="selectedColorScale">
-                            <mat-option value="none">None</mat-option>
-                            <mat-option value="grayscale">Grayscale</mat-option>
-                            <mat-option value="heatmap">YellowOrangeRed</mat-option>
-                            <mat-option value="spectral">Spectral</mat-option>
-                            <mat-option value="viridis">Viridis</mat-option>
-                        </mat-select>
-                    </mat-form-field> -->
-
 
                     <div style="border-left: var(--default-border); padding-left: 20px; margin-left: 15px; display: flex; align-items: center;">
 
@@ -87,11 +92,11 @@
 
                 <app-bitmap class="bitmap" [bitmap]="bitmap" [pixelSize]="pixelSize"
                     [showHeaders]="showHeaders&&pixelSize>=40" [showGrid]="showGrid"
-                    [showNumbers]="showNumberValues&&pixelSize>=40" [tick]="bitmapTick"
-                    [selectedColorScale]="selectedColorScale" [userSelect]="false" style="margin: auto;"
+                    [showNumbers]="false" [tick]="bitmapTick"
+                    [userSelect]="false" style="margin: auto;"
+                    [selectionColor]="selectionColor"
                     (cellClicked)="onCellClicked($event)"
                     (cellEntered)="onCellClicked($event)"
-
                     >
 
                 </app-bitmap>
@@ -103,11 +108,12 @@
 
                 <app-bitmap class="bitmap" [bitmap]="resultBitmap" [pixelSize]="pixelSize"
                     [showHeaders]="showHeaders&&pixelSize>=40" [showGrid]="showGrid"
-                    [selectedColorScale]="selectedColorScale" [showNumbers]="showNumberValues&&pixelSize>=40"
+                    [showNumbers]="false"
+                    [selectedColorScale]="colorscale"
+                    [selectionColor]="selectionColor"
                     [tick]="bitmapTick" [userSelect]="false"
                     (cellClicked)="onCellClicked($event)"
                     (cellEntered)="onCellClicked($event)"
-
                     >
 
                 </app-bitmap>
@@ -116,25 +122,10 @@
 
     </div>
 
-    <mat-card appearance="outlined" style="overflow: hidden; min-height: fit-content;">
+    <!-- <mat-card appearance="outlined" style="overflow: hidden; min-height: fit-content;">
         <div class="scrollable flex-row" style="padding: 10px; justify-content: center; align-items: center;">
-            <!-- <app-matrix-display [kernel]="sourceKernel"></app-matrix-display> -->
-            <!--           
-            <mat-icon class="sign">
-                asterisk
-            </mat-icon> -->
-
-            <!-- <app-matrix-display [kernel]="kernel"></app-matrix-display> -->
-            <div [mathjax]="getEquation()"
-                style="font-size: 1.2rem; color: var(--mat-sys-on-surface); font-family: Roboto, 'Helvetica Neue', sans-serif;">
-            </div>
-            <!--           
-            <mat-icon class="sign">
-                equal
-            </mat-icon> -->
-
-            <!-- <app-matrix-display [kernel]="resultKernel"></app-matrix-display> -->
+            w
         </div>
-    </mat-card>
+    </mat-card> -->
 
 </div>

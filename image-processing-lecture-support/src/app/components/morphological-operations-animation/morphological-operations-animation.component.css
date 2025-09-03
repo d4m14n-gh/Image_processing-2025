@@ -1,14 +1,3 @@
-.sign {
-    font-size: 1.8rem;
-    width: fit-content;
-    height: fit-content;
-}
-
-
-mjx-container, 
-mjx-container * {
-  font-family: 'Roboto', 'Helvetica Neue', sans-serif !important;
-}
 
 .slim-form-field:focus { 
     outline: none !important;

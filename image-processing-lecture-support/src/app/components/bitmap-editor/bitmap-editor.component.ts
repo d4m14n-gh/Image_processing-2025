@@ -74,27 +74,20 @@ export class BitmapEditorComponent {
   ]);
 
   private _defaultValue: number = 255;
-  private _bitmap: InteractiveBitmap = new InteractiveBitmap(this.width, this.height, undefined, this.defaultValue);
+  bitmap: InteractiveBitmap = new InteractiveBitmap(this.width, this.height, undefined, this.defaultValue);
   private _id: string | null = null;
 
   constructor(private historyService: HistoryService, private route: ActivatedRoute, private bitmap_storage: BitmapStorageService, private router: Router) {
     this._id = this.route.snapshot.paramMap.get('id');
-    if (this._id) {
-      let bitmap: Bitmap | null = this.bitmap_storage.load(this._id);
-      if(bitmap)
-        this.bitmap = new InteractiveBitmap(bitmap.width, bitmap.height, bitmap, this.defaultValue);
-    }
+    let bitmap = this.bitmap_storage.load(this._id);
+    if(bitmap)
+      this.bitmap = new InteractiveBitmap(bitmap.width, bitmap.height, bitmap, this.defaultValue);
+    this.width = this.bitmap.width;
+    this.height = this.bitmap.height;
     this.expressionControl.setValue(historyService.getHistory().slice().reverse()[0] ?? this.expressionControl.value);
+    this.tick++;
   }
 
-  set bitmap(value: InteractiveBitmap){
-    this._bitmap = value;
-    this.width = value.width;
-    this.height = value.height;
-  }
-  get bitmap(): InteractiveBitmap {
-    return this._bitmap;
-  }
 
   get defaultValue() {
     return this._defaultValue;

@@ -40,7 +40,7 @@ import { Subscription } from 'rxjs';
     FormsModule
 ]  
 })
-export class HistogramComponent implements AfterViewInit, OnInit, OnDestroy {
+export class HistogramComponent implements AfterViewInit, OnDestroy {
   @ViewChild('histogram') histogramCanvas!: ElementRef<HTMLCanvasElement>;
   bitmap: InteractiveBitmap = new InteractiveBitmap(16, 9);
   bitmapKey: string = "histogram-bitmap";
@@ -65,18 +65,17 @@ export class HistogramComponent implements AfterViewInit, OnInit, OnDestroy {
   private _themeSubscription: Subscription = new Subscription();
 
   constructor(private bitmapStorage: BitmapStorageService, private themeService: ThemeService) {
+    let bitmap = this.bitmapStorage.load(this.bitmapKey);
+    if(bitmap)
+      this.bitmap = new InteractiveBitmap(bitmap.width, bitmap.height, bitmap, 255);
+    else
+      this.bitmapStorage.save(this.bitmapKey, this.bitmap);
+
     this._themeSubscription = this.themeService.themeChanged$.subscribe(theme => {
       this.updateChart();
     });
   }
 
-  ngOnInit(): void {
-    let bitmap = this.bitmapStorage.load(this.bitmapKey);
-    if(bitmap !== null)
-      this.bitmap = new InteractiveBitmap(bitmap.width, bitmap.height, bitmap, 255);
-    else
-      this.bitmapStorage.save(this.bitmapKey, this.bitmap);
-  }
   @HostListener('window:resize', ['$event'])
   onResize(event: Event) {
     this.updateChart();
@@ -143,11 +142,11 @@ export class HistogramComponent implements AfterViewInit, OnInit, OnDestroy {
     }
   }
 
-  animate(t: number) {
+  animate(animationIndex: number) {
     this.bitmap.clearSelection();
-    this.bitmap.cells().filter(c => c.value <= t && !isNaN(c.value) && c.value != null).forEach(
+    this.bitmap.pixels().filter(c => c.value <= animationIndex && !isNaN(c.value) && c.value != null).forEach(
       c => {
-        this.bitmap.select(c.row, c.col);
+        this.bitmap.select(c.cell);
       }
     );
   

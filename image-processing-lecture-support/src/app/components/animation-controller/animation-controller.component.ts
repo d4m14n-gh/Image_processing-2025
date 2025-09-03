@@ -1,4 +1,4 @@
-import { Component, input, OnDestroy, OnInit, output } from '@angular/core';
+import { Component, effect, input, model, OnDestroy, OnInit, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -33,41 +33,40 @@ export class AnimationControllerComponent implements OnInit, OnDestroy {
   min = input<number>(1);
   max = input<number>(255);
   step = input<number>(1);
-  startValue = input<number>(0);
 
+  value = model<number>(0);
   valueChanged = output<number>();
-
-  private _value: number = 0;
   private _timeoutId: any;
-  set value(newValue: number) {
-    if(this._value !== newValue)
-      this.valueChanged.emit(newValue);
-    this._value = newValue;
-  }
-  get value(): number {
-    return this._value;
-  }
-  
+
+
   ngOnInit() {
-    this._value = this.startValue();
     this.animate();
   }
+
+  setValue(value: number) {
+    if (value !== this.value()){
+      this.value.set(value);
+      this.valueChanged.emit(value);
+    }
+  }
+
   stepFirst() {
-    this.value = this.min();
+    this.setValue(this.min());
   }
   stepBackward() {
-    this.value = Math.max(this.min(), this.value - this.step());
+    this.setValue(Math.max(this.min(), this.value() - this.step()));
   }
   togglePlay() {
     this.playing = !this.playing;
     this.animate();
   }
   stepForward() {
-    this.value = Math.min(this.max(), this.value + this.step());
+    this.setValue(Math.min(this.max(), this.value() + this.step()));
   }
   stepLast(){
-    this.value = this.max();
+    this.setValue(this.max());
   }
+
 
   toggleLoop() {
     this.loop = !this.loop;
@@ -97,10 +96,10 @@ export class AnimationControllerComponent implements OnInit, OnDestroy {
   
   animate(){
     if(this.playing){
-      if(this.value<this.max())
-        this.value++;
+      if(this.value()<this.max())
+        this.setValue(this.value() + 1);
       else if(this.loop)
-        this.value = this.min();
+        this.setValue(this.min());
 
 
       this._timeoutId = setTimeout(() => {

@@ -1,0 +1,105 @@
+<div class="flex-row" style="padding: 8px; height: 100%; box-sizing: border-box;">
+
+    <mat-card style="flex: 1; overflow: hidden;" appearance="outlined">
+        <div class="scrollable">
+            <button mat-icon-button class="end" (click)="clear()" class="hover-button">
+                <mat-icon>cleaning_services</mat-icon>
+            </button>
+            <app-bitmap class="bitmap" [bitmap]="bitmap" [tick]="bitmapComponentTick" [pixelSize]="pixelSize"
+                [showHeaders]="showHeaders&&pixelSize>=40" [showNumbers]="false" [showGrid]="showGrid"
+                [userSelect]="false" 
+                (cellEntered)="onCellEntered($event)"
+                (cellClicked)="onCellEntered($event); onCellClicked($event)"
+                >
+            </app-bitmap>
+        </div>
+    </mat-card>
+
+    <mat-card appearance="outlined" style="width: 275px;">
+        <div class="scrollable sidebar flex-col">
+            
+            <mat-card-title class="end">
+                <mat-icon inline>tune</mat-icon>
+                Properties
+            </mat-card-title>
+            
+            <mat-label>Height</mat-label>
+            <mat-slider min="2" max="10" step="1" discrete="thumbLabel">
+                <input matSliderThumb [value]="height" (dragEnd)="height = $event.value; resize()">
+            </mat-slider>
+            <mat-label>Width</mat-label>
+            <mat-slider min="2" max="10" step="1" discrete="thumbLabel">
+                <input matSliderThumb [value]="width" (dragEnd)="width = $event.value; resize()">
+            </mat-slider>
+        
+            <mat-divider></mat-divider>
+
+            <mat-card-title class="end">
+                <mat-icon inline>visibility</mat-icon>
+                View
+            </mat-card-title>
+
+            
+            <mat-checkbox [(ngModel)]="showGrid">
+                Grid
+            </mat-checkbox>
+            <mat-checkbox class="end" [(ngModel)]="showHeaders" [disabled]="pixelSize<40">
+                Headers
+            </mat-checkbox>
+            
+            <mat-label>Pixel Size</mat-label>
+            <mat-slider min="50" max="100" step="1" discrete="thumbLabel">
+                <input matSliderThumb [(ngModel)]="pixelSize">
+            </mat-slider>
+            
+            <!-- <mat-divider></mat-divider>
+
+            <mat-card-title class="end">
+                <mat-icon inline>build</mat-icon>
+                Tools
+            </mat-card-title>
+
+            <button mat-flat-button class="end" (click)="clear()">
+                <mat-icon>cleaning_services</mat-icon>
+                Clear
+            </button> -->
+
+            <div class="spacer"></div>
+            
+            @if (canSave()) {
+            
+            <mat-card-title class="end">
+                <mat-icon inline>commit</mat-icon>
+                Actions
+            </mat-card-title>
+        
+            <button mat-flat-button class="end" style="background-color: var(--mat-sys-tertiary); " (click)="save()">
+                <mat-icon>save</mat-icon>
+                Save
+            </button>
+        
+            <button mat-flat-button style="background-color: var(--mat-sys-neutral);"
+                (click)="quit()">
+                <mat-icon>cancel</mat-icon>
+                Cancel
+            </button>
+            }
+            @else {
+            <div>
+                <p>
+                    Width: {{width}}px
+                </p>
+                <p>
+                    Height: {{height}}px
+                </p>
+                <p>
+                    Pixel size: {{pixelSize}}px
+                </p>
+            </div>
+            }
+        </div>
+    </mat-card>
+
+    
+
+</div>

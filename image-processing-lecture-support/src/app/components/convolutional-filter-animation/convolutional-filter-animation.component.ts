@@ -66,40 +66,19 @@ export class ConvolutionalFilterAnimationComponent {
   
   
   
-  private _animationIndex: number = 0;
-  get animationIndex(){
-    return this._animationIndex;
-  }
-  set animationIndex(value: number) {
-    this._animationIndex = value;
-    this.animate();
-  }
+  animationIndex: number = 0;
 
-  constructor(private dialog: MatDialog, private bitmapStorage: BitmapStorageService) { }
 
-  ngOnInit(): void {
+  constructor(private dialog: MatDialog, private bitmapStorage: BitmapStorageService) { 
     let bitmap = this.bitmapStorage.load(this.bitmapKey);
-    if (bitmap !== null)
+    if (bitmap)
       this.bitmap = new InteractiveBitmap(bitmap.width, bitmap.height, bitmap, 255);
     else
       this.bitmapStorage.save(this.bitmapKey, this.bitmap);
-
-
-    let kernel = Kernel.tryLoad(localStorage.getItem("kernel"));
-    if (kernel !== null)
-      this.kernel = kernel;
-    else
-      localStorage.setItem("kernel", this.kernel.save());
-
-
-    // this.filteredBitmap = new InteractiveBitmap(this.bitmap.width, this.bitmap.height, this.bitmap, 255);
-    this.filteredBitmap = new InteractiveBitmap(this.bitmap.width, this.bitmap.height, undefined, 255);
     
-    this.clearResult();
-    this.applayFilter(this.length(), this.filteredBitmap, this.bitmap);
-    this.animate();
+    this.kernel.load("kernel");
+    this.refresh();
   }
-
 
   openDialog() {
     const dialogRef = this.dialog.open(KernelDialogComponent, {
@@ -114,82 +93,71 @@ export class ConvolutionalFilterAnimationComponent {
         this.kernel = result;
         this.sourceKernel = new Kernel(result.size);
         this.resultKernel = new Kernel(result.size);
-        localStorage.setItem("kernel", this.kernel.save());
-        
-        this.clearResult();
-        this.applayFilter(this.length(), this.filteredBitmap, this.bitmap);
-        this.animate();
+        this.kernel.save("kernel");
+        this.refresh();
       }
     });
   }
-
+  
+  refresh(){
+    this.resultBitmap = new InteractiveBitmap(this.bitmap.width, this.bitmap.height, this.bitmap, 255);
+    this.filteredBitmap = new InteractiveBitmap(this.bitmap.width, this.bitmap.height, undefined, 255);
+    this.applyFilter(this.bitmap.length(), this.filteredBitmap, this.bitmap);
+    this.animate();
+  }
 
   animate() {
     const index = this.animationIndex;
     this.bitmap.clearSelection();
-    this.clearResult();
-
+    this.resultBitmap = new InteractiveBitmap(this.bitmap.width, this.bitmap.height, this.bitmap, 255);
+    this.setValues(index+1, this.resultBitmap, this.filteredBitmap);
+    
 
     this.sourceKernel = this.getSourceKernel()
     this.resultKernel = this.getResultKernel();
 
     const size = this.kernel.size;
     const r = Math.trunc((size - 1) / 2);
-    const { row: x, col: y } = this.getPoint(index);
+    const cell = this.bitmap.getIndexCell(index);
 
-    if (index < this.length()) {
+    if (index < this.bitmap.length()) {
 
     for (let ox = -r; ox <= r; ox++)
       for (let oy = -r; oy <= r; oy++)
-        this.bitmap.select(x + oy, y + ox);
-      this.resultBitmap.select(x, y);
+        this.bitmap.select(cell.add(new Point(ox, oy)));
+      this.resultBitmap.select(cell);
     }
-    this.bitmap.dragArea.dragStart = new Point(x, y);
-    this.bitmap.dragArea.dragEnd = new Point(x, y);
+    this.bitmap.dragArea.dragStart = cell;
+    this.bitmap.dragArea.dragEnd = cell;
     this.bitmap.dragArea.dragging = true;
+    this.bitmap.dragArea.button = 2; 
 
-    this.setValues(index+1, this.resultBitmap, this.filteredBitmap);
 
     this.bitmapTick++;
   }
   
   
   length() {
-    return this.bitmap.width * this.bitmap.height;
+    return this.bitmap.length;
   }
 
-
-  getPoint(index: number): Point {
-    if(index < 0) return new Point(0, 0);
-    if(index >= this.length()) return new Point(0, 0);
-    const x = Math.trunc(index / this.bitmap.width);
-    const y = index % this.bitmap.width;
-    return new Point(x, y);
-  }
-
-
-  clearResult() {
-    this.resultBitmap = new InteractiveBitmap(this.bitmap.width, this.bitmap.height, undefined, 255);
-  }
-
-
-  applayFilter(length: number, destination: InteractiveBitmap, source: InteractiveBitmap) {
+  applyFilter(length: number, destination: InteractiveBitmap, source: InteractiveBitmap) {
     for (let i = 0; i < length; i++) {
-      const { row: x, col: y } = this.getPoint(i);
-      if (destination.isOut(x, y) || source.isOut(x, y)) 
+      const cell = source.getIndexCell(i);
+      if (destination.isOut(cell) || source.isOut(cell)) 
         continue;
-      let kernelValue = this.kernel.apply(source, x, y, QuantizationMode.Round, OutOfRangeHandling.Clipping, this.padding);
-      destination.set(x, y, kernelValue);
+      let kernelValue = this.kernel.apply(source, cell, QuantizationMode.Round, OutOfRangeHandling.Clipping, this.padding);
+      destination.set(cell, kernelValue);
     }
   }
 
   setValues(length: number, destination: InteractiveBitmap, source: InteractiveBitmap) {
     for (let i = 0; i < length; i++) {
-      const { row: x, col: y } = this.getPoint(i);
-      if (destination.isOut(x, y) || source.isOut(x, y)) 
+      const cell = source.getIndexCell(i);
+      if (destination.isOut(cell) || source.isOut(cell)) 
         continue;
-      let value = source.get(x, y);
-      destination.set(x, y, value);
+      let value = source.get(cell)!;
+      destination.set(cell, value);
     }
   }
 
@@ -199,7 +167,7 @@ export class ConvolutionalFilterAnimationComponent {
     const r = Math.trunc((this.kernel.size - 1) / 2);
     for (let oy = -r; oy <= r; oy++)
       for (let ox = -r; ox <= r; ox++) {
-        const point = this.getPoint(this.animationIndex);
+        const point = this.bitmap.getIndexCell(this.animationIndex);
         const offset = point.add(new Point(oy, ox));
 
         let value = this.bitmap.getWithPadding(offset, this.padding);
@@ -225,7 +193,14 @@ export class ConvolutionalFilterAnimationComponent {
       ${divider<0 ? '-' : ''}\\frac{1}{${Math.abs(divider)}}
       ${this.kernel.toLatex()}
       =
-      ${this.filteredBitmap.get(this.getPoint(this.animationIndex).row, this.getPoint(this.animationIndex).col)}
+      ${this.filteredBitmap.get(this.bitmap.getIndexCell(this.animationIndex))}
       \\]`;
+  }
+
+  onCellClicked($event: { cell: Point; event: MouseEvent; }) {
+    if($event.event.buttons === 1) {
+      this.animationIndex = this.bitmap.getCellIndex($event.cell);
+      this.animate();
+    }
   }
 }

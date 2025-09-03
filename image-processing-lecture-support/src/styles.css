@@ -16,11 +16,12 @@ body {
   padding: 0; 
   font-family: Roboto, "Helvetica Neue", sans-serif;
 
-  --selection-border-color: #00b3ff;
-  --selection-border-color: #00b3ff;
+  --selection-color: rgba(56, 116, 255, 1);
   --selection-background-color: rgba(218, 226, 249, 0.5);
+
   --selected-border: 2px solid var(--selection-border-color);
   --default-border: 1px solid var(--mdc-outlined-card-outline-color, var(--mat-sys-outline-variant, crimson));
+  --mat-select-panel-background-color: var(--mat-sys-surface);
 }
 header, button[mat-flat-button] {
   font-family: "Montserrat", sans-serif !important;
@@ -35,15 +36,14 @@ header, button[mat-flat-button] {
 
 .flex-row {
   display: flex;
-  gap: 10px;
+  gap: 8px;
 }
 
 .flex-col {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
-
 
 .bitmap {
   margin: auto;
@@ -51,8 +51,55 @@ header, button[mat-flat-button] {
   border-radius: 1px;
   outline: 1px solid var(--mat-sys-outline-variant);
 }
+
 .scrollable {
   height: 100%;
   overflow: auto;
   display: flex;
+}
+
+
+.hover-button{
+    position: absolute !important;
+    top: 8px !important;
+    right: 8px !important;
+    z-index: 10 !important;
+    background-color: var(--mat-sys-primary) !important;
+    color: var(--mat-sys-on-primary) !important;
+    &:hover{
+        opacity: 0.9 !important;
+    }
+}
+
+.sidebar {
+  padding: 16px;
+  gap: 0;
+  user-select: none;
+  .end{
+    /* margin-bottom: 16px; */
+    margin-bottom: 16px;
+  }
+  .spacer{
+    flex: 1;
+  }
+  mat-form-field{
+    margin: 0;
+  }
+  mat-slider{
+    margin: 0 4px;
+    min-height: 48px;
+    width: calc(100% - 10px);
+  }
+  mat-divider{
+    margin: 16px 0;
+  }
+  mat-icon{
+    vertical-align: middle;
+  }
+  button{
+    min-height: 32px;
+  }
+  p{
+    margin: 3px 0;
+  }
 }
