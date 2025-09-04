@@ -29,10 +29,8 @@ mat-card {
   user-select: none;
 }
 
-
 mat-card-subtitle {
   display: flex;
   align-items: center;
   gap: 5px;
-  margin-bottom: 5px;
 }

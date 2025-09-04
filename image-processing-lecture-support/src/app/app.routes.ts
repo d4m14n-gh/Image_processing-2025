@@ -8,6 +8,7 @@ import { HelpComponent } from './components/help/help.component';
 import { BinaryBitmapEditorComponent } from './components/binary-bitmap-editor/binary-bitmap-editor.component';
 import { StructuringElementEditorComponent } from './components/structuring-element-editor/structuring-element-editor.component';
 import { MorphologicalOperationsAnimationComponent } from './components/morphological-operations-animation/morphological-operations-animation.component';
+import { MedianFilterAnimationComponent } from './components/median-filter-animation/median-filter-animation.component';
 
 export const routes: Routes = [
     { path: 'editor', component: BitmapEditorComponent },
@@ -24,6 +25,7 @@ export const routes: Routes = [
     
     { path: 'histogram', component: HistogramComponent },
     { path: 'convolutional-filters', component: ConvolutionalFilterAnimationComponent },
+    { path: 'median-filters', component: MedianFilterAnimationComponent },
     { path: 'morphological-operations', component: MorphologicalOperationsAnimationComponent },
 
     { path: '', redirectTo: 'home', pathMatch: 'full' },

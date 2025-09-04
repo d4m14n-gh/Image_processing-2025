@@ -14,7 +14,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { KernelDialogComponent } from '../dialogs/kernel-dialog/kernel-dialog.component';
 import { BitmapStorageService } from '../../services/bitmap-storage/bitmap-storage.service';
 import { Kernel } from '../../static/kernel';
-import { ColorScale, OutOfBoundsHandling, OutOfRangeHandling, Padding, QuantizationMode } from '../../static/enums';
+import { ColorScale, OutOfRangeHandling, Padding, QuantizationMode } from '../../static/enums';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { Point } from '../../static/point';
 import { MatrixDisplayComponent } from "../matrix-display/matrix-display.component";
@@ -56,16 +56,19 @@ export class ConvolutionalFilterAnimationComponent {
   kernel: Kernel = new Kernel(3);
   sourceKernel: Kernel = new Kernel(3);
   resultKernel: Kernel = new Kernel(3);
-
   padding: Padding = Padding.Edge;
+
+
+  //view
   pixelSize: number = 40;
   showGrid: boolean = true;
   showHeaders: boolean = true;
   showNumberValues: boolean = true;
+  showBase: boolean = false;
   selectedColorScale: ColorScale = ColorScale.Grayscale;
   
   
-  
+  //controls
   animationIndex: number = 0;
 
 
@@ -109,7 +112,7 @@ export class ConvolutionalFilterAnimationComponent {
   animate() {
     const index = this.animationIndex;
     this.bitmap.clearSelection();
-    this.resultBitmap = new InteractiveBitmap(this.bitmap.width, this.bitmap.height, this.bitmap, 255);
+    this.resultBitmap = new InteractiveBitmap(this.bitmap.width, this.bitmap.height, this.showBase?this.bitmap:undefined, 255);
     this.setValues(index+1, this.resultBitmap, this.filteredBitmap);
     
 
@@ -197,7 +200,11 @@ export class ConvolutionalFilterAnimationComponent {
       \\]`;
   }
 
-  onCellClicked($event: { cell: Point; event: MouseEvent; }) {
+  onCellClicked($event: { cell: Point; event: MouseEvent; }, click: boolean = true) {
+    // if(!click && this.bitmap.isOut($event.cell)){
+    //   $event.cell = $event.cell.limit(new Point(this.bitmap.height-1, this.bitmap.width-1)); 
+    // }
+    if(this.bitmap.isOut($event.cell)) return;
     if($event.event.buttons === 1) {
       this.animationIndex = this.bitmap.getCellIndex($event.cell);
       this.animate();

@@ -1,89 +1,82 @@
-<div class="flex-col" style="gap: 8px; padding: 8px; height: 100%; box-sizing: border-box;">
-
-    <mat-card appearance="outlined" style="overflow: hidden; min-height: fit-content;">
-        <div class="flex-col" style="gap: 0px;">
-            <!-- <mat-card appearance="raised" style="border-radius: 0;"> -->
-            <div class="flex-row" style="min-width: 250px; padding: 10px; justify-content: start; align-items: center; user-select: none;">
-
-                <button mat-button [routerLink]="['/binary-edit', bitmapKey]" style="color: var(--mat-sys-on-surface);">
-                    <mat-icon style="min-width: fit-content;">edit</mat-icon>
-                    Edit
-                </button>
-
-                <button mat-button [routerLink]="['/structuring-element']" style="color: var(--mat-sys-on-surface);">
-                    <mat-icon style="min-width: fit-content;">grid_on</mat-icon>
-                    Structuring Element
-                </button>
-
-                <button mat-button (click)="apply(true)" style="color: var(--mat-sys-on-surface);">
-                    <mat-icon style="min-width: fit-content;">check</mat-icon>
-                    Apply
-                </button>
-
-                <button mat-button (click)="apply(false)" style="color: var(--mat-sys-on-surface);">
-                    <mat-icon style="min-width: fit-content;">cleaning_services</mat-icon>
-                    Reset
-                </button>
+<div class="flex-col" style="padding: 8px; height: 100%; box-sizing: border-box;">
 
 
-                
 
-                <div>
+    <mat-card appearance="outlined" class="topbar">
+    
+    
+        <button mat-button [routerLink]="['/binary-edit', bitmapKey]">
+            <mat-icon>edit</mat-icon>
+            Edit
+        </button>
+        <button mat-button [routerLink]="['/structuring-element']">
+            <mat-icon>crossword</mat-icon>
+            Structuring Element
+        </button>
+    
+    
+        <div class="divider"></div>
+    
+    
+        <button mat-button (click)="apply(true)">
+            <mat-icon>check</mat-icon>
+            Apply
+        </button>
+        <button mat-button (click)="apply(false)">
+            <mat-icon>cleaning_services</mat-icon>
+            Reset
+        </button>
+        <button mat-button (click)="commit()">
+            <mat-icon>commit</mat-icon>
+            Save
+        </button>
+    
+    
+        <mat-form-field subscriptSizing="dynamic" class="slim-form-field" appearance="outline">
+            <mat-label>Operation</mat-label>
+            <mat-select [(ngModel)]="operation" (ngModelChange)="refresh()">
+                <mat-option value="erosion">Erosion</mat-option>
+                <mat-option value="dilation">Dilation</mat-option>
+                <mat-option value="opening">Opening</mat-option>
+                <mat-option value="closing">Closing</mat-option>
+            </mat-select>
+        </mat-form-field>
+    
+    
+        <div class="divider"></div>
+    
+    
+        <mat-checkbox [(ngModel)]="showGrid">
+            Grid
+        </mat-checkbox>
+        <mat-checkbox [(ngModel)]="showHeaders" [disabled]="pixelSize<40">
+            Headers
+        </mat-checkbox>
+        <mat-checkbox [(ngModel)]="showDifference" (ngModelChange)="refresh()">
+            Difference
+        </mat-checkbox>
+        <mat-checkbox [(ngModel)]="showBase" (ngModelChange)="refresh()">
+            Base
+        </mat-checkbox>
+    
+    
+        <div class="divider"></div>
+    
+    
+        <mat-label>
+            Pixel Size
+        </mat-label>
+        <mat-slider min="25" max="100" step="1" discrete="false">
+            <input matSliderThumb [(ngModel)]="pixelSize">
+        </mat-slider>
+    
 
-                    <mat-form-field subscriptSizing="dynamic" class="slim-form-field" appearance="outline">
-                        <mat-label>Operation</mat-label>
-                        <mat-select [(ngModel)]="operation" (ngModelChange)="refresh()">
-                            <mat-option value="erosion">Erosion</mat-option>
-                            <mat-option value="dilation">Dilation</mat-option>
-                            <mat-option value="opening">Opening</mat-option>
-                            <mat-option value="closing">Closing</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </div>
-
-                <div class="flex-row"
-                    style="border-left: var(--default-border); padding-left: 10px; margin-left: 10px; align-items: center;">
-
-
-                  
-                    <mat-checkbox [(ngModel)]="showGrid">
-                        Grid
-                    </mat-checkbox>
-                    <mat-checkbox [(ngModel)]="showHeaders" [disabled]="pixelSize<40">
-                        Headers
-                    </mat-checkbox>
-                    <mat-checkbox [(ngModel)]="showDifference" (ngModelChange)="refresh()">
-                        Difference
-                    </mat-checkbox>
-                     <mat-checkbox [(ngModel)]="base" (ngModelChange)="refresh()">
-                        Base
-                    </mat-checkbox>
-                    
-
-                    <div style="border-left: var(--default-border); padding-left: 20px; margin-left: 15px; display: flex; align-items: center;">
-
-                        <mat-label style="font-weight: 400; font-size: 15px; line-height: 20px; ">
-                            Pixel Size
-                        </mat-label>
-
-                        <mat-slider min="25" max="100" step="1" discrete="false" style="width: 120px;">
-                            <input matSliderThumb [(ngModel)]="pixelSize">
-                        </mat-slider>
-                    </div>
-                        
-                        
-
-                </div>
-
-
-                <div style="flex: 1; border-left: var(--default-border); margin-left: 15px;">
-                    <app-animation-controller [showValue]="false" [(value)]="animationIndex" (valueChanged)="animate()" [min]="0" [max]="bitmap.length()-1">
-                    </app-animation-controller>
-                </div>
-            </div>
-
-        </div>
     </mat-card>
+
+
+
+
+
 
     <div class="flex-row" style="gap: 8px; flex: 1; min-height: 0">
 
@@ -96,7 +89,6 @@
                     [userSelect]="false" style="margin: auto;"
                     [selectionColor]="selectionColor"
                     (cellClicked)="onCellClicked($event)"
-                    (cellEntered)="onCellClicked($event)"
                     >
 
                 </app-bitmap>
@@ -113,7 +105,6 @@
                     [selectionColor]="selectionColor"
                     [tick]="bitmapTick" [userSelect]="false"
                     (cellClicked)="onCellClicked($event)"
-                    (cellEntered)="onCellClicked($event)"
                     >
 
                 </app-bitmap>
@@ -122,10 +113,9 @@
 
     </div>
 
-    <!-- <mat-card appearance="outlined" style="overflow: hidden; min-height: fit-content;">
-        <div class="scrollable flex-row" style="padding: 10px; justify-content: center; align-items: center;">
-            w
-        </div>
-    </mat-card> -->
+
+    <mat-card class="topbar" appearance="outlined" style="overflow: hidden; min-height: fit-content;">
+           <app-animation-controller [showValue]="false" [(value)]="animationIndex" (valueChanged)="animate()" [min]="0" [max]="bitmap.length()-1"></app-animation-controller>
+    </mat-card>
 
 </div>

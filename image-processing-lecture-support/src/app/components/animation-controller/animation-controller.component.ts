@@ -104,7 +104,7 @@ export class AnimationControllerComponent implements OnInit, OnDestroy {
 
       this._timeoutId = setTimeout(() => {
         this.animate();
-      }, 100 / this.speed);
+      }, 250 / this.speed);
     }
   }
 

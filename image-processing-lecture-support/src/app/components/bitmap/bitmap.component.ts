@@ -37,6 +37,7 @@ export class BitmapComponent implements OnInit, OnDestroy{
   rowClicked = output<{row: number, event: MouseEvent}>();
   colClicked = output<{col: number, event: MouseEvent}>();
   cellClicked = output<{cell: Point, event: MouseEvent}>();
+  
   cellEntered = output<{cell: Point, event: MouseEvent}>();
 
   @ViewChild('canvas', { static: false }) canvasRef?: ElementRef<HTMLCanvasElement> = undefined;
@@ -160,12 +161,8 @@ export class BitmapComponent implements OnInit, OnDestroy{
     }
 
     if(this._currentCell===null || !this._currentCell.equals(cell)){
-      if(this.bitmapRenderer.isCursorOnCell(x, y, this.bitmap())){
         this._currentCell = cell;
         this.cellEntered.emit({cell, event});
-      }
-      else
-        this._currentCell = null;
     }
     
     if (event.buttons !== 0 && this.bitmapRenderer.isCursorOnCell(x, y, this.bitmap())) 

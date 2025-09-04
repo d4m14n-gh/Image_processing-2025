@@ -51,10 +51,10 @@ export class MorphologicalOperationsAnimationComponent {
   showGrid: boolean = true;
   showHeaders: boolean = true;
   showDifference: boolean = true;
+  showBase: boolean = false;
   selectionColor: string = getVar("--selection-color");
 
   animationIndex: number = 0;
-  base: boolean = true;
   readonly colorscale: ColorScale = ColorScale.Binary;
 
   constructor(private bitmapStorage: BitmapStorageService) { 
@@ -75,6 +75,10 @@ export class MorphologicalOperationsAnimationComponent {
     this.animate();
   }
 
+  commit() {
+    this.bitmapStorage.save(this.bitmapKey, this.bitmap);
+  }
+
   apply(apply: boolean = true) {
     this.bitmap = new InteractiveBitmap(this.bitmap.width, this.bitmap.height, undefined, 255);
     if(apply)
@@ -92,7 +96,7 @@ export class MorphologicalOperationsAnimationComponent {
     let cell = this.bitmap.getIndexCell(this.animationIndex);
 
 
-    this.resultBitmap = new InteractiveBitmap(this.bitmap.width, this.bitmap.height, this.base?this.bitmap:undefined, 255);
+    this.resultBitmap = new InteractiveBitmap(this.bitmap.width, this.bitmap.height, this.showBase?this.bitmap:undefined, 255);
     this.resultBitmap.pixels().filter(p=>p.value===0).forEach(p => this.resultBitmap.set(p.cell, 128));
     this.setValues(this.animationIndex+1, this.resultBitmap, this.appliedBitmap);
 
@@ -158,7 +162,8 @@ export class MorphologicalOperationsAnimationComponent {
     }
   }
 
-  onCellClicked($event: { cell: Point; event: MouseEvent; }) {
+  onCellClicked($event: { cell: Point; event: MouseEvent; }, click: boolean = false) {
+    if(this.bitmap.isOut($event.cell)) return;
     if($event.event.buttons === 1) {
       this.animationIndex = this.bitmap.getCellIndex($event.cell);
       this.animate();

@@ -18,13 +18,6 @@ export enum OutOfRangeHandling {
     Modulo = 'modulo'
 }
 
-
-export enum OutOfBoundsHandling {
-    None = 'none',
-    Zero = 'zero',
-    DefaultValue = 'default',
-}
-
 export enum QuantizationMode {
     Round = 'round',
     Floor = 'floor',
@@ -38,6 +31,7 @@ export enum Themes{
 
 export enum Padding{
     Zero = 'zero',
+    DefaultValue = 'default',
     Edge = 'edge'
 }
 

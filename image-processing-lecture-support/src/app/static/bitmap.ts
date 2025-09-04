@@ -39,7 +39,7 @@ export class Bitmap{
   getBinary(cell: Point): boolean {
     return this._matrix[cell.row]?.[cell.col] === 0;
   }
-  getWithPadding(cell: Point, mode: Padding): number {
+  getWithPadding(cell: Point, mode: Padding, defaultValue: number = 255): number {
     if (!this.isOut(cell))
       return this.get(cell) ?? 0;
 
@@ -57,6 +57,9 @@ export class Bitmap{
       else if (col >= this.width)
         col = this.width - 1;
       return this.get(new Point(row, col)) ?? 0;
+    }
+    else if (mode == Padding.DefaultValue){
+      return defaultValue;
     }
     return 0;
   }

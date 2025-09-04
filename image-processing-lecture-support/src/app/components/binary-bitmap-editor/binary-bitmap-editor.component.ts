@@ -50,6 +50,7 @@ export class BinaryBitmapEditorComponent {
   }
 
   onCellEntered($event: { cell: Point; event: MouseEvent; }) {
+    if(this.bitmap.isOut($event.cell)) return;
     if($event.event.buttons === 1)
       this.bitmap.set($event.cell, 0);
     else if($event.event.buttons === 2)

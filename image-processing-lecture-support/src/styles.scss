@@ -1,0 +1,147 @@
+
+/* You can add global styles to this file, and also import other style files */
+
+
+html, body { height: 100%; }
+body { 
+  margin: 0; 
+  padding: 0; 
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  --selection-color: rgba(56, 116, 255, 1);
+  --selection-background-color: rgba(218, 226, 249, 0.5);
+  --selected-border: 2px solid var(--selection-border-color);
+  --default-border: 1px solid var(--mdc-outlined-card-outline-color, var(--mat-sys-outline-variant, crimson));
+  --mat-select-panel-background-color: var(--mat-sys-surface);
+}
+header, button[mat-flat-button] {
+  font-family: "Montserrat", sans-serif !important;
+}
+
+
+.main-card {
+    margin: 8px;
+    padding: 20px;
+    min-height: calc(100% - 16px);
+    width: calc(100% - 16px);
+}
+
+.flex-row {
+  display: flex;
+  gap: 8px;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.bitmap {
+  margin: auto;
+  background-color: var(--mat-sys-outline-variant);
+  border-radius: 1px;
+  outline: 1px solid var(--mat-sys-outline-variant);
+}
+
+.scrollable {
+  height: 100%;
+  overflow: auto;
+  display: flex;
+}
+
+
+button.hover-button{
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    z-index: 10;
+    background-color: var(--mat-sys-primary);
+    color: var(--mat-sys-on-primary);
+    &:hover{
+        opacity: 0.9;
+    }
+}
+
+div.sidebar, mat-card.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 16px;
+  user-select: none;
+  .start{
+    margin-bottom: 8px;
+  }
+  .end{
+    margin-bottom: 16px;
+  }
+  .spacer{
+    flex: 1;
+  }
+  mat-form-field{
+    margin: 0;
+  }
+  mat-slider{
+    margin: 0 4px;
+    min-height: 48px;
+    width: calc(100% - 10px);
+  }
+  mat-divider{
+    margin: 16px 0;
+  }
+  mat-icon{
+    vertical-align: middle;
+  }
+  button{
+    min-height: 32px;
+  }
+  p{
+    margin: 3px 0;
+  }
+}
+
+
+mat-card.topbar, div.topbar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    min-height: fit-content;
+    min-width: fit-content;
+    overflow: hidden;
+    user-select: none;
+    padding: 4px 8px;
+    gap: 0;
+    
+    button{
+        color: var(--mat-sys-on-surface) !important;
+    }
+    mat-label{
+        font-size: 14px; 
+        line-height: 20px; 
+        letter-spacing: 0.256px;
+    }
+    mat-icon{
+        min-width: fit-content;
+    }
+    app-animation-controller{
+        flex: 1;
+    }
+    .divider{
+        width: 0;
+        height: 100%;
+        border-right: var(--default-border);
+        margin: 0 16px;
+    }
+    .slim-form-field:focus { 
+        outline: none !important;
+        border: var(--default-border) !important;
+    }
+    .slim-form-field {
+        --mat-form-field-container-vertical-padding: 10px;
+        --mat-form-field-container-height: 40px;
+        --mat-form-field-outlined-focus-outline-width: 1px;
+        --mdc-outlined-text-field-focus-outline-width: 1px;
+        --mdc-outlined-text-field-focus-outline-color: var(--mat-sys-primary);
+        --mdc-outlined-text-field-container-shape: 8px;
+    }
+}

@@ -1,17 +1,10 @@
 import { AbstractControl, ValidationErrors } from "@angular/forms";
 import { Bitmap, InteractiveBitmap } from "./bitmap";
-import { OutOfBoundsHandling, OutOfRangeHandling, Padding, QuantizationMode } from "./enums";
+import { OutOfRangeHandling, Padding, QuantizationMode } from "./enums";
 import { Parser } from "expr-eval";
 import * as fastNoise from 'fast-simplex-noise';
 import { Point } from "./point";
 
-export function outOfBoundsHandle(mode: OutOfBoundsHandling, defaultValue: number): number {
-    if (mode == OutOfBoundsHandling.None)
-        return NaN;
-    else if (mode == OutOfBoundsHandling.DefaultValue)
-        return defaultValue;
-    return 0;
-}
 
 export function quantizationHandle(value: number, mode: QuantizationMode): number {
     if (mode === QuantizationMode.Floor)
@@ -45,7 +38,7 @@ export function expressionValidator() {
 export function validateExpression(expression: string): [boolean, string?, string?] {
     const parser = new Parser();
 
-    declareCustomFunctions(parser, new InteractiveBitmap(10, 10), OutOfBoundsHandling.DefaultValue, 0);
+    declareCustomFunctions(parser, new InteractiveBitmap(10, 10), Padding.Zero, 0);
 
     const allowedVariables = ['x', 'y'];
     try {
@@ -67,14 +60,12 @@ export function validateExpression(expression: string): [boolean, string?, strin
 export function declareCustomFunctions(
     parser: Parser,
     bitmap: InteractiveBitmap,
-    outOfBoundsHandling: OutOfBoundsHandling,
+    padding: Padding,
     defaultValue: number
 ){
     parser.functions.b = (x: number, y: number) => {
         const cell = new Point(y, x);
-        if (bitmap.isOut(cell))
-            return outOfBoundsHandle(outOfBoundsHandling, defaultValue);
-        return bitmap.get(cell);
+        return bitmap.getWithPadding(cell, padding, defaultValue);
     }
     parser.functions.simplex = (x: number, y: number, seed: number) => {
         const gen = fastNoise.makeNoise2D(() => seed);
@@ -88,15 +79,15 @@ export function declareCustomFunctions(
 export function parseAndApply(
     expression: string,
     bitmap: InteractiveBitmap, 
-    outOfBoundsHandling: OutOfBoundsHandling,
+    padding: Padding,
     outOfRangeHandling: OutOfRangeHandling,
     quantizationMode: QuantizationMode,
     defaultValue: number,
     selectedOnly: boolean
-) {
+): Bitmap {
     const parser = new Parser();
 
-    declareCustomFunctions(parser, bitmap, outOfBoundsHandling, defaultValue);
+    declareCustomFunctions(parser, bitmap, padding, defaultValue);
 
     const compiled = parser.parse(expression);
     const resultBitmap = new Bitmap(bitmap.width, bitmap.height, bitmap);
@@ -114,10 +105,5 @@ export function parseAndApply(
         }
     }
 
-    for (let row = 0; row < bitmap.height; row++) {
-        for (let col = 0; col < bitmap.width; col++) {
-            const cell = new Point(row, col);
-            bitmap.set(cell, resultBitmap.get(cell)!);
-        }
-    }
+    return resultBitmap;
 }

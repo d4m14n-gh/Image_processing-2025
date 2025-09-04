@@ -8,7 +8,7 @@
   --mat-sys-primary-fixed-dim: #abc7ff;
   --mat-sys-on-primary-fixed: #001b3f;
   --mat-sys-on-primary-fixed-variant: #00458f;
-  --mat-sys-secondary: #005cbb;
+  --mat-sys-secondary: #162d59;
   --mat-sys-on-secondary: #ffffff;
   --mat-sys-secondary-container: #d7e3ff;
   --mat-sys-on-secondary-container: #011b3d;
@@ -57,8 +57,10 @@
 }
 
 .dark {
-  --mat-sys-primary: #5f6a94;
-  --mat-sys-on-primary: #e5e2e2;
+  --mat-sys-primary:
+   #738ec8;
+  --mat-sys-on-primary: 
+  #121313;
   --mat-sys-primary-container: #00458f;
   --mat-sys-on-primary-container: #d7e2ff;
   --mat-sys-inverse-primary: #005cbb;
@@ -66,15 +68,18 @@
   --mat-sys-primary-fixed-dim: #abc7ff;
   --mat-sys-on-primary-fixed: #001b3f;
   --mat-sys-on-primary-fixed-variant: #00458f;
-  --mat-sys-secondary: #005cbb;
-  --mat-sys-on-secondary: #1a3053;
+  --mat-sys-secondary: 
+  #303030;
+  --mat-sys-on-secondary: 
+  #dee1e6;
   --mat-sys-secondary-container: #32476b;
   --mat-sys-on-secondary-container: #d7e3ff;
   --mat-sys-secondary-fixed: #d7e3ff;
   --mat-sys-secondary-fixed-dim: #b2c7f2;
   --mat-sys-on-secondary-fixed: #011b3d;
   --mat-sys-on-secondary-fixed-variant: #32476b;
-  --mat-sys-tertiary: #628588;
+  --mat-sys-tertiary: 
+  #7ba8ac;
   --mat-sys-on-tertiary: #00363b;
   --mat-sys-tertiary-container: #004f55;
   --mat-sys-on-tertiary-container: #83f3ff;
@@ -85,13 +90,14 @@
   --mat-sys-background: #131314;
   --mat-sys-on-background: #e5e2e2;
   --mat-sys-surface: 
-  #282828;
+  #303030;
   --mat-sys-surface-dim: #131314;
   --mat-sys-surface-bright: 
   #3a3939;
   --mat-sys-surface-container-lowest: #0e0e0f;
   --mat-sys-surface-container-low: #1c1b1c;
-  --mat-sys-surface-container: #201f20;
+  --mat-sys-surface-container: 
+  #212121;
   --mat-sys-surface-container-high: #2a2a2a;
   --mat-sys-surface-container-highest: #353435;
   --mat-sys-on-surface: #e5e2e2;
@@ -102,7 +108,8 @@
   --mat-sys-inverse-on-surface: #313031;
   --mat-sys-outline: #909095;
   --mat-sys-outline-variant: #45474b;
-  --mat-sys-neutral: #797777;
+  --mat-sys-neutral: 
+  #939292;
   --mat-sys-neutral10: #1c1b1c;
   --mat-sys-error: #a45d55;
   --mat-sys-error-container: #93000a;

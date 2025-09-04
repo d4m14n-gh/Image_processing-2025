@@ -21,6 +21,10 @@ export class HistoryService {
     localStorage.setItem(this.storageKey, JSON.stringify(this.history));
   }
 
+  getHistoryReversed() {
+    return this.getHistory().slice().reverse();
+  }
+
   getHistory() {
     const history = localStorage.getItem(this.storageKey);
     if (history) {

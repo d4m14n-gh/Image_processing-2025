@@ -3,11 +3,9 @@
     menu
   </mat-icon>
 
-  <ng-content select="[header]">
-    <h4 style="margin: 0;">
-      {{title}}
-    </h4>
-  </ng-content>
+  <h4 style="margin: 0;">
+    {{title}}
+  </h4>
   <span class="spacer"></span>
 
   <mat-icon class="menu-icon" [routerLink]="['/home']">
@@ -32,8 +30,8 @@
         <!-- <a mat-list-item routerLink="/help">Help</a> -->
         <a mat-list-item routerLink="/editor">Bitmap Editor</a>
         <a mat-list-item routerLink="/binary-editor">Binary Bitmap Editor #tmp</a>
-        <a mat-list-item routerLink="/structuring-element">Structuring Element Editor #tmp</a>
         <a mat-list-item routerLink="/histogram">Histogram</a>
+        <a mat-list-item routerLink="/median-filters">Median Filters</a>
         <a mat-list-item routerLink="/convolutional-filters">Convolutional Filters</a>
         <a mat-list-item routerLink="/morphological-operations">Morphological Operations</a>
       </mat-nav-list>

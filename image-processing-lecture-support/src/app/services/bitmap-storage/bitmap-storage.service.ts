@@ -24,7 +24,8 @@ export class BitmapStorageService {
 
     try {
       const obj = JSON.parse(raw) as any;
-      if (!obj || typeof obj !== 'object') return null;
+      if (!obj || typeof obj !== "object") return null;
+      if (typeof obj._width !== "number" || typeof obj._height !== "number" || obj._matrix === undefined || obj._matrix === null) return null;
       const inst = Object.create(Bitmap.prototype) as Bitmap;
       return Object.assign(inst, obj);
     } catch {
