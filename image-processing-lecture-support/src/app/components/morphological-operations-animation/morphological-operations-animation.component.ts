@@ -64,7 +64,7 @@ export class MorphologicalOperationsAnimationComponent {
     else
       this.bitmapStorage.save(this.bitmapKey, this.bitmap);
 
-    this.structuringElemnet.set(Point.one, 1);
+    this.structuringElemnet.set(Point.one, 0);
     this.structuringElemnet.load();
     this.refresh();
   }
