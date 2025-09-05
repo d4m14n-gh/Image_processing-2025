@@ -17,6 +17,7 @@ import { BitmapStorageService } from '../../services/bitmap-storage/bitmap-stora
 import { Point } from '../../static/point';
 import { Chart, LineController, LineElement, PointElement, LinearScale, Title, Tooltip, Legend } from 'chart.js';
 import { MatInputModule } from '@angular/material/input';
+import { MatTabsModule } from '@angular/material/tabs';
 
 
 @Component({
@@ -34,13 +35,13 @@ import { MatInputModule } from '@angular/material/input';
     MatCardModule,
     BitmapComponent,
     AnimationControllerComponent,
+    MatTabsModule
   ],
   templateUrl: './hough-transform-animation.component.html',
   styleUrl: './hough-transform-animation.component.css'
 })
 export class HoughTransformAnimationComponent implements AfterViewInit {
   bitmap: InteractiveBitmap = new InteractiveBitmap(16, 9, undefined, 255);
-  appliedBitmap: InteractiveBitmap = new InteractiveBitmap(16, 9, undefined, 255);
   resultBitmap: InteractiveBitmap = new InteractiveBitmap(16, 9, undefined, 255);
   bitmapTick: number = 0;
   bitmapKey: string = 'hough-transform';
@@ -50,6 +51,7 @@ export class HoughTransformAnimationComponent implements AfterViewInit {
   limit: number = 5;
   threshold: number = 5;
   showGrid: boolean = true;
+  tabIndex: number = 0;
   showHeaders: boolean = true;
   selectionColor: string = getVar("--selection-color");
 
@@ -93,6 +95,7 @@ export class HoughTransformAnimationComponent implements AfterViewInit {
             enabled: false
           }
         },
+        animation: false,
         scales: {
           x: {
             display: false,
@@ -117,15 +120,14 @@ export class HoughTransformAnimationComponent implements AfterViewInit {
   }
 
   refresh() {
-    this.appliedBitmap = new InteractiveBitmap(this.bitmap.width, this.bitmap.height, undefined, 255);
-    this.resultBitmap = new InteractiveBitmap(this.bitmap.width, this.bitmap.height, this.bitmap, 255);
+    // this.resultBitmap = new InteractiveBitmap(this.bitmap.width, this.bitmap.height, this.bitmap, 255);
     
     if(this.chart){
       this.chart.data.datasets = [];
       const width = this.bitmap.width;
       const height = this.bitmap.height;
     
-      const lines = this.transform().slice(0, this.limit);
+      const lines = this.transform(this.resultBitmap).slice(0, this.limit);
       for(let line of lines) {
         let p1 = this.linePoint(line.min.col, line.rho, line.theta*Math.PI/180);
         let p2 = this.linePoint(line.max.col, line.rho, line.theta*Math.PI/180);
@@ -154,7 +156,7 @@ export class HoughTransformAnimationComponent implements AfterViewInit {
       this.chart.update();
       }
     
-    this.animate();
+    // this.animate();
   }
 
   animate() {
@@ -162,14 +164,11 @@ export class HoughTransformAnimationComponent implements AfterViewInit {
 
 
     this.resultBitmap = new InteractiveBitmap(this.bitmap.width, this.bitmap.height, undefined, 255);
-    this.resultBitmap.pixels().filter(p=>p.value===0).forEach(p => this.resultBitmap.set(p.cell, 128));
-    this.setValues(this.animationIndex+1, this.resultBitmap, this.appliedBitmap);
-
+    this.bitmap.pixels().filter(p=>p.value===0&&this.bitmap.getCellIndex(p.cell)<=this.animationIndex).forEach(p => this.resultBitmap.set(p.cell, 0));
+    this.refresh();
 
     this.bitmap.clearSelection(); 
     this.resultBitmap.clearSelection(); 
-
-    this.resultBitmap.select(cell);
     
     this.bitmap.highlightedElement = null;
     this.selectionColor = getVar("--selection-color");
@@ -177,15 +176,16 @@ export class HoughTransformAnimationComponent implements AfterViewInit {
     
    
     this.bitmap.select(cell);
+    this.resultBitmap.select(cell);
 
     this.bitmapTick++;
   }
 
-  transform(): Line[] {
+  transform(bitmap: Bitmap): Line[] {
     const thetaStep = 15;
     const thetas: number[] = [];
-    const width = this.bitmap.width;
-    const height = this.bitmap.height;
+    const width = bitmap.width;
+    const height = bitmap.height;
 
     //thetas
     for (let t = 0; t < 180; t += thetaStep)
@@ -194,7 +194,6 @@ export class HoughTransformAnimationComponent implements AfterViewInit {
 
     // rhos
     const diagLen = Math.ceil(Math.sqrt(width * width + height * height));
-    console.log("diagLen:", diagLen);
     const rhos: number[] = [];
     for (let r = -diagLen; r <= diagLen; r++)
       rhos.push(r);
@@ -213,8 +212,8 @@ export class HoughTransformAnimationComponent implements AfterViewInit {
     );
 
 
-    this.bitmap.cells().forEach(p => {
-      if (this.bitmap.getBinary(p)) {
+    bitmap.cells().forEach(p => {
+      if (bitmap.getBinary(p)) {
 
         thetas.forEach((theta, tIdx) => {
           const rho = Math.round(p.col * Math.cos(theta) + p.row * Math.sin(theta));
@@ -251,7 +250,6 @@ export class HoughTransformAnimationComponent implements AfterViewInit {
     }
 
     lines.sort((a, b) => b.votes - a.votes);
-    console.log(lines);
     return lines;
   }
 
