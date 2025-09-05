@@ -124,7 +124,7 @@ export class InteractiveBitmap extends Bitmap {
     });
   }
 
-  constructor(width: number, height: number, oldMatrix?: Bitmap, defaultValue: number = 0) {
+  constructor(width: number, height: number, oldMatrix?: Bitmap, defaultValue: number = 255) {
     super(width, height, oldMatrix, defaultValue);
     this._selected = new Set();
     this._dragArea = new DragArea();

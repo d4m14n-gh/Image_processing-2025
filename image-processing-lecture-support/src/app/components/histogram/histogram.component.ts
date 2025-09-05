@@ -68,12 +68,8 @@ export class HistogramComponent implements AfterViewInit, OnDestroy {
     let bitmap = this.bitmapStorage.load(this.bitmapKey);
     if(bitmap)
       this.bitmap = new InteractiveBitmap(bitmap.width, bitmap.height, bitmap, 255);
-    else
-      this.bitmapStorage.save(this.bitmapKey, this.bitmap);
 
-    this._themeSubscription = this.themeService.themeChanged$.subscribe(theme => {
-      this.updateChart();
-    });
+    this._themeSubscription = this.themeService.themeChanged$.subscribe(() => this.updateChart());
   }
 
   @HostListener('window:resize', ['$event'])
