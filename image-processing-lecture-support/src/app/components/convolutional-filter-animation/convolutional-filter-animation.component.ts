@@ -133,7 +133,6 @@ export class ConvolutionalFilterAnimationComponent {
     this.bitmap.dragArea.dragStart = cell;
     this.bitmap.dragArea.dragEnd = cell;
     this.bitmap.dragArea.dragging = true;
-    this.bitmap.dragArea.button = 2; 
 
 
     this.bitmapTick++;
@@ -143,51 +142,13 @@ export class ConvolutionalFilterAnimationComponent {
   length() {
     return this.bitmap.length;
   }
-
-  applyFilter(length: number, destination: InteractiveBitmap, source: InteractiveBitmap) {
-    for (let i = 0; i < length; i++) {
-      const cell = source.getIndexCell(i);
-      if (destination.isOut(cell) || source.isOut(cell)) 
-        continue;
-      let kernelValue = this.kernel.apply(source, cell, QuantizationMode.Round, OutOfRangeHandling.Clipping, this.padding);
-      destination.set(cell, kernelValue);
+  onCellClicked($event: { cell: Point; event: MouseEvent; }, click: boolean = true) {
+    if(this.bitmap.isOut($event.cell)) return;
+    if($event.event.buttons === 1) {
+      this.animationIndex = this.bitmap.getCellIndex($event.cell);
+      this.animate();
     }
   }
-
-  setValues(length: number, destination: InteractiveBitmap, source: InteractiveBitmap) {
-    for (let i = 0; i < length; i++) {
-      const cell = source.getIndexCell(i);
-      if (destination.isOut(cell) || source.isOut(cell)) 
-        continue;
-      let value = source.get(cell)!;
-      destination.set(cell, value);
-    }
-  }
-
-
-  getSourceKernel(): Kernel {
-    let kernel = new Kernel(this.kernel.size);
-    const r = Math.trunc((this.kernel.size - 1) / 2);
-    for (let oy = -r; oy <= r; oy++)
-      for (let ox = -r; ox <= r; ox++) {
-        const point = this.bitmap.getIndexCell(this.animationIndex);
-        const offset = point.add(new Point(oy, ox));
-
-        let value = this.bitmap.getWithPadding(offset, this.padding);
-        kernel.kernel[ox + r][oy + r] = value;
-      }
-    return kernel;
-  }
-
-  getResultKernel(): Kernel {
-    let kernel = new Kernel(this.kernel.size);
-    const r = Math.trunc((this.kernel.size - 1) / 2);
-    for (let oy = -r; oy <= r; oy++)
-      for (let ox = -r; ox <= r; ox++)
-        kernel.kernel[oy + r][ox + r] = this.kernel.kernel[oy + r][ox + r] * this.sourceKernel.kernel[oy + r][ox + r];
-    return kernel;
-  }
-
   getEquation(): string {
     const divider = this.kernel.divider;
     return `\\[
@@ -200,14 +161,43 @@ export class ConvolutionalFilterAnimationComponent {
       \\]`;
   }
 
-  onCellClicked($event: { cell: Point; event: MouseEvent; }, click: boolean = true) {
-    // if(!click && this.bitmap.isOut($event.cell)){
-    //   $event.cell = $event.cell.limit(new Point(this.bitmap.height-1, this.bitmap.width-1)); 
-    // }
-    if(this.bitmap.isOut($event.cell)) return;
-    if($event.event.buttons === 1) {
-      this.animationIndex = this.bitmap.getCellIndex($event.cell);
-      this.animate();
+  private applyFilter(length: number, destination: InteractiveBitmap, source: InteractiveBitmap) {
+    for (let i = 0; i < length; i++) {
+      const cell = source.getIndexCell(i);
+      if (destination.isOut(cell) || source.isOut(cell)) 
+        continue;
+      let kernelValue = this.kernel.apply(source, cell, QuantizationMode.Round, OutOfRangeHandling.Clipping, this.padding);
+      destination.set(cell, kernelValue);
     }
+  }
+  private setValues(length: number, destination: InteractiveBitmap, source: InteractiveBitmap) {
+    for (let i = 0; i < length; i++) {
+      const cell = source.getIndexCell(i);
+      if (destination.isOut(cell) || source.isOut(cell)) 
+        continue;
+      let value = source.get(cell)!;
+      destination.set(cell, value);
+    }
+  }
+  private getSourceKernel(): Kernel {
+    let kernel = new Kernel(this.kernel.size);
+    const r = Math.trunc((this.kernel.size - 1) / 2);
+    for (let oy = -r; oy <= r; oy++)
+      for (let ox = -r; ox <= r; ox++) {
+        const point = this.bitmap.getIndexCell(this.animationIndex);
+        const offset = point.add(new Point(oy, ox));
+
+        let value = this.bitmap.getWithPadding(offset, this.padding);
+        kernel.kernel[ox + r][oy + r] = value;
+      }
+    return kernel;
+  }
+  private getResultKernel(): Kernel {
+    let kernel = new Kernel(this.kernel.size);
+    const r = Math.trunc((this.kernel.size - 1) / 2);
+    for (let oy = -r; oy <= r; oy++)
+      for (let ox = -r; ox <= r; ox++)
+        kernel.kernel[oy + r][ox + r] = this.kernel.kernel[oy + r][ox + r] * this.sourceKernel.kernel[oy + r][ox + r];
+    return kernel;
   }
 }

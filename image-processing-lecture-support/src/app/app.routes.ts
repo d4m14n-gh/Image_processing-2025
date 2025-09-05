@@ -9,6 +9,7 @@ import { BinaryBitmapEditorComponent } from './components/binary-bitmap-editor/b
 import { StructuringElementEditorComponent } from './components/structuring-element-editor/structuring-element-editor.component';
 import { MorphologicalOperationsAnimationComponent } from './components/morphological-operations-animation/morphological-operations-animation.component';
 import { MedianFilterAnimationComponent } from './components/median-filter-animation/median-filter-animation.component';
+import { HoughTransformAnimationComponent } from './components/hough-transform-animation/hough-transform-animation.component';
 
 export const routes: Routes = [
     { path: 'editor', component: BitmapEditorComponent },
@@ -27,6 +28,7 @@ export const routes: Routes = [
     { path: 'convolutional-filters', component: ConvolutionalFilterAnimationComponent },
     { path: 'median-filters', component: MedianFilterAnimationComponent },
     { path: 'morphological-operations', component: MorphologicalOperationsAnimationComponent },
+    { path: 'hough-transform', component: HoughTransformAnimationComponent },
 
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: '**', component: PageNotFoundComponent }

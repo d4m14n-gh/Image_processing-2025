@@ -28,14 +28,14 @@ import { Kernel } from '../../../static/kernel';
 })
 export class KernelDialogComponent {
   kernel: Kernel;
-
-  get size(): string {
-    return this.kernel.size.toString();
+  get size(): number {
+    return this.kernel.size;
   }
-  set size(value: string) {
-    this.kernel = new Kernel(Number.parseInt(value));
+  set size(value: number) {
+    this.kernel = new Kernel(value);
   }
 
+  
   constructor(private dialogRef: MatDialogRef<KernelDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: Kernel) {
     this.kernel = data;
   }

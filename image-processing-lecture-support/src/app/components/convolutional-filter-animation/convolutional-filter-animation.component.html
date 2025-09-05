@@ -2,21 +2,26 @@
 
     <mat-card appearance="outlined" class="topbar">
         <button mat-button [routerLink]="['/edit', bitmapKey]">
-            <mat-icon style="min-width: fit-content;">edit</mat-icon>
+            <mat-icon>edit</mat-icon>
             Edit
         </button>
         <button mat-button (click)="openDialog()">
-            <mat-icon style="min-width: fit-content;">grid_on</mat-icon>
+            <mat-icon>grid_on</mat-icon>
             Kernel
         </button>
+        <div class="divider"></div>
         <mat-form-field subscriptSizing="dynamic" class="slim-form-field" appearance="outline">
             <mat-label>Padding</mat-label>
-            <mat-select [(ngModel)]="padding"
-                (ngModelChange)="refresh();">
+            <mat-select [(ngModel)]="padding" (ngModelChange)="refresh();">
                 <mat-option value="zero">Zero</mat-option>
                 <mat-option value="edge">Edge</mat-option>
             </mat-select>
         </mat-form-field>
+        <div class="divider"></div>
+        <mat-label>Pixel Size</mat-label>
+        <mat-slider min="25" max="100" step="1" discrete="false">
+            <input matSliderThumb [(ngModel)]="pixelSize">
+        </mat-slider>
         <div class="divider"></div>
         <mat-checkbox [(ngModel)]="showNumberValues" [disabled]="pixelSize<40">
             Numbers
@@ -31,13 +36,8 @@
             Base
         </mat-checkbox>
         <div class="divider"></div>
-        <mat-label>
-            Pixel Size
-        </mat-label>
-        <mat-slider min="25" max="100" step="1" discrete="false">
-            <input matSliderThumb [(ngModel)]="pixelSize">
-        </mat-slider>
-        <app-animation-controller [showValue]="false" [(value)]="animationIndex" (valueChanged)="animate()" [min]="0" [max]="bitmap.length()-1">
+        <app-animation-controller [showValue]="false" [(value)]="animationIndex" (valueChanged)="animate()" [min]="0"
+            [max]="bitmap.length()-1">
         </app-animation-controller>
     </mat-card>
 
@@ -50,8 +50,7 @@
                     [showHeaders]="showHeaders&&pixelSize>=40" [showGrid]="showGrid"
                     [showNumbers]="showNumberValues&&pixelSize>=40" [tick]="bitmapTick"
                     [selectedColorScale]="selectedColorScale" [userSelect]="false" style="margin: auto;"
-                    (cellClicked)="onCellClicked($event)"
-                    >
+                    (cellClicked)="onCellClicked($event)">
 
                 </app-bitmap>
             </div>
@@ -63,9 +62,7 @@
                 <app-bitmap class="bitmap" [bitmap]="resultBitmap" [pixelSize]="pixelSize"
                     [showHeaders]="showHeaders&&pixelSize>=40" [showGrid]="showGrid"
                     [selectedColorScale]="selectedColorScale" [showNumbers]="showNumberValues&&pixelSize>=40"
-                    [tick]="bitmapTick" [userSelect]="false"
-                    (cellClicked)="onCellClicked($event)"
-                    >
+                    [tick]="bitmapTick" [userSelect]="false" (cellClicked)="onCellClicked($event)">
 
                 </app-bitmap>
             </div>

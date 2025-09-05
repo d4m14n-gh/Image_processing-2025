@@ -12,9 +12,9 @@
         <!-- <div class="flex-row" style="align-items: center; border: var(--default-border); border-radius: 10px;"> -->
             <div style="margin-bottom: 15px;">
                 <mat-button-toggle-group name="fontStyle" [(ngModel)]="size" style="width: fit-content;">
-                    <mat-button-toggle value="3">3x3 Kernel</mat-button-toggle>
-                    <mat-button-toggle value="5">5x5 Kernel</mat-button-toggle>
-                    <mat-button-toggle value="7">7x7 Kernel</mat-button-toggle>
+                    <mat-button-toggle [value]="3">3x3 Kernel</mat-button-toggle>
+                    <mat-button-toggle [value]="5">5x5 Kernel</mat-button-toggle>
+                    <mat-button-toggle [value]="7">7x7 Kernel</mat-button-toggle>
                 </mat-button-toggle-group>
             </div>
             

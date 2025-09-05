@@ -13,25 +13,7 @@
             <mat-icon>crossword</mat-icon>
             Structuring Element
         </button>
-    
-    
         <div class="divider"></div>
-    
-    
-        <button mat-button (click)="apply(true)">
-            <mat-icon>check</mat-icon>
-            Apply
-        </button>
-        <button mat-button (click)="apply(false)">
-            <mat-icon>cleaning_services</mat-icon>
-            Reset
-        </button>
-        <button mat-button (click)="commit()">
-            <mat-icon>commit</mat-icon>
-            Save
-        </button>
-    
-    
         <mat-form-field subscriptSizing="dynamic" class="slim-form-field" appearance="outline">
             <mat-label>Operation</mat-label>
             <mat-select [(ngModel)]="operation" (ngModelChange)="refresh()">
@@ -46,6 +28,28 @@
         <div class="divider"></div>
     
     
+        <button mat-button (click)="apply(true)">
+            <mat-icon>check</mat-icon>
+            Apply
+        </button>
+        <button mat-button (click)="apply(false)">
+            <mat-icon>cleaning_services</mat-icon>
+            Revert
+        </button>
+        <button mat-button (click)="commit()">
+            <mat-icon>commit</mat-icon>
+            Save
+        </button>
+    
+    
+        <div class="divider"></div>
+    
+    
+        <mat-label>Pixel Size</mat-label>
+        <mat-slider min="25" max="100" step="1" discrete="false">
+            <input matSliderThumb [(ngModel)]="pixelSize">
+        </mat-slider>
+        <div class="divider"></div>
         <mat-checkbox [(ngModel)]="showGrid">
             Grid
         </mat-checkbox>
@@ -60,18 +64,7 @@
         </mat-checkbox>
     
     
-        <div class="divider"></div>
-    
-    
-        <mat-label>
-            Pixel Size
-        </mat-label>
-        <mat-slider min="25" max="100" step="1" discrete="false">
-            <input matSliderThumb [(ngModel)]="pixelSize">
-        </mat-slider>
-    
-
-    </mat-card>
+        </mat-card>
 
 
 

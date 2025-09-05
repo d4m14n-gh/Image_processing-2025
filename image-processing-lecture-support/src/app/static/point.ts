@@ -9,7 +9,13 @@ export class Point{
         return new Point(this.row + other.row, this.col + other.col);
     }
     subtract(other: Point): Point {
-      return new Point(this.row - other.row, this.col - other.col);
+        return new Point(this.row - other.row, this.col - other.col);
+    }
+    min(other: Point): Point{
+        return new Point(Math.min(this.row, other.row), Math.min(this.col, other.col)); 
+    }
+    max(other: Point): Point{
+        return new Point(Math.max(this.row, other.row), Math.max(this.col, other.col)); 
     }
     left(): Point{
         return new Point(this.row, this.col - 1);

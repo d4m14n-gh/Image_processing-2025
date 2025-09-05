@@ -1,7 +1,7 @@
 <div class="flex-row" style="padding: 8px; height: 100%; box-sizing: border-box;">
 
     <mat-card style="flex: 1; overflow: hidden;" appearance="outlined">
-        <div class="scrollable">
+        <div (contextmenu)="$event.preventDefault()" class="scrollable">
             <button mat-icon-button class="end" (click)="clear()" class="hover-button">
                 <mat-icon>cleaning_services</mat-icon>
             </button>

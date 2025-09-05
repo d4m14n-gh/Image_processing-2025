@@ -30,6 +30,10 @@ export class Kernel {
         return outOfRangeHandle(quantizationHandle(sum, quantization), outOfRange);
     }
 
+    values(): number[] {
+        return this._kernel.flat();
+    }
+
     clone(): Kernel{
         const clone = new Kernel(this._size);
         clone._kernel = this._kernel.map(row => [...row]);
@@ -62,8 +66,10 @@ export class Kernel {
             const inst = Object.create(Kernel.prototype) as Kernel;
             let kernel = Object.assign(inst, obj);
             if (kernel) {
-                this._kernel = kernel.kernel;
-                this._divider = kernel.divider;
+                if(kernel.kernel)
+                    this._kernel = kernel.kernel;
+                if(kernel.divider)
+                    this._divider = kernel.divider;
             }
         } catch { }
     }

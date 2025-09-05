@@ -107,8 +107,8 @@ mat-card.topbar, div.topbar {
     justify-content: start;
     min-height: fit-content;
     min-width: fit-content;
-    overflow: hidden;
     user-select: none;
+    overflow: hidden;
     padding: 4px 8px;
     gap: 0;
     
@@ -132,16 +132,23 @@ mat-card.topbar, div.topbar {
         border-right: var(--default-border);
         margin: 0 16px;
     }
-    .slim-form-field:focus { 
-        outline: none !important;
-        border: var(--default-border) !important;
+    .slim-divider{
+      @extend .divider;
+      border: none; 
+      margin: 5px;
     }
+    .slim-form-field:focus {
+      outline: none !important;
+      border: var(--default-border) !important;
+    }
+
     .slim-form-field {
-        --mat-form-field-container-vertical-padding: 10px;
-        --mat-form-field-container-height: 40px;
-        --mat-form-field-outlined-focus-outline-width: 1px;
-        --mdc-outlined-text-field-focus-outline-width: 1px;
-        --mdc-outlined-text-field-focus-outline-color: var(--mat-sys-primary);
-        --mdc-outlined-text-field-container-shape: 8px;
+      width: 140px;
+      --mat-form-field-container-vertical-padding: 10px;
+      --mat-form-field-container-height: 40px;
+      --mat-form-field-outlined-focus-outline-width: 1px;
+      --mdc-outlined-text-field-focus-outline-width: 1px;
+      --mdc-outlined-text-field-focus-outline-color: var(--mat-sys-primary);
+      --mdc-outlined-text-field-container-shape: 8px;
     }
 }
