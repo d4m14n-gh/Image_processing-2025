@@ -39,4 +39,5 @@ export class Point{
         return `${this.row},${this.col}`;
     }
     static readonly zero: Point = new Point(0, 0);
+    static readonly one: Point = new Point(1, 1);
 }
