@@ -92,9 +92,12 @@ export class StructuringElement extends Bitmap{
             let se: StructuringElement = Object.assign(inst, obj);
             if (se) {
                 this.origin = Object.assign(Object.create(Point.prototype), se.origin);
-                this._width = se.width;
-                this._height = se.height;
-                this._matrix = se._matrix;
+                if(se.width)
+                    this._width = se.width;
+                if(se.height)
+                    this._height = se.height;
+                if(se._matrix)
+                    this._matrix = se._matrix;
             }
         } catch { console.log("Error loading structuring element from localStorage") }
     }
