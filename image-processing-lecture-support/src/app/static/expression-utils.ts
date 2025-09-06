@@ -40,7 +40,7 @@ export function validateExpression(expression: string): [boolean, string?, strin
 
     declareCustomFunctions(parser, new InteractiveBitmap(10, 10), Padding.Zero, 0);
 
-    const allowedVariables = ['x', 'y'];
+    const allowedVariables = ['x', 'y', 'v'];
     try {
         const parsed = parser.parse(expression);
 
@@ -97,7 +97,7 @@ export function parseAndApply(
             const cell = new Point(row, col);
             if (!selectedOnly || bitmap.isSelected(cell)) {
                 const cell = new Point(row, col);
-                let newValue = compiled.evaluate({ x: col, y: row });
+                let newValue = compiled.evaluate({ x: col, y: row, v: bitmap.get(cell) ?? defaultValue });
                 if(typeof newValue !== 'number' || isNaN(newValue)) continue;
                 let quantizedValue = quantizationHandle(newValue, quantizationMode);
                 let clippedValue = outOfRangeHandle(quantizedValue, outOfRangeHandling);
