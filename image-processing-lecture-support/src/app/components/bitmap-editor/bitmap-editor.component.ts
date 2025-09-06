@@ -78,7 +78,7 @@ export class BitmapEditorComponent {
   
 
   //expression
-  expressionControl = new FormControl("b(x, y) + simplex(x, y, 0) * 128 - 128", [
+  expressionControl = new FormControl("b(x, y) + simplex(x, y, RANDOM) * 128 - 128", [
     Validators.required,
     expressionValidator(),
   ]);
