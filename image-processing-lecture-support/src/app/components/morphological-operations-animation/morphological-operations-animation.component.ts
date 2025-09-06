@@ -44,7 +44,7 @@ export class MorphologicalOperationsAnimationComponent {
   bitmapTick: number = 0;
   bitmapKey: string = 'morphological-operations';
 
-  structuringElemnet: StructuringElement = new StructuringElement(3, 3);
+  structuringElement: StructuringElement = new StructuringElement(3, 3);
   operation: MorphologicalOperations = MorphologicalOperations.Erosion;
 
   pixelSize: number = 40;
@@ -64,16 +64,16 @@ export class MorphologicalOperationsAnimationComponent {
     else
       this.bitmapStorage.save(this.bitmapKey, this.bitmap);
 
-    this.structuringElemnet.set(Point.one, 0);
-    this.structuringElemnet.load();
-    this.structuringElemnet.save();
+    this.structuringElement.set(Point.one, 0);
+    this.structuringElement.load();
+    this.structuringElement.save();
     this.refresh();
   }
 
   refresh() {
     this.appliedBitmap = new InteractiveBitmap(this.bitmap.width, this.bitmap.height, undefined, 255);
     this.resultBitmap = new InteractiveBitmap(this.bitmap.width, this.bitmap.height, this.bitmap, 255);
-    this.structuringElemnet.applyComplex(this.bitmap, this.appliedBitmap, this.operation, this.showDifference);
+    this.structuringElement.applyComplex(this.bitmap, this.appliedBitmap, this.operation, this.showDifference);
     this.animate();
   }
 
@@ -116,19 +116,19 @@ export class MorphologicalOperationsAnimationComponent {
         this.selectionColor = "#636363ff"
     }
     if(this.operation===MorphologicalOperations.Erosion){
-      if(!this.structuringElemnet.getErosion(this.bitmap, cell))
+      if(!this.structuringElement.getErosion(this.bitmap, cell))
         this.selectionColor = "#636363ff"
     }
     
     if(this.operation===MorphologicalOperations.Dilation || this.operation===MorphologicalOperations.Erosion){
       this.bitmap.highlightedElement = cell;
-      for(let row = 0; row < this.structuringElemnet.height; row++){
-        for(let col = 0; col < this.structuringElemnet.width; col++) {
+      for(let row = 0; row < this.structuringElement.height; row++){
+        for(let col = 0; col < this.structuringElement.width; col++) {
           let structuringCell = new Point(row, col);
-          if(this.structuringElemnet.getBinary(structuringCell)){
-            this.bitmap.select(cell.add(structuringCell).subtract(this.structuringElemnet.origin));
+          if(this.structuringElement.getBinary(structuringCell)){
+            this.bitmap.select(cell.add(structuringCell).subtract(this.structuringElement.origin));
             if(this.operation===MorphologicalOperations.Dilation)
-              this.resultBitmap.select(cell.add(structuringCell).subtract(this.structuringElemnet.origin));
+              this.resultBitmap.select(cell.add(structuringCell).subtract(this.structuringElement.origin));
           }
         }
       }
@@ -144,7 +144,7 @@ export class MorphologicalOperationsAnimationComponent {
   setValues(length: number, destination: Bitmap, source: Bitmap) {
     if(this.operation == MorphologicalOperations.Dilation){
 
-      this.structuringElemnet.getDilatationMask(length, source).pixels().filter(pixel=>pixel.value===0).forEach(pixel => {
+      this.structuringElement.getDilatationMask(length, source).pixels().filter(pixel=>pixel.value===0).forEach(pixel => {
         if (destination.isOut(pixel.cell) || source.isOut(pixel.cell))
           return;
         destination.set(pixel.cell, source.get(pixel.cell) ?? 255);

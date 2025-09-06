@@ -44,6 +44,7 @@ export class StructuringElementEditorComponent {
   height: number;
 
   constructor(private router: Router) {
+    this.structuringElement.set(Point.one, 0);
     this.structuringElement.load();
     this.width = this.structuringElement.width;
     this.height = this.structuringElement.height;

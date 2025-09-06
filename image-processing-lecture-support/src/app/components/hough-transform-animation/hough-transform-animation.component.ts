@@ -132,8 +132,8 @@ export class HoughTransformAnimationComponent implements AfterViewInit {
         let p1 = this.linePoint(line.min.col, line.rho, line.theta*Math.PI/180);
         let p2 = this.linePoint(line.max.col, line.rho, line.theta*Math.PI/180);
         if(line.min.col == line.max.col){
-          p1 = new Point(line.min.row, line.rho);
-          p2 = new Point(line.max.row, line.rho);
+          p1 = new Point(line.min.row, line.min.col);
+          p2 = new Point(line.max.row, line.max.col);
         }
         // const points = this.toLine(line.rho, line.theta);
         const dataPoints = [

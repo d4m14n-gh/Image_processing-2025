@@ -18,10 +18,11 @@ header, button[mat-flat-button] {
 }
 
 
-.main-card {
+mat-card.main-card {
+    box-sizing: border-box;
     margin: 8px;
     padding: 20px;
-    min-height: calc(100% - 16px);
+    min-height: calc(100% - 20px);
     width: calc(100% - 16px);
 }
 

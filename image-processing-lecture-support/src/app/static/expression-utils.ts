@@ -98,6 +98,7 @@ export function parseAndApply(
             if (!selectedOnly || bitmap.isSelected(cell)) {
                 const cell = new Point(row, col);
                 let newValue = compiled.evaluate({ x: col, y: row });
+                if(typeof newValue !== 'number' || isNaN(newValue)) continue;
                 let quantizedValue = quantizationHandle(newValue, quantizationMode);
                 let clippedValue = outOfRangeHandle(quantizedValue, outOfRangeHandling);
                 resultBitmap.set(cell, clippedValue);
