@@ -10,6 +10,7 @@ import { StructuringElementEditorComponent } from './components/structuring-elem
 import { MorphologicalOperationsAnimationComponent } from './components/morphological-operations-animation/morphological-operations-animation.component';
 import { MedianFilterAnimationComponent } from './components/median-filter-animation/median-filter-animation.component';
 import { HoughTransformAnimationComponent } from './components/hough-transform-animation/hough-transform-animation.component';
+import { ShapeBitmapEditorComponent } from './components/shape-bitmap-editor/shape-bitmap-editor.component';
 
 export const routes: Routes = [
     { path: 'editor', component: BitmapEditorComponent },
@@ -17,6 +18,8 @@ export const routes: Routes = [
     
     { path: 'binary-editor', component: BinaryBitmapEditorComponent },
     { path: 'binary-edit/:id', component: BinaryBitmapEditorComponent },
+    
+    { path: 'shape-editor', component: ShapeBitmapEditorComponent },
 
     { path: 'structuring-element', component: StructuringElementEditorComponent },
     
