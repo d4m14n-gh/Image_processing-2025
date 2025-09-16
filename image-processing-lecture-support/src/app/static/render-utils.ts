@@ -127,7 +127,7 @@ export class BitmapRenderer {
         const offsetX = this.getOffsetX();
         const offsetY = this.getOffsetY();
 
-        ctx.lineWidth = scale;
+        ctx.lineWidth = Math.floor(scale);
         ctx.lineWidth = 1;
         ctx.strokeStyle = color;
 

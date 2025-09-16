@@ -1728,7 +1728,7 @@ export class BitmapRenderer {
         const offsetX &#x3D; this.getOffsetX();
         const offsetY &#x3D; this.getOffsetY();
 
-        ctx.lineWidth &#x3D; scale;
+        ctx.lineWidth &#x3D; Math.floor(scale);
         ctx.lineWidth &#x3D; 1;
         ctx.strokeStyle &#x3D; color;
 
