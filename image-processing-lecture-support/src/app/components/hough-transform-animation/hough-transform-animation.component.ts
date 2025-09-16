@@ -18,6 +18,8 @@ import { Point } from '../../static/point';
 import { Chart, LineController, LineElement, PointElement, LinearScale, Title, Tooltip, Legend } from 'chart.js';
 import { MatInputModule } from '@angular/material/input';
 import { MatTabsModule } from '@angular/material/tabs';
+import { AccumulatorDialogComponent } from '../dialogs/accumulator-dialog/accumulator-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 
 @Component({
@@ -60,7 +62,7 @@ export class HoughTransformAnimationComponent implements AfterViewInit {
   private chart?: Chart; 
   
 
-  constructor(private bitmapStorage: BitmapStorageService) { 
+  constructor(private dialog: MatDialog, private bitmapStorage: BitmapStorageService) { 
     let bitmap = this.bitmapStorage.load(this.bitmapKey);
     if (bitmap)
       this.bitmap = new InteractiveBitmap(bitmap.width, bitmap.height, bitmap, 255);
@@ -181,14 +183,15 @@ export class HoughTransformAnimationComponent implements AfterViewInit {
     this.bitmapTick++;
   }
 
+  accumulator: number[][] = [];
+  readonly thetaStep = 15;
   transform(bitmap: Bitmap): Line[] {
-    const thetaStep = 15;
     const thetas: number[] = [];
     const width = bitmap.width;
     const height = bitmap.height;
 
     //thetas
-    for (let t = 0; t < 180; t += thetaStep)
+    for (let t = 0; t < 180; t += this.thetaStep)
       thetas.push((t * Math.PI) / 180);
     
 
@@ -201,7 +204,7 @@ export class HoughTransformAnimationComponent implements AfterViewInit {
 
 
     // akumulator [rho][theta]
-    const accumulator: number[][] = Array.from({ length: rhos.length }, () =>
+    this.accumulator = Array.from({ length: rhos.length }, () =>
       Array(thetas.length).fill(0)
     );
     const min: Point[][] = Array.from({ length: rhos.length }, () =>
@@ -220,12 +223,7 @@ export class HoughTransformAnimationComponent implements AfterViewInit {
           const rIdx = rho + diagLen;
           min[rIdx][tIdx] = min[rIdx][tIdx].min(p);
           max[rIdx][tIdx] = max[rIdx][tIdx].max(p);
-          // if(min[rIdx][tIdx].col>p.col)
-          //   min[rIdx][tIdx].col = p.col;
-          // if(max[rIdx][tIdx].col<p.col)
-          //   max[rIdx][tIdx].col = p.col;
-
-          accumulator[rIdx][tIdx]++;
+          this.accumulator[rIdx][tIdx]++;
         });
 
       }
@@ -236,7 +234,7 @@ export class HoughTransformAnimationComponent implements AfterViewInit {
 
     for (let r = 0; r < rhos.length; r++) {
       for (let t = 0; t < thetas.length; t++) {
-        const votes = accumulator[r][t];
+        const votes = this.accumulator[r][t];
         if (votes >= threshold) {
           lines.push(new Line(
             rhos[r],
@@ -284,6 +282,16 @@ export class HoughTransformAnimationComponent implements AfterViewInit {
       this.animate();
     }
   }
+
+    /** Opens a dialog to edit the convolutional kernel. */
+    openDialog(): void {
+      const dialogRef = this.dialog.open(AccumulatorDialogComponent, {
+        width: '560px',
+        disableClose: false,
+        // hasBackdrop: false,
+        data: this.accumulator
+      });
+    }
 }
 /** Represents a line in polar coordinates along with its voting information and endpoints. */
 class Line {

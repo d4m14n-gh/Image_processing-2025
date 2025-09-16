@@ -1,0 +1,20 @@
+:host {
+    display: block;
+    width: 100%;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid var(--mat-sys-outline);
+    padding: 4px;
+    text-align: center;
+    width: 32px;
+    height: 32px;
+}
+
+th {
+    background-color: var(--mat-sys-surface-variant);
+}

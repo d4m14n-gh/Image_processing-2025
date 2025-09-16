@@ -1,0 +1,1429 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>image-processing-lecture-support documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">image-processing-lecture-support documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  StructuringElementEditorComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/components/structuring-element-editor/structuring-element-editor.component.ts</code>
+</p>
+
+
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-structuring-element-editor</code></td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>MatCardModule</code>
+                                <code><a href="../components/BitmapComponent.html" target="_self" >BitmapComponent</a></code>
+                            <code>MatSliderModule</code>
+                            <code>FormsModule</code>
+                            <code>MatFormFieldModule</code>
+                            <code>MatDividerModule</code>
+                            <code>MatCheckboxModule</code>
+                            <code>MatIconModule</code>
+                            <code>MatButtonModule</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./structuring-element-editor.component.html</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./structuring-element-editor.component.css</code></td>
+            </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#bitmap" >bitmap</a>
+                            </li>
+                            <li>
+                                <a href="#height" >height</a>
+                            </li>
+                            <li>
+                                <a href="#origin" >origin</a>
+                            </li>
+                            <li>
+                                <a href="#pixelSize" >pixelSize</a>
+                            </li>
+                            <li>
+                                <a href="#showGrid" >showGrid</a>
+                            </li>
+                            <li>
+                                <a href="#showHeaders" >showHeaders</a>
+                            </li>
+                            <li>
+                                <a href="#structuringElement" >structuringElement</a>
+                            </li>
+                            <li>
+                                <a href="#tick" >tick</a>
+                            </li>
+                            <li>
+                                <a href="#width" >width</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#canSave" >canSave</a>
+                            </li>
+                            <li>
+                                <a href="#clear" >clear</a>
+                            </li>
+                            <li>
+                                <a href="#onCellClicked" >onCellClicked</a>
+                            </li>
+                            <li>
+                                <a href="#onCellEntered" >onCellEntered</a>
+                            </li>
+                            <li>
+                                <a href="#quit" >quit</a>
+                            </li>
+                            <li>
+                                <a href="#refresh" >refresh</a>
+                            </li>
+                            <li>
+                                <a href="#resize" >resize</a>
+                            </li>
+                            <li>
+                                <a href="#save" >save</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(router: Router)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/components/structuring-element-editor/structuring-element-editor.component.ts:54</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Creates an instance of the StructuringElementEditorComponent.</p>
+</div>
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                    <code>Router</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <p>The router for navigation.</p>
+
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="canSave"></a>
+                    <span class="name">
+                        <span ><b>canSave</b></span>
+                        <a href="#canSave"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>canSave()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="117"
+                                    class="link-to-prism">src/app/components/structuring-element-editor/structuring-element-editor.component.ts:117</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Checks if the structuring element can be saved (i.e., if it has a valid ID).</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="clear"></a>
+                    <span class="name">
+                        <span ><b>clear</b></span>
+                        <a href="#clear"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>clear()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="104"
+                                    class="link-to-prism">src/app/components/structuring-element-editor/structuring-element-editor.component.ts:104</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Clears the bitmap to a new blank state.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onCellClicked"></a>
+                    <span class="name">
+                        <span ><b>onCellClicked</b></span>
+                        <a href="#onCellClicked"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onCellClicked($event: literal type)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="85"
+                                    class="link-to-prism">src/app/components/structuring-element-editor/structuring-element-editor.component.ts:85</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Handles cell click events to set the origin of the structuring element.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>$event</td>
+                                            <td>
+                                                        <code>literal type</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>The event containing the clicked cell and mouse event details.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onCellEntered"></a>
+                    <span class="name">
+                        <span ><b>onCellEntered</b></span>
+                        <a href="#onCellEntered"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onCellEntered($event: literal type)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="73"
+                                    class="link-to-prism">src/app/components/structuring-element-editor/structuring-element-editor.component.ts:73</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Handles cell enter events to set pixel values based on mouse buttons.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>$event</td>
+                                            <td>
+                                                        <code>literal type</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>The event containing the entered cell and mouse event details.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="quit"></a>
+                    <span class="name">
+                        <span ><b>quit</b></span>
+                        <a href="#quit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>quit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="122"
+                                    class="link-to-prism">src/app/components/structuring-element-editor/structuring-element-editor.component.ts:122</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Navigates back to the previous page or home if no history exists.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="refresh"></a>
+                    <span class="name">
+                        <span ><b>refresh</b></span>
+                        <a href="#refresh"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>refresh()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="92"
+                                    class="link-to-prism">src/app/components/structuring-element-editor/structuring-element-editor.component.ts:92</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Refreshes the bitmap display and highlights the origin.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="resize"></a>
+                    <span class="name">
+                        <span ><b>resize</b></span>
+                        <a href="#resize"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>resize()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="110"
+                                    class="link-to-prism">src/app/components/structuring-element-editor/structuring-element-editor.component.ts:110</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Resizes the bitmap to the current width and height settings.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="save"></a>
+                    <span class="name">
+                        <span ><b>save</b></span>
+                        <a href="#save"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>save()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="130"
+                                    class="link-to-prism">src/app/components/structuring-element-editor/structuring-element-editor.component.ts:130</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Saves the current structuring element to storage and navigates back.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="bitmap"></a>
+                    <span class="name">
+                        <span ><b>bitmap</b></span>
+                        <a href="#bitmap"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/InteractiveBitmap.html" target="_self" >InteractiveBitmap</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/components/structuring-element-editor/structuring-element-editor.component.ts:35</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>The interactive bitmap representing the structuring element.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="height"></a>
+                    <span class="name">
+                        <span ><b>height</b></span>
+                        <a href="#height"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/components/structuring-element-editor/structuring-element-editor.component.ts:54</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Height of the structuring element.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="origin"></a>
+                    <span class="name">
+                        <span ><b>origin</b></span>
+                        <a href="#origin"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/Point.html" target="_self" >Point</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/components/structuring-element-editor/structuring-element-editor.component.ts:41</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>The origin point of the structuring element.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="pixelSize"></a>
+                    <span class="name">
+                        <span ><b>pixelSize</b></span>
+                        <a href="#pixelSize"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>75</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/components/structuring-element-editor/structuring-element-editor.component.ts:45</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Size of each pixel in the bitmap display (in pixels).</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showGrid"></a>
+                    <span class="name">
+                        <span ><b>showGrid</b></span>
+                        <a href="#showGrid"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/components/structuring-element-editor/structuring-element-editor.component.ts:49</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>If true, a grid is displayed over the bitmap.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showHeaders"></a>
+                    <span class="name">
+                        <span ><b>showHeaders</b></span>
+                        <a href="#showHeaders"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/components/structuring-element-editor/structuring-element-editor.component.ts:47</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>If true, headers are displayed on the bitmap.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="structuringElement"></a>
+                    <span class="name">
+                        <span ><b>structuringElement</b></span>
+                        <a href="#structuringElement"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/StructuringElement.html" target="_self" >StructuringElement</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new StructuringElement(3, 3)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/components/structuring-element-editor/structuring-element-editor.component.ts:39</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>The structuring element being edited.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="tick"></a>
+                    <span class="name">
+                        <span ><b>tick</b></span>
+                        <a href="#tick"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/components/structuring-element-editor/structuring-element-editor.component.ts:37</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Used to trigger bitmap component refresh.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="width"></a>
+                    <span class="name">
+                        <span ><b>width</b></span>
+                        <a href="#width"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/components/structuring-element-editor/structuring-element-editor.component.ts:52</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Width of the structuring element.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
+import { InteractiveBitmap } from &#x27;../../static/bitmap&#x27;;
+import { MatCardModule } from &#x27;@angular/material/card&#x27;;
+import { BitmapComponent } from &#x27;../bitmap/bitmap.component&#x27;;
+import { Point } from &#x27;../../static/point&#x27;;
+import { FormsModule } from &#x27;@angular/forms&#x27;;
+import { MatSliderModule } from &#x27;@angular/material/slider&#x27;;
+import { MatDividerModule } from &#x27;@angular/material/divider&#x27;;
+import { MatFormFieldModule } from &#x27;@angular/material/form-field&#x27;;
+import { MatCheckboxModule } from &#x27;@angular/material/checkbox&#x27;;
+import { MatIconModule } from &#x27;@angular/material/icon&#x27;;
+import { MatButtonModule } from &#x27;@angular/material/button&#x27;;
+import { ActivatedRoute, Router } from &#x27;@angular/router&#x27;;
+import { BitmapStorageService } from &#x27;../../services/bitmap-storage/bitmap-storage.service&#x27;;
+import { StructuringElement } from &#x27;../../static/structuringElement&#x27;;
+
+@Component({
+  selector: &#x27;app-structuring-element-editor&#x27;,
+  imports: [
+    MatCardModule,
+    BitmapComponent,
+    MatSliderModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatDividerModule,
+    MatCheckboxModule,
+    MatIconModule,
+    MatButtonModule
+  ],
+  templateUrl: &#x27;./structuring-element-editor.component.html&#x27;,
+  styleUrl: &#x27;./structuring-element-editor.component.css&#x27;
+})
+export class StructuringElementEditorComponent {
+  /** The interactive bitmap representing the structuring element. */
+  bitmap: InteractiveBitmap;
+  /** Used to trigger bitmap component refresh. */
+  tick: number &#x3D; 0;
+  /** The structuring element being edited. */
+  structuringElement: StructuringElement &#x3D; new StructuringElement(3, 3);
+  /** The origin point of the structuring element. */
+  origin: Point;
+
+  //view
+  /** Size of each pixel in the bitmap display (in pixels). */
+  pixelSize: number &#x3D; 75;
+  /** If true, headers are displayed on the bitmap. */
+  showHeaders: boolean &#x3D; true;
+  /** If true, a grid is displayed over the bitmap. */
+  showGrid: boolean &#x3D; true;
+
+  /** Width of the structuring element. */
+  width: number;
+  /** Height of the structuring element. */
+  height: number;
+
+  /** Creates an instance of the StructuringElementEditorComponent.
+   * @param router The router for navigation.
+   */
+  constructor(private router: Router) {
+    this.structuringElement.set(Point.one, 0);
+    this.structuringElement.load();
+    this.width &#x3D; this.structuringElement.width;
+    this.height &#x3D; this.structuringElement.height;
+    this.bitmap &#x3D; new InteractiveBitmap(this.width, this.height, this.structuringElement);
+    this.origin &#x3D; this.structuringElement.origin;
+    
+    this.refresh();
+  }
+
+  /** Handles cell enter events to set pixel values based on mouse buttons.
+   * @param $event The event containing the entered cell and mouse event details.
+   */
+  onCellEntered($event: { cell: Point; event: MouseEvent; }): void {
+    if(this.bitmap.isOut($event.cell)) return;
+    if($event.event.buttons &#x3D;&#x3D;&#x3D; 1)
+      this.bitmap.set($event.cell, 0);
+    else if($event.event.buttons &#x3D;&#x3D;&#x3D; 2)
+      this.bitmap.set($event.cell, 255);
+    this.refresh();
+  }
+
+  /** Handles cell click events to set the origin of the structuring element.
+   * @param $event The event containing the clicked cell and mouse event details.
+   */
+  onCellClicked($event: { cell: Point; event: MouseEvent; }): void {
+    if($event.event.buttons !&#x3D;&#x3D; 4) return;
+    this.origin &#x3D; $event.cell;
+    this.refresh();
+  }
+  
+  /** Refreshes the bitmap display and highlights the origin. */
+  refresh(): void {
+    this.bitmap.clearSelection();
+    this.bitmap.highlightedElement &#x3D; this.origin.clone();
+    this.bitmap.select(this.origin);
+    // this.bitmap.dragArea.button &#x3D; 2;
+    // this.bitmap.dragArea.dragStart &#x3D; this.origin.clone();
+    // this.bitmap.dragArea.dragEnd &#x3D; this.origin.clone();
+    // this.bitmap.dragArea.dragging &#x3D; true;
+    this.tick++;
+  }
+
+  /** Clears the bitmap to a new blank state. */
+  clear(): void {
+    this.bitmap &#x3D; new InteractiveBitmap(this.width, this.height, undefined, 255);
+    this.refresh();
+  }
+  
+  /** Resizes the bitmap to the current width and height settings. */
+  resize(): void {
+    this.bitmap &#x3D; new InteractiveBitmap(this.width, this.height, this.bitmap, 255);
+    this.origin &#x3D; new Point(Math.min(this.origin.row, this.height-1), Math.min(this.origin.col, this.width-1));
+    this.refresh();
+  }
+  
+  /** Checks if the structuring element can be saved (i.e., if it has a valid ID). */
+  canSave(): boolean {
+    return true;
+    // return this._id !&#x3D;&#x3D; null; 
+  }
+  /** Navigates back to the previous page or home if no history exists. */
+  quit(): void {
+     if (history.length &gt; 1) {
+      history.back();
+    } else {
+      this.router.navigate([&#x27;/&#x27;]);
+    }
+  }
+  /** Saves the current structuring element to storage and navigates back. */
+  save(): void {
+    this.structuringElement &#x3D; new StructuringElement(this.bitmap.width, this.bitmap.height, this.origin, this.bitmap);
+    this.structuringElement.save();
+    this.quit();
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;flex-row&quot; style&#x3D;&quot;padding: 8px; height: 100%; box-sizing: border-box;&quot;&gt;
+
+    &lt;mat-card style&#x3D;&quot;flex: 1; overflow: hidden;&quot; appearance&#x3D;&quot;outlined&quot;&gt;
+        &lt;div (contextmenu)&#x3D;&quot;$event.preventDefault()&quot; class&#x3D;&quot;scrollable&quot;&gt;
+            &lt;button mat-icon-button class&#x3D;&quot;end&quot; (click)&#x3D;&quot;clear()&quot; class&#x3D;&quot;hover-button&quot;&gt;
+                &lt;mat-icon&gt;cleaning_services&lt;/mat-icon&gt;
+            &lt;/button&gt;
+            &lt;app-bitmap class&#x3D;&quot;bitmap&quot; [bitmap]&#x3D;&quot;bitmap&quot; [tick]&#x3D;&quot;tick&quot; [pixelSize]&#x3D;&quot;pixelSize&quot;
+                [showHeaders]&#x3D;&quot;showHeaders&amp;&amp;pixelSize&gt;&#x3D;40&quot; [showNumbers]&#x3D;&quot;false&quot; [showGrid]&#x3D;&quot;showGrid&quot;
+                [userSelect]&#x3D;&quot;false&quot; 
+                (cellEntered)&#x3D;&quot;onCellEntered($event)&quot;
+                (cellClicked)&#x3D;&quot;onCellEntered($event); onCellClicked($event)&quot;
+                &gt;
+            &lt;/app-bitmap&gt;
+        &lt;/div&gt;
+    &lt;/mat-card&gt;
+
+    &lt;mat-card appearance&#x3D;&quot;outlined&quot; style&#x3D;&quot;width: 275px;&quot;&gt;
+        &lt;div class&#x3D;&quot;scrollable sidebar flex-col&quot;&gt;
+            
+            &lt;mat-card-title class&#x3D;&quot;end&quot;&gt;
+                &lt;mat-icon inline&gt;tune&lt;/mat-icon&gt;
+                Properties
+            &lt;/mat-card-title&gt;
+            
+            &lt;mat-label&gt;Height&lt;/mat-label&gt;
+            &lt;mat-slider min&#x3D;&quot;2&quot; max&#x3D;&quot;10&quot; step&#x3D;&quot;1&quot; discrete&#x3D;&quot;thumbLabel&quot;&gt;
+                &lt;input matSliderThumb [value]&#x3D;&quot;height&quot; (dragEnd)&#x3D;&quot;height &#x3D; $event.value; resize()&quot;&gt;
+            &lt;/mat-slider&gt;
+            &lt;mat-label&gt;Width&lt;/mat-label&gt;
+            &lt;mat-slider min&#x3D;&quot;2&quot; max&#x3D;&quot;10&quot; step&#x3D;&quot;1&quot; discrete&#x3D;&quot;thumbLabel&quot;&gt;
+                &lt;input matSliderThumb [value]&#x3D;&quot;width&quot; (dragEnd)&#x3D;&quot;width &#x3D; $event.value; resize()&quot;&gt;
+            &lt;/mat-slider&gt;
+        
+            &lt;mat-divider&gt;&lt;/mat-divider&gt;
+
+            &lt;mat-card-title class&#x3D;&quot;end&quot;&gt;
+                &lt;mat-icon inline&gt;visibility&lt;/mat-icon&gt;
+                View
+            &lt;/mat-card-title&gt;
+
+            
+            &lt;mat-checkbox [(ngModel)]&#x3D;&quot;showGrid&quot;&gt;
+                Grid
+            &lt;/mat-checkbox&gt;
+            &lt;mat-checkbox class&#x3D;&quot;end&quot; [(ngModel)]&#x3D;&quot;showHeaders&quot; [disabled]&#x3D;&quot;pixelSize&lt;40&quot;&gt;
+                Headers
+            &lt;/mat-checkbox&gt;
+            
+            &lt;mat-label&gt;Pixel Size&lt;/mat-label&gt;
+            &lt;mat-slider min&#x3D;&quot;50&quot; max&#x3D;&quot;100&quot; step&#x3D;&quot;1&quot; discrete&#x3D;&quot;thumbLabel&quot;&gt;
+                &lt;input matSliderThumb [(ngModel)]&#x3D;&quot;pixelSize&quot;&gt;
+            &lt;/mat-slider&gt;
+            
+            &lt;!-- &lt;mat-divider&gt;&lt;/mat-divider&gt;
+
+            &lt;mat-card-title class&#x3D;&quot;end&quot;&gt;
+                &lt;mat-icon inline&gt;build&lt;/mat-icon&gt;
+                Tools
+            &lt;/mat-card-title&gt;
+
+            &lt;button mat-flat-button class&#x3D;&quot;end&quot; (click)&#x3D;&quot;clear()&quot;&gt;
+                &lt;mat-icon&gt;cleaning_services&lt;/mat-icon&gt;
+                Clear
+            &lt;/button&gt; --&gt;
+
+            &lt;div class&#x3D;&quot;spacer&quot;&gt;&lt;/div&gt;
+            
+            @if (canSave()) {
+            
+            &lt;mat-card-title class&#x3D;&quot;end&quot;&gt;
+                &lt;mat-icon inline&gt;commit&lt;/mat-icon&gt;
+                Actions
+            &lt;/mat-card-title&gt;
+        
+            &lt;button mat-flat-button class&#x3D;&quot;end&quot; style&#x3D;&quot;background-color: var(--mat-sys-tertiary); &quot; (click)&#x3D;&quot;save()&quot;&gt;
+                &lt;mat-icon&gt;save&lt;/mat-icon&gt;
+                Save
+            &lt;/button&gt;
+        
+            &lt;button mat-flat-button style&#x3D;&quot;background-color: var(--mat-sys-neutral);&quot;
+                (click)&#x3D;&quot;quit()&quot;&gt;
+                &lt;mat-icon&gt;cancel&lt;/mat-icon&gt;
+                Cancel
+            &lt;/button&gt;
+            }
+            @else {
+            &lt;div&gt;
+                &lt;p&gt;
+                    Width: {{width}}px
+                &lt;/p&gt;
+                &lt;p&gt;
+                    Height: {{height}}px
+                &lt;/p&gt;
+                &lt;p&gt;
+                    Pixel size: {{pixelSize}}px
+                &lt;/p&gt;
+            &lt;/div&gt;
+            }
+        &lt;/div&gt;
+    &lt;/mat-card&gt;
+
+    
+
+&lt;/div&gt;</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="flex-row" style="padding: 8px; height: 100%; box-sizing: border-box;">    <mat-card style="flex: 1; overflow: hidden;" appearance="outlined">        <div (contextmenu)="$event.preventDefault()" class="scrollable">            <button mat-icon-button class="end" (click)="clear()" class="hover-button">                <mat-icon>cleaning_services</mat-icon>            </button>            <app-bitmap class="bitmap" [bitmap]="bitmap" [tick]="tick" [pixelSize]="pixelSize"                [showHeaders]="showHeaders&&pixelSize>=40" [showNumbers]="false" [showGrid]="showGrid"                [userSelect]="false"                 (cellEntered)="onCellEntered($event)"                (cellClicked)="onCellEntered($event); onCellClicked($event)"                >            </app-bitmap>        </div>    </mat-card>    <mat-card appearance="outlined" style="width: 275px;">        <div class="scrollable sidebar flex-col">                        <mat-card-title class="end">                <mat-icon inline>tune</mat-icon>                Properties            </mat-card-title>                        <mat-label>Height</mat-label>            <mat-slider min="2" max="10" step="1" discrete="thumbLabel">                <input matSliderThumb [value]="height" (dragEnd)="height = $event.value; resize()">            </mat-slider>            <mat-label>Width</mat-label>            <mat-slider min="2" max="10" step="1" discrete="thumbLabel">                <input matSliderThumb [value]="width" (dragEnd)="width = $event.value; resize()">            </mat-slider>                    <mat-divider></mat-divider>            <mat-card-title class="end">                <mat-icon inline>visibility</mat-icon>                View            </mat-card-title>                        <mat-checkbox [(ngModel)]="showGrid">                Grid            </mat-checkbox>            <mat-checkbox class="end" [(ngModel)]="showHeaders" [disabled]="pixelSize<40">                Headers            </mat-checkbox>                        <mat-label>Pixel Size</mat-label>            <mat-slider min="50" max="100" step="1" discrete="thumbLabel">                <input matSliderThumb [(ngModel)]="pixelSize">            </mat-slider>                        <!-- <mat-divider></mat-divider>            <mat-card-title class="end">                <mat-icon inline>build</mat-icon>                Tools            </mat-card-title>            <button mat-flat-button class="end" (click)="clear()">                <mat-icon>cleaning_services</mat-icon>                Clear            </button> -->            <div class="spacer"></div>                        @if (canSave()) {                        <mat-card-title class="end">                <mat-icon inline>commit</mat-icon>                Actions            </mat-card-title>                    <button mat-flat-button class="end" style="background-color: var(--mat-sys-tertiary); " (click)="save()">                <mat-icon>save</mat-icon>                Save            </button>                    <button mat-flat-button style="background-color: var(--mat-sys-neutral);"                (click)="quit()">                <mat-icon>cancel</mat-icon>                Cancel            </button>            }            @else {            <div>                <p>                    Width: {{width}}px                </p>                <p>                    Height: {{height}}px                </p>                <p>                    Pixel size: {{pixelSize}}px                </p>            </div>            }        </div>    </mat-card>    </div></div>'
+    var COMPONENTS = [{'name': 'AnimationControllerComponent', 'selector': 'app-animation-controller'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BinaryBitmapEditorComponent', 'selector': 'app-binary-bitmap-editor'},{'name': 'BitmapComponent', 'selector': 'app-bitmap'},{'name': 'BitmapEditorComponent', 'selector': 'app-bitmap-editor'},{'name': 'ConvolutionalFilterAnimationComponent', 'selector': 'app-convolutional-filter-animation'},{'name': 'HelpComponent', 'selector': 'app-help'},{'name': 'HistogramComponent', 'selector': 'app-histogram'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'HoughTransformAnimationComponent', 'selector': 'app-hough-transform-animation'},{'name': 'KernelDialogComponent', 'selector': 'app-kernel-dialog'},{'name': 'MatrixDisplayComponent', 'selector': 'app-matrix-display'},{'name': 'MedianFilterAnimationComponent', 'selector': 'app-median-filter-animation'},{'name': 'MorphologicalOperationsAnimationComponent', 'selector': 'app-morphological-operations-animation'},{'name': 'PageNotFoundComponent', 'selector': 'app-page-not-found'},{'name': 'ShapeBitmapEditorComponent', 'selector': 'app-shape-bitmap-editor'},{'name': 'StructuringElementEditorComponent', 'selector': 'app-structuring-element-editor'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'StructuringElementEditorComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'StructuringElementEditorComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

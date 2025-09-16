@@ -21,66 +21,66 @@ import { Point } from '../../static/point';
   styleUrl: './bitmap.component.css'
 })
 export class BitmapComponent implements OnInit, OnDestroy{
-  /** The bitmap (model) to display and interact with
+  /** The bitmap (model) to display and interact with.
    * @see InteractiveBitmap
    */
   bitmap = input.required<InteractiveBitmap>();
-  /** Used for refreshing bitmap */
+  /** Used for refreshing bitmap. */
   tick = input<number>(0);
-  /** Size of each pixel in the bitmap display (in pixels) */
+  /** Size of each pixel in the bitmap display (in pixels). */
   pixelSize =  input<number>(40);  
-  /** If true, pixel values are displayed within each cell */
+  /** If true, pixel values are displayed within each cell. */
   showNumbers =  input<boolean>(true);
-  /** If true, a grid is displayed over the bitmap */
+  /** If true, a grid is displayed over the bitmap. */
   showGrid =  input<boolean>(true);
-  /** If true, row and column headers are displayed */
+  /** If true, row and column headers are displayed. */
   showHeaders =  input<boolean>(false);
-  /** If true, a color scale is displayed alongside the bitmap */
+  /** If true, a color scale is displayed alongside the bitmap. */
   showColorScale =  input<boolean>(true);
-  /** If true, user can select cells in the bitmap */
+  /** If true, user can select cells in the bitmap. */
   userSelect =  input<boolean>(true);
-  /** If true, the cursor changes dynamically based on cursor position in bitmap */
+  /** If true, the cursor changes dynamically based on cursor position in bitmap. */
   dynamicCursor =  input<boolean>(true);
-  /** The color scale used for rendering the bitmap */
+  /** The color scale used for rendering the bitmap. */
   selectedColorScale =  input<ColorScale>(ColorScale.Grayscale);
-  /** The color used to highlight selected cells */
+  /** The color used to highlight selected cells. */
   selectionColor =  input<string>("rgba(56, 116, 255, 1)");
 
-  /** Event emitted when the bitmap data (bitmap input) changes (e.g., cell values or selection) */
+  /** Event emitted when the bitmap data (bitmap input) changes (e.g., cell values or selection). */
   bitmapChanged = output<InteractiveBitmap>();
-  /** Event emitted when a drag operation starts*/
+  /** Event emitted when a drag operation starts. */
   dragStarted = output<DragArea>();
-  /** Event emitted when a drag operation is in progress*/
+  /** Event emitted when a drag operation is in progress. */
   dragMoved = output<DragArea>();
-  /** Event emitted when a drag operation ends*/
+  /** Event emitted when a drag operation ends.*/
   dragEnded = output<DragArea>();
-  /** Event emitted when a row header is clicked */
+  /** Event emitted when a row header is clicked. */
   rowClicked = output<{row: number, event: MouseEvent}>();
-  /** Event emitted when a column header is clicked */
+  /** Event emitted when a column header is clicked. */
   colClicked = output<{col: number, event: MouseEvent}>();
-  /** Event emitted when a cell (pixel) is clicked */
+  /** Event emitted when a cell (pixel) is clicked. */
   cellClicked = output<{cell: Point, event: MouseEvent}>();
-  /** Event emitted when the cursor enters a cell (pixel) */
+  /** Event emitted when the cursor enters a cell (pixel). */
   cellEntered = output<{cell: Point, event: MouseEvent}>();
 
-  /** Reference to the canvas element, used for drawing bitmap */
+  /** Reference to the canvas element, used for drawing bitmap. */
   @ViewChild('canvas', { static: false }) canvasRef?: ElementRef<HTMLCanvasElement> = undefined;
   
   
   
   //private
 
-  /** The bitmap renderer used for drawing the bitmap */
+  /** The bitmap renderer used for drawing the bitmap. */
   private _bitmapRenderer: BitmapRenderer = new BitmapRenderer();
-  /** Manages drag operations for selecting cells */
+  /** Manages drag operations for selecting cells. */
   private _dragArea: DragArea = new DragArea();
-  /** If true, context menu is disabled (during drag operations) */
+  /** If true, context menu is disabled (during drag operations). */
   private _disableContext: boolean = false;
-  /** Subscription to theme changes for dynamic bitmap redrawing */
+  /** Subscription to theme changes for dynamic bitmap redrawing. */
   private _themeSubscription: Subscription = new Subscription();
-  /** The currently hovered cell (pixel) */
+  /** The currently hovered cell (pixel). */
   private _currentCell: Point | null = null;
-  /** Indicates if the component has been initialized, used for preventing actions before initialization */
+  /** Indicates if the component has been initialized, used for preventing actions before initialization. */
   private _initialized: boolean = false;
 
   
@@ -107,7 +107,7 @@ export class BitmapComponent implements OnInit, OnDestroy{
   }
   /** Lifecycle hook called when input properties change.
    * Updates bitmap renderer settings and redraws the bitmap.
-   * **When bitmap is internally updated, `ngOnChanges` is not called. In this case, you should call `draw()` manually. or 'tick' input properties**
+   * **When bitmap is internally updated, `ngOnChanges` is not called. In this case, you should call `draw()` manually. or 'tick' input properties.**
    * @param changes The changes to the input properties
    */
   ngOnChanges(_: SimpleChanges): void {

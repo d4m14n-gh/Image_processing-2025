@@ -1,0 +1,2062 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>image-processing-lecture-support documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">image-processing-lecture-support documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  MedianFilterAnimationComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/components/median-filter-animation/median-filter-animation.component.ts</code>
+</p>
+
+
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Component to visualize and animate the application of a median filter on a bitmap image.
+It allows users to see how the median filter processes each pixel in the image step-by-step.</p>
+
+    </p>
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-median-filter-animation</code></td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>MatCardModule</code>
+                            <code>MatButtonModule</code>
+                            <code>MatIconModule</code>
+                            <code>MatSliderModule</code>
+                            <code>RouterModule</code>
+                            <code>MatFormFieldModule</code>
+                            <code>MatMenuModule</code>
+                                <code><a href="../components/BitmapComponent.html" target="_self" >BitmapComponent</a></code>
+                            <code>FormsModule</code>
+                                <code><a href="../components/AnimationControllerComponent.html" target="_self" >AnimationControllerComponent</a></code>
+                            <code>MatCheckboxModule</code>
+                            <code>MatSelectModule</code>
+                            <code>MathjaxModule</code>
+                            <code>MatButtonToggleModule</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./median-filter-animation.component.html</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./median-filter-animation.component.css</code></td>
+            </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#animationIndex" >animationIndex</a>
+                            </li>
+                            <li>
+                                <a href="#appliedBitmap" >appliedBitmap</a>
+                            </li>
+                            <li>
+                                <a href="#bitmap" >bitmap</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#bitmapKey" >bitmapKey</a>
+                            </li>
+                            <li>
+                                <a href="#padding" >padding</a>
+                            </li>
+                            <li>
+                                <a href="#pixelSize" >pixelSize</a>
+                            </li>
+                            <li>
+                                <a href="#resultBitmap" >resultBitmap</a>
+                            </li>
+                            <li>
+                                <a href="#selectedColorScale" >selectedColorScale</a>
+                            </li>
+                            <li>
+                                <a href="#showBase" >showBase</a>
+                            </li>
+                            <li>
+                                <a href="#showGrid" >showGrid</a>
+                            </li>
+                            <li>
+                                <a href="#showHeaders" >showHeaders</a>
+                            </li>
+                            <li>
+                                <a href="#showNumberValues" >showNumberValues</a>
+                            </li>
+                            <li>
+                                <a href="#sourceKernel" >sourceKernel</a>
+                            </li>
+                            <li>
+                                <a href="#tick" >tick</a>
+                            </li>
+                            <li>
+                                <a href="#windowSize" >windowSize</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#animate" >animate</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#applyMedian" >applyMedian</a>
+                            </li>
+                            <li>
+                                <a href="#getEquation" >getEquation</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#getSourceKernel" >getSourceKernel</a>
+                            </li>
+                            <li>
+                                <a href="#load" >load</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#median" >median</a>
+                            </li>
+                            <li>
+                                <a href="#onCellClicked" >onCellClicked</a>
+                            </li>
+                            <li>
+                                <a href="#refresh" >refresh</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#setValues" >setValues</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(bitmapStorage: <a href="../injectables/BitmapStorageService.html" target="_self">BitmapStorageService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="85" class="link-to-prism">src/app/components/median-filter-animation/median-filter-animation.component.ts:85</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Initializes the component and loads the bitmap from storage if available.</p>
+</div>
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>bitmapStorage</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/BitmapStorageService.html" target="_self" >BitmapStorageService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <p>Service for loading and saving bitmap images.</p>
+
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="animate"></a>
+                    <span class="name">
+                        <span ><b>animate</b></span>
+                        <a href="#animate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>animate()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="110"
+                                    class="link-to-prism">src/app/components/median-filter-animation/median-filter-animation.component.ts:110</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Advances the animation by processing the next pixel and updating the selection.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="applyMedian"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>applyMedian</b></span>
+                        <a href="#applyMedian"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>applyMedian(srcBitmap: <a href="../classes/Bitmap.html" target="_self">Bitmap</a>, dstBitmap: <a href="../classes/Bitmap.html" target="_self">Bitmap</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="206"
+                                    class="link-to-prism">src/app/components/median-filter-animation/median-filter-animation.component.ts:206</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Applies the median filter to the source bitmap and stores the result in the destination bitmap.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>srcBitmap</td>
+                                            <td>
+                                                            <code><a href="../classes/Bitmap.html" target="_self" >Bitmap</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>The source bitmap to which the median filter is applied.</p>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>dstBitmap</td>
+                                            <td>
+                                                            <code><a href="../classes/Bitmap.html" target="_self" >Bitmap</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>The destination bitmap where the filtered result is stored.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getEquation"></a>
+                    <span class="name">
+                        <span ><b>getEquation</b></span>
+                        <a href="#getEquation"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getEquation()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="137"
+                                    class="link-to-prism">src/app/components/median-filter-animation/median-filter-animation.component.ts:137</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Generates a LaTeX representation of the median filter operation for display.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getSourceKernel"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>getSourceKernel</b></span>
+                        <a href="#getSourceKernel"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getSourceKernel(cell: <a href="../classes/Point.html" target="_self">Point</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="189"
+                                    class="link-to-prism">src/app/components/median-filter-animation/median-filter-animation.component.ts:189</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Retrieves the kernel of pixel values centered around a given cell.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>cell</td>
+                                            <td>
+                                                            <code><a href="../classes/Point.html" target="_self" >Point</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>The center cell for which to retrieve the kernel.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../classes/Kernel.html" target="_self" >Kernel</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>A Kernel instance containing the pixel values in the neighborhood.</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="load"></a>
+                    <span class="name">
+                        <span ><b>load</b></span>
+                        <a href="#load"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>load(bitmap: <a href="../classes/Bitmap.html" target="_self">Bitmap</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="99"
+                                    class="link-to-prism">src/app/components/median-filter-animation/median-filter-animation.component.ts:99</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Loads a bitmap into the component and initializes the bitmap.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>bitmap</td>
+                                            <td>
+                                                            <code><a href="../classes/Bitmap.html" target="_self" >Bitmap</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>The bitmap image to load.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="median"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>median</b></span>
+                        <a href="#median"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>median(arr: number[])</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="216"
+                                    class="link-to-prism">src/app/components/median-filter-animation/median-filter-animation.component.ts:216</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Calculates the median value from an array of numbers.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>arr</td>
+                                            <td>
+                                                        <code>number[]</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>The array of numbers from which to calculate the median.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>The median value.</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onCellClicked"></a>
+                    <span class="name">
+                        <span ><b>onCellClicked</b></span>
+                        <a href="#onCellClicked"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onCellClicked($event: literal type, click: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="176"
+                                    class="link-to-prism">src/app/components/median-filter-animation/median-filter-animation.component.ts:176</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Handles cell click events to update the animation index and refresh the animation.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Default value</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>$event</td>
+                                            <td>
+                                                        <code>literal type</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                            </td>
+
+                                            <td>
+                                                    <p>The event containing the clicked cell and mouse event details.</p>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>click</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                                    <code>true</code>
+                                            </td>
+
+                                            <td>
+                                                    <p>Unused.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="refresh"></a>
+                    <span class="name">
+                        <span ><b>refresh</b></span>
+                        <a href="#refresh"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>refresh()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="103"
+                                    class="link-to-prism">src/app/components/median-filter-animation/median-filter-animation.component.ts:103</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Refreshes the applied bitmap by reapplying the median filter and resets the animation.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setValues"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>setValues</b></span>
+                        <a href="#setValues"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>setValues(length: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, destination: <a href="../classes/InteractiveBitmap.html" target="_self">InteractiveBitmap</a>, source: <a href="../classes/InteractiveBitmap.html" target="_self">InteractiveBitmap</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="225"
+                                    class="link-to-prism">src/app/components/median-filter-animation/median-filter-animation.component.ts:225</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Sets pixel values from the source bitmap to the destination bitmap up to a specified length.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>length</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>The number of pixels to set.</p>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>destination</td>
+                                            <td>
+                                                            <code><a href="../classes/InteractiveBitmap.html" target="_self" >InteractiveBitmap</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>The destination bitmap where the pixel values are set.</p>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>source</td>
+                                            <td>
+                                                            <code><a href="../classes/InteractiveBitmap.html" target="_self" >InteractiveBitmap</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>The source bitmap from which the pixel values are taken.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="animationIndex"></a>
+                    <span class="name">
+                        <span ><b>animationIndex</b></span>
+                        <a href="#animationIndex"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="83" class="link-to-prism">src/app/components/median-filter-animation/median-filter-animation.component.ts:83</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Current index of the pixel being processed in the animation.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="appliedBitmap"></a>
+                    <span class="name">
+                        <span ><b>appliedBitmap</b></span>
+                        <a href="#appliedBitmap"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/InteractiveBitmap.html" target="_self" >InteractiveBitmap</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new InteractiveBitmap(16, 9, undefined, 255)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/components/median-filter-animation/median-filter-animation.component.ts:52</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>The bitmap image after applying the median filter.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="bitmap"></a>
+                    <span class="name">
+                        <span ><b>bitmap</b></span>
+                        <a href="#bitmap"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/InteractiveBitmap.html" target="_self" >InteractiveBitmap</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new InteractiveBitmap(16, 9, undefined, 255)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/components/median-filter-animation/median-filter-animation.component.ts:50</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>The original bitmap image to which the median filter is applied.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="bitmapKey"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>bitmapKey</b></span>
+                        <a href="#bitmapKey"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&quot;median-filter&quot;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="85" class="link-to-prism">src/app/components/median-filter-animation/median-filter-animation.component.ts:85</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Key used to load and save the bitmap in storage.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="padding"></a>
+                    <span class="name">
+                        <span ><b>padding</b></span>
+                        <a href="#padding"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../miscellaneous/enumerations.html#Padding" target="_self" >Padding</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>Padding.Edge</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/components/median-filter-animation/median-filter-animation.component.ts:57</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Padding strategy used when accessing pixels outside the bitmap boundaries.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="pixelSize"></a>
+                    <span class="name">
+                        <span ><b>pixelSize</b></span>
+                        <a href="#pixelSize"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>40</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">src/app/components/median-filter-animation/median-filter-animation.component.ts:66</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Size of each pixel in the bitmap display (in pixels).</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="resultBitmap"></a>
+                    <span class="name">
+                        <span ><b>resultBitmap</b></span>
+                        <a href="#resultBitmap"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/InteractiveBitmap.html" target="_self" >InteractiveBitmap</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new InteractiveBitmap(16, 9, undefined, 255)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/components/median-filter-animation/median-filter-animation.component.ts:54</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>The result bitmap after the animation.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectedColorScale"></a>
+                    <span class="name">
+                        <span ><b>selectedColorScale</b></span>
+                        <a href="#selectedColorScale"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../miscellaneous/enumerations.html#ColorScale" target="_self" >ColorScale</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>ColorScale.Grayscale</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="76" class="link-to-prism">src/app/components/median-filter-animation/median-filter-animation.component.ts:76</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Color scale used for displaying the bitmap.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showBase"></a>
+                    <span class="name">
+                        <span ><b>showBase</b></span>
+                        <a href="#showBase"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="74" class="link-to-prism">src/app/components/median-filter-animation/median-filter-animation.component.ts:74</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>If true, the original bitmap is shown under the result for comparison.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showGrid"></a>
+                    <span class="name">
+                        <span ><b>showGrid</b></span>
+                        <a href="#showGrid"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/app/components/median-filter-animation/median-filter-animation.component.ts:68</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>If true, a grid is displayed over the bitmap.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showHeaders"></a>
+                    <span class="name">
+                        <span ><b>showHeaders</b></span>
+                        <a href="#showHeaders"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="70" class="link-to-prism">src/app/components/median-filter-animation/median-filter-animation.component.ts:70</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>If true, headers (row/column indices) are displayed around the bitmap.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showNumberValues"></a>
+                    <span class="name">
+                        <span ><b>showNumberValues</b></span>
+                        <a href="#showNumberValues"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="72" class="link-to-prism">src/app/components/median-filter-animation/median-filter-animation.component.ts:72</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>If true, pixel values are displayed on the bitmap.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sourceKernel"></a>
+                    <span class="name">
+                        <span ><b>sourceKernel</b></span>
+                        <a href="#sourceKernel"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/Kernel.html" target="_self" >Kernel</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Kernel(3)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/components/median-filter-animation/median-filter-animation.component.ts:59</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>The kernel representing the current neighborhood of pixels being processed.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="tick"></a>
+                    <span class="name">
+                        <span ><b>tick</b></span>
+                        <a href="#tick"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="81" class="link-to-prism">src/app/components/median-filter-animation/median-filter-animation.component.ts:81</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Used to trigger re-rendering of the bitmap component when the bitmap changes.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="windowSize"></a>
+                    <span class="name">
+                        <span ><b>windowSize</b></span>
+                        <a href="#windowSize"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>3</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/components/median-filter-animation/median-filter-animation.component.ts:61</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Size of the median filter window (must be an odd number).</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component } from &#x27;@angular/core&#x27;;
+import { MatButtonModule } from &#x27;@angular/material/button&#x27;;
+import { MatCardModule } from &#x27;@angular/material/card&#x27;;
+import { MatFormFieldModule } from &#x27;@angular/material/form-field&#x27;;
+import { MatIconModule } from &#x27;@angular/material/icon&#x27;;
+import { MatMenuModule } from &#x27;@angular/material/menu&#x27;;
+import { MatSliderModule } from &#x27;@angular/material/slider&#x27;;
+import { RouterModule } from &#x27;@angular/router&#x27;;
+import { BitmapComponent } from &#x27;../bitmap/bitmap.component&#x27;;
+import { FormsModule } from &#x27;@angular/forms&#x27;;
+import { AnimationControllerComponent } from &#x27;../animation-controller/animation-controller.component&#x27;;
+import { MatCheckboxModule } from &#x27;@angular/material/checkbox&#x27;;
+import { MatSelectModule } from &#x27;@angular/material/select&#x27;;
+import { ColorScale, Padding } from &#x27;../../static/enums&#x27;;
+import { Bitmap, InteractiveBitmap } from &#x27;../../static/bitmap&#x27;;
+import { BitmapStorageService } from &#x27;../../services/bitmap-storage/bitmap-storage.service&#x27;;
+import { Point } from &#x27;../../static/point&#x27;;
+import { MathjaxModule } from &#x27;mathjax-angular&#x27;;
+import { Kernel } from &#x27;../../static/kernel&#x27;;
+import { MatButtonToggleModule } from &#x27;@angular/material/button-toggle&#x27;;
+
+
+/**
+ * Component to visualize and animate the application of a median filter on a bitmap image.
+ * It allows users to see how the median filter processes each pixel in the image step-by-step.
+ */
+@Component({
+  selector: &#x27;app-median-filter-animation&#x27;,
+  imports: [
+    MatCardModule,
+    MatButtonModule,
+    MatIconModule,
+    MatSliderModule,
+    RouterModule,
+    MatFormFieldModule,
+    MatMenuModule,
+    BitmapComponent,
+    FormsModule,
+    AnimationControllerComponent,
+    MatCheckboxModule,
+    MatSelectModule,
+    MathjaxModule,
+    MatButtonToggleModule
+  ],
+  templateUrl: &#x27;./median-filter-animation.component.html&#x27;,
+  styleUrl: &#x27;./median-filter-animation.component.css&#x27;
+})
+export class MedianFilterAnimationComponent {
+  /** The original bitmap image to which the median filter is applied. */
+  bitmap: InteractiveBitmap &#x3D; new InteractiveBitmap(16, 9, undefined, 255);
+  /** The bitmap image after applying the median filter. */
+  appliedBitmap: InteractiveBitmap &#x3D; new InteractiveBitmap(16, 9, undefined, 255);
+  /** The result bitmap after the animation. */
+  resultBitmap: InteractiveBitmap &#x3D; new InteractiveBitmap(16, 9, undefined, 255);
+
+  /** Padding strategy used when accessing pixels outside the bitmap boundaries. */
+  padding: Padding &#x3D; Padding.Edge;
+  /** The kernel representing the current neighborhood of pixels being processed. */
+  sourceKernel: Kernel &#x3D; new Kernel(3);
+  /** Size of the median filter window (must be an odd number). */
+  windowSize: number &#x3D; 3;
+  
+  
+  //view
+  /** Size of each pixel in the bitmap display (in pixels). */
+  pixelSize: number &#x3D; 40;
+  /** If true, a grid is displayed over the bitmap. */
+  showGrid: boolean &#x3D; true;
+  /** If true, headers (row/column indices) are displayed around the bitmap. */
+  showHeaders: boolean &#x3D; true;
+  /** If true, pixel values are displayed on the bitmap. */
+  showNumberValues: boolean &#x3D; true;
+  /** If true, the original bitmap is shown under the result for comparison. */
+  showBase: boolean &#x3D; false;
+  /** Color scale used for displaying the bitmap. */
+  selectedColorScale: ColorScale &#x3D; ColorScale.Grayscale;
+  
+  
+  //controls
+  /** Used to trigger re-rendering of the bitmap component when the bitmap changes. */
+  tick: number &#x3D; 0;
+  /** Current index of the pixel being processed in the animation. */
+  animationIndex: number &#x3D; 0;
+  /** Key used to load and save the bitmap in storage. */
+  readonly bitmapKey: string &#x3D; &quot;median-filter&quot;;
+
+  /** Initializes the component and loads the bitmap from storage if available. 
+   * @param bitmapStorage Service for loading and saving bitmap images.
+  */
+  constructor(private bitmapStorage: BitmapStorageService) { 
+    let bitmap &#x3D; this.bitmapStorage.load(this.bitmapKey);
+    if (bitmap) this.load(bitmap);
+    this.refresh();
+  }
+  
+  /** Loads a bitmap into the component and initializes the bitmap.
+   * @param bitmap The bitmap image to load.
+  */
+  load(bitmap: Bitmap): void { 
+    this.bitmap &#x3D; new InteractiveBitmap(bitmap.width, bitmap.height, bitmap, 255);
+  }
+  /** Refreshes the applied bitmap by reapplying the median filter and resets the animation. */
+  refresh(): void {
+    this.appliedBitmap &#x3D; new InteractiveBitmap(this.bitmap.width, this.bitmap.height, undefined, 255);
+    this.applyMedian(this.bitmap, this.appliedBitmap); 
+    this.animate();
+    this.tick++;
+  }
+  /** Advances the animation by processing the next pixel and updating the selection. */
+  animate(): void {
+    const index &#x3D; this.animationIndex;
+    const cell &#x3D; this.bitmap.getIndexCell(index);
+    const r &#x3D; Math.trunc((this.windowSize - 1) / 2);
+
+
+    this.bitmap.clearSelection();
+    this.sourceKernel &#x3D; this.getSourceKernel(cell);
+    this.resultBitmap &#x3D; new InteractiveBitmap(this.bitmap.width, this.bitmap.height, this.showBase?this.bitmap:undefined, 255);
+    this.setValues(index+1, this.resultBitmap, this.appliedBitmap);
+
+
+    if (index &lt; this.bitmap.length()) {
+      for (let ox &#x3D; -r; ox &lt;&#x3D; r; ox++)
+        for (let oy &#x3D; -r; oy &lt;&#x3D; r; oy++)
+          this.bitmap.select(cell.add(new Point(ox, oy)));
+      this.resultBitmap.select(cell);
+    }
+    this.bitmap.dragArea.dragStart &#x3D; cell;
+    this.bitmap.dragArea.dragEnd &#x3D; cell;
+    this.bitmap.dragArea.dragging &#x3D; true;
+
+
+    this.tick++;
+  }
+
+  /** Generates a LaTeX representation of the median filter operation for display. */
+  getEquation(): string {
+    const values &#x3D; this.sourceKernel.values().sort((a, b) &#x3D;&gt; a - b);
+    const h &#x3D; Math.floor(values.length / 2);
+
+    const maxLength &#x3D; 21;
+    let latexArray: string;
+
+    if (values.length &lt;&#x3D; maxLength) {
+      latexArray &#x3D; values
+        .map((v, i) &#x3D;&gt; (i &#x3D;&#x3D;&#x3D; h ? &#x60;\\boxed{${v}}&#x60; : &#x60;${v}&#x60;))
+        .join(&#x27; &amp; &#x27;);
+    } 
+    else {
+      const n &#x3D; Math.floor(maxLength / 2);
+      const s &#x3D; 3;
+
+      const start &#x3D; values.slice(0, s);
+      const end &#x3D; values.slice(values.length - s);
+      const leftmid &#x3D; values.slice(h-(n-s), h);
+      const rigtmid &#x3D; values.slice(h+1, h+1+(n-s));
+      
+      latexArray &#x3D; &#x60;${start.join(&quot; &amp; &quot;)} &amp; \\dots &amp; ${leftmid.join(&quot; &amp; &quot;)} &amp; \\boxed{${values[h]}} &amp; ${rigtmid.join(&quot; &amp; &quot;)} &amp; \\dots &amp; ${end.join(&quot; &amp; &quot;)}&#x60;;
+    }
+
+    return &#x60;
+      \\[
+      ${this.sourceKernel.toLatex()} 
+      \\\longrightarrow 
+      \\begin{bmatrix} ${latexArray} \\end{bmatrix}
+      \\\longrightarrow 
+      ${this.median(values)}
+      \\]
+    &#x60;;
+  }
+
+  /** Handles cell click events to update the animation index and refresh the animation.
+   * @param $event The event containing the clicked cell and mouse event details.
+   * @param click Unused.
+  */
+  onCellClicked($event: { cell: Point; event: MouseEvent; }, click: boolean &#x3D; true) {
+    if(this.bitmap.isOut($event.cell)) return;
+    if($event.event.buttons &#x3D;&#x3D;&#x3D; 1) {
+      this.animationIndex &#x3D; this.bitmap.getCellIndex($event.cell);
+      this.animate();
+    }
+  }
+
+
+  /** Retrieves the kernel of pixel values centered around a given cell.
+   * @param cell The center cell for which to retrieve the kernel.
+   * @returns A Kernel instance containing the pixel values in the neighborhood.
+  */
+  private getSourceKernel(cell: Point): Kernel {
+    let kernel &#x3D; new Kernel(this.windowSize);
+    const r &#x3D; Math.trunc((this.windowSize - 1) / 2);
+
+    for (let oy &#x3D; -r; oy &lt;&#x3D; r; oy++)
+      for (let ox &#x3D; -r; ox &lt;&#x3D; r; ox++) {
+        const offset &#x3D; new Point(oy, ox);
+        let value &#x3D; this.bitmap.getWithPadding(cell.add(offset), this.padding);
+        kernel.kernel[ox + r][oy + r] &#x3D; value;
+      }
+    
+    return kernel;
+  }
+  /** Applies the median filter to the source bitmap and stores the result in the destination bitmap.
+   * @param srcBitmap The source bitmap to which the median filter is applied.
+   * @param dstBitmap The destination bitmap where the filtered result is stored.
+  */
+  private applyMedian(srcBitmap: Bitmap, dstBitmap: Bitmap): void{
+    srcBitmap.pixels().forEach(p&#x3D;&gt;{
+      const result &#x3D; this.median(this.getSourceKernel(p.cell).values());
+      dstBitmap.set(p.cell, result);
+    });
+  }
+  /** Calculates the median value from an array of numbers.
+   * @param arr The array of numbers from which to calculate the median.
+   * @returns The median value.
+  */
+  private median(arr: number[]): number {
+    const mid &#x3D; Math.floor(arr.length / 2);
+    return arr.sort((a, b) &#x3D;&gt; a - b)[mid];
+  }
+  /** Sets pixel values from the source bitmap to the destination bitmap up to a specified length.
+   * @param length The number of pixels to set.
+   * @param destination The destination bitmap where the pixel values are set.
+   * @param source The source bitmap from which the pixel values are taken.
+  */
+  private setValues(length: number, destination: InteractiveBitmap, source: InteractiveBitmap): void {
+    for (let i &#x3D; 0; i &lt; length; i++) {
+      const cell &#x3D; source.getIndexCell(i);
+      if (destination.isOut(cell) || source.isOut(cell)) 
+        continue;
+      let value &#x3D; source.get(cell)!;
+      destination.set(cell, value);
+    }
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;flex-col&quot; style&#x3D;&quot;padding: 8px; height: 100%; box-sizing: border-box; width: 100%;&quot;&gt;
+    &lt;mat-card appearance&#x3D;&quot;outlined&quot; class&#x3D;&quot;topbar&quot;&gt;
+                &lt;button mat-button [routerLink]&#x3D;&quot;[&#x27;/edit&#x27;, bitmapKey]&quot;&gt;
+                    &lt;mat-icon&gt;edit&lt;/mat-icon&gt;
+                    Edit
+                &lt;/button&gt;
+                
+                &lt;div class&#x3D;&quot;divider&quot;&gt;&lt;/div&gt;
+
+                &lt;mat-form-field subscriptSizing&#x3D;&quot;dynamic&quot; class&#x3D;&quot;slim-form-field&quot; appearance&#x3D;&quot;outline&quot;&gt;
+                    &lt;mat-label&gt;Window Size&lt;/mat-label&gt;
+                    &lt;mat-select [(ngModel)]&#x3D;&quot;windowSize&quot; (ngModelChange)&#x3D;&quot;refresh();&quot;&gt;
+                        &lt;mat-option [value]&#x3D;&quot;3&quot;&gt;3x3&lt;/mat-option&gt;
+                        &lt;mat-option [value]&#x3D;&quot;5&quot;&gt;5x5&lt;/mat-option&gt;
+                        &lt;mat-option [value]&#x3D;&quot;7&quot;&gt;7x7&lt;/mat-option&gt;
+                    &lt;/mat-select&gt;
+                &lt;/mat-form-field&gt;
+                
+                &lt;!-- &lt;mat-label&gt;Window Size&lt;/mat-label&gt; --&gt;
+                &lt;!-- &lt;mat-button-toggle-group name&#x3D;&quot;fontStyle&quot; [(ngModel)]&#x3D;&quot;windowSize&quot; (ngModelChange)&#x3D;&quot;refresh();&quot;&gt;
+                    &lt;mat-button-toggle [value]&#x3D;&quot;3&quot;&gt;3x3&lt;/mat-button-toggle&gt;
+                    &lt;mat-button-toggle [value]&#x3D;&quot;5&quot;&gt;5x5&lt;/mat-button-toggle&gt;
+                    &lt;mat-button-toggle [value]&#x3D;&quot;7&quot;&gt;7x7&lt;/mat-button-toggle&gt;
+                &lt;/mat-button-toggle-group&gt; --&gt;
+
+                &lt;div class&#x3D;&quot;slim-divider&quot;&gt;&lt;/div&gt;
+                
+                &lt;mat-form-field subscriptSizing&#x3D;&quot;dynamic&quot; class&#x3D;&quot;slim-form-field&quot; appearance&#x3D;&quot;outline&quot;&gt;
+                    &lt;mat-label&gt;Padding&lt;/mat-label&gt;
+                    &lt;mat-select [(ngModel)]&#x3D;&quot;padding&quot; (ngModelChange)&#x3D;&quot;refresh();&quot;&gt;
+                        &lt;mat-option value&#x3D;&quot;zero&quot;&gt;Zero&lt;/mat-option&gt;
+                        &lt;mat-option value&#x3D;&quot;edge&quot;&gt;Edge&lt;/mat-option&gt;
+                    &lt;/mat-select&gt;
+                &lt;/mat-form-field&gt;
+                
+                &lt;div class&#x3D;&quot;divider&quot;&gt;&lt;/div&gt;
+                &lt;mat-label&gt;Pixel Size&lt;/mat-label&gt;
+                &lt;mat-slider min&#x3D;&quot;25&quot; max&#x3D;&quot;100&quot; step&#x3D;&quot;1&quot; discrete&#x3D;&quot;false&quot;&gt;
+                    &lt;input matSliderThumb [(ngModel)]&#x3D;&quot;pixelSize&quot;&gt;
+                &lt;/mat-slider&gt;
+                
+                &lt;div class&#x3D;&quot;divider&quot;&gt;&lt;/div&gt;
+                &lt;mat-checkbox [(ngModel)]&#x3D;&quot;showNumberValues&quot; [disabled]&#x3D;&quot;pixelSize&lt;40&quot;&gt;
+                    Numbers
+                &lt;/mat-checkbox&gt;
+                &lt;mat-checkbox [(ngModel)]&#x3D;&quot;showGrid&quot;&gt;
+                    Grid
+                &lt;/mat-checkbox&gt;
+                &lt;mat-checkbox [(ngModel)]&#x3D;&quot;showHeaders&quot; [disabled]&#x3D;&quot;pixelSize&lt;40&quot;&gt;
+                    Headers
+                &lt;/mat-checkbox&gt;
+                &lt;mat-checkbox [(ngModel)]&#x3D;&quot;showBase&quot; (ngModelChange)&#x3D;&quot;animate()&quot;&gt;
+                    Base
+                &lt;/mat-checkbox&gt;
+                &lt;div class&#x3D;&quot;divider&quot;&gt;&lt;/div&gt;
+
+                &lt;app-animation-controller [showValue]&#x3D;&quot;false&quot; [(value)]&#x3D;&quot;animationIndex&quot; (valueChanged)&#x3D;&quot;animate()&quot; [min]&#x3D;&quot;0&quot; [max]&#x3D;&quot;bitmap.length()-1&quot;&gt;
+                &lt;/app-animation-controller&gt;
+    &lt;/mat-card&gt;
+
+    &lt;div class&#x3D;&quot;flex-row&quot; style&#x3D;&quot;gap: 8px; flex: 1; min-height: 0&quot;&gt;
+
+        &lt;mat-card appearance&#x3D;&quot;outlined&quot; style&#x3D;&quot;width: 50%; overflow: hidden;&quot;&gt;
+            &lt;div class&#x3D;&quot;scrollable&quot;&gt;
+
+                &lt;app-bitmap class&#x3D;&quot;bitmap&quot; [bitmap]&#x3D;&quot;bitmap&quot; [pixelSize]&#x3D;&quot;pixelSize&quot;
+                    [showHeaders]&#x3D;&quot;showHeaders&amp;&amp;pixelSize&gt;&#x3D;40&quot; [showGrid]&#x3D;&quot;showGrid&quot;
+                    [showNumbers]&#x3D;&quot;showNumberValues&amp;&amp;pixelSize&gt;&#x3D;40&quot; [tick]&#x3D;&quot;tick&quot;
+                    [selectedColorScale]&#x3D;&quot;selectedColorScale&quot; [userSelect]&#x3D;&quot;false&quot; style&#x3D;&quot;margin: auto;&quot;
+                    (cellClicked)&#x3D;&quot;onCellClicked($event)&quot;
+                    &gt;
+
+                &lt;/app-bitmap&gt;
+            &lt;/div&gt;
+        &lt;/mat-card&gt;
+
+        &lt;mat-card appearance&#x3D;&quot;outlined&quot; style&#x3D;&quot;width: 50%; overflow: hidden;&quot;&gt;
+            &lt;div class&#x3D;&quot;scrollable&quot;&gt;
+
+                &lt;app-bitmap class&#x3D;&quot;bitmap&quot; [bitmap]&#x3D;&quot;resultBitmap&quot; [pixelSize]&#x3D;&quot;pixelSize&quot;
+                    [showHeaders]&#x3D;&quot;showHeaders&amp;&amp;pixelSize&gt;&#x3D;40&quot; [showGrid]&#x3D;&quot;showGrid&quot;
+                    [selectedColorScale]&#x3D;&quot;selectedColorScale&quot; [showNumbers]&#x3D;&quot;showNumberValues&amp;&amp;pixelSize&gt;&#x3D;40&quot;
+                    [tick]&#x3D;&quot;tick&quot; [userSelect]&#x3D;&quot;false&quot;
+                    (cellClicked)&#x3D;&quot;onCellClicked($event)&quot;
+                    &gt;
+
+                &lt;/app-bitmap&gt;
+            &lt;/div&gt;
+        &lt;/mat-card&gt;
+    &lt;/div&gt;
+    
+    &lt;mat-card appearance&#x3D;&quot;outlined&quot; style&#x3D;&quot;overflow: hidden; min-height: fit-content;&quot;&gt;
+        &lt;!-- &lt;div class&#x3D;&quot;scrollable flex-row&quot;&gt; --&gt;
+            &lt;div [mathjax]&#x3D;&quot;getEquation()&quot; style&#x3D;&quot;font-size: 1.2rem; color: var(--mat-sys-on-surface);&quot;&gt;&lt;/div&gt;
+        &lt;!-- &lt;/div&gt; --&gt;
+    &lt;/mat-card&gt;
+
+&lt;/div&gt;</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="flex-col" style="padding: 8px; height: 100%; box-sizing: border-box; width: 100%;">    <mat-card appearance="outlined" class="topbar">                <button mat-button [routerLink]="[\'/edit\', bitmapKey]">                    <mat-icon>edit</mat-icon>                    Edit                </button>                                <div class="divider"></div>                <mat-form-field subscriptSizing="dynamic" class="slim-form-field" appearance="outline">                    <mat-label>Window Size</mat-label>                    <mat-select [(ngModel)]="windowSize" (ngModelChange)="refresh();">                        <mat-option [value]="3">3x3</mat-option>                        <mat-option [value]="5">5x5</mat-option>                        <mat-option [value]="7">7x7</mat-option>                    </mat-select>                </mat-form-field>                                <!-- <mat-label>Window Size</mat-label> -->                <!-- <mat-button-toggle-group name="fontStyle" [(ngModel)]="windowSize" (ngModelChange)="refresh();">                    <mat-button-toggle [value]="3">3x3</mat-button-toggle>                    <mat-button-toggle [value]="5">5x5</mat-button-toggle>                    <mat-button-toggle [value]="7">7x7</mat-button-toggle>                </mat-button-toggle-group> -->                <div class="slim-divider"></div>                                <mat-form-field subscriptSizing="dynamic" class="slim-form-field" appearance="outline">                    <mat-label>Padding</mat-label>                    <mat-select [(ngModel)]="padding" (ngModelChange)="refresh();">                        <mat-option value="zero">Zero</mat-option>                        <mat-option value="edge">Edge</mat-option>                    </mat-select>                </mat-form-field>                                <div class="divider"></div>                <mat-label>Pixel Size</mat-label>                <mat-slider min="25" max="100" step="1" discrete="false">                    <input matSliderThumb [(ngModel)]="pixelSize">                </mat-slider>                                <div class="divider"></div>                <mat-checkbox [(ngModel)]="showNumberValues" [disabled]="pixelSize<40">                    Numbers                </mat-checkbox>                <mat-checkbox [(ngModel)]="showGrid">                    Grid                </mat-checkbox>                <mat-checkbox [(ngModel)]="showHeaders" [disabled]="pixelSize<40">                    Headers                </mat-checkbox>                <mat-checkbox [(ngModel)]="showBase" (ngModelChange)="animate()">                    Base                </mat-checkbox>                <div class="divider"></div>                <app-animation-controller [showValue]="false" [(value)]="animationIndex" (valueChanged)="animate()" [min]="0" [max]="bitmap.length()-1">                </app-animation-controller>    </mat-card>    <div class="flex-row" style="gap: 8px; flex: 1; min-height: 0">        <mat-card appearance="outlined" style="width: 50%; overflow: hidden;">            <div class="scrollable">                <app-bitmap class="bitmap" [bitmap]="bitmap" [pixelSize]="pixelSize"                    [showHeaders]="showHeaders&&pixelSize>=40" [showGrid]="showGrid"                    [showNumbers]="showNumberValues&&pixelSize>=40" [tick]="tick"                    [selectedColorScale]="selectedColorScale" [userSelect]="false" style="margin: auto;"                    (cellClicked)="onCellClicked($event)"                    >                </app-bitmap>            </div>        </mat-card>        <mat-card appearance="outlined" style="width: 50%; overflow: hidden;">            <div class="scrollable">                <app-bitmap class="bitmap" [bitmap]="resultBitmap" [pixelSize]="pixelSize"                    [showHeaders]="showHeaders&&pixelSize>=40" [showGrid]="showGrid"                    [selectedColorScale]="selectedColorScale" [showNumbers]="showNumberValues&&pixelSize>=40"                    [tick]="tick" [userSelect]="false"                    (cellClicked)="onCellClicked($event)"                    >                </app-bitmap>            </div>        </mat-card>    </div>        <mat-card appearance="outlined" style="overflow: hidden; min-height: fit-content;">        <!-- <div class="scrollable flex-row"> -->            <div [mathjax]="getEquation()" style="font-size: 1.2rem; color: var(--mat-sys-on-surface);"></div>        <!-- </div> -->    </mat-card></div></div>'
+    var COMPONENTS = [{'name': 'AnimationControllerComponent', 'selector': 'app-animation-controller'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BinaryBitmapEditorComponent', 'selector': 'app-binary-bitmap-editor'},{'name': 'BitmapComponent', 'selector': 'app-bitmap'},{'name': 'BitmapEditorComponent', 'selector': 'app-bitmap-editor'},{'name': 'ConvolutionalFilterAnimationComponent', 'selector': 'app-convolutional-filter-animation'},{'name': 'HelpComponent', 'selector': 'app-help'},{'name': 'HistogramComponent', 'selector': 'app-histogram'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'HoughTransformAnimationComponent', 'selector': 'app-hough-transform-animation'},{'name': 'KernelDialogComponent', 'selector': 'app-kernel-dialog'},{'name': 'MatrixDisplayComponent', 'selector': 'app-matrix-display'},{'name': 'MedianFilterAnimationComponent', 'selector': 'app-median-filter-animation'},{'name': 'MorphologicalOperationsAnimationComponent', 'selector': 'app-morphological-operations-animation'},{'name': 'PageNotFoundComponent', 'selector': 'app-page-not-found'},{'name': 'ShapeBitmapEditorComponent', 'selector': 'app-shape-bitmap-editor'},{'name': 'StructuringElementEditorComponent', 'selector': 'app-structuring-element-editor'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'MedianFilterAnimationComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'MedianFilterAnimationComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

@@ -1,0 +1,2296 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>image-processing-lecture-support documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">image-processing-lecture-support documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  HistogramComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/components/histogram/histogram.component.ts</code>
+</p>
+
+
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Component to display and interact with a histogram of bitmap pixel values.</p>
+
+    </p>
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code>AfterViewInit</code>
+                <code>OnDestroy</code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-histogram</code></td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                                <code><a href="../components/BitmapComponent.html" target="_self" >BitmapComponent</a></code>
+                            <code>MatCardModule</code>
+                            <code>MatButtonModule</code>
+                            <code>MatIconModule</code>
+                            <code>MatSliderModule</code>
+                            <code>RouterModule</code>
+                            <code>MatSlider</code>
+                                <code><a href="../components/AnimationControllerComponent.html" target="_self" >AnimationControllerComponent</a></code>
+                            <code>MatFormFieldModule</code>
+                            <code>MatMenuModule</code>
+                            <code>MatSelectModule</code>
+                            <code>MatCheckboxModule</code>
+                            <code>FormsModule</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./histogram.component.css</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./histogram.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#_border_colors" >_border_colors</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#_colors" >_colors</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#_data" >_data</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#_labels" >_labels</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#_themeSubscription" >_themeSubscription</a>
+                            </li>
+                            <li>
+                                <a href="#bitmap" >bitmap</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#bitmapKey" >bitmapKey</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Optional</span>
+                                <a href="#chart" >chart</a>
+                            </li>
+                            <li>
+                                <a href="#enableHistogramColorscale" >enableHistogramColorscale</a>
+                            </li>
+                            <li>
+                                <a href="#histogramBinSize" >histogramBinSize</a>
+                            </li>
+                            <li>
+                                    <span class="modifier"></span>
+                                <a href="#histogramCanvas" >histogramCanvas</a>
+                            </li>
+                            <li>
+                                <a href="#pixelSize" >pixelSize</a>
+                            </li>
+                            <li>
+                                <a href="#rangeEnd" >rangeEnd</a>
+                            </li>
+                            <li>
+                                <a href="#rangeStart" >rangeStart</a>
+                            </li>
+                            <li>
+                                <a href="#selectedColorScale" >selectedColorScale</a>
+                            </li>
+                            <li>
+                                <a href="#showGrid" >showGrid</a>
+                            </li>
+                            <li>
+                                <a href="#showHeaders" >showHeaders</a>
+                            </li>
+                            <li>
+                                <a href="#showNumberValues" >showNumberValues</a>
+                            </li>
+                            <li>
+                                <a href="#tick" >tick</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#animate" >animate</a>
+                            </li>
+                            <li>
+                                <a href="#ngAfterViewInit" >ngAfterViewInit</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
+                            </li>
+                            <li>
+                                    <span class="modifier"></span>
+                                <a href="#onResize" >onResize</a>
+                            </li>
+                            <li>
+                                <a href="#prepareChartData" >prepareChartData</a>
+                            </li>
+                            <li>
+                                <a href="#setGroupSize" >setGroupSize</a>
+                            </li>
+                            <li>
+                                <a href="#setRangeEnd" >setRangeEnd</a>
+                            </li>
+                            <li>
+                                <a href="#setRangeStart" >setRangeStart</a>
+                            </li>
+                            <li>
+                                <a href="#updateChart" >updateChart</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>HostListeners</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#window:resize" >window:resize</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(bitmapStorage: <a href="../injectables/BitmapStorageService.html" target="_self">BitmapStorageService</a>, themeService: <a href="../injectables/ThemeService.html" target="_self">ThemeService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="86" class="link-to-prism">src/app/components/histogram/histogram.component.ts:86</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Initializes the component, loading the bitmap from storage if available.</p>
+</div>
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>bitmapStorage</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/BitmapStorageService.html" target="_self" >BitmapStorageService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <p>Service for loading and saving bitmaps.</p>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>themeService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ThemeService.html" target="_self" >ThemeService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <p>Service for managing application themes.</p>
+
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+    <section data-compodoc="block-methods">
+    <h3>HostListeners</h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="window:resize"></a>
+                    <span class="name">
+                        <span ><b>window:resize</b></span>
+                        <a href="#window:resize"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <i>Arguments : </i><code>'$event' </code>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>window:resize(event: Event)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="104"
+                                    class="link-to-prism">src/app/components/histogram/histogram.component.ts:104</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Handles window resize events to update the histogram chart accordingly.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>The resize event.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="animate"></a>
+                    <span class="name">
+                        <span ><b>animate</b></span>
+                        <a href="#animate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>animate(animationIndex: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="185"
+                                    class="link-to-prism">src/app/components/histogram/histogram.component.ts:185</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Animates the bitmap by selecting pixels based on their values and updating the histogram chart.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>animationIndex</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>The current index for the animation, determining which pixels to select.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngAfterViewInit"></a>
+                    <span class="name">
+                        <span ><b>ngAfterViewInit</b></span>
+                        <a href="#ngAfterViewInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngAfterViewInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="203"
+                                    class="link-to-prism">src/app/components/histogram/histogram.component.ts:203</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Initializes the histogram chart after the view has been initialized.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="199"
+                                    class="link-to-prism">src/app/components/histogram/histogram.component.ts:199</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Cleans up subscriptions when the component is destroyed.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onResize"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                        <span ><b>onResize</b></span>
+                        <a href="#onResize"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>onResize(event: Event)</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Decorators : </b>
+                    <br />
+                    <code>@HostListener(&#x27;window:resize&#x27;, [&#x27;$event&#x27;])<br /></code>
+                </td>
+            </tr>
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="104"
+                                    class="link-to-prism">src/app/components/histogram/histogram.component.ts:104</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Handles window resize events to update the histogram chart accordingly.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                        <code>Event</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>The resize event.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="prepareChartData"></a>
+                    <span class="name">
+                        <span ><b>prepareChartData</b></span>
+                        <a href="#prepareChartData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>prepareChartData(selectedOnly: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="138"
+                                    class="link-to-prism">src/app/components/histogram/histogram.component.ts:138</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Prepares the data for the histogram chart based on the current bitmap and settings.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Default value</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>selectedOnly</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                                    <code>true</code>
+                                            </td>
+
+                                            <td>
+                                                    <p>If true, only selected pixels are included in the histogram.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setGroupSize"></a>
+                    <span class="name">
+                        <span ><b>setGroupSize</b></span>
+                        <a href="#setGroupSize"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>setGroupSize(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="129"
+                                    class="link-to-prism">src/app/components/histogram/histogram.component.ts:129</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Sets the size of each histogram bin (group size) and updates the chart.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>value</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>The new bin size.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setRangeEnd"></a>
+                    <span class="name">
+                        <span ><b>setRangeEnd</b></span>
+                        <a href="#setRangeEnd"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>setRangeEnd(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="120"
+                                    class="link-to-prism">src/app/components/histogram/histogram.component.ts:120</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Sets the end of the pixel value range for the histogram and updates the chart.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>value</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>The new end value for the range.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setRangeStart"></a>
+                    <span class="name">
+                        <span ><b>setRangeStart</b></span>
+                        <a href="#setRangeStart"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>setRangeStart(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="111"
+                                    class="link-to-prism">src/app/components/histogram/histogram.component.ts:111</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Sets the start of the pixel value range for the histogram and updates the chart.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>value</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>The new start value for the range.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateChart"></a>
+                    <span class="name">
+                        <span ><b>updateChart</b></span>
+                        <a href="#updateChart"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>updateChart()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="157"
+                                    class="link-to-prism">src/app/components/histogram/histogram.component.ts:157</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Updates the histogram chart with the current data and styling.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="_border_colors"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>_border_colors</b></span>
+                        <a href="#_border_colors"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="82" class="link-to-prism">src/app/components/histogram/histogram.component.ts:82</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Border colors for the histogram bars.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="_colors"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>_colors</b></span>
+                        <a href="#_colors"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="80" class="link-to-prism">src/app/components/histogram/histogram.component.ts:80</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Colors for the histogram bars.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="_data"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>_data</b></span>
+                        <a href="#_data"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>number[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="84" class="link-to-prism">src/app/components/histogram/histogram.component.ts:84</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Data values for the histogram bins.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="_labels"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>_labels</b></span>
+                        <a href="#_labels"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="78" class="link-to-prism">src/app/components/histogram/histogram.component.ts:78</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Labels for the histogram bins.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="_themeSubscription"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>_themeSubscription</b></span>
+                        <a href="#_themeSubscription"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Subscription</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Subscription()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="86" class="link-to-prism">src/app/components/histogram/histogram.component.ts:86</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Subscription to theme changes for dynamic styling.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="bitmap"></a>
+                    <span class="name">
+                        <span ><b>bitmap</b></span>
+                        <a href="#bitmap"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/InteractiveBitmap.html" target="_self" >InteractiveBitmap</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new InteractiveBitmap(16, 9)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/components/histogram/histogram.component.ts:48</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>The bitmap for which the histogram is displayed and analyzed.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="bitmapKey"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>bitmapKey</b></span>
+                        <a href="#bitmapKey"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&quot;histogram-bitmap&quot;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/components/histogram/histogram.component.ts:50</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Key used to load and save the bitmap in storage.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="chart"></a>
+                    <span class="name">
+                            <span class="modifier">Optional</span>
+                        <span ><b>chart</b></span>
+                        <a href="#chart"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Chart</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="76" class="link-to-prism">src/app/components/histogram/histogram.component.ts:76</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>The Chart.js instance for the histogram.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="enableHistogramColorscale"></a>
+                    <span class="name">
+                        <span ><b>enableHistogramColorscale</b></span>
+                        <a href="#enableHistogramColorscale"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/components/histogram/histogram.component.ts:62</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>If true, the histogram bars are colored according to the selected color scale.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="histogramBinSize"></a>
+                    <span class="name">
+                        <span ><b>histogramBinSize</b></span>
+                        <a href="#histogramBinSize"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>5</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">src/app/components/histogram/histogram.component.ts:67</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Size of each histogram bin (group size).</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="histogramCanvas"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                        <span ><b>histogramCanvas</b></span>
+                        <a href="#histogramCanvas"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>ElementRef&lt;HTMLCanvasElement&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @ViewChild(&#x27;histogram&#x27;)<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/components/histogram/histogram.component.ts:46</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Reference to the histogram canvas element.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="pixelSize"></a>
+                    <span class="name">
+                        <span ><b>pixelSize</b></span>
+                        <a href="#pixelSize"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>50</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/components/histogram/histogram.component.ts:54</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Size of each pixel in the bitmap display (in pixels).</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="rangeEnd"></a>
+                    <span class="name">
+                        <span ><b>rangeEnd</b></span>
+                        <a href="#rangeEnd"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>256</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="71" class="link-to-prism">src/app/components/histogram/histogram.component.ts:71</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>End of the pixel value range to include in the histogram.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="rangeStart"></a>
+                    <span class="name">
+                        <span ><b>rangeStart</b></span>
+                        <a href="#rangeStart"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="69" class="link-to-prism">src/app/components/histogram/histogram.component.ts:69</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Start of the pixel value range to include in the histogram.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectedColorScale"></a>
+                    <span class="name">
+                        <span ><b>selectedColorScale</b></span>
+                        <a href="#selectedColorScale"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../miscellaneous/enumerations.html#ColorScale" target="_self" >ColorScale</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>ColorScale.Grayscale</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">src/app/components/histogram/histogram.component.ts:64</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Color scale used for displaying the histogram bars.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showGrid"></a>
+                    <span class="name">
+                        <span ><b>showGrid</b></span>
+                        <a href="#showGrid"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/components/histogram/histogram.component.ts:56</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>If true, a grid is displayed over the bitmap.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showHeaders"></a>
+                    <span class="name">
+                        <span ><b>showHeaders</b></span>
+                        <a href="#showHeaders"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/app/components/histogram/histogram.component.ts:58</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>If true, headers are displayed above the bitmap.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showNumberValues"></a>
+                    <span class="name">
+                        <span ><b>showNumberValues</b></span>
+                        <a href="#showNumberValues"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/components/histogram/histogram.component.ts:60</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>If true, pixel values are displayed on the bitmap.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="tick"></a>
+                    <span class="name">
+                        <span ><b>tick</b></span>
+                        <a href="#tick"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="73" class="link-to-prism">src/app/components/histogram/histogram.component.ts:73</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Used to trigger bitmap component updates.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, AfterViewInit, ViewChild, ElementRef, OnInit, HostListener, OnDestroy } from &#x27;@angular/core&#x27;;
+import { Chart, BarController, BarElement, CategoryScale, LinearScale, Tooltip, Legend } from &quot;chart.js&quot;;
+import { BitmapComponent } from &quot;../bitmap/bitmap.component&quot;;
+import { InteractiveBitmap } from &#x27;../../static/bitmap&#x27;;
+import { MatCardModule } from &#x27;@angular/material/card&#x27;;
+import { MatButtonModule } from &#x27;@angular/material/button&#x27;;
+import { MatIconModule } from &#x27;@angular/material/icon&#x27;;
+import { RouterModule } from &#x27;@angular/router&#x27;;
+import { BitmapStorageService } from &#x27;../../services/bitmap-storage/bitmap-storage.service&#x27;;
+import { getVar } from &#x27;../../static/style-utils&#x27;;
+import { MatSlider, MatSliderModule } from &quot;@angular/material/slider&quot;;
+import { AnimationControllerComponent } from &#x27;../animation-controller/animation-controller.component&#x27;;
+import { MatFormFieldModule } from &#x27;@angular/material/form-field&#x27;;
+import { getContrastColor, scaleColor } from &#x27;../../static/color-utils&#x27;;
+import { ColorScale } from &#x27;../../static/enums&#x27;;
+import { MatMenuModule } from &quot;@angular/material/menu&quot;;
+import { MatSelectModule } from &#x27;@angular/material/select&#x27;;
+import { MatCheckboxModule } from &#x27;@angular/material/checkbox&#x27;;
+import { FormsModule } from &#x27;@angular/forms&#x27;;
+import { ThemeService } from &#x27;../../services/theme/theme.service&#x27;;
+import { Subscription } from &#x27;rxjs&#x27;;
+
+/** Component to display and interact with a histogram of bitmap pixel values. */
+@Component({
+  selector: &#x27;app-histogram&#x27;,
+  templateUrl: &#x27;./histogram.component.html&#x27;,
+  styleUrls: [&#x27;./histogram.component.css&#x27;],
+  imports: [
+    BitmapComponent,
+    MatCardModule,
+    MatButtonModule,
+    MatIconModule,
+    MatSliderModule,
+    RouterModule,
+    MatSlider,
+    AnimationControllerComponent,
+    MatFormFieldModule,
+    MatMenuModule,
+    MatSelectModule,
+    MatCheckboxModule,
+    FormsModule
+]  
+})
+export class HistogramComponent implements AfterViewInit, OnDestroy {
+  /** Reference to the histogram canvas element. */
+  @ViewChild(&#x27;histogram&#x27;) histogramCanvas!: ElementRef&lt;HTMLCanvasElement&gt;;
+  /** The bitmap for which the histogram is displayed and analyzed. */
+  bitmap: InteractiveBitmap &#x3D; new InteractiveBitmap(16, 9);
+  /** Key used to load and save the bitmap in storage. */
+  readonly bitmapKey: string &#x3D; &quot;histogram-bitmap&quot;;
+
+  //view
+  /** Size of each pixel in the bitmap display (in pixels). */
+  pixelSize: number &#x3D; 50;
+  /** If true, a grid is displayed over the bitmap. */
+  showGrid: boolean &#x3D; true;
+  /** If true, headers are displayed above the bitmap. */
+  showHeaders: boolean &#x3D; true;
+  /** If true, pixel values are displayed on the bitmap. */
+  showNumberValues: boolean &#x3D; true;
+  /** If true, the histogram bars are colored according to the selected color scale. */
+  enableHistogramColorscale: boolean &#x3D; true;
+  /** Color scale used for displaying the histogram bars. */
+  selectedColorScale: ColorScale &#x3D; ColorScale.Grayscale;
+  
+  /** Size of each histogram bin (group size). */
+  histogramBinSize: number &#x3D; 5;
+  /** Start of the pixel value range to include in the histogram. */
+  rangeStart: number &#x3D; 0;
+  /** End of the pixel value range to include in the histogram. */
+  rangeEnd: number &#x3D; 256;
+  /** Used to trigger bitmap component updates. */
+  tick: number &#x3D; 0;
+
+  /**  The Chart.js instance for the histogram. */
+  chart?: Chart; 
+  /** Labels for the histogram bins. */
+  private _labels: string[] &#x3D; [];
+  /** Colors for the histogram bars. */
+  private _colors: string[] &#x3D; [];
+  /** Border colors for the histogram bars. */
+  private _border_colors: string[] &#x3D; [];
+  /** Data values for the histogram bins. */
+  private _data: number[] &#x3D; [];
+  /** Subscription to theme changes for dynamic styling. */
+  private _themeSubscription: Subscription &#x3D; new Subscription();
+
+  /** Initializes the component, loading the bitmap from storage if available. 
+   * @param bitmapStorage Service for loading and saving bitmaps.
+   * @param themeService Service for managing application themes.
+  */
+  constructor(private bitmapStorage: BitmapStorageService, private themeService: ThemeService) {
+    let bitmap &#x3D; this.bitmapStorage.load(this.bitmapKey);
+    if(bitmap)
+      this.bitmap &#x3D; new InteractiveBitmap(bitmap.width, bitmap.height, bitmap, 255);
+
+    this._themeSubscription &#x3D; this.themeService.themeChanged$.subscribe(() &#x3D;&gt; this.updateChart());
+  }
+
+  /** Handles window resize events to update the histogram chart accordingly. 
+   * @param event The resize event.
+  */
+  @HostListener(&#x27;window:resize&#x27;, [&#x27;$event&#x27;])
+  onResize(event: Event): void {
+    this.updateChart();
+  }
+
+  /** Sets the start of the pixel value range for the histogram and updates the chart.
+   * @param value The new start value for the range.
+  */
+  setRangeStart(value: number): void {
+    this.rangeStart &#x3D; value;
+    this.prepareChartData();
+    this.updateChart();
+  }
+
+  /** Sets the end of the pixel value range for the histogram and updates the chart.
+   * @param value The new end value for the range.
+  */
+  setRangeEnd(value: number): void {
+    this.rangeEnd &#x3D; value;
+    this.prepareChartData();
+    this.updateChart();
+  }
+
+  /** Sets the size of each histogram bin (group size) and updates the chart.
+   * @param value The new bin size.
+  */
+  setGroupSize(value: number): void {
+    this.histogramBinSize &#x3D; value;
+    this.prepareChartData();
+    this.updateChart();
+  }
+
+  /** Prepares the data for the histogram chart based on the current bitmap and settings.
+   * @param selectedOnly If true, only selected pixels are included in the histogram.
+  */
+  prepareChartData(selectedOnly: boolean&#x3D;true): void {
+    this._labels &#x3D; [];
+    this._colors &#x3D; [];
+    this._border_colors &#x3D; [];
+
+    for (let i &#x3D; this.rangeStart; i &lt; this.rangeEnd; i+&#x3D;this.histogramBinSize) {
+      if(this.histogramBinSize &#x3D;&#x3D; 1)
+        this._labels.push(&#x60;${i.toString()}&#x60;);
+      else  
+        this._labels.push(&#x60;${i.toString()}-${Math.min(i + this.histogramBinSize - 1, this.rangeEnd - 1).toString()}&#x60;);
+
+      let color &#x3D; scaleColor(i, this.selectedColorScale);
+      this._colors.push(color);
+      this._border_colors.push(getContrastColor(&quot;f6f3f3&quot;));
+    }
+    this._data &#x3D; this.bitmap.histogram(this.histogramBinSize, selectedOnly);
+  }
+
+  /** Updates the histogram chart with the current data and styling. */
+  updateChart(): void {
+    if(this.chart){
+      this.chart.data.datasets[0].data &#x3D; this._data;
+      this.chart.data.labels &#x3D; this._labels;
+
+      if(this.enableHistogramColorscale)
+        this.chart.data.datasets[0].backgroundColor &#x3D; this._colors;
+      else
+        this.chart.data.datasets[0].backgroundColor &#x3D; getVar();
+      
+      this.chart.data.datasets[0].borderWidth &#x3D; 0;
+      
+      // this.chart.data.datasets[0].backgroundColor &#x3D; getVar();
+      // if(this.histogramBinSize&gt;2){
+      // this.chart.data.datasets[0].borderColor &#x3D; this._border_colors;
+        // this.chart.data.datasets[0].borderWidth &#x3D; 1;
+      // }
+      // else{
+      //   this.chart.data.datasets[0].backgroundColor &#x3D; getVar();
+      //   this.chart.data.datasets[0].borderWidth &#x3D; 0;
+      // }
+      this.chart.update();
+    }
+  }
+
+  /** Animates the bitmap by selecting pixels based on their values and updating the histogram chart.
+   * @param animationIndex The current index for the animation, determining which pixels to select.
+  */
+  animate(animationIndex: number): void {
+    this.bitmap.clearSelection();
+    this.bitmap.pixels().filter(c &#x3D;&gt; c.value &lt;&#x3D; animationIndex &amp;&amp; !isNaN(c.value) &amp;&amp; c.value !&#x3D; null).forEach(
+      c &#x3D;&gt; {
+        this.bitmap.select(c.cell);
+      }
+    );
+  
+    this.prepareChartData(true);
+    this.tick++;
+    this.updateChart();
+  }
+
+  /** Cleans up subscriptions when the component is destroyed. */
+  ngOnDestroy(): void {
+    this._themeSubscription.unsubscribe();
+  }
+  /** Initializes the histogram chart after the view has been initialized. */
+  ngAfterViewInit(): void {
+    Chart.register(BarController, BarElement, CategoryScale, LinearScale, Tooltip, Legend);
+
+    this.prepareChartData();
+
+    const bgColor &#x3D; getVar();
+    
+    const ctx &#x3D; this.histogramCanvas.nativeElement;
+    this.chart &#x3D; new Chart(ctx, {
+      type: &quot;bar&quot;,
+      data: {
+        labels: this._labels,
+        datasets: [
+          {
+            label: &quot;Histogram&quot;,
+            data: this._data,
+            backgroundColor: bgColor,
+            categoryPercentage: 0.9,
+            barPercentage: 1,
+            borderWidth: 1,
+            borderColor: bgColor,
+          },
+        ],
+      },
+      options: {
+        devicePixelRatio: 2,
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false 
+          }
+        },
+        animation: {
+          duration: 500,
+          easing: &quot;easeOutQuart&quot;,
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+          },
+        },
+      },
+    });
+
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;!-- &lt;mat-card appearance&#x3D;&quot;outlined&quot; class&#x3D;&quot;main-card&quot; style&#x3D;&quot;height: calc(100% - 20px); overflow-y: auto;&quot;&gt; --&gt;
+&lt;div
+    style&#x3D;&quot;height: calc(100% - 16px); display: flex; flex-direction: column; justify-content: start; gap: 8px; padding: 8px;&quot;&gt;
+
+    &lt;div style&#x3D;&quot;flex: 1 1 auto; min-height: 250px; display: flex; gap: 8px; overflow: auto;&quot;&gt;
+
+        &lt;mat-card style&#x3D;&quot;flex: 1; overflow: hidden; padding: 0;&quot; appearance&#x3D;&quot;outlined&quot;&gt;
+            &lt;div class&#x3D;&quot;scrollable&quot;&gt;
+                &lt;app-bitmap class&#x3D;&quot;bitmap&quot; [bitmap]&#x3D;&quot;bitmap&quot; [tick]&#x3D;&quot;tick&quot; [pixelSize]&#x3D;&quot;pixelSize&quot;
+                    [showHeaders]&#x3D;&quot;showHeaders&amp;&amp;pixelSize&gt;&#x3D;40&quot; [showNumbers]&#x3D;&quot;showNumberValues&amp;&amp;pixelSize&gt;&#x3D;40&quot;
+                    [showGrid]&#x3D;&quot;showGrid&quot; [selectedColorScale]&#x3D;&quot;selectedColorScale&quot;
+                    (bitmapChanged)&#x3D;&quot;prepareChartData(); updateChart()&quot;&gt;
+                &lt;/app-bitmap&gt;
+            &lt;/div&gt;
+        &lt;/mat-card&gt;
+
+        &lt;mat-card appearance&#x3D;&quot;outlined&quot; style&#x3D;&quot;overflow: auto;&quot;&gt;
+            &lt;div class&#x3D;&quot;scrollable sidebar flex-col&quot;&gt;
+
+                &lt;mat-card-title class&#x3D;&quot;end&quot;&gt;
+                    &lt;mat-icon inline&gt;visibility&lt;/mat-icon&gt;
+                    View
+                &lt;/mat-card-title&gt;
+
+                
+                &lt;mat-checkbox [(ngModel)]&#x3D;&quot;showNumberValues&quot; [disabled]&#x3D;&quot;pixelSize&lt;40&quot;&gt;
+                    Numbers
+                &lt;/mat-checkbox&gt;
+                &lt;mat-checkbox [(ngModel)]&#x3D;&quot;showGrid&quot;&gt;
+                    Grid
+                &lt;/mat-checkbox&gt;
+                &lt;mat-checkbox [(ngModel)]&#x3D;&quot;showHeaders&quot; [disabled]&#x3D;&quot;pixelSize&lt;40&quot;&gt;
+                    Headers
+                &lt;/mat-checkbox&gt;
+                &lt;mat-checkbox  class&#x3D;&quot;end&quot; [(ngModel)]&#x3D;&quot;enableHistogramColorscale&quot; (ngModelChange)&#x3D;&quot;updateChart(); this.chart?.update(&#x27;none&#x27;);&quot;&gt;
+                    Histogram Colorscale
+                &lt;/mat-checkbox&gt;
+                
+                &lt;mat-label&gt;Pixel Size&lt;/mat-label&gt;
+                &lt;mat-slider min&#x3D;&quot;25&quot; max&#x3D;&quot;100&quot; step&#x3D;&quot;1&quot; discrete&#x3D;&quot;thumbLabel&quot;&gt;
+                    &lt;input matSliderThumb [(ngModel)]&#x3D;&quot;pixelSize&quot;&gt;
+                &lt;/mat-slider&gt;
+            
+                &lt;mat-label&gt;Bin Size &lt;/mat-label&gt;
+                &lt;mat-slider min&#x3D;&quot;1&quot; max&#x3D;&quot;32&quot; step&#x3D;&quot;1&quot; discrete&#x3D;&quot;thumbLabel&quot;&gt;
+                    &lt;input matSliderThumb [value]&#x3D;&quot;this.histogramBinSize&quot; (dragEnd)&#x3D;&quot;setGroupSize($event.value)&quot; /&gt;
+                &lt;/mat-slider&gt;
+          
+                &lt;mat-form-field class&#x3D;&quot;end&quot; subscriptSizing&#x3D;&quot;dynamic&quot; appearance&#x3D;&quot;outline&quot;&gt;
+                    &lt;mat-label&gt;Color Scale&lt;/mat-label&gt;
+                    &lt;mat-select [(ngModel)]&#x3D;&quot;selectedColorScale&quot;&gt;
+                        &lt;mat-option value&#x3D;&quot;none&quot;&gt;None&lt;/mat-option&gt;
+                        &lt;mat-option value&#x3D;&quot;grayscale&quot;&gt;Grayscale&lt;/mat-option&gt;
+                        &lt;mat-option value&#x3D;&quot;heatmap&quot;&gt;YellowOrangeRed&lt;/mat-option&gt;
+                        &lt;mat-option value&#x3D;&quot;spectral&quot;&gt;Spectral&lt;/mat-option&gt;
+                        &lt;mat-option value&#x3D;&quot;viridis&quot;&gt;Viridis&lt;/mat-option&gt;
+                    &lt;/mat-select&gt;
+                &lt;/mat-form-field&gt;
+
+                &lt;button mat-flat-button [routerLink]&#x3D;&quot;[&#x27;/edit&#x27;, bitmapKey]&quot;&gt;
+                    &lt;mat-icon&gt;edit&lt;/mat-icon&gt;
+                    Edit
+                &lt;/button&gt;
+            &lt;/div&gt;
+        &lt;/mat-card&gt;
+    &lt;/div&gt;
+
+    &lt;mat-card appearance&#x3D;&quot;outlined&quot; style&#x3D;&quot;overflow: hidden; flex: 0 0 auto;&quot;&gt;
+        &lt;div style&#x3D;&quot;height: 200px;&quot;&gt;
+            &lt;canvas #histogram id&#x3D;&quot;histogram&quot; style&#x3D;&quot;width: 100%;&quot;&gt;
+            &lt;/canvas&gt;
+        &lt;/div&gt;
+        &lt;!-- &lt;div style&#x3D;&quot;display: flex; align-items: center; gap: 10px&quot;&gt;
+                    &lt;mat-label style&#x3D;&quot;text-wrap: nowrap;&quot;&gt;Range &lt;/mat-label&gt;
+                    &lt;mat-slider min&#x3D;&quot;0&quot; max&#x3D;&quot;256&quot; step&#x3D;&quot;1&quot; discrete&#x3D;&quot;thumbLabel&quot; style&#x3D;&quot;width: 100%;&quot;&gt;
+                        &lt;input matSliderStartThumb [value]&#x3D;&quot;this.rangeStart&quot; (dragStart)&#x3D;&quot;setRangeStart($event.value)&quot;/&gt;
+                        &lt;input matSliderEndThumb [value]&#x3D;&quot;this.rangeEnd&quot; (dragEnd)&#x3D;&quot;setRangeEnd($event.value)&quot;/&gt;
+                    &lt;/mat-slider&gt;
+                &lt;/div&gt; --&gt;
+    &lt;/mat-card&gt;
+
+    &lt;mat-card appearance&#x3D;&quot;outlined&quot; style&#x3D;&quot;padding: 4px;&quot;&gt;
+        &lt;app-animation-controller (valueChanged)&#x3D;&quot;animate($event)&quot;&gt;
+        &lt;/app-animation-controller&gt;
+    &lt;/mat-card&gt;
+
+
+&lt;/div&gt;
+
+&lt;!-- &lt;/mat-card&gt; --&gt;</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./histogram.component.css</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.top-right-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 10;
+}
+
+button[mat-mini-fab] {
+  background-color: var(--mat-sys-primary);
+  color: var(--mat-sys-on-primary);
+}</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><!-- <mat-card appearance="outlined" class="main-card" style="height: calc(100% - 20px); overflow-y: auto;"> --><div    style="height: calc(100% - 16px); display: flex; flex-direction: column; justify-content: start; gap: 8px; padding: 8px;">    <div style="flex: 1 1 auto; min-height: 250px; display: flex; gap: 8px; overflow: auto;">        <mat-card style="flex: 1; overflow: hidden; padding: 0;" appearance="outlined">            <div class="scrollable">                <app-bitmap class="bitmap" [bitmap]="bitmap" [tick]="tick" [pixelSize]="pixelSize"                    [showHeaders]="showHeaders&&pixelSize>=40" [showNumbers]="showNumberValues&&pixelSize>=40"                    [showGrid]="showGrid" [selectedColorScale]="selectedColorScale"                    (bitmapChanged)="prepareChartData(); updateChart()">                </app-bitmap>            </div>        </mat-card>        <mat-card appearance="outlined" style="overflow: auto;">            <div class="scrollable sidebar flex-col">                <mat-card-title class="end">                    <mat-icon inline>visibility</mat-icon>                    View                </mat-card-title>                                <mat-checkbox [(ngModel)]="showNumberValues" [disabled]="pixelSize<40">                    Numbers                </mat-checkbox>                <mat-checkbox [(ngModel)]="showGrid">                    Grid                </mat-checkbox>                <mat-checkbox [(ngModel)]="showHeaders" [disabled]="pixelSize<40">                    Headers                </mat-checkbox>                <mat-checkbox  class="end" [(ngModel)]="enableHistogramColorscale" (ngModelChange)="updateChart(); this.chart?.update(\'none\');">                    Histogram Colorscale                </mat-checkbox>                                <mat-label>Pixel Size</mat-label>                <mat-slider min="25" max="100" step="1" discrete="thumbLabel">                    <input matSliderThumb [(ngModel)]="pixelSize">                </mat-slider>                            <mat-label>Bin Size </mat-label>                <mat-slider min="1" max="32" step="1" discrete="thumbLabel">                    <input matSliderThumb [value]="this.histogramBinSize" (dragEnd)="setGroupSize($event.value)" />                </mat-slider>                          <mat-form-field class="end" subscriptSizing="dynamic" appearance="outline">                    <mat-label>Color Scale</mat-label>                    <mat-select [(ngModel)]="selectedColorScale">                        <mat-option value="none">None</mat-option>                        <mat-option value="grayscale">Grayscale</mat-option>                        <mat-option value="heatmap">YellowOrangeRed</mat-option>                        <mat-option value="spectral">Spectral</mat-option>                        <mat-option value="viridis">Viridis</mat-option>                    </mat-select>                </mat-form-field>                <button mat-flat-button [routerLink]="[\'/edit\', bitmapKey]">                    <mat-icon>edit</mat-icon>                    Edit                </button>            </div>        </mat-card>    </div>    <mat-card appearance="outlined" style="overflow: hidden; flex: 0 0 auto;">        <div style="height: 200px;">            <canvas #histogram id="histogram" style="width: 100%;">            </canvas>        </div>        <!-- <div style="display: flex; align-items: center; gap: 10px">                    <mat-label style="text-wrap: nowrap;">Range </mat-label>                    <mat-slider min="0" max="256" step="1" discrete="thumbLabel" style="width: 100%;">                        <input matSliderStartThumb [value]="this.rangeStart" (dragStart)="setRangeStart($event.value)"/>                        <input matSliderEndThumb [value]="this.rangeEnd" (dragEnd)="setRangeEnd($event.value)"/>                    </mat-slider>                </div> -->    </mat-card>    <mat-card appearance="outlined" style="padding: 4px;">        <app-animation-controller (valueChanged)="animate($event)">        </app-animation-controller>    </mat-card></div><!-- </mat-card> --></div>'
+    var COMPONENTS = [{'name': 'AnimationControllerComponent', 'selector': 'app-animation-controller'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BinaryBitmapEditorComponent', 'selector': 'app-binary-bitmap-editor'},{'name': 'BitmapComponent', 'selector': 'app-bitmap'},{'name': 'BitmapEditorComponent', 'selector': 'app-bitmap-editor'},{'name': 'ConvolutionalFilterAnimationComponent', 'selector': 'app-convolutional-filter-animation'},{'name': 'HelpComponent', 'selector': 'app-help'},{'name': 'HistogramComponent', 'selector': 'app-histogram'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'HoughTransformAnimationComponent', 'selector': 'app-hough-transform-animation'},{'name': 'KernelDialogComponent', 'selector': 'app-kernel-dialog'},{'name': 'MatrixDisplayComponent', 'selector': 'app-matrix-display'},{'name': 'MedianFilterAnimationComponent', 'selector': 'app-median-filter-animation'},{'name': 'MorphologicalOperationsAnimationComponent', 'selector': 'app-morphological-operations-animation'},{'name': 'PageNotFoundComponent', 'selector': 'app-page-not-found'},{'name': 'ShapeBitmapEditorComponent', 'selector': 'app-shape-bitmap-editor'},{'name': 'StructuringElementEditorComponent', 'selector': 'app-structuring-element-editor'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'HistogramComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'HistogramComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

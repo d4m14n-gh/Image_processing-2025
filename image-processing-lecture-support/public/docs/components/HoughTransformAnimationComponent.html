@@ -1,0 +1,1881 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>image-processing-lecture-support documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">image-processing-lecture-support documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  HoughTransformAnimationComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/components/hough-transform-animation/hough-transform-animation.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code>AfterViewInit</code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-hough-transform-animation</code></td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>MatIconModule</code>
+                            <code>MatButtonModule</code>
+                            <code>MatCheckboxModule</code>
+                            <code>MatSliderModule</code>
+                            <code>FormsModule</code>
+                            <code>MatFormFieldModule</code>
+                            <code>MatInputModule</code>
+                            <code>MatSelectModule</code>
+                            <code>RouterModule</code>
+                            <code>MatCardModule</code>
+                                <code><a href="../components/BitmapComponent.html" target="_self" >BitmapComponent</a></code>
+                                <code><a href="../components/AnimationControllerComponent.html" target="_self" >AnimationControllerComponent</a></code>
+                            <code>MatTabsModule</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./hough-transform-animation.component.html</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./hough-transform-animation.component.css</code></td>
+            </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#animationIndex" >animationIndex</a>
+                            </li>
+                            <li>
+                                <a href="#bitmap" >bitmap</a>
+                            </li>
+                            <li>
+                                <a href="#bitmapKey" >bitmapKey</a>
+                            </li>
+                            <li>
+                                <a href="#bitmapTick" >bitmapTick</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Optional</span>
+                                <a href="#chart" >chart</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#colorscale" >colorscale</a>
+                            </li>
+                            <li>
+                                <a href="#limit" >limit</a>
+                            </li>
+                            <li>
+                                <a href="#pixelSize" >pixelSize</a>
+                            </li>
+                            <li>
+                                <a href="#resultBitmap" >resultBitmap</a>
+                            </li>
+                            <li>
+                                <a href="#selectionColor" >selectionColor</a>
+                            </li>
+                            <li>
+                                <a href="#showGrid" >showGrid</a>
+                            </li>
+                            <li>
+                                <a href="#showHeaders" >showHeaders</a>
+                            </li>
+                            <li>
+                                <a href="#tabIndex" >tabIndex</a>
+                            </li>
+                            <li>
+                                <a href="#threshold" >threshold</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#animate" >animate</a>
+                            </li>
+                            <li>
+                                <a href="#getCanvasHeight" >getCanvasHeight</a>
+                            </li>
+                            <li>
+                                <a href="#getCanvasWidth" >getCanvasWidth</a>
+                            </li>
+                            <li>
+                                <a href="#linePoint" >linePoint</a>
+                            </li>
+                            <li>
+                                <a href="#ngAfterViewInit" >ngAfterViewInit</a>
+                            </li>
+                            <li>
+                                <a href="#onCellClicked" >onCellClicked</a>
+                            </li>
+                            <li>
+                                <a href="#refresh" >refresh</a>
+                            </li>
+                            <li>
+                                <a href="#setValues" >setValues</a>
+                            </li>
+                            <li>
+                                <a href="#transform" >transform</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(bitmapStorage: <a href="../injectables/BitmapStorageService.html" target="_self">BitmapStorageService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/components/hough-transform-animation/hough-transform-animation.component.ts:60</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>bitmapStorage</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/BitmapStorageService.html" target="_self" >BitmapStorageService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="animate"></a>
+                    <span class="name">
+                        <span ><b>animate</b></span>
+                        <a href="#animate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>animate()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="162"
+                                    class="link-to-prism">src/app/components/hough-transform-animation/hough-transform-animation.component.ts:162</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getCanvasHeight"></a>
+                    <span class="name">
+                        <span ><b>getCanvasHeight</b></span>
+                        <a href="#getCanvasHeight"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getCanvasHeight()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="257"
+                                    class="link-to-prism">src/app/components/hough-transform-animation/hough-transform-animation.component.ts:257</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getCanvasWidth"></a>
+                    <span class="name">
+                        <span ><b>getCanvasWidth</b></span>
+                        <a href="#getCanvasWidth"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getCanvasWidth()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="260"
+                                    class="link-to-prism">src/app/components/hough-transform-animation/hough-transform-animation.component.ts:260</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="linePoint"></a>
+                    <span class="name">
+                        <span ><b>linePoint</b></span>
+                        <a href="#linePoint"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>linePoint(x: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, rho: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, thetaRad: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="263"
+                                    class="link-to-prism">src/app/components/hough-transform-animation/hough-transform-animation.component.ts:263</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>x</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>rho</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>thetaRad</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../classes/Point.html" target="_self" >Point</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngAfterViewInit"></a>
+                    <span class="name">
+                        <span ><b>ngAfterViewInit</b></span>
+                        <a href="#ngAfterViewInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngAfterViewInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="70"
+                                    class="link-to-prism">src/app/components/hough-transform-animation/hough-transform-animation.component.ts:70</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onCellClicked"></a>
+                    <span class="name">
+                        <span ><b>onCellClicked</b></span>
+                        <a href="#onCellClicked"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onCellClicked($event: literal type, click: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="280"
+                                    class="link-to-prism">src/app/components/hough-transform-animation/hough-transform-animation.component.ts:280</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Default value</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>$event</td>
+                                            <td>
+                                                        <code>literal type</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                                <td>click</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                                    <code>false</code>
+                                            </td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="refresh"></a>
+                    <span class="name">
+                        <span ><b>refresh</b></span>
+                        <a href="#refresh"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>refresh()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="122"
+                                    class="link-to-prism">src/app/components/hough-transform-animation/hough-transform-animation.component.ts:122</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setValues"></a>
+                    <span class="name">
+                        <span ><b>setValues</b></span>
+                        <a href="#setValues"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>setValues(length: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, destination: <a href="../classes/Bitmap.html" target="_self">Bitmap</a>, source: <a href="../classes/Bitmap.html" target="_self">Bitmap</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="267"
+                                    class="link-to-prism">src/app/components/hough-transform-animation/hough-transform-animation.component.ts:267</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>length</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>destination</td>
+                                            <td>
+                                                            <code><a href="../classes/Bitmap.html" target="_self" >Bitmap</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>source</td>
+                                            <td>
+                                                            <code><a href="../classes/Bitmap.html" target="_self" >Bitmap</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="transform"></a>
+                    <span class="name">
+                        <span ><b>transform</b></span>
+                        <a href="#transform"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>transform(bitmap: <a href="../classes/Bitmap.html" target="_self">Bitmap</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="184"
+                                    class="link-to-prism">src/app/components/hough-transform-animation/hough-transform-animation.component.ts:184</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>bitmap</td>
+                                            <td>
+                                                            <code><a href="../classes/Bitmap.html" target="_self" >Bitmap</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../classes/Line.html" target="_self" >Line[]</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="animationIndex"></a>
+                    <span class="name">
+                        <span ><b>animationIndex</b></span>
+                        <a href="#animationIndex"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/app/components/hough-transform-animation/hough-transform-animation.component.ts:58</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="bitmap"></a>
+                    <span class="name">
+                        <span ><b>bitmap</b></span>
+                        <a href="#bitmap"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/InteractiveBitmap.html" target="_self" >InteractiveBitmap</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new InteractiveBitmap(16, 9, undefined, 255)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/components/hough-transform-animation/hough-transform-animation.component.ts:44</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="bitmapKey"></a>
+                    <span class="name">
+                        <span ><b>bitmapKey</b></span>
+                        <a href="#bitmapKey"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;hough-transform&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/components/hough-transform-animation/hough-transform-animation.component.ts:47</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="bitmapTick"></a>
+                    <span class="name">
+                        <span ><b>bitmapTick</b></span>
+                        <a href="#bitmapTick"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/components/hough-transform-animation/hough-transform-animation.component.ts:46</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="chart"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Optional</span>
+                        <span ><b>chart</b></span>
+                        <a href="#chart"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Chart</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/components/hough-transform-animation/hough-transform-animation.component.ts:60</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="colorscale"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>colorscale</b></span>
+                        <a href="#colorscale"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../miscellaneous/enumerations.html#ColorScale" target="_self" >ColorScale</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>ColorScale.Binary</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/components/hough-transform-animation/hough-transform-animation.component.ts:59</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="limit"></a>
+                    <span class="name">
+                        <span ><b>limit</b></span>
+                        <a href="#limit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>5</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/components/hough-transform-animation/hough-transform-animation.component.ts:51</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="pixelSize"></a>
+                    <span class="name">
+                        <span ><b>pixelSize</b></span>
+                        <a href="#pixelSize"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>40</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/components/hough-transform-animation/hough-transform-animation.component.ts:50</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="resultBitmap"></a>
+                    <span class="name">
+                        <span ><b>resultBitmap</b></span>
+                        <a href="#resultBitmap"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/InteractiveBitmap.html" target="_self" >InteractiveBitmap</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new InteractiveBitmap(16, 9, undefined, 255)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/components/hough-transform-animation/hough-transform-animation.component.ts:45</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectionColor"></a>
+                    <span class="name">
+                        <span ><b>selectionColor</b></span>
+                        <a href="#selectionColor"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>getVar(&quot;--selection-color&quot;)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/components/hough-transform-animation/hough-transform-animation.component.ts:56</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showGrid"></a>
+                    <span class="name">
+                        <span ><b>showGrid</b></span>
+                        <a href="#showGrid"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/components/hough-transform-animation/hough-transform-animation.component.ts:53</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showHeaders"></a>
+                    <span class="name">
+                        <span ><b>showHeaders</b></span>
+                        <a href="#showHeaders"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/components/hough-transform-animation/hough-transform-animation.component.ts:55</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="tabIndex"></a>
+                    <span class="name">
+                        <span ><b>tabIndex</b></span>
+                        <a href="#tabIndex"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/components/hough-transform-animation/hough-transform-animation.component.ts:54</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="threshold"></a>
+                    <span class="name">
+                        <span ><b>threshold</b></span>
+                        <a href="#threshold"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>5</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/components/hough-transform-animation/hough-transform-animation.component.ts:52</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { AfterViewInit, Component, OnInit } from &#x27;@angular/core&#x27;;
+import { FormsModule } from &#x27;@angular/forms&#x27;;
+import { MatButtonModule } from &#x27;@angular/material/button&#x27;;
+import { MatCardModule } from &#x27;@angular/material/card&#x27;;
+import { MatCheckboxModule } from &#x27;@angular/material/checkbox&#x27;;
+import { MatFormFieldModule } from &#x27;@angular/material/form-field&#x27;;
+import { MatIconModule } from &#x27;@angular/material/icon&#x27;;
+import { MatSelectModule } from &#x27;@angular/material/select&#x27;;
+import { MatSliderModule } from &#x27;@angular/material/slider&#x27;;
+import { RouterModule } from &#x27;@angular/router&#x27;;
+import { BitmapComponent } from &#x27;../bitmap/bitmap.component&#x27;;
+import { AnimationControllerComponent } from &#x27;../animation-controller/animation-controller.component&#x27;;
+import { Bitmap, InteractiveBitmap } from &#x27;../../static/bitmap&#x27;;
+import { getVar } from &#x27;../../static/style-utils&#x27;;
+import { ColorScale } from &#x27;../../static/enums&#x27;;
+import { BitmapStorageService } from &#x27;../../services/bitmap-storage/bitmap-storage.service&#x27;;
+import { Point } from &#x27;../../static/point&#x27;;
+import { Chart, LineController, LineElement, PointElement, LinearScale, Title, Tooltip, Legend } from &#x27;chart.js&#x27;;
+import { MatInputModule } from &#x27;@angular/material/input&#x27;;
+import { MatTabsModule } from &#x27;@angular/material/tabs&#x27;;
+
+
+@Component({
+  selector: &#x27;app-hough-transform-animation&#x27;,
+  imports: [
+    MatIconModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatSliderModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    RouterModule,
+    MatCardModule,
+    BitmapComponent,
+    AnimationControllerComponent,
+    MatTabsModule
+  ],
+  templateUrl: &#x27;./hough-transform-animation.component.html&#x27;,
+  styleUrl: &#x27;./hough-transform-animation.component.css&#x27;
+})
+export class HoughTransformAnimationComponent implements AfterViewInit {
+  bitmap: InteractiveBitmap &#x3D; new InteractiveBitmap(16, 9, undefined, 255);
+  resultBitmap: InteractiveBitmap &#x3D; new InteractiveBitmap(16, 9, undefined, 255);
+  bitmapTick: number &#x3D; 0;
+  bitmapKey: string &#x3D; &#x27;hough-transform&#x27;;
+
+
+  pixelSize: number &#x3D; 40;
+  limit: number &#x3D; 5;
+  threshold: number &#x3D; 5;
+  showGrid: boolean &#x3D; true;
+  tabIndex: number &#x3D; 0;
+  showHeaders: boolean &#x3D; true;
+  selectionColor: string &#x3D; getVar(&quot;--selection-color&quot;);
+
+  animationIndex: number &#x3D; 0;
+  readonly colorscale: ColorScale &#x3D; ColorScale.Binary;
+  private chart?: Chart; 
+  
+
+  constructor(private bitmapStorage: BitmapStorageService) { 
+    let bitmap &#x3D; this.bitmapStorage.load(this.bitmapKey);
+    if (bitmap)
+      this.bitmap &#x3D; new InteractiveBitmap(bitmap.width, bitmap.height, bitmap, 255);
+
+    this.refresh();
+  }
+  ngAfterViewInit(): void {
+    const width &#x3D; this.bitmap.width;
+    const height &#x3D; this.bitmap.height;
+    
+    Chart.register(LineController, LineElement, PointElement, LinearScale, Title, Tooltip, Legend);
+    const canvas: HTMLCanvasElement &#x3D; document.getElementById(&#x27;bitmapChart&#x27;) as HTMLCanvasElement;
+    const ctx &#x3D; canvas.getContext(&#x27;2d&#x27;)!;
+    this.chart &#x3D; new Chart(ctx, {
+      type: &#x27;line&#x27;,
+      data: {
+        datasets: []
+      },
+      options: {
+        responsive: false,
+        devicePixelRatio: 2,
+        maintainAspectRatio: false,
+        layout: {
+
+          padding: 0
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            enabled: false
+          }
+        },
+        animation: false,
+        scales: {
+          x: {
+            display: false,
+            // grid: { display: true },
+            type: &#x27;linear&#x27;,
+            min: 0,
+            max: width,
+            title: { display: true, text: &#x27;X&#x27; }
+          },
+          y: {
+            display: false,
+            type: &#x27;linear&#x27;,
+            min: 0,
+            max: height, 
+            title: { display: true, text: &#x27;Y&#x27; }
+          }
+        }
+      }
+    });
+    this.refresh();
+  
+  }
+
+  refresh() {
+    // this.resultBitmap &#x3D; new InteractiveBitmap(this.bitmap.width, this.bitmap.height, this.bitmap, 255);
+    
+    if(this.chart){
+      this.chart.data.datasets &#x3D; [];
+      const width &#x3D; this.bitmap.width;
+      const height &#x3D; this.bitmap.height;
+    
+      const lines &#x3D; this.transform(this.resultBitmap).slice(0, this.limit);
+      for(let line of lines) {
+        let p1 &#x3D; this.linePoint(line.min.col, line.rho, line.theta*Math.PI/180);
+        let p2 &#x3D; this.linePoint(line.max.col, line.rho, line.theta*Math.PI/180);
+        if(line.min.col &#x3D;&#x3D; line.max.col){
+          p1 &#x3D; new Point(line.min.row, line.min.col);
+          p2 &#x3D; new Point(line.max.row, line.max.col);
+        }
+        // const points &#x3D; this.toLine(line.rho, line.theta);
+        const dataPoints &#x3D; [
+          { x: p1.col, y: p1.row },
+          { x: p2.col, y: p2.row }
+        ];
+        const flippedData &#x3D; dataPoints.map(p &#x3D;&gt; ({ x: p.x + 0.5, y: height - p.y - 0.5 }));
+        this.chart.data.datasets.push(
+          {
+            label: &#x60;line theta: ${line.theta} rho: ${line.rho} votes: ${line.votes}&#x60;,
+            data: flippedData,
+            borderColor: getVar(&quot;--selection-color&quot;),
+            // tension: 0 ,
+            pointRadius: 0,
+            clip: false
+          }
+        );
+      }
+      // this.chart.resize(this.getCanvasWidth()*2, this.getCanvasHeight()*2);
+      this.chart.update();
+      }
+    
+    // this.animate();
+  }
+
+  animate() {
+    let cell &#x3D; this.bitmap.getIndexCell(this.animationIndex);
+
+
+    this.resultBitmap &#x3D; new InteractiveBitmap(this.bitmap.width, this.bitmap.height, undefined, 255);
+    this.bitmap.pixels().filter(p&#x3D;&gt;p.value&#x3D;&#x3D;&#x3D;0&amp;&amp;this.bitmap.getCellIndex(p.cell)&lt;&#x3D;this.animationIndex).forEach(p &#x3D;&gt; this.resultBitmap.set(p.cell, 0));
+    this.refresh();
+
+    this.bitmap.clearSelection(); 
+    this.resultBitmap.clearSelection(); 
+    
+    this.bitmap.highlightedElement &#x3D; null;
+    this.selectionColor &#x3D; getVar(&quot;--selection-color&quot;);
+    
+    
+   
+    this.bitmap.select(cell);
+    this.resultBitmap.select(cell);
+
+    this.bitmapTick++;
+  }
+
+  transform(bitmap: Bitmap): Line[] {
+    const thetaStep &#x3D; 15;
+    const thetas: number[] &#x3D; [];
+    const width &#x3D; bitmap.width;
+    const height &#x3D; bitmap.height;
+
+    //thetas
+    for (let t &#x3D; 0; t &lt; 180; t +&#x3D; thetaStep)
+      thetas.push((t * Math.PI) / 180);
+    
+
+    // rhos
+    const diagLen &#x3D; Math.ceil(Math.sqrt(width * width + height * height));
+    const rhos: number[] &#x3D; [];
+    for (let r &#x3D; -diagLen; r &lt;&#x3D; diagLen; r++)
+      rhos.push(r);
+
+
+
+    // akumulator [rho][theta]
+    const accumulator: number[][] &#x3D; Array.from({ length: rhos.length }, () &#x3D;&gt;
+      Array(thetas.length).fill(0)
+    );
+    const min: Point[][] &#x3D; Array.from({ length: rhos.length }, () &#x3D;&gt;
+      Array(thetas.length).fill(new Point(height, width))
+    );
+    const max: Point[][] &#x3D; Array.from({ length: rhos.length }, () &#x3D;&gt;
+      Array(thetas.length).fill(Point.zero)
+    );
+
+
+    bitmap.cells().forEach(p &#x3D;&gt; {
+      if (bitmap.getBinary(p)) {
+
+        thetas.forEach((theta, tIdx) &#x3D;&gt; {
+          const rho &#x3D; Math.round(p.col * Math.cos(theta) + p.row * Math.sin(theta));
+          const rIdx &#x3D; rho + diagLen;
+          min[rIdx][tIdx] &#x3D; min[rIdx][tIdx].min(p);
+          max[rIdx][tIdx] &#x3D; max[rIdx][tIdx].max(p);
+          // if(min[rIdx][tIdx].col&gt;p.col)
+          //   min[rIdx][tIdx].col &#x3D; p.col;
+          // if(max[rIdx][tIdx].col&lt;p.col)
+          //   max[rIdx][tIdx].col &#x3D; p.col;
+
+          accumulator[rIdx][tIdx]++;
+        });
+
+      }
+    });
+
+    const threshold &#x3D; this.threshold;
+    const lines: Line[] &#x3D; [];
+
+    for (let r &#x3D; 0; r &lt; rhos.length; r++) {
+      for (let t &#x3D; 0; t &lt; thetas.length; t++) {
+        const votes &#x3D; accumulator[r][t];
+        if (votes &gt;&#x3D; threshold) {
+          lines.push(new Line(
+            rhos[r],
+            thetas[t]*180/Math.PI,
+            votes,
+            min[r][t],
+            max[r][t]
+          ));
+        }
+      }
+    }
+
+    lines.sort((a, b) &#x3D;&gt; b.votes - a.votes);
+    return lines;
+  }
+
+  //helpers
+  getCanvasHeight(): number {
+    return this.bitmap.height * this.pixelSize;// + (this.showHeaders ? 30 : 0);
+  }
+  getCanvasWidth(): number {
+    return this.bitmap.width * this.pixelSize;// + (this.showHeaders ? 30 : 0);
+  }
+  linePoint(x: number, rho: number, thetaRad: number): Point {
+    return new Point((rho-x*Math.cos(thetaRad))/Math.sin(thetaRad), x);
+  }
+
+  setValues(length: number, destination: Bitmap, source: Bitmap) {
+    for (let i &#x3D; 0; i &lt; length; i++) {
+      const cell &#x3D; this.bitmap.getIndexCell(i);
+      
+      if (destination.isOut(cell) || source.isOut(cell)) 
+        continue;
+      
+      let value &#x3D; source.get(cell);
+      if(value !&#x3D;&#x3D; undefined)
+        destination.set(cell, value);
+    }
+  }
+
+  onCellClicked($event: { cell: Point; event: MouseEvent; }, click: boolean &#x3D; false) {
+    if(this.bitmap.isOut($event.cell)) return;
+    if($event.event.buttons &#x3D;&#x3D;&#x3D; 1) {
+      this.animationIndex &#x3D; this.bitmap.getCellIndex($event.cell);
+      this.animate();
+    }
+  }
+}
+/** Represents a line in polar coordinates along with its voting information and endpoints. */
+class Line {
+    constructor(public rho: number, public theta: number, public votes: number, public min: Point, public max: Point){ }
+}
+
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;flex-col&quot; style&#x3D;&quot;padding: 8px; height: 100%; box-sizing: border-box;&quot;&gt;
+
+
+
+    &lt;mat-card appearance&#x3D;&quot;outlined&quot; class&#x3D;&quot;topbar&quot;&gt;
+    
+    
+        &lt;button mat-button [routerLink]&#x3D;&quot;[&#x27;/binary-edit&#x27;, bitmapKey]&quot;&gt;
+            &lt;mat-icon&gt;edit&lt;/mat-icon&gt;
+            Edit
+        &lt;/button&gt;
+
+        
+        &lt;div class&#x3D;&quot;divider&quot;&gt;&lt;/div&gt;
+    
+    
+        &lt;mat-label&gt;Pixel Size&lt;/mat-label&gt;
+        &lt;mat-slider min&#x3D;&quot;25&quot; max&#x3D;&quot;100&quot; step&#x3D;&quot;1&quot; discrete&#x3D;&quot;false&quot;&gt;
+            &lt;input matSliderThumb [(ngModel)]&#x3D;&quot;pixelSize&quot;&gt;
+        &lt;/mat-slider&gt;
+        &lt;div class&#x3D;&quot;divider&quot;&gt;&lt;/div&gt;
+        &lt;mat-checkbox [(ngModel)]&#x3D;&quot;showGrid&quot;&gt;
+            Grid
+        &lt;/mat-checkbox&gt;
+        &lt;mat-checkbox [(ngModel)]&#x3D;&quot;showHeaders&quot; [disabled]&#x3D;&quot;pixelSize&lt;40&quot;&gt;
+            Headers
+        &lt;/mat-checkbox&gt;
+
+        &lt;div class&#x3D;&quot;divider&quot;&gt;&lt;/div&gt;
+        
+        &lt;mat-form-field class&#x3D;&quot;slim-form-field&quot; subscriptSizing&#x3D;&quot;dynamic&quot; appearance&#x3D;&quot;outline&quot;&gt;
+            &lt;mat-label&gt;Threshold&lt;/mat-label&gt;
+            &lt;input matInput type&#x3D;&quot;number&quot; placeholder&#x3D;&quot;Ex. 10&quot; [(ngModel)]&#x3D;&quot;threshold&quot; (ngModelChange)&#x3D;&quot;refresh()&quot; min&#x3D;&quot;3&quot;
+                max&#x3D;&quot;25&quot; step&#x3D;&quot;1&quot;&gt;
+        &lt;/mat-form-field&gt;
+        
+        &lt;div class&#x3D;&quot;slim-divider&quot;&gt;&lt;/div&gt;
+        
+        &lt;mat-form-field class&#x3D;&quot;slim-form-field&quot; subscriptSizing&#x3D;&quot;dynamic&quot; appearance&#x3D;&quot;outline&quot;&gt;
+            &lt;mat-label&gt;Limit&lt;/mat-label&gt;
+            &lt;input matInput type&#x3D;&quot;number&quot; placeholder&#x3D;&quot;Ex. 10&quot; [(ngModel)]&#x3D;&quot;limit&quot; (ngModelChange)&#x3D;&quot;refresh()&quot; min&#x3D;&quot;0&quot; max&#x3D;&quot;25&quot;
+                step&#x3D;&quot;1&quot;&gt;
+        &lt;/mat-form-field&gt;
+        
+        &lt;div class&#x3D;&quot;divider&quot;&gt;&lt;/div&gt;
+        
+        &lt;app-animation-controller [showValue]&#x3D;&quot;false&quot; [(value)]&#x3D;&quot;animationIndex&quot; (valueChanged)&#x3D;&quot;animate()&quot; [min]&#x3D;&quot;0&quot; [max]&#x3D;&quot;bitmap.length()-1&quot;&gt;&lt;/app-animation-controller&gt;
+        
+    
+    &lt;/mat-card&gt;
+
+
+
+
+
+
+    &lt;div class&#x3D;&quot;flex-row&quot; style&#x3D;&quot;gap: 8px; flex: 1; min-height: 0&quot;&gt;
+
+        &lt;mat-card appearance&#x3D;&quot;outlined&quot; style&#x3D;&quot;overflow: hidden; width: 50%;&quot;&gt;
+            &lt;div class&#x3D;&quot;scrollable&quot;&gt;
+
+                &lt;app-bitmap class&#x3D;&quot;bitmap&quot; [bitmap]&#x3D;&quot;bitmap&quot; [pixelSize]&#x3D;&quot;pixelSize&quot;
+                    [showHeaders]&#x3D;&quot;showHeaders&amp;&amp;pixelSize&gt;&#x3D;40&quot; [showGrid]&#x3D;&quot;showGrid&quot;
+                    [showNumbers]&#x3D;&quot;false&quot; [tick]&#x3D;&quot;bitmapTick&quot;
+                    [userSelect]&#x3D;&quot;false&quot; style&#x3D;&quot;margin: auto;&quot;
+                    [selectionColor]&#x3D;&quot;selectionColor&quot;
+                    (cellClicked)&#x3D;&quot;onCellClicked($event)&quot;
+                    &gt;
+
+                &lt;/app-bitmap&gt;
+            &lt;/div&gt;
+        &lt;/mat-card&gt;
+
+        &lt;!-- &lt;div class&#x3D;&quot;flex-col&quot; style&#x3D;&quot;width: 50%;&quot;&gt; --&gt;
+            &lt;!-- &lt;mat-card appearance&#x3D;&quot;outlined&quot; class&#x3D;&quot;topbar&quot; style&#x3D;&quot;padding: 8px;&quot;&gt;
+        
+                
+             
+                
+                &lt;div class&#x3D;&quot;divider&quot;&gt;&lt;/div&gt;
+                &lt;button mat-raised-button (click)&#x3D;&quot;tabIndex &#x3D; 0&quot;&gt;Panel 1&lt;/button&gt;
+                &lt;div class&#x3D;&quot;slim-divider&quot;&gt;&lt;/div&gt;
+
+                &lt;button mat-raised-button (click)&#x3D;&quot;tabIndex &#x3D; 1&quot;&gt;Panel 2&lt;/button&gt;
+            &lt;/mat-card&gt;
+         --&gt;
+
+            &lt;mat-card appearance&#x3D;&quot;outlined&quot;style&#x3D;&quot;height: 100%; width: 50%; overflow: hidden;&quot;&gt;
+                
+
+
+                        &lt;div class&#x3D;&quot;scrollable&quot; style&#x3D;&quot;height: 100%;&quot;&gt;
+                            &lt;div class&#x3D;&quot;bitmap&quot; style&#x3D;&quot;position: relative; height: fit-content;&quot;&gt;
+                                &lt;canvas id&#x3D;&quot;bitmapChart&quot; [style.width]&#x3D;&quot;getCanvasWidth()+&#x27;px&#x27;&quot; [style.height]&#x3D;&quot;getCanvasHeight()+&#x27;px&#x27;&quot;
+                                    [style.top]&#x3D;&quot;showHeaders&amp;&amp;pixelSize&gt;&#x3D;40?&#x27;30px&#x27;:&#x27;0&#x27;&quot;
+                                    [style.left]&#x3D;&quot;showHeaders&amp;&amp;pixelSize&gt;&#x3D;40?&#x27;30px&#x27;:&#x27;0&#x27;&quot;
+                                    style&#x3D;&quot;position: absolute; z-index: 1; pointer-events: none;&quot;&gt;&lt;/canvas&gt;
+                
+                                &lt;app-bitmap class&#x3D;&quot;bitmap&quot; [bitmap]&#x3D;&quot;resultBitmap&quot; [pixelSize]&#x3D;&quot;pixelSize&quot;
+                                    [showHeaders]&#x3D;&quot;showHeaders&amp;&amp;pixelSize&gt;&#x3D;40&quot; [showGrid]&#x3D;&quot;showGrid&quot; [showNumbers]&#x3D;&quot;false&quot;
+                                    [tick]&#x3D;&quot;bitmapTick&quot; [userSelect]&#x3D;&quot;false&quot; style&#x3D;&quot;margin: auto;&quot; [selectionColor]&#x3D;&quot;selectionColor&quot;
+                                    (cellClicked)&#x3D;&quot;onCellClicked($event)&quot;&gt;
+                
+                                &lt;/app-bitmap&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+
+
+
+
+            &lt;/mat-card&gt;
+        &lt;!-- &lt;/div&gt; --&gt;
+
+    &lt;/div&gt;
+
+
+    &lt;!-- &lt;mat-card class&#x3D;&quot;topbar&quot; appearance&#x3D;&quot;outlined&quot; style&#x3D;&quot;overflow: hidden; min-height: fit-content;&quot;&gt;
+    &lt;/mat-card&gt; --&gt;
+
+&lt;/div&gt;</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="flex-col" style="padding: 8px; height: 100%; box-sizing: border-box;">    <mat-card appearance="outlined" class="topbar">                <button mat-button [routerLink]="[\'/binary-edit\', bitmapKey]">            <mat-icon>edit</mat-icon>            Edit        </button>                <div class="divider"></div>                <mat-label>Pixel Size</mat-label>        <mat-slider min="25" max="100" step="1" discrete="false">            <input matSliderThumb [(ngModel)]="pixelSize">        </mat-slider>        <div class="divider"></div>        <mat-checkbox [(ngModel)]="showGrid">            Grid        </mat-checkbox>        <mat-checkbox [(ngModel)]="showHeaders" [disabled]="pixelSize<40">            Headers        </mat-checkbox>        <div class="divider"></div>                <mat-form-field class="slim-form-field" subscriptSizing="dynamic" appearance="outline">            <mat-label>Threshold</mat-label>            <input matInput type="number" placeholder="Ex. 10" [(ngModel)]="threshold" (ngModelChange)="refresh()" min="3"                max="25" step="1">        </mat-form-field>                <div class="slim-divider"></div>                <mat-form-field class="slim-form-field" subscriptSizing="dynamic" appearance="outline">            <mat-label>Limit</mat-label>            <input matInput type="number" placeholder="Ex. 10" [(ngModel)]="limit" (ngModelChange)="refresh()" min="0" max="25"                step="1">        </mat-form-field>                <div class="divider"></div>                <app-animation-controller [showValue]="false" [(value)]="animationIndex" (valueChanged)="animate()" [min]="0" [max]="bitmap.length()-1"></app-animation-controller>                </mat-card>    <div class="flex-row" style="gap: 8px; flex: 1; min-height: 0">        <mat-card appearance="outlined" style="overflow: hidden; width: 50%;">            <div class="scrollable">                <app-bitmap class="bitmap" [bitmap]="bitmap" [pixelSize]="pixelSize"                    [showHeaders]="showHeaders&&pixelSize>=40" [showGrid]="showGrid"                    [showNumbers]="false" [tick]="bitmapTick"                    [userSelect]="false" style="margin: auto;"                    [selectionColor]="selectionColor"                    (cellClicked)="onCellClicked($event)"                    >                </app-bitmap>            </div>        </mat-card>        <!-- <div class="flex-col" style="width: 50%;"> -->            <!-- <mat-card appearance="outlined" class="topbar" style="padding: 8px;">                                                                     <div class="divider"></div>                <button mat-raised-button (click)="tabIndex = 0">Panel 1</button>                <div class="slim-divider"></div>                <button mat-raised-button (click)="tabIndex = 1">Panel 2</button>            </mat-card>         -->            <mat-card appearance="outlined"style="height: 100%; width: 50%; overflow: hidden;">                                        <div class="scrollable" style="height: 100%;">                            <div class="bitmap" style="position: relative; height: fit-content;">                                <canvas id="bitmapChart" [style.width]="getCanvasWidth()+\'px\'" [style.height]="getCanvasHeight()+\'px\'"                                    [style.top]="showHeaders&&pixelSize>=40?\'30px\':\'0\'"                                    [style.left]="showHeaders&&pixelSize>=40?\'30px\':\'0\'"                                    style="position: absolute; z-index: 1; pointer-events: none;"></canvas>                                                <app-bitmap class="bitmap" [bitmap]="resultBitmap" [pixelSize]="pixelSize"                                    [showHeaders]="showHeaders&&pixelSize>=40" [showGrid]="showGrid" [showNumbers]="false"                                    [tick]="bitmapTick" [userSelect]="false" style="margin: auto;" [selectionColor]="selectionColor"                                    (cellClicked)="onCellClicked($event)">                                                </app-bitmap>                            </div>                        </div>            </mat-card>        <!-- </div> -->    </div>    <!-- <mat-card class="topbar" appearance="outlined" style="overflow: hidden; min-height: fit-content;">    </mat-card> --></div></div>'
+    var COMPONENTS = [{'name': 'AnimationControllerComponent', 'selector': 'app-animation-controller'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BinaryBitmapEditorComponent', 'selector': 'app-binary-bitmap-editor'},{'name': 'BitmapComponent', 'selector': 'app-bitmap'},{'name': 'BitmapEditorComponent', 'selector': 'app-bitmap-editor'},{'name': 'ConvolutionalFilterAnimationComponent', 'selector': 'app-convolutional-filter-animation'},{'name': 'HelpComponent', 'selector': 'app-help'},{'name': 'HistogramComponent', 'selector': 'app-histogram'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'HoughTransformAnimationComponent', 'selector': 'app-hough-transform-animation'},{'name': 'KernelDialogComponent', 'selector': 'app-kernel-dialog'},{'name': 'MatrixDisplayComponent', 'selector': 'app-matrix-display'},{'name': 'MedianFilterAnimationComponent', 'selector': 'app-median-filter-animation'},{'name': 'MorphologicalOperationsAnimationComponent', 'selector': 'app-morphological-operations-animation'},{'name': 'PageNotFoundComponent', 'selector': 'app-page-not-found'},{'name': 'ShapeBitmapEditorComponent', 'selector': 'app-shape-bitmap-editor'},{'name': 'StructuringElementEditorComponent', 'selector': 'app-structuring-element-editor'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'HoughTransformAnimationComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'HoughTransformAnimationComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

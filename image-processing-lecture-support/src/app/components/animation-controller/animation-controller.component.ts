@@ -30,7 +30,7 @@ import { MatSliderModule } from '@angular/material/slider';
 export class AnimationControllerComponent implements OnInit, OnDestroy {
   //public
   
-  /** If true, the animation will loop continuously */
+  /** If true, the animation will loop continuously. */
   loop: boolean = false;
   /** If true, the animation is currently playing.
    * When false, the animation is paused.
@@ -39,19 +39,19 @@ export class AnimationControllerComponent implements OnInit, OnDestroy {
   /** Speed multiplier for the animation playback. Higher values result in faster playback. */
   speed: number = 1;
   
-  /** If true, the value (current frame) is displayed */
+  /** If true, the value (current frame) is displayed. */
   showValue = input<boolean>(true);
 
-  /** Minimum value (first frame) of the animation */
+  /** Minimum value (first frame) of the animation. */
   min = input<number>(1);
-  /** Maximum value (last frame) of the animation */
+  /** Maximum value (last frame) of the animation. */
   max = input<number>(255);
-  /** Step size for incrementing/decrementing the value (frame) */
+  /** Step size for incrementing/decrementing the value (frame). */
   step = input<number>(1);
 
-  /** Current value (frame) of the animation */
+  /** Current value (frame) of the animation. */
   value = model<number>(0);
-  /** Event emitted when the value (frame) changes, **overrides default model behavior** */
+  /** Event emitted when the value (frame) changes, **overrides default model behavior.** */
   valueChanged = output<number>();
 
   //private

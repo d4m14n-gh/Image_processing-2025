@@ -1,0 +1,1789 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>image-processing-lecture-support documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">image-processing-lecture-support documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  MorphologicalOperationsAnimationComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/components/morphological-operations-animation/morphological-operations-animation.component.ts</code>
+</p>
+
+
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Component to visualize and animate morphological operations (dilation, erosion, opening, closing) on a bitmap image.</p>
+
+    </p>
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-morphological-operations-animation</code></td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>MatIconModule</code>
+                            <code>MatButtonModule</code>
+                            <code>MatCheckboxModule</code>
+                            <code>MatSliderModule</code>
+                            <code>FormsModule</code>
+                            <code>MatFormFieldModule</code>
+                            <code>MatSelectModule</code>
+                            <code>RouterModule</code>
+                            <code>MatCardModule</code>
+                                <code><a href="../components/BitmapComponent.html" target="_self" >BitmapComponent</a></code>
+                                <code><a href="../components/AnimationControllerComponent.html" target="_self" >AnimationControllerComponent</a></code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./morphological-operations-animation.component.html</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./morphological-operations-animation.component.css</code></td>
+            </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#animationIndex" >animationIndex</a>
+                            </li>
+                            <li>
+                                <a href="#appliedBitmap" >appliedBitmap</a>
+                            </li>
+                            <li>
+                                <a href="#bitmap" >bitmap</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#bitmapKey" >bitmapKey</a>
+                            </li>
+                            <li>
+                                <a href="#bitmapTick" >bitmapTick</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#colorscale" >colorscale</a>
+                            </li>
+                            <li>
+                                <a href="#operation" >operation</a>
+                            </li>
+                            <li>
+                                <a href="#pixelSize" >pixelSize</a>
+                            </li>
+                            <li>
+                                <a href="#resultBitmap" >resultBitmap</a>
+                            </li>
+                            <li>
+                                <a href="#selectionColor" >selectionColor</a>
+                            </li>
+                            <li>
+                                <a href="#showBase" >showBase</a>
+                            </li>
+                            <li>
+                                <a href="#showDifference" >showDifference</a>
+                            </li>
+                            <li>
+                                <a href="#showGrid" >showGrid</a>
+                            </li>
+                            <li>
+                                <a href="#showHeaders" >showHeaders</a>
+                            </li>
+                            <li>
+                                <a href="#structuringElement" >structuringElement</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#animate" >animate</a>
+                            </li>
+                            <li>
+                                <a href="#apply" >apply</a>
+                            </li>
+                            <li>
+                                <a href="#commit" >commit</a>
+                            </li>
+                            <li>
+                                <a href="#onCellClicked" >onCellClicked</a>
+                            </li>
+                            <li>
+                                <a href="#refresh" >refresh</a>
+                            </li>
+                            <li>
+                                <a href="#setValues" >setValues</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(bitmapStorage: <a href="../injectables/BitmapStorageService.html" target="_self">BitmapStorageService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="73" class="link-to-prism">src/app/components/morphological-operations-animation/morphological-operations-animation.component.ts:73</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Creates an instance of the MorphologicalOperationsAnimationComponent.</p>
+</div>
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>bitmapStorage</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/BitmapStorageService.html" target="_self" >BitmapStorageService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <p>The service for loading and saving bitmaps.</p>
+
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="animate"></a>
+                    <span class="name">
+                        <span ><b>animate</b></span>
+                        <a href="#animate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>animate()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="118"
+                                    class="link-to-prism">src/app/components/morphological-operations-animation/morphological-operations-animation.component.ts:118</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Advances the animation by processing the next pixel and updating the selection.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="apply"></a>
+                    <span class="name">
+                        <span ><b>apply</b></span>
+                        <a href="#apply"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>apply(apply: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="105"
+                                    class="link-to-prism">src/app/components/morphological-operations-animation/morphological-operations-animation.component.ts:105</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Applies or reverts the morphological operation on the original bitmap.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Default value</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>apply</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                                    <code>true</code>
+                                            </td>
+
+                                            <td>
+                                                    <p>If true, applies the operation; if false, reverts to the original bitmap.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="commit"></a>
+                    <span class="name">
+                        <span ><b>commit</b></span>
+                        <a href="#commit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>commit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="99"
+                                    class="link-to-prism">src/app/components/morphological-operations-animation/morphological-operations-animation.component.ts:99</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Saves the current bitmap to storage.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onCellClicked"></a>
+                    <span class="name">
+                        <span ><b>onCellClicked</b></span>
+                        <a href="#onCellClicked"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onCellClicked($event: literal type, click: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="196"
+                                    class="link-to-prism">src/app/components/morphological-operations-animation/morphological-operations-animation.component.ts:196</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Handles cell click events to start the animation from the clicked pixel.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Default value</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>$event</td>
+                                            <td>
+                                                        <code>literal type</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                            </td>
+
+                                            <td>
+                                                    <p>The event containing the clicked cell and mouse event details.</p>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>click</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                                    <code>false</code>
+                                            </td>
+
+                                            <td>
+                                                    <p>Unused.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="refresh"></a>
+                    <span class="name">
+                        <span ><b>refresh</b></span>
+                        <a href="#refresh"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>refresh()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="92"
+                                    class="link-to-prism">src/app/components/morphological-operations-animation/morphological-operations-animation.component.ts:92</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Updates the applied and result bitmaps based on the current operation and structuring element.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setValues"></a>
+                    <span class="name">
+                        <span ><b>setValues</b></span>
+                        <a href="#setValues"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>setValues(length: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, destination: <a href="../classes/Bitmap.html" target="_self">Bitmap</a>, source: <a href="../classes/Bitmap.html" target="_self">Bitmap</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="169"
+                                    class="link-to-prism">src/app/components/morphological-operations-animation/morphological-operations-animation.component.ts:169</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Sets pixel values in the destination bitmap based on the selected morphological operation.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>length</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>The number of pixels to process.</p>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>destination</td>
+                                            <td>
+                                                            <code><a href="../classes/Bitmap.html" target="_self" >Bitmap</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>The bitmap where the results are stored.</p>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>source</td>
+                                            <td>
+                                                            <code><a href="../classes/Bitmap.html" target="_self" >Bitmap</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>The bitmap from which pixel values are taken.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="animationIndex"></a>
+                    <span class="name">
+                        <span ><b>animationIndex</b></span>
+                        <a href="#animationIndex"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="71" class="link-to-prism">src/app/components/morphological-operations-animation/morphological-operations-animation.component.ts:71</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Current index of the pixel being processed in the animation.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="appliedBitmap"></a>
+                    <span class="name">
+                        <span ><b>appliedBitmap</b></span>
+                        <a href="#appliedBitmap"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/InteractiveBitmap.html" target="_self" >InteractiveBitmap</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new InteractiveBitmap(16, 9, undefined, 255)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/components/morphological-operations-animation/morphological-operations-animation.component.ts:43</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>The bitmap image after applying the morphological operation.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="bitmap"></a>
+                    <span class="name">
+                        <span ><b>bitmap</b></span>
+                        <a href="#bitmap"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/InteractiveBitmap.html" target="_self" >InteractiveBitmap</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new InteractiveBitmap(16, 9, undefined, 255)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/components/morphological-operations-animation/morphological-operations-animation.component.ts:41</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>The original bitmap image to which the morphological operation is applied.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="bitmapKey"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>bitmapKey</b></span>
+                        <a href="#bitmapKey"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;morphological-operations&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/components/morphological-operations-animation/morphological-operations-animation.component.ts:49</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Key used to load and save the bitmap in storage.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="bitmapTick"></a>
+                    <span class="name">
+                        <span ><b>bitmapTick</b></span>
+                        <a href="#bitmapTick"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/components/morphological-operations-animation/morphological-operations-animation.component.ts:47</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Used to trigger bitmap component refresh.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="colorscale"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>colorscale</b></span>
+                        <a href="#colorscale"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../miscellaneous/enumerations.html#ColorScale" target="_self" >ColorScale</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>ColorScale.Binary</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="73" class="link-to-prism">src/app/components/morphological-operations-animation/morphological-operations-animation.component.ts:73</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Color scale used for displaying the bitmap.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="operation"></a>
+                    <span class="name">
+                        <span ><b>operation</b></span>
+                        <a href="#operation"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../miscellaneous/enumerations.html#MorphologicalOperations" target="_self" >MorphologicalOperations</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>MorphologicalOperations.Erosion</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/components/morphological-operations-animation/morphological-operations-animation.component.ts:54</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>The morphological operation to perform.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="pixelSize"></a>
+                    <span class="name">
+                        <span ><b>pixelSize</b></span>
+                        <a href="#pixelSize"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>40</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/app/components/morphological-operations-animation/morphological-operations-animation.component.ts:58</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Size of each pixel in the bitmap display (in pixels).</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="resultBitmap"></a>
+                    <span class="name">
+                        <span ><b>resultBitmap</b></span>
+                        <a href="#resultBitmap"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/InteractiveBitmap.html" target="_self" >InteractiveBitmap</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new InteractiveBitmap(16, 9, undefined, 255)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/components/morphological-operations-animation/morphological-operations-animation.component.ts:45</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>The result bitmap after the operation is applied.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectionColor"></a>
+                    <span class="name">
+                        <span ><b>selectionColor</b></span>
+                        <a href="#selectionColor"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>getVar(&quot;--selection-color&quot;)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/app/components/morphological-operations-animation/morphological-operations-animation.component.ts:68</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Color used to highlight selected pixels.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showBase"></a>
+                    <span class="name">
+                        <span ><b>showBase</b></span>
+                        <a href="#showBase"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">src/app/components/morphological-operations-animation/morphological-operations-animation.component.ts:66</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>If true, the original bitmap is shown under the result.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showDifference"></a>
+                    <span class="name">
+                        <span ><b>showDifference</b></span>
+                        <a href="#showDifference"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">src/app/components/morphological-operations-animation/morphological-operations-animation.component.ts:64</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>If true, the difference is displayed.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showGrid"></a>
+                    <span class="name">
+                        <span ><b>showGrid</b></span>
+                        <a href="#showGrid"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/components/morphological-operations-animation/morphological-operations-animation.component.ts:60</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>If true, a grid is displayed over the bitmap.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showHeaders"></a>
+                    <span class="name">
+                        <span ><b>showHeaders</b></span>
+                        <a href="#showHeaders"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/components/morphological-operations-animation/morphological-operations-animation.component.ts:62</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>If true, headers are displayed.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="structuringElement"></a>
+                    <span class="name">
+                        <span ><b>structuringElement</b></span>
+                        <a href="#structuringElement"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/StructuringElement.html" target="_self" >StructuringElement</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new StructuringElement(3, 3)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/components/morphological-operations-animation/morphological-operations-animation.component.ts:52</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>The structuring element used for the morphological operation.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component } from &#x27;@angular/core&#x27;;
+import { FormsModule } from &#x27;@angular/forms&#x27;;
+import { MatButtonModule } from &#x27;@angular/material/button&#x27;;
+import { MatCardModule } from &#x27;@angular/material/card&#x27;;
+import { MatCheckboxModule } from &#x27;@angular/material/checkbox&#x27;;
+import { MatFormFieldModule } from &#x27;@angular/material/form-field&#x27;;
+import { MatIconModule } from &#x27;@angular/material/icon&#x27;;
+import { MatSelectModule } from &#x27;@angular/material/select&#x27;;
+import { MatSliderModule } from &#x27;@angular/material/slider&#x27;;
+import { RouterModule } from &#x27;@angular/router&#x27;;
+import { AnimationControllerComponent } from &#x27;../animation-controller/animation-controller.component&#x27;;
+import { Bitmap, InteractiveBitmap } from &#x27;../../static/bitmap&#x27;;
+import { BitmapComponent } from &#x27;../bitmap/bitmap.component&#x27;;
+import { BitmapStorageService } from &#x27;../../services/bitmap-storage/bitmap-storage.service&#x27;;
+import { Point } from &#x27;../../static/point&#x27;;
+import { StructuringElement } from &#x27;../../static/structuringElement&#x27;;
+import { ColorScale, MorphologicalOperations } from &#x27;../../static/enums&#x27;;
+import { getVar } from &#x27;../../static/style-utils&#x27;;
+
+/** Component to visualize and animate morphological operations (dilation, erosion, opening, closing) on a bitmap image. */
+@Component({
+  selector: &#x27;app-morphological-operations-animation&#x27;,
+  imports: [
+    MatIconModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatSliderModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    RouterModule,
+    MatCardModule,
+    BitmapComponent,
+    AnimationControllerComponent,
+],
+  templateUrl: &#x27;./morphological-operations-animation.component.html&#x27;,
+  styleUrl: &#x27;./morphological-operations-animation.component.css&#x27;
+})
+export class MorphologicalOperationsAnimationComponent {
+  /** The original bitmap image to which the morphological operation is applied. */
+  bitmap: InteractiveBitmap &#x3D; new InteractiveBitmap(16, 9, undefined, 255);
+  /** The bitmap image after applying the morphological operation. */
+  appliedBitmap: InteractiveBitmap &#x3D; new InteractiveBitmap(16, 9, undefined, 255);
+  /** The result bitmap after the operation is applied. */
+  resultBitmap: InteractiveBitmap &#x3D; new InteractiveBitmap(16, 9, undefined, 255);
+  /** Used to trigger bitmap component refresh. */
+  bitmapTick: number &#x3D; 0;
+  /** Key used to load and save the bitmap in storage. */
+  readonly bitmapKey: string &#x3D; &#x27;morphological-operations&#x27;;
+
+  /** The structuring element used for the morphological operation. */
+  structuringElement: StructuringElement &#x3D; new StructuringElement(3, 3);
+  /** The morphological operation to perform. */
+  operation: MorphologicalOperations &#x3D; MorphologicalOperations.Erosion;
+
+  //view
+  /** Size of each pixel in the bitmap display (in pixels). */
+  pixelSize: number &#x3D; 40;
+  /** If true, a grid is displayed over the bitmap. */
+  showGrid: boolean &#x3D; true;
+  /** If true, headers are displayed. */
+  showHeaders: boolean &#x3D; true;
+  /** If true, the difference is displayed. */
+  showDifference: boolean &#x3D; true;
+  /** If true, the original bitmap is shown under the result. */
+  showBase: boolean &#x3D; false;
+  /** Color used to highlight selected pixels. */
+  selectionColor: string &#x3D; getVar(&quot;--selection-color&quot;);
+  
+  /** Current index of the pixel being processed in the animation. */
+  animationIndex: number &#x3D; 0;
+  /** Color scale used for displaying the bitmap. */
+  readonly colorscale: ColorScale &#x3D; ColorScale.Binary;
+
+  /** Creates an instance of the MorphologicalOperationsAnimationComponent.
+   * @param bitmapStorage The service for loading and saving bitmaps.
+   */
+  constructor(private bitmapStorage: BitmapStorageService) { 
+    let bitmap &#x3D; this.bitmapStorage.load(this.bitmapKey);
+    if (bitmap)
+      this.bitmap &#x3D; new InteractiveBitmap(bitmap.width, bitmap.height, bitmap, 255);
+    else
+      this.bitmapStorage.save(this.bitmapKey, this.bitmap);
+
+    this.structuringElement.set(Point.one, 0);
+    this.structuringElement.load();
+    this.structuringElement.save();
+    this.refresh();
+  }
+
+  /** Updates the applied and result bitmaps based on the current operation and structuring element. */
+  refresh(): void {
+    this.appliedBitmap &#x3D; new InteractiveBitmap(this.bitmap.width, this.bitmap.height, undefined, 255);
+    this.resultBitmap &#x3D; new InteractiveBitmap(this.bitmap.width, this.bitmap.height, this.bitmap, 255);
+    this.structuringElement.applyComplex(this.bitmap, this.appliedBitmap, this.operation, this.showDifference);
+    this.animate();
+  }
+  /** Saves the current bitmap to storage. */
+  commit(): void {
+    this.bitmapStorage.save(this.bitmapKey, this.bitmap);
+  }
+  /** Applies or reverts the morphological operation on the original bitmap.
+   * @param apply If true, applies the operation; if false, reverts to the original bitmap.
+  */
+  apply(apply: boolean &#x3D; true): void {
+    this.bitmap &#x3D; new InteractiveBitmap(this.bitmap.width, this.bitmap.height, undefined, 255);
+    if(apply)
+      this.appliedBitmap.pixels().filter(p&#x3D;&gt;p.value!&lt;&#x3D;128).forEach(p&#x3D;&gt;this.bitmap.set(p.cell, 0));
+    else{
+      let bitmap &#x3D; this.bitmapStorage.load(this.bitmapKey);
+      if (bitmap)
+        this.bitmap &#x3D; new InteractiveBitmap(bitmap.width, bitmap.height, bitmap, 255);
+    }
+
+    this.refresh();
+  }
+  /** Advances the animation by processing the next pixel and updating the selection. */
+  animate(): void {
+    let cell &#x3D; this.bitmap.getIndexCell(this.animationIndex);
+
+
+    this.resultBitmap &#x3D; new InteractiveBitmap(this.bitmap.width, this.bitmap.height, this.showBase?this.bitmap:undefined, 255);
+    this.resultBitmap.pixels().filter(p&#x3D;&gt;p.value&#x3D;&#x3D;&#x3D;0).forEach(p &#x3D;&gt; this.resultBitmap.set(p.cell, 128));
+    this.setValues(this.animationIndex+1, this.resultBitmap, this.appliedBitmap);
+
+
+    this.bitmap.clearSelection(); 
+    this.resultBitmap.clearSelection(); 
+
+    this.resultBitmap.select(cell);
+    
+    this.bitmap.highlightedElement &#x3D; null;
+    this.selectionColor &#x3D; getVar(&quot;--selection-color&quot;);
+    if(this.operation&#x3D;&#x3D;&#x3D;MorphologicalOperations.Dilation){
+      this.resultBitmap.highlightedElement &#x3D; cell;
+      if(!this.bitmap.getBinary(cell))
+        this.selectionColor &#x3D; &quot;#636363ff&quot;
+    }
+    if(this.operation&#x3D;&#x3D;&#x3D;MorphologicalOperations.Erosion){
+      if(!this.structuringElement.getErosion(this.bitmap, cell))
+        this.selectionColor &#x3D; &quot;#636363ff&quot;
+    }
+    
+    if(this.operation&#x3D;&#x3D;&#x3D;MorphologicalOperations.Dilation || this.operation&#x3D;&#x3D;&#x3D;MorphologicalOperations.Erosion){
+      this.bitmap.highlightedElement &#x3D; cell;
+      for(let row &#x3D; 0; row &lt; this.structuringElement.height; row++){
+        for(let col &#x3D; 0; col &lt; this.structuringElement.width; col++) {
+          let structuringCell &#x3D; new Point(row, col);
+          if(this.structuringElement.getBinary(structuringCell)){
+            this.bitmap.select(cell.add(structuringCell).subtract(this.structuringElement.origin));
+            if(this.operation&#x3D;&#x3D;&#x3D;MorphologicalOperations.Dilation)
+              this.resultBitmap.select(cell.add(structuringCell).subtract(this.structuringElement.origin));
+          }
+        }
+      }
+    }
+    else{
+      this.bitmap.select(cell);
+    }
+
+    this.bitmapTick++;
+  }
+
+  /** Sets pixel values in the destination bitmap based on the selected morphological operation.
+   * @param length The number of pixels to process.
+   * @param destination The bitmap where the results are stored.
+   * @param source The bitmap from which pixel values are taken.
+   */
+  setValues(length: number, destination: Bitmap, source: Bitmap): void {
+    if(this.operation &#x3D;&#x3D; MorphologicalOperations.Dilation){
+
+      this.structuringElement.getDilatationMask(length, source).pixels().filter(pixel&#x3D;&gt;pixel.value&#x3D;&#x3D;&#x3D;0).forEach(pixel &#x3D;&gt; {
+        if (destination.isOut(pixel.cell) || source.isOut(pixel.cell))
+          return;
+        destination.set(pixel.cell, source.get(pixel.cell) ?? 255);
+      });
+      return;
+    
+    }
+    for (let i &#x3D; 0; i &lt; length; i++) {
+      const cell &#x3D; this.bitmap.getIndexCell(i);
+      
+      if (destination.isOut(cell) || source.isOut(cell)) 
+        continue;
+      
+      let value &#x3D; source.get(cell);
+      if(value !&#x3D;&#x3D; undefined)
+        destination.set(cell, value);
+    }
+  }
+
+  /** Handles cell click events to start the animation from the clicked pixel.
+   * @param $event The event containing the clicked cell and mouse event details.
+   * @param click Unused.
+  */
+  onCellClicked($event: { cell: Point; event: MouseEvent; }, click: boolean &#x3D; false): void {
+    if(this.bitmap.isOut($event.cell)) return;
+    if($event.event.buttons &#x3D;&#x3D;&#x3D; 1) {
+      this.animationIndex &#x3D; this.bitmap.getCellIndex($event.cell);
+      this.animate();
+    }
+  }
+
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;flex-col&quot; style&#x3D;&quot;padding: 8px; height: 100%; box-sizing: border-box;&quot;&gt;
+
+
+
+    &lt;mat-card appearance&#x3D;&quot;outlined&quot; class&#x3D;&quot;topbar&quot;&gt;
+    
+    
+        &lt;button mat-button [routerLink]&#x3D;&quot;[&#x27;/binary-edit&#x27;, bitmapKey]&quot;&gt;
+            &lt;mat-icon&gt;edit&lt;/mat-icon&gt;
+            Edit
+        &lt;/button&gt;
+        &lt;button mat-button [routerLink]&#x3D;&quot;[&#x27;/structuring-element&#x27;]&quot;&gt;
+            &lt;mat-icon&gt;crossword&lt;/mat-icon&gt;
+            Structuring Element
+        &lt;/button&gt;
+        &lt;div class&#x3D;&quot;divider&quot;&gt;&lt;/div&gt;
+        &lt;mat-form-field subscriptSizing&#x3D;&quot;dynamic&quot; class&#x3D;&quot;slim-form-field&quot; appearance&#x3D;&quot;outline&quot;&gt;
+            &lt;mat-label&gt;Operation&lt;/mat-label&gt;
+            &lt;mat-select [(ngModel)]&#x3D;&quot;operation&quot; (ngModelChange)&#x3D;&quot;refresh()&quot;&gt;
+                &lt;mat-option value&#x3D;&quot;erosion&quot;&gt;Erosion&lt;/mat-option&gt;
+                &lt;mat-option value&#x3D;&quot;dilation&quot;&gt;Dilation&lt;/mat-option&gt;
+                &lt;mat-option value&#x3D;&quot;opening&quot;&gt;Opening&lt;/mat-option&gt;
+                &lt;mat-option value&#x3D;&quot;closing&quot;&gt;Closing&lt;/mat-option&gt;
+            &lt;/mat-select&gt;
+        &lt;/mat-form-field&gt;
+    
+    
+        &lt;div class&#x3D;&quot;divider&quot;&gt;&lt;/div&gt;
+    
+    
+        &lt;button mat-button (click)&#x3D;&quot;apply(true)&quot;&gt;
+            &lt;mat-icon&gt;check&lt;/mat-icon&gt;
+            Apply
+        &lt;/button&gt;
+        &lt;button mat-button (click)&#x3D;&quot;apply(false)&quot;&gt;
+            &lt;mat-icon&gt;cleaning_services&lt;/mat-icon&gt;
+            Revert
+        &lt;/button&gt;
+        &lt;button mat-button (click)&#x3D;&quot;commit()&quot;&gt;
+            &lt;mat-icon&gt;commit&lt;/mat-icon&gt;
+            Save
+        &lt;/button&gt;
+    
+    
+        &lt;div class&#x3D;&quot;divider&quot;&gt;&lt;/div&gt;
+    
+    
+        &lt;mat-label&gt;Pixel Size&lt;/mat-label&gt;
+        &lt;mat-slider min&#x3D;&quot;25&quot; max&#x3D;&quot;100&quot; step&#x3D;&quot;1&quot; discrete&#x3D;&quot;false&quot;&gt;
+            &lt;input matSliderThumb [(ngModel)]&#x3D;&quot;pixelSize&quot;&gt;
+        &lt;/mat-slider&gt;
+        &lt;div class&#x3D;&quot;divider&quot;&gt;&lt;/div&gt;
+        &lt;mat-checkbox [(ngModel)]&#x3D;&quot;showGrid&quot;&gt;
+            Grid
+        &lt;/mat-checkbox&gt;
+        &lt;mat-checkbox [(ngModel)]&#x3D;&quot;showHeaders&quot; [disabled]&#x3D;&quot;pixelSize&lt;40&quot;&gt;
+            Headers
+        &lt;/mat-checkbox&gt;
+        &lt;mat-checkbox [(ngModel)]&#x3D;&quot;showDifference&quot; (ngModelChange)&#x3D;&quot;refresh()&quot;&gt;
+            Difference
+        &lt;/mat-checkbox&gt;
+        &lt;mat-checkbox [(ngModel)]&#x3D;&quot;showBase&quot; (ngModelChange)&#x3D;&quot;refresh()&quot;&gt;
+            Base
+        &lt;/mat-checkbox&gt;
+    
+    
+        &lt;/mat-card&gt;
+
+
+
+
+
+
+    &lt;div class&#x3D;&quot;flex-row&quot; style&#x3D;&quot;gap: 8px; flex: 1; min-height: 0&quot;&gt;
+
+        &lt;mat-card appearance&#x3D;&quot;outlined&quot; style&#x3D;&quot;width: 50%; overflow: hidden;&quot;&gt;
+            &lt;div class&#x3D;&quot;scrollable&quot;&gt;
+
+                &lt;app-bitmap class&#x3D;&quot;bitmap&quot; [bitmap]&#x3D;&quot;bitmap&quot; [pixelSize]&#x3D;&quot;pixelSize&quot;
+                    [showHeaders]&#x3D;&quot;showHeaders&amp;&amp;pixelSize&gt;&#x3D;40&quot; [showGrid]&#x3D;&quot;showGrid&quot;
+                    [showNumbers]&#x3D;&quot;false&quot; [tick]&#x3D;&quot;bitmapTick&quot;
+                    [userSelect]&#x3D;&quot;false&quot; style&#x3D;&quot;margin: auto;&quot;
+                    [selectionColor]&#x3D;&quot;selectionColor&quot;
+                    (cellClicked)&#x3D;&quot;onCellClicked($event)&quot;
+                    &gt;
+
+                &lt;/app-bitmap&gt;
+            &lt;/div&gt;
+        &lt;/mat-card&gt;
+
+        &lt;mat-card appearance&#x3D;&quot;outlined&quot; style&#x3D;&quot;width: 50%; overflow: hidden;&quot;&gt;
+            &lt;div class&#x3D;&quot;scrollable&quot;&gt;
+
+                &lt;app-bitmap class&#x3D;&quot;bitmap&quot; [bitmap]&#x3D;&quot;resultBitmap&quot; [pixelSize]&#x3D;&quot;pixelSize&quot;
+                    [showHeaders]&#x3D;&quot;showHeaders&amp;&amp;pixelSize&gt;&#x3D;40&quot; [showGrid]&#x3D;&quot;showGrid&quot;
+                    [showNumbers]&#x3D;&quot;false&quot;
+                    [selectedColorScale]&#x3D;&quot;colorscale&quot;
+                    [selectionColor]&#x3D;&quot;selectionColor&quot;
+                    [tick]&#x3D;&quot;bitmapTick&quot; [userSelect]&#x3D;&quot;false&quot;
+                    (cellClicked)&#x3D;&quot;onCellClicked($event)&quot;
+                    &gt;
+
+                &lt;/app-bitmap&gt;
+            &lt;/div&gt;
+        &lt;/mat-card&gt;
+
+    &lt;/div&gt;
+
+
+    &lt;mat-card class&#x3D;&quot;topbar&quot; appearance&#x3D;&quot;outlined&quot; style&#x3D;&quot;overflow: hidden; min-height: fit-content;&quot;&gt;
+           &lt;app-animation-controller [showValue]&#x3D;&quot;false&quot; [(value)]&#x3D;&quot;animationIndex&quot; (valueChanged)&#x3D;&quot;animate()&quot; [min]&#x3D;&quot;0&quot; [max]&#x3D;&quot;bitmap.length()-1&quot;&gt;&lt;/app-animation-controller&gt;
+    &lt;/mat-card&gt;
+
+&lt;/div&gt;</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="flex-col" style="padding: 8px; height: 100%; box-sizing: border-box;">    <mat-card appearance="outlined" class="topbar">                <button mat-button [routerLink]="[\'/binary-edit\', bitmapKey]">            <mat-icon>edit</mat-icon>            Edit        </button>        <button mat-button [routerLink]="[\'/structuring-element\']">            <mat-icon>crossword</mat-icon>            Structuring Element        </button>        <div class="divider"></div>        <mat-form-field subscriptSizing="dynamic" class="slim-form-field" appearance="outline">            <mat-label>Operation</mat-label>            <mat-select [(ngModel)]="operation" (ngModelChange)="refresh()">                <mat-option value="erosion">Erosion</mat-option>                <mat-option value="dilation">Dilation</mat-option>                <mat-option value="opening">Opening</mat-option>                <mat-option value="closing">Closing</mat-option>            </mat-select>        </mat-form-field>                <div class="divider"></div>                <button mat-button (click)="apply(true)">            <mat-icon>check</mat-icon>            Apply        </button>        <button mat-button (click)="apply(false)">            <mat-icon>cleaning_services</mat-icon>            Revert        </button>        <button mat-button (click)="commit()">            <mat-icon>commit</mat-icon>            Save        </button>                <div class="divider"></div>                <mat-label>Pixel Size</mat-label>        <mat-slider min="25" max="100" step="1" discrete="false">            <input matSliderThumb [(ngModel)]="pixelSize">        </mat-slider>        <div class="divider"></div>        <mat-checkbox [(ngModel)]="showGrid">            Grid        </mat-checkbox>        <mat-checkbox [(ngModel)]="showHeaders" [disabled]="pixelSize<40">            Headers        </mat-checkbox>        <mat-checkbox [(ngModel)]="showDifference" (ngModelChange)="refresh()">            Difference        </mat-checkbox>        <mat-checkbox [(ngModel)]="showBase" (ngModelChange)="refresh()">            Base        </mat-checkbox>                </mat-card>    <div class="flex-row" style="gap: 8px; flex: 1; min-height: 0">        <mat-card appearance="outlined" style="width: 50%; overflow: hidden;">            <div class="scrollable">                <app-bitmap class="bitmap" [bitmap]="bitmap" [pixelSize]="pixelSize"                    [showHeaders]="showHeaders&&pixelSize>=40" [showGrid]="showGrid"                    [showNumbers]="false" [tick]="bitmapTick"                    [userSelect]="false" style="margin: auto;"                    [selectionColor]="selectionColor"                    (cellClicked)="onCellClicked($event)"                    >                </app-bitmap>            </div>        </mat-card>        <mat-card appearance="outlined" style="width: 50%; overflow: hidden;">            <div class="scrollable">                <app-bitmap class="bitmap" [bitmap]="resultBitmap" [pixelSize]="pixelSize"                    [showHeaders]="showHeaders&&pixelSize>=40" [showGrid]="showGrid"                    [showNumbers]="false"                    [selectedColorScale]="colorscale"                    [selectionColor]="selectionColor"                    [tick]="bitmapTick" [userSelect]="false"                    (cellClicked)="onCellClicked($event)"                    >                </app-bitmap>            </div>        </mat-card>    </div>    <mat-card class="topbar" appearance="outlined" style="overflow: hidden; min-height: fit-content;">           <app-animation-controller [showValue]="false" [(value)]="animationIndex" (valueChanged)="animate()" [min]="0" [max]="bitmap.length()-1"></app-animation-controller>    </mat-card></div></div>'
+    var COMPONENTS = [{'name': 'AnimationControllerComponent', 'selector': 'app-animation-controller'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BinaryBitmapEditorComponent', 'selector': 'app-binary-bitmap-editor'},{'name': 'BitmapComponent', 'selector': 'app-bitmap'},{'name': 'BitmapEditorComponent', 'selector': 'app-bitmap-editor'},{'name': 'ConvolutionalFilterAnimationComponent', 'selector': 'app-convolutional-filter-animation'},{'name': 'HelpComponent', 'selector': 'app-help'},{'name': 'HistogramComponent', 'selector': 'app-histogram'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'HoughTransformAnimationComponent', 'selector': 'app-hough-transform-animation'},{'name': 'KernelDialogComponent', 'selector': 'app-kernel-dialog'},{'name': 'MatrixDisplayComponent', 'selector': 'app-matrix-display'},{'name': 'MedianFilterAnimationComponent', 'selector': 'app-median-filter-animation'},{'name': 'MorphologicalOperationsAnimationComponent', 'selector': 'app-morphological-operations-animation'},{'name': 'PageNotFoundComponent', 'selector': 'app-page-not-found'},{'name': 'ShapeBitmapEditorComponent', 'selector': 'app-shape-bitmap-editor'},{'name': 'StructuringElementEditorComponent', 'selector': 'app-structuring-element-editor'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'MorphologicalOperationsAnimationComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'MorphologicalOperationsAnimationComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
