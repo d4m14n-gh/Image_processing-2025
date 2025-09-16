@@ -15,10 +15,9 @@ import { BitmapStorageService } from '../../services/bitmap-storage/bitmap-stora
 import { Point } from '../../static/point';
 import { StructuringElement } from '../../static/structuringElement';
 import { ColorScale, MorphologicalOperations } from '../../static/enums';
-import { CdkAutofill } from "@angular/cdk/text-field";
-import { DragArea } from '../../static/drag-area';
 import { getVar } from '../../static/style-utils';
 
+/** Component to visualize and animate morphological operations (dilation, erosion, opening, closing) on a bitmap image. */
 @Component({
   selector: 'app-morphological-operations-animation',
   imports: [
@@ -38,25 +37,44 @@ import { getVar } from '../../static/style-utils';
   styleUrl: './morphological-operations-animation.component.css'
 })
 export class MorphologicalOperationsAnimationComponent {
+  /** The original bitmap image to which the morphological operation is applied. */
   bitmap: InteractiveBitmap = new InteractiveBitmap(16, 9, undefined, 255);
+  /** The bitmap image after applying the morphological operation. */
   appliedBitmap: InteractiveBitmap = new InteractiveBitmap(16, 9, undefined, 255);
+  /** The result bitmap after the operation is applied. */
   resultBitmap: InteractiveBitmap = new InteractiveBitmap(16, 9, undefined, 255);
+  /** Used to trigger bitmap component refresh. */
   bitmapTick: number = 0;
-  bitmapKey: string = 'morphological-operations';
+  /** Key used to load and save the bitmap in storage. */
+  readonly bitmapKey: string = 'morphological-operations';
 
+  /** The structuring element used for the morphological operation. */
   structuringElement: StructuringElement = new StructuringElement(3, 3);
+  /** The morphological operation to perform. */
   operation: MorphologicalOperations = MorphologicalOperations.Erosion;
 
+  //view
+  /** Size of each pixel in the bitmap display (in pixels). */
   pixelSize: number = 40;
+  /** If true, a grid is displayed over the bitmap. */
   showGrid: boolean = true;
+  /** If true, headers are displayed. */
   showHeaders: boolean = true;
+  /** If true, the difference is displayed. */
   showDifference: boolean = true;
+  /** If true, the original bitmap is shown under the result. */
   showBase: boolean = false;
+  /** Color used to highlight selected pixels. */
   selectionColor: string = getVar("--selection-color");
-
+  
+  /** Current index of the pixel being processed in the animation. */
   animationIndex: number = 0;
+  /** Color scale used for displaying the bitmap. */
   readonly colorscale: ColorScale = ColorScale.Binary;
 
+  /** Creates an instance of the MorphologicalOperationsAnimationComponent.
+   * @param bitmapStorage The service for loading and saving bitmaps.
+   */
   constructor(private bitmapStorage: BitmapStorageService) { 
     let bitmap = this.bitmapStorage.load(this.bitmapKey);
     if (bitmap)
@@ -70,18 +88,21 @@ export class MorphologicalOperationsAnimationComponent {
     this.refresh();
   }
 
-  refresh() {
+  /** Updates the applied and result bitmaps based on the current operation and structuring element. */
+  refresh(): void {
     this.appliedBitmap = new InteractiveBitmap(this.bitmap.width, this.bitmap.height, undefined, 255);
     this.resultBitmap = new InteractiveBitmap(this.bitmap.width, this.bitmap.height, this.bitmap, 255);
     this.structuringElement.applyComplex(this.bitmap, this.appliedBitmap, this.operation, this.showDifference);
     this.animate();
   }
-
-  commit() {
+  /** Saves the current bitmap to storage. */
+  commit(): void {
     this.bitmapStorage.save(this.bitmapKey, this.bitmap);
   }
-
-  apply(apply: boolean = true) {
+  /** Applies or reverts the morphological operation on the original bitmap.
+   * @param apply If true, applies the operation; if false, reverts to the original bitmap.
+  */
+  apply(apply: boolean = true): void {
     this.bitmap = new InteractiveBitmap(this.bitmap.width, this.bitmap.height, undefined, 255);
     if(apply)
       this.appliedBitmap.pixels().filter(p=>p.value!<=128).forEach(p=>this.bitmap.set(p.cell, 0));
@@ -93,8 +114,8 @@ export class MorphologicalOperationsAnimationComponent {
 
     this.refresh();
   }
-
-  animate() {
+  /** Advances the animation by processing the next pixel and updating the selection. */
+  animate(): void {
     let cell = this.bitmap.getIndexCell(this.animationIndex);
 
 
@@ -140,8 +161,12 @@ export class MorphologicalOperationsAnimationComponent {
     this.bitmapTick++;
   }
 
-
-  setValues(length: number, destination: Bitmap, source: Bitmap) {
+  /** Sets pixel values in the destination bitmap based on the selected morphological operation.
+   * @param length The number of pixels to process.
+   * @param destination The bitmap where the results are stored.
+   * @param source The bitmap from which pixel values are taken.
+   */
+  setValues(length: number, destination: Bitmap, source: Bitmap): void {
     if(this.operation == MorphologicalOperations.Dilation){
 
       this.structuringElement.getDilatationMask(length, source).pixels().filter(pixel=>pixel.value===0).forEach(pixel => {
@@ -164,7 +189,11 @@ export class MorphologicalOperationsAnimationComponent {
     }
   }
 
-  onCellClicked($event: { cell: Point; event: MouseEvent; }, click: boolean = false) {
+  /** Handles cell click events to start the animation from the clicked pixel.
+   * @param $event The event containing the clicked cell and mouse event details.
+   * @param click Unused.
+  */
+  onCellClicked($event: { cell: Point; event: MouseEvent; }, click: boolean = false): void {
     if(this.bitmap.isOut($event.cell)) return;
     if($event.event.buttons === 1) {
       this.animationIndex = this.bitmap.getCellIndex($event.cell);

@@ -31,18 +31,31 @@ import { StructuringElement } from '../../static/structuringElement';
   styleUrl: './structuring-element-editor.component.css'
 })
 export class StructuringElementEditorComponent {
+  /** The interactive bitmap representing the structuring element. */
   bitmap: InteractiveBitmap;
-  bitmapComponentTick: number = 0;
+  /** Used to trigger bitmap component refresh. */
+  tick: number = 0;
+  /** The structuring element being edited. */
   structuringElement: StructuringElement = new StructuringElement(3, 3);
+  /** The origin point of the structuring element. */
   origin: Point;
 
+  //view
+  /** Size of each pixel in the bitmap display (in pixels). */
   pixelSize: number = 75;
+  /** If true, headers are displayed on the bitmap. */
   showHeaders: boolean = true;
+  /** If true, a grid is displayed over the bitmap. */
   showGrid: boolean = true;
 
+  /** Width of the structuring element. */
   width: number;
+  /** Height of the structuring element. */
   height: number;
 
+  /** Creates an instance of the StructuringElementEditorComponent.
+   * @param router The router for navigation.
+   */
   constructor(private router: Router) {
     this.structuringElement.set(Point.one, 0);
     this.structuringElement.load();
@@ -54,7 +67,10 @@ export class StructuringElementEditorComponent {
     this.refresh();
   }
 
-  onCellEntered($event: { cell: Point; event: MouseEvent; }) {
+  /** Handles cell enter events to set pixel values based on mouse buttons.
+   * @param $event The event containing the entered cell and mouse event details.
+   */
+  onCellEntered($event: { cell: Point; event: MouseEvent; }): void {
     if(this.bitmap.isOut($event.cell)) return;
     if($event.event.buttons === 1)
       this.bitmap.set($event.cell, 0);
@@ -63,13 +79,17 @@ export class StructuringElementEditorComponent {
     this.refresh();
   }
 
-  onCellClicked($event: { cell: Point; event: MouseEvent; }) {
+  /** Handles cell click events to set the origin of the structuring element.
+   * @param $event The event containing the clicked cell and mouse event details.
+   */
+  onCellClicked($event: { cell: Point; event: MouseEvent; }): void {
     if($event.event.buttons !== 4) return;
     this.origin = $event.cell;
     this.refresh();
   }
   
-  refresh(){
+  /** Refreshes the bitmap display and highlights the origin. */
+  refresh(): void {
     this.bitmap.clearSelection();
     this.bitmap.highlightedElement = this.origin.clone();
     this.bitmap.select(this.origin);
@@ -77,32 +97,37 @@ export class StructuringElementEditorComponent {
     // this.bitmap.dragArea.dragStart = this.origin.clone();
     // this.bitmap.dragArea.dragEnd = this.origin.clone();
     // this.bitmap.dragArea.dragging = true;
-    this.bitmapComponentTick++;
+    this.tick++;
   }
 
-  clear(){
+  /** Clears the bitmap to a new blank state. */
+  clear(): void {
     this.bitmap = new InteractiveBitmap(this.width, this.height, undefined, 255);
     this.refresh();
   }
   
-  resize() {
+  /** Resizes the bitmap to the current width and height settings. */
+  resize(): void {
     this.bitmap = new InteractiveBitmap(this.width, this.height, this.bitmap, 255);
     this.origin = new Point(Math.min(this.origin.row, this.height-1), Math.min(this.origin.col, this.width-1));
     this.refresh();
   }
-
-  canSave(): boolean{
+  
+  /** Checks if the structuring element can be saved (i.e., if it has a valid ID). */
+  canSave(): boolean {
     return true;
     // return this._id !== null; 
   }
-  quit(){
+  /** Navigates back to the previous page or home if no history exists. */
+  quit(): void {
      if (history.length > 1) {
       history.back();
     } else {
       this.router.navigate(['/']);
     }
   }
-  save(){
+  /** Saves the current structuring element to storage and navigates back. */
+  save(): void {
     this.structuringElement = new StructuringElement(this.bitmap.width, this.bitmap.height, this.origin, this.bitmap);
     this.structuringElement.save();
     this.quit();

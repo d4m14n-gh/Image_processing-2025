@@ -5,7 +5,7 @@
             <button mat-icon-button class="end" (click)="clear()" class="hover-button">
                 <mat-icon>cleaning_services</mat-icon>
             </button>
-            <app-bitmap class="bitmap" [bitmap]="bitmap" [tick]="bitmapComponentTick" [pixelSize]="pixelSize"
+            <app-bitmap class="bitmap" [bitmap]="bitmap" [tick]="tick" [pixelSize]="pixelSize"
                 [showHeaders]="showHeaders&&pixelSize>=40" [showNumbers]="false" [showGrid]="showGrid"
                 [userSelect]="false" 
                 (cellEntered)="onCellEntered($event)"
