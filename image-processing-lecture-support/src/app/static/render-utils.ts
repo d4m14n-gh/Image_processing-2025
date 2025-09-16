@@ -3,37 +3,36 @@ import { getContrastColor, scaleColor } from "./color-utils";
 import { ColorScale } from "./enums";
 import { Point } from "./point";
 
-
+/** Utility class for rendering bitmaps onto a canvas. */
 export class BitmapRenderer {
-    
+    /** Size of each pixel in the bitmap when rendered on the canvas. Default is 50. */
     pixelSize: number = 50;
     
+    /** If true, the grid lines will be drawn. Default is true. */
     grid: boolean = true;
+    /** If true, the numerical values of each cell will be displayed. Default is true. */
     numbers: boolean = true;
+    /** If true, row and column headers will be displayed. Default is false. */
     headers: boolean = false;
-    
+    /** Color scale used for rendering the bitmap. Default is Grayscale. */
     colorScale: ColorScale = ColorScale.Grayscale;
     
+    /** Color used for drawing the grid lines. Default is '#74777f'. */
     gridColor: string = '#74777f';
+    /** Color used for the header background. Default is '#c1cce5'. */
     headerColor: string = '#c1cce5';
+    /** Color used for selection highlighting. Default is '#222'. */
     selectionColor: string = "#222";
-    selectionColor2: string = "#702121ff";
 
 
-    private getOffsetX(): number {
-        return this.headers ? 30 : 0;
-    }
-    private getOffsetY(): number {
-        return this.headers ? 30 : 0;
-    }
-    drawString(ctx: CanvasRenderingContext2D, scale: number, text: string, x: number, y: number, color: string, stroke: boolean=false): void {
-        ctx.font = `${Math.round(scale*16)}px Roboto Mono, monospace`;
-        ctx.fillStyle = color;
-        
-        if(stroke)
-            ctx.strokeText(text, x * scale, y * scale);
-        ctx.fillText(text, x * scale, y * scale);
-    }
+    //cursor
+
+    /** Checks if the cursor is over a specific cell in the bitmap.
+     * @param x The x-coordinate of the cursor.
+     * @param y The y-coordinate of the cursor.
+     * @param bitmap The bitmap to check against.
+     * @returns True if the cursor is over a cell in the bitmap, false otherwise.
+     */
     isCursorOnCell(x: number, y: number, bitmap: Bitmap): boolean {
        let cell = this.getCursorCell(x, y);
        return (
@@ -45,6 +44,11 @@ export class BitmapRenderer {
            cell.col < bitmap.width
        );
     }
+    /** Gets the cell coordinates (row and column) under the cursor.
+     * @param x The x-coordinate of the cursor.
+     * @param y The y-coordinate of the cursor.
+     * @returns An object containing the row and column indices of the cell under the cursor.
+     */
     getCursorCell(x: number, y: number): { row: number, col: number } {
         const { pixelSize } = this;
         const offsetX = this.getOffsetX();
@@ -54,6 +58,12 @@ export class BitmapRenderer {
         const row = (Math.trunc((y - offsetY) / (pixelSize)));
         return { row, col };
     }
+    /** Checks if the cursor is over the column header area.
+     * @param x The x-coordinate of the cursor.
+     * @param y The y-coordinate of the cursor.
+     * @param bitmap The bitmap to check against.
+     * @returns True if the cursor is over the column header area, false otherwise.
+     */
     isCursorOnColHeader(x: number, y: number, bitmap: Bitmap): boolean {
         const { pixelSize } = this;
         const offsetX = this.getOffsetX();
@@ -61,6 +71,12 @@ export class BitmapRenderer {
 
         return y < offsetY && x >= offsetX && x <= offsetX + pixelSize * bitmap.width;
     }
+    /** Checks if the cursor is over the row header area.
+     * @param x The x-coordinate of the cursor.
+     * @param y The y-coordinate of the cursor.
+     * @param bitmap The bitmap to check against.
+     * @returns True if the cursor is over the row header area, false otherwise.
+     */
     isCursorOnRowHeader(x: number, y: number, bitmap: Bitmap): boolean {
         const { pixelSize } = this;
         const offsetX = this.getOffsetX();
@@ -68,6 +84,44 @@ export class BitmapRenderer {
         return x < offsetX && y >= offsetY && y <= offsetY + pixelSize * bitmap.height;
     }
 
+
+    //drawing
+    
+    /** Gets the X offset (row headers) for rendering the bitmap.
+     * @returns The X offset in pixels.
+     */
+    private getOffsetX(): number {
+        return this.headers ? 30 : 0;
+    }
+    /** Gets the Y offset (column headers) for rendering the bitmap.
+     * @returns The Y offset in pixels.
+     */
+    private getOffsetY(): number {
+        return this.headers ? 30 : 0;
+    }
+    /** Draws a string on the canvas at the specified position with the given scale and color.
+     * @param ctx The 2D rendering context of the canvas.
+     * @param scale The scale factor for the text size.
+     * @param text The text string to be drawn.
+     * @param x The x-coordinate where the text will be drawn.
+     * @param y The y-coordinate where the text will be drawn.
+     * @param color The color of the text.
+     * @param stroke If true, the text will be stroked for better visibility. Default is false.
+     */
+    drawString(ctx: CanvasRenderingContext2D, scale: number, text: string, x: number, y: number, color: string, stroke: boolean=false): void {
+        ctx.font = `${Math.round(scale*16)}px Roboto Mono, monospace`;
+        ctx.fillStyle = color;
+        
+        if(stroke)
+            ctx.strokeText(text, x * scale, y * scale);
+        ctx.fillText(text, x * scale, y * scale);
+    }
+    /** Draws the grid lines on the canvas for the bitmap.
+     * @param ctx The 2D rendering context of the canvas.
+     * @param scale The scale factor for rendering.
+     * @param bitmap The bitmap to draw the grid for.
+     * @param color The color of the grid lines.
+     */
     drawGrid(ctx: CanvasRenderingContext2D, scale: number, bitmap: InteractiveBitmap, color: string): void {
         const { pixelSize } = this;
         const offsetX = this.getOffsetX();
@@ -90,7 +144,12 @@ export class BitmapRenderer {
             ctx.stroke();
         }
     }
-
+    /** Creates a diagonal line pattern for selection highlighting.
+     * @param size The size of the pattern canvas. Default is 20.
+     * @param lineWidth The width of the diagonal lines. Default is 2.
+     * @param color The color of the diagonal lines. Default is '#ccc'.
+     * @returns A canvas element containing the diagonal line pattern.
+     */
     private createDiagonalPattern(size = 20, lineWidth = 2, color = '#ccc'): HTMLCanvasElement {
         const off = document.createElement('canvas');
         off.width = size;
@@ -114,7 +173,11 @@ export class BitmapRenderer {
 
         return off;
     }
-
+    /** Renders the bitmap onto the provided canvas context with the specified scale.
+     * @param ctx The 2D rendering context of the canvas.
+     * @param scale The scale factor for rendering.
+     * @param bitmap The bitmap to be rendered.
+     */
     render(ctx: CanvasRenderingContext2D, scale: number, bitmap: InteractiveBitmap): void {
         const { pixelSize, colorScale, grid, numbers, headerColor, selectionColor } = this;
         const offsetX = this.getOffsetX();

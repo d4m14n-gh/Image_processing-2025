@@ -285,8 +285,8 @@ export class HoughTransformAnimationComponent implements AfterViewInit {
     }
   }
 }
-
-
+/** Represents a line in polar coordinates along with its voting information and endpoints. */
 class Line {
     constructor(public rho: number, public theta: number, public votes: number, public min: Point, public max: Point){ }
 }
+

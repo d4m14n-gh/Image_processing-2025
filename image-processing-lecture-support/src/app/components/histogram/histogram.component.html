@@ -6,7 +6,7 @@
 
         <mat-card style="flex: 1; overflow: hidden; padding: 0;" appearance="outlined">
             <div class="scrollable">
-                <app-bitmap class="bitmap" [bitmap]="bitmap" [tick]="bitmapComponentTick" [pixelSize]="pixelSize"
+                <app-bitmap class="bitmap" [bitmap]="bitmap" [tick]="tick" [pixelSize]="pixelSize"
                     [showHeaders]="showHeaders&&pixelSize>=40" [showNumbers]="showNumberValues&&pixelSize>=40"
                     [showGrid]="showGrid" [selectedColorScale]="selectedColorScale"
                     (bitmapChanged)="prepareChartData(); updateChart()">

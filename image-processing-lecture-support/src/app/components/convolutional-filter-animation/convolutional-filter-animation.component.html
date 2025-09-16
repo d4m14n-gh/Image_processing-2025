@@ -48,7 +48,7 @@
 
                 <app-bitmap class="bitmap" [bitmap]="bitmap" [pixelSize]="pixelSize"
                     [showHeaders]="showHeaders&&pixelSize>=40" [showGrid]="showGrid"
-                    [showNumbers]="showNumberValues&&pixelSize>=40" [tick]="bitmapTick"
+                    [showNumbers]="showNumberValues&&pixelSize>=40" [tick]="tick"
                     [selectedColorScale]="selectedColorScale" [userSelect]="false" style="margin: auto;"
                     (cellClicked)="onCellClicked($event)">
 
@@ -62,7 +62,7 @@
                 <app-bitmap class="bitmap" [bitmap]="resultBitmap" [pixelSize]="pixelSize"
                     [showHeaders]="showHeaders&&pixelSize>=40" [showGrid]="showGrid"
                     [selectedColorScale]="selectedColorScale" [showNumbers]="showNumberValues&&pixelSize>=40"
-                    [tick]="bitmapTick" [userSelect]="false" (cellClicked)="onCellClicked($event)">
+                    [tick]="tick" [userSelect]="false" (cellClicked)="onCellClicked($event)">
 
                 </app-bitmap>
             </div>

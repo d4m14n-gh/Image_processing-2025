@@ -21,17 +21,17 @@ import { MatrixDisplayComponent } from "../matrix-display/matrix-display.compone
 import { MathjaxModule } from 'mathjax-angular';
 import { MatSelectModule } from '@angular/material/select';
 
+/** Component to visualize and animate the application of a convolutional filter on a bitmap image.
+ * It allows users to see how the convolutional filter processes each pixel in the image step-by-step.
+ */
 @Component({
   selector: 'app-convolutional-filter-animation',
   imports: [
-    // BitmapComponent,
     MatCardModule,
     MatButtonModule,
     MatIconModule,
     MatSliderModule,
     RouterModule,
-    // MatSlider,
-    // AnimationControllerComponent,
     MatFormFieldModule,
     MatMenuModule,
     BitmapComponent,
@@ -44,34 +44,53 @@ import { MatSelectModule } from '@angular/material/select';
   templateUrl: './convolutional-filter-animation.component.html',
   styleUrl: './convolutional-filter-animation.component.css'
 })
-
 export class ConvolutionalFilterAnimationComponent {
+  /** The original bitmap image to which the convolutional filter is applied. */
   bitmap: InteractiveBitmap = new InteractiveBitmap(16, 9, undefined, 255);
+  /** The bitmap image after applying the convolutional filter. */
   filteredBitmap: InteractiveBitmap = new InteractiveBitmap(16, 9, undefined, 255);
+  /** The result bitmap after the animation. */
   resultBitmap: InteractiveBitmap = new InteractiveBitmap(16, 9, undefined, 255);
 
-  bitmapTick: number = 0;
-  bitmapKey: string = "convolutional-filter";
 
+  /** Used to trigger re-rendering of the bitmap component when the bitmap changes. */
+  tick: number = 0;
+  /** Key used to load and save the bitmap in storage. */
+  readonly bitmapKey: string = "convolutional-filter";
+
+  /** The convolutional kernel used for filtering. */
   kernel: Kernel = new Kernel(3);
+  /** The kernel representing the current neighborhood of pixels being processed. */
   sourceKernel: Kernel = new Kernel(3);
+  /** The kernel representing the weighted values used to compute the filtered pixel value. */
   resultKernel: Kernel = new Kernel(3);
+  /** Padding strategy used when accessing pixels outside the bitmap boundaries. */
   padding: Padding = Padding.Edge;
 
 
   //view
+  /** Size of each pixel in the bitmap display (in pixels). */
   pixelSize: number = 40;
+  /** If true, a grid is displayed over the bitmap. */
   showGrid: boolean = true;
+  /** If true, headers (row/column indices) are displayed around the bitmap. */
   showHeaders: boolean = true;
+  /** If true, pixel values are displayed on the bitmap. */
   showNumberValues: boolean = true;
+  /** If true, the original bitmap is shown under the result for comparison. */
   showBase: boolean = false;
+  /** Color scale used for displaying the bitmap. */
   selectedColorScale: ColorScale = ColorScale.Grayscale;
   
   
   //controls
+  /** Current index of the pixel being processed in the animation. */
   animationIndex: number = 0;
 
-
+  /** Constructor to initialize the component with necessary services and load initial data. 
+   * @param dialog Service to manage dialog interactions.
+   * @param bitmapStorage Service to load and save bitmaps in storage.
+  */
   constructor(private dialog: MatDialog, private bitmapStorage: BitmapStorageService) { 
     let bitmap = this.bitmapStorage.load(this.bitmapKey);
     if (bitmap)
@@ -83,7 +102,8 @@ export class ConvolutionalFilterAnimationComponent {
     this.refresh();
   }
 
-  openDialog() {
+  /** Opens a dialog to edit the convolutional kernel. */
+  openDialog(): void {
     const dialogRef = this.dialog.open(KernelDialogComponent, {
       width: '650px',
       disableClose: true,
@@ -102,14 +122,16 @@ export class ConvolutionalFilterAnimationComponent {
     });
   }
   
-  refresh(){
+  /** Refreshes the filtered and result bitmaps by reapplying the convolutional filter and resets the animation. */
+  refresh(): void {
     this.resultBitmap = new InteractiveBitmap(this.bitmap.width, this.bitmap.height, this.bitmap, 255);
     this.filteredBitmap = new InteractiveBitmap(this.bitmap.width, this.bitmap.height, undefined, 255);
     this.applyFilter(this.bitmap.length(), this.filteredBitmap, this.bitmap);
     this.animate();
   }
 
-  animate() {
+  /** Advances the animation by processing the next pixel and updating the selection. */
+  animate(): void {
     const index = this.animationIndex;
     this.bitmap.clearSelection();
     this.resultBitmap = new InteractiveBitmap(this.bitmap.width, this.bitmap.height, this.showBase?this.bitmap:undefined, 255);
@@ -135,20 +157,21 @@ export class ConvolutionalFilterAnimationComponent {
     this.bitmap.dragArea.dragging = true;
 
 
-    this.bitmapTick++;
+    this.tick++;
   }
-  
-  
-  length() {
-    return this.bitmap.length;
-  }
-  onCellClicked($event: { cell: Point; event: MouseEvent; }, click: boolean = true) {
+
+  /** Handles cell click events to jump to a specific pixel in the animation.
+   * @param $event The event containing the clicked cell and mouse event details.
+   * @param click unused.
+   */
+  onCellClicked($event: { cell: Point; event: MouseEvent; }, click: boolean = true): void {
     if(this.bitmap.isOut($event.cell)) return;
     if($event.event.buttons === 1) {
       this.animationIndex = this.bitmap.getCellIndex($event.cell);
       this.animate();
     }
   }
+  /** Generates a LaTeX representation of the convolution operation for display. */
   getEquation(): string {
     const divider = this.kernel.divider;
     return `\\[
@@ -160,8 +183,12 @@ export class ConvolutionalFilterAnimationComponent {
       ${this.filteredBitmap.get(this.bitmap.getIndexCell(this.animationIndex))}
       \\]`;
   }
-
-  private applyFilter(length: number, destination: InteractiveBitmap, source: InteractiveBitmap) {
+  /** Applies the convolutional filter to the source bitmap and stores the result in the destination bitmap.
+   * @param length The number of pixels to process.
+   * @param destination The destination bitmap where the filtered result is stored.
+   * @param source The source bitmap to which the convolutional filter is applied.
+  */
+  private applyFilter(length: number, destination: InteractiveBitmap, source: InteractiveBitmap): void {
     for (let i = 0; i < length; i++) {
       const cell = source.getIndexCell(i);
       if (destination.isOut(cell) || source.isOut(cell)) 
@@ -170,7 +197,12 @@ export class ConvolutionalFilterAnimationComponent {
       destination.set(cell, kernelValue);
     }
   }
-  private setValues(length: number, destination: InteractiveBitmap, source: InteractiveBitmap) {
+  /** Sets pixel values from the source bitmap to the destination bitmap up to a specified length.
+   * @param length The number of pixels to set.
+   * @param destination The destination bitmap where the pixel values are set.
+   * @param source The source bitmap from which the pixel values are taken.
+  */
+  private setValues(length: number, destination: InteractiveBitmap, source: InteractiveBitmap): void {
     for (let i = 0; i < length; i++) {
       const cell = source.getIndexCell(i);
       if (destination.isOut(cell) || source.isOut(cell)) 
@@ -179,6 +211,9 @@ export class ConvolutionalFilterAnimationComponent {
       destination.set(cell, value);
     }
   }
+  /** Retrieves the kernel of pixel values centered around the current animation index.
+   * @returns A Kernel instance containing the pixel values in the neighborhood.
+  */
   private getSourceKernel(): Kernel {
     let kernel = new Kernel(this.kernel.size);
     const r = Math.trunc((this.kernel.size - 1) / 2);
@@ -192,6 +227,9 @@ export class ConvolutionalFilterAnimationComponent {
       }
     return kernel;
   }
+  /** Computes the result kernel by multiplying the convolutional kernel with the source kernel.
+   * @returns A Kernel instance containing the weighted values used to compute the filtered pixel value.
+  */
   private getResultKernel(): Kernel {
     let kernel = new Kernel(this.kernel.size);
     const r = Math.trunc((this.kernel.size - 1) / 2);

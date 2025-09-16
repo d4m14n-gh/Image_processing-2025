@@ -19,6 +19,11 @@ import { MathjaxModule } from 'mathjax-angular';
 import { Kernel } from '../../static/kernel';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
+
+/**
+ * Component to visualize and animate the application of a median filter on a bitmap image.
+ * It allows users to see how the median filter processes each pixel in the image step-by-step.
+ */
 @Component({
   selector: 'app-median-filter-animation',
   imports: [
@@ -41,45 +46,68 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
   styleUrl: './median-filter-animation.component.css'
 })
 export class MedianFilterAnimationComponent {
+  /** The original bitmap image to which the median filter is applied. */
   bitmap: InteractiveBitmap = new InteractiveBitmap(16, 9, undefined, 255);
+  /** The bitmap image after applying the median filter. */
   appliedBitmap: InteractiveBitmap = new InteractiveBitmap(16, 9, undefined, 255);
+  /** The result bitmap after the animation. */
   resultBitmap: InteractiveBitmap = new InteractiveBitmap(16, 9, undefined, 255);
 
+  /** Padding strategy used when accessing pixels outside the bitmap boundaries. */
   padding: Padding = Padding.Edge;
+  /** The kernel representing the current neighborhood of pixels being processed. */
   sourceKernel: Kernel = new Kernel(3);
+  /** Size of the median filter window (must be an odd number). */
   windowSize: number = 3;
   
   
   //view
+  /** Size of each pixel in the bitmap display (in pixels). */
   pixelSize: number = 40;
+  /** If true, a grid is displayed over the bitmap. */
   showGrid: boolean = true;
+  /** If true, headers (row/column indices) are displayed around the bitmap. */
   showHeaders: boolean = true;
+  /** If true, pixel values are displayed on the bitmap. */
   showNumberValues: boolean = true;
+  /** If true, the original bitmap is shown under the result for comparison. */
   showBase: boolean = false;
+  /** Color scale used for displaying the bitmap. */
   selectedColorScale: ColorScale = ColorScale.Grayscale;
   
   
   //controls
-  bitmapTick: number = 0;
+  /** Used to trigger re-rendering of the bitmap component when the bitmap changes. */
+  tick: number = 0;
+  /** Current index of the pixel being processed in the animation. */
   animationIndex: number = 0;
-  bitmapKey: string = "median-filter";
+  /** Key used to load and save the bitmap in storage. */
+  readonly bitmapKey: string = "median-filter";
 
+  /** Initializes the component and loads the bitmap from storage if available. 
+   * @param bitmapStorage Service for loading and saving bitmap images.
+  */
   constructor(private bitmapStorage: BitmapStorageService) { 
     let bitmap = this.bitmapStorage.load(this.bitmapKey);
     if (bitmap) this.load(bitmap);
     this.refresh();
   }
   
-  load(bitmap: Bitmap) { 
+  /** Loads a bitmap into the component and initializes the bitmap.
+   * @param bitmap The bitmap image to load.
+  */
+  load(bitmap: Bitmap): void { 
     this.bitmap = new InteractiveBitmap(bitmap.width, bitmap.height, bitmap, 255);
   }
-  refresh() {
+  /** Refreshes the applied bitmap by reapplying the median filter and resets the animation. */
+  refresh(): void {
     this.appliedBitmap = new InteractiveBitmap(this.bitmap.width, this.bitmap.height, undefined, 255);
     this.applyMedian(this.bitmap, this.appliedBitmap); 
     this.animate();
-    this.bitmapTick++;
+    this.tick++;
   }
-  animate() {
+  /** Advances the animation by processing the next pixel and updating the selection. */
+  animate(): void {
     const index = this.animationIndex;
     const cell = this.bitmap.getIndexCell(index);
     const r = Math.trunc((this.windowSize - 1) / 2);
@@ -102,48 +130,49 @@ export class MedianFilterAnimationComponent {
     this.bitmap.dragArea.dragging = true;
 
 
-    this.bitmapTick++;
+    this.tick++;
   }
 
+  /** Generates a LaTeX representation of the median filter operation for display. */
   getEquation(): string {
-  const values = this.sourceKernel.values().sort((a, b) => a - b);
-  const h = Math.floor(values.length / 2);
+    const values = this.sourceKernel.values().sort((a, b) => a - b);
+    const h = Math.floor(values.length / 2);
 
-  const maxLength = 21;
-  let latexArray: string;
+    const maxLength = 21;
+    let latexArray: string;
 
-  if (values.length <= maxLength) {
-    latexArray = values
-      .map((v, i) => (i === h ? `\\boxed{${v}}` : `${v}`))
-      .join(' & ');
-  } 
-  else {
-    const n = Math.floor(maxLength / 2);
-    const s = 3;
+    if (values.length <= maxLength) {
+      latexArray = values
+        .map((v, i) => (i === h ? `\\boxed{${v}}` : `${v}`))
+        .join(' & ');
+    } 
+    else {
+      const n = Math.floor(maxLength / 2);
+      const s = 3;
 
-    const start = values.slice(0, s);
-    const end = values.slice(values.length - s);
-    const leftmid = values.slice(h-(n-s), h);
-    const rigtmid = values.slice(h+1, h+1+(n-s));
+      const start = values.slice(0, s);
+      const end = values.slice(values.length - s);
+      const leftmid = values.slice(h-(n-s), h);
+      const rigtmid = values.slice(h+1, h+1+(n-s));
+      
+      latexArray = `${start.join(" & ")} & \\dots & ${leftmid.join(" & ")} & \\boxed{${values[h]}} & ${rigtmid.join(" & ")} & \\dots & ${end.join(" & ")}`;
+    }
 
-
-    // const startStr = start.map((v, i) => (i === midIndex ? `\\boxed{${v}}` : `${v}`)).join(' & ');
-    // const endStr = end.map((v, i) => (i + n === midIndex ? `\\boxed{${v}}` : `${v}`)).join(' & ');
-    latexArray = `${start.join(" & ")} & \\dots & ${leftmid.join(" & ")} & \\boxed{${values[h]}} & ${rigtmid.join(" & ")} & \\dots & ${end.join(" & ")}`;
+    return `
+      \\[
+      ${this.sourceKernel.toLatex()} 
+      \\\longrightarrow 
+      \\begin{bmatrix} ${latexArray} \\end{bmatrix}
+      \\\longrightarrow 
+      ${this.median(values)}
+      \\]
+    `;
   }
 
-  return `
-    \\[
-    ${this.sourceKernel.toLatex()} 
-    \\\longrightarrow 
-    \\begin{bmatrix} ${latexArray} \\end{bmatrix}
-    \\\longrightarrow 
-    ${this.median(values)}
-    \\]
-  `;
-}
-
-
+  /** Handles cell click events to update the animation index and refresh the animation.
+   * @param $event The event containing the clicked cell and mouse event details.
+   * @param click Unused.
+  */
   onCellClicked($event: { cell: Point; event: MouseEvent; }, click: boolean = true) {
     if(this.bitmap.isOut($event.cell)) return;
     if($event.event.buttons === 1) {
@@ -153,7 +182,10 @@ export class MedianFilterAnimationComponent {
   }
 
 
-
+  /** Retrieves the kernel of pixel values centered around a given cell.
+   * @param cell The center cell for which to retrieve the kernel.
+   * @returns A Kernel instance containing the pixel values in the neighborhood.
+  */
   private getSourceKernel(cell: Point): Kernel {
     let kernel = new Kernel(this.windowSize);
     const r = Math.trunc((this.windowSize - 1) / 2);
@@ -167,17 +199,30 @@ export class MedianFilterAnimationComponent {
     
     return kernel;
   }
-  private applyMedian(srcBitmap: Bitmap, dstBitmap: Bitmap){
+  /** Applies the median filter to the source bitmap and stores the result in the destination bitmap.
+   * @param srcBitmap The source bitmap to which the median filter is applied.
+   * @param dstBitmap The destination bitmap where the filtered result is stored.
+  */
+  private applyMedian(srcBitmap: Bitmap, dstBitmap: Bitmap): void{
     srcBitmap.pixels().forEach(p=>{
       const result = this.median(this.getSourceKernel(p.cell).values());
       dstBitmap.set(p.cell, result);
     });
   }
+  /** Calculates the median value from an array of numbers.
+   * @param arr The array of numbers from which to calculate the median.
+   * @returns The median value.
+  */
   private median(arr: number[]): number {
     const mid = Math.floor(arr.length / 2);
     return arr.sort((a, b) => a - b)[mid];
   }
-  private  setValues(length: number, destination: InteractiveBitmap, source: InteractiveBitmap) {
+  /** Sets pixel values from the source bitmap to the destination bitmap up to a specified length.
+   * @param length The number of pixels to set.
+   * @param destination The destination bitmap where the pixel values are set.
+   * @param source The source bitmap from which the pixel values are taken.
+  */
+  private setValues(length: number, destination: InteractiveBitmap, source: InteractiveBitmap): void {
     for (let i = 0; i < length; i++) {
       const cell = source.getIndexCell(i);
       if (destination.isOut(cell) || source.isOut(cell)) 
