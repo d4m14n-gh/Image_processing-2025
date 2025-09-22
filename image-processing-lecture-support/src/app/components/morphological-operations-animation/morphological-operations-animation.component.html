@@ -1,0 +1,114 @@
+<div class="flex-col" style="padding: 8px; height: 100%; box-sizing: border-box;">
+
+
+
+    <mat-card appearance="outlined" class="topbar">
+    
+    
+        <button mat-button [routerLink]="['/binary-edit', bitmapKey]">
+            <mat-icon>edit</mat-icon>
+            Edit
+        </button>
+        <button mat-button [routerLink]="['/structuring-element']">
+            <mat-icon>crossword</mat-icon>
+            Structuring Element
+        </button>
+        <div class="divider"></div>
+        <mat-form-field subscriptSizing="dynamic" class="slim-form-field" appearance="outline">
+            <mat-label>Operation</mat-label>
+            <mat-select [(ngModel)]="operation" (ngModelChange)="refresh()">
+                <mat-option value="erosion">Erosion</mat-option>
+                <mat-option value="dilation">Dilation</mat-option>
+                <mat-option value="opening">Opening</mat-option>
+                <mat-option value="closing">Closing</mat-option>
+            </mat-select>
+        </mat-form-field>
+    
+    
+        <div class="divider"></div>
+    
+    
+        <button mat-button (click)="apply(true)">
+            <mat-icon>check</mat-icon>
+            Apply
+        </button>
+        <button mat-button (click)="apply(false)">
+            <mat-icon>cleaning_services</mat-icon>
+            Revert
+        </button>
+        <button mat-button (click)="commit()">
+            <mat-icon>commit</mat-icon>
+            Save
+        </button>
+    
+    
+        <div class="divider"></div>
+    
+    
+        <mat-label>Pixel Size</mat-label>
+        <mat-slider min="25" max="100" step="1" discrete="false">
+            <input matSliderThumb [(ngModel)]="pixelSize">
+        </mat-slider>
+        <div class="divider"></div>
+        <mat-checkbox [(ngModel)]="showGrid">
+            Grid
+        </mat-checkbox>
+        <mat-checkbox [(ngModel)]="showHeaders" [disabled]="pixelSize<40">
+            Headers
+        </mat-checkbox>
+        <mat-checkbox [(ngModel)]="showDifference" (ngModelChange)="refresh()">
+            Difference
+        </mat-checkbox>
+        <mat-checkbox [(ngModel)]="showBase" (ngModelChange)="refresh()">
+            Base
+        </mat-checkbox>
+    
+    
+        </mat-card>
+
+
+
+
+
+
+    <div class="flex-row" style="gap: 8px; flex: 1; min-height: 0">
+
+        <mat-card appearance="outlined" style="width: 50%; overflow: hidden;">
+            <div class="scrollable">
+
+                <app-bitmap class="bitmap" [bitmap]="bitmap" [pixelSize]="pixelSize"
+                    [showHeaders]="showHeaders&&pixelSize>=40" [showGrid]="showGrid"
+                    [showNumbers]="false" [tick]="bitmapTick"
+                    [userSelect]="false" style="margin: auto;"
+                    [selectionColor]="selectionColor"
+                    (cellClicked)="onCellClicked($event)"
+                    >
+
+                </app-bitmap>
+            </div>
+        </mat-card>
+
+        <mat-card appearance="outlined" style="width: 50%; overflow: hidden;">
+            <div class="scrollable">
+
+                <app-bitmap class="bitmap" [bitmap]="resultBitmap" [pixelSize]="pixelSize"
+                    [showHeaders]="showHeaders&&pixelSize>=40" [showGrid]="showGrid"
+                    [showNumbers]="false"
+                    [selectedColorScale]="colorscale"
+                    [selectionColor]="selectionColor"
+                    [tick]="bitmapTick" [userSelect]="false"
+                    (cellClicked)="onCellClicked($event)"
+                    >
+
+                </app-bitmap>
+            </div>
+        </mat-card>
+
+    </div>
+
+
+    <mat-card class="topbar" appearance="outlined" style="overflow: hidden; min-height: fit-content;">
+           <app-animation-controller [showValue]="false" [(value)]="animationIndex" (valueChanged)="animate()" [min]="0" [max]="bitmap.length()-1"></app-animation-controller>
+    </mat-card>
+
+</div>

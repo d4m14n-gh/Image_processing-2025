@@ -7,7 +7,6 @@
 }
 
 .main-grid {
-  /* flex: 1; */
   display: grid;
   grid-template-columns: 275px 1fr 275px;
   gap: 8px;
@@ -30,14 +29,8 @@ mat-card {
   user-select: none;
 }
 
-
 mat-card-subtitle {
   display: flex;
   align-items: center;
   gap: 5px;
-  margin-bottom: 5px;
-}
-
-mat-form-field {
-  margin-bottom: 15px;
 }

@@ -52,7 +52,7 @@
 
     @if(showValue()){
         <div style="padding: 5px; margin: 0; width: 3ch; border: var(--default-border); border-radius: 5px; text-align: center;">
-            {{value}}
+            {{value()}}
         </div>
     }
     
@@ -67,8 +67,9 @@
         [step]="step()"
         [discrete]="showValue()"
         >
-            <input matSliderThumb
-                [(ngModel)]="value"
+        <input matSliderThumb
+        (ngModelChange)="setValue($event)"
+        [(ngModel)]="value"
             >
         </mat-slider>
     </div>

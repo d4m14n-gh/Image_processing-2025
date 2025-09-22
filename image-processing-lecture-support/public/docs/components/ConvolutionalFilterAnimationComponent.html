@@ -1,0 +1,2038 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Image Processing Lecture Support</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+        <link rel="stylesheet" href="../styles/github.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">Image Processing Lecture Support</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  ConvolutionalFilterAnimationComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/components/convolutional-filter-animation/convolutional-filter-animation.component.ts</code>
+</p>
+
+
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Component to visualize and animate the application of a convolutional filter on a bitmap image.
+It allows users to see how the convolutional filter processes each pixel in the image step-by-step.</p>
+
+    </p>
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-convolutional-filter-animation</code></td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>MatCardModule</code>
+                            <code>MatButtonModule</code>
+                            <code>MatIconModule</code>
+                            <code>MatSliderModule</code>
+                            <code>RouterModule</code>
+                            <code>MatFormFieldModule</code>
+                            <code>MatMenuModule</code>
+                                <code><a href="../components/BitmapComponent.html" target="_self" >BitmapComponent</a></code>
+                            <code>FormsModule</code>
+                                <code><a href="../components/AnimationControllerComponent.html" target="_self" >AnimationControllerComponent</a></code>
+                            <code>MatCheckboxModule</code>
+                            <code>MatSelectModule</code>
+                            <code>MathjaxModule</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./convolutional-filter-animation.component.html</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./convolutional-filter-animation.component.css</code></td>
+            </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#animationIndex" >animationIndex</a>
+                            </li>
+                            <li>
+                                <a href="#bitmap" >bitmap</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#bitmapKey" >bitmapKey</a>
+                            </li>
+                            <li>
+                                <a href="#filteredBitmap" >filteredBitmap</a>
+                            </li>
+                            <li>
+                                <a href="#kernel" >kernel</a>
+                            </li>
+                            <li>
+                                <a href="#padding" >padding</a>
+                            </li>
+                            <li>
+                                <a href="#pixelSize" >pixelSize</a>
+                            </li>
+                            <li>
+                                <a href="#resultBitmap" >resultBitmap</a>
+                            </li>
+                            <li>
+                                <a href="#resultKernel" >resultKernel</a>
+                            </li>
+                            <li>
+                                <a href="#selectedColorScale" >selectedColorScale</a>
+                            </li>
+                            <li>
+                                <a href="#showBase" >showBase</a>
+                            </li>
+                            <li>
+                                <a href="#showGrid" >showGrid</a>
+                            </li>
+                            <li>
+                                <a href="#showHeaders" >showHeaders</a>
+                            </li>
+                            <li>
+                                <a href="#showNumberValues" >showNumberValues</a>
+                            </li>
+                            <li>
+                                <a href="#sourceKernel" >sourceKernel</a>
+                            </li>
+                            <li>
+                                <a href="#tick" >tick</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#animate" >animate</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#applyFilter" >applyFilter</a>
+                            </li>
+                            <li>
+                                <a href="#getEquation" >getEquation</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#getResultKernel" >getResultKernel</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#getSourceKernel" >getSourceKernel</a>
+                            </li>
+                            <li>
+                                <a href="#onCellClicked" >onCellClicked</a>
+                            </li>
+                            <li>
+                                <a href="#openDialog" >openDialog</a>
+                            </li>
+                            <li>
+                                <a href="#refresh" >refresh</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#setValues" >setValues</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(dialog: MatDialog, bitmapStorage: <a href="../injectables/BitmapStorageService.html" target="_self">BitmapStorageService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="88" class="link-to-prism">src/app/components/convolutional-filter-animation/convolutional-filter-animation.component.ts:88</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Constructor to initialize the component with necessary services and load initial data.</p>
+</div>
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>dialog</td>
+                                                  
+                                                        <td>
+                                                                    <code>MatDialog</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <p>Service to manage dialog interactions.</p>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>bitmapStorage</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/BitmapStorageService.html" target="_self" >BitmapStorageService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <p>Service to load and save bitmaps in storage.</p>
+
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="animate"></a>
+                    <span class="name">
+                        <span ><b>animate</b></span>
+                        <a href="#animate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>animate()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="134"
+                                    class="link-to-prism">src/app/components/convolutional-filter-animation/convolutional-filter-animation.component.ts:134</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Advances the animation by processing the next pixel and updating the selection.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="applyFilter"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>applyFilter</b></span>
+                        <a href="#applyFilter"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>applyFilter(length: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, destination: <a href="../classes/InteractiveBitmap.html" target="_self">InteractiveBitmap</a>, source: <a href="../classes/InteractiveBitmap.html" target="_self">InteractiveBitmap</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="191"
+                                    class="link-to-prism">src/app/components/convolutional-filter-animation/convolutional-filter-animation.component.ts:191</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Applies the convolutional filter to the source bitmap and stores the result in the destination bitmap.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>length</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>The number of pixels to process.</p>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>destination</td>
+                                            <td>
+                                                            <code><a href="../classes/InteractiveBitmap.html" target="_self" >InteractiveBitmap</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>The destination bitmap where the filtered result is stored.</p>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>source</td>
+                                            <td>
+                                                            <code><a href="../classes/InteractiveBitmap.html" target="_self" >InteractiveBitmap</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>The source bitmap to which the convolutional filter is applied.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getEquation"></a>
+                    <span class="name">
+                        <span ><b>getEquation</b></span>
+                        <a href="#getEquation"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getEquation()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="175"
+                                    class="link-to-prism">src/app/components/convolutional-filter-animation/convolutional-filter-animation.component.ts:175</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Generates a LaTeX representation of the convolution operation for display.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getResultKernel"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>getResultKernel</b></span>
+                        <a href="#getResultKernel"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getResultKernel()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="233"
+                                    class="link-to-prism">src/app/components/convolutional-filter-animation/convolutional-filter-animation.component.ts:233</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Computes the result kernel by multiplying the convolutional kernel with the source kernel.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../classes/Kernel.html" target="_self" >Kernel</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>A Kernel instance containing the weighted values used to compute the filtered pixel value.</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getSourceKernel"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>getSourceKernel</b></span>
+                        <a href="#getSourceKernel"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getSourceKernel()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="217"
+                                    class="link-to-prism">src/app/components/convolutional-filter-animation/convolutional-filter-animation.component.ts:217</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Retrieves the kernel of pixel values centered around the current animation index.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../classes/Kernel.html" target="_self" >Kernel</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>A Kernel instance containing the pixel values in the neighborhood.</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onCellClicked"></a>
+                    <span class="name">
+                        <span ><b>onCellClicked</b></span>
+                        <a href="#onCellClicked"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onCellClicked($event: literal type, click: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="167"
+                                    class="link-to-prism">src/app/components/convolutional-filter-animation/convolutional-filter-animation.component.ts:167</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Handles cell click events to jump to a specific pixel in the animation.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Default value</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>$event</td>
+                                            <td>
+                                                        <code>literal type</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                            </td>
+
+                                            <td>
+                                                    <p>The event containing the clicked cell and mouse event details.</p>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>click</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                                    <code>true</code>
+                                            </td>
+
+                                            <td>
+                                                    <p>unused.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="openDialog"></a>
+                    <span class="name">
+                        <span ><b>openDialog</b></span>
+                        <a href="#openDialog"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>openDialog()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="106"
+                                    class="link-to-prism">src/app/components/convolutional-filter-animation/convolutional-filter-animation.component.ts:106</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Opens a dialog to edit the convolutional kernel.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="refresh"></a>
+                    <span class="name">
+                        <span ><b>refresh</b></span>
+                        <a href="#refresh"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>refresh()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="126"
+                                    class="link-to-prism">src/app/components/convolutional-filter-animation/convolutional-filter-animation.component.ts:126</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Refreshes the filtered and result bitmaps by reapplying the convolutional filter and resets the animation.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setValues"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>setValues</b></span>
+                        <a href="#setValues"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>setValues(length: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, destination: <a href="../classes/InteractiveBitmap.html" target="_self">InteractiveBitmap</a>, source: <a href="../classes/InteractiveBitmap.html" target="_self">InteractiveBitmap</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="205"
+                                    class="link-to-prism">src/app/components/convolutional-filter-animation/convolutional-filter-animation.component.ts:205</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Sets pixel values from the source bitmap to the destination bitmap up to a specified length.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>length</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>The number of pixels to set.</p>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>destination</td>
+                                            <td>
+                                                            <code><a href="../classes/InteractiveBitmap.html" target="_self" >InteractiveBitmap</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>The destination bitmap where the pixel values are set.</p>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>source</td>
+                                            <td>
+                                                            <code><a href="../classes/InteractiveBitmap.html" target="_self" >InteractiveBitmap</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>The source bitmap from which the pixel values are taken.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="animationIndex"></a>
+                    <span class="name">
+                        <span ><b>animationIndex</b></span>
+                        <a href="#animationIndex"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="88" class="link-to-prism">src/app/components/convolutional-filter-animation/convolutional-filter-animation.component.ts:88</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Current index of the pixel being processed in the animation.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="bitmap"></a>
+                    <span class="name">
+                        <span ><b>bitmap</b></span>
+                        <a href="#bitmap"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/InteractiveBitmap.html" target="_self" >InteractiveBitmap</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new InteractiveBitmap(16, 9, undefined, 255)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/components/convolutional-filter-animation/convolutional-filter-animation.component.ts:49</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>The original bitmap image to which the convolutional filter is applied.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="bitmapKey"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>bitmapKey</b></span>
+                        <a href="#bitmapKey"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&quot;convolutional-filter&quot;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/components/convolutional-filter-animation/convolutional-filter-animation.component.ts:59</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Key used to load and save the bitmap in storage.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="filteredBitmap"></a>
+                    <span class="name">
+                        <span ><b>filteredBitmap</b></span>
+                        <a href="#filteredBitmap"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/InteractiveBitmap.html" target="_self" >InteractiveBitmap</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new InteractiveBitmap(16, 9, undefined, 255)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/components/convolutional-filter-animation/convolutional-filter-animation.component.ts:51</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>The bitmap image after applying the convolutional filter.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="kernel"></a>
+                    <span class="name">
+                        <span ><b>kernel</b></span>
+                        <a href="#kernel"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/Kernel.html" target="_self" >Kernel</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Kernel(3)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/components/convolutional-filter-animation/convolutional-filter-animation.component.ts:62</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>The convolutional kernel used for filtering.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="padding"></a>
+                    <span class="name">
+                        <span ><b>padding</b></span>
+                        <a href="#padding"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../miscellaneous/enumerations.html#Padding" target="_self" >Padding</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>Padding.Edge</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/app/components/convolutional-filter-animation/convolutional-filter-animation.component.ts:68</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Padding strategy used when accessing pixels outside the bitmap boundaries.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="pixelSize"></a>
+                    <span class="name">
+                        <span ><b>pixelSize</b></span>
+                        <a href="#pixelSize"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>40</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="73" class="link-to-prism">src/app/components/convolutional-filter-animation/convolutional-filter-animation.component.ts:73</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Size of each pixel in the bitmap display (in pixels).</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="resultBitmap"></a>
+                    <span class="name">
+                        <span ><b>resultBitmap</b></span>
+                        <a href="#resultBitmap"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/InteractiveBitmap.html" target="_self" >InteractiveBitmap</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new InteractiveBitmap(16, 9, undefined, 255)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/components/convolutional-filter-animation/convolutional-filter-animation.component.ts:53</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>The result bitmap after the animation.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="resultKernel"></a>
+                    <span class="name">
+                        <span ><b>resultKernel</b></span>
+                        <a href="#resultKernel"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/Kernel.html" target="_self" >Kernel</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Kernel(3)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">src/app/components/convolutional-filter-animation/convolutional-filter-animation.component.ts:66</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>The kernel representing the weighted values used to compute the filtered pixel value.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectedColorScale"></a>
+                    <span class="name">
+                        <span ><b>selectedColorScale</b></span>
+                        <a href="#selectedColorScale"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../miscellaneous/enumerations.html#ColorScale" target="_self" >ColorScale</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>ColorScale.Grayscale</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="83" class="link-to-prism">src/app/components/convolutional-filter-animation/convolutional-filter-animation.component.ts:83</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Color scale used for displaying the bitmap.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showBase"></a>
+                    <span class="name">
+                        <span ><b>showBase</b></span>
+                        <a href="#showBase"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="81" class="link-to-prism">src/app/components/convolutional-filter-animation/convolutional-filter-animation.component.ts:81</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>If true, the original bitmap is shown under the result for comparison.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showGrid"></a>
+                    <span class="name">
+                        <span ><b>showGrid</b></span>
+                        <a href="#showGrid"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="75" class="link-to-prism">src/app/components/convolutional-filter-animation/convolutional-filter-animation.component.ts:75</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>If true, a grid is displayed over the bitmap.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showHeaders"></a>
+                    <span class="name">
+                        <span ><b>showHeaders</b></span>
+                        <a href="#showHeaders"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="77" class="link-to-prism">src/app/components/convolutional-filter-animation/convolutional-filter-animation.component.ts:77</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>If true, headers (row/column indices) are displayed around the bitmap.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showNumberValues"></a>
+                    <span class="name">
+                        <span ><b>showNumberValues</b></span>
+                        <a href="#showNumberValues"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="79" class="link-to-prism">src/app/components/convolutional-filter-animation/convolutional-filter-animation.component.ts:79</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>If true, pixel values are displayed on the bitmap.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sourceKernel"></a>
+                    <span class="name">
+                        <span ><b>sourceKernel</b></span>
+                        <a href="#sourceKernel"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/Kernel.html" target="_self" >Kernel</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Kernel(3)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">src/app/components/convolutional-filter-animation/convolutional-filter-animation.component.ts:64</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>The kernel representing the current neighborhood of pixels being processed.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="tick"></a>
+                    <span class="name">
+                        <span ><b>tick</b></span>
+                        <a href="#tick"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/components/convolutional-filter-animation/convolutional-filter-animation.component.ts:57</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Used to trigger re-rendering of the bitmap component when the bitmap changes.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component} from &#x27;@angular/core&#x27;;
+import { BitmapComponent } from &#x27;../bitmap/bitmap.component&#x27;;
+import { MatCardModule } from &#x27;@angular/material/card&#x27;;
+import { MatButtonModule } from &#x27;@angular/material/button&#x27;;
+import { MatIconModule } from &#x27;@angular/material/icon&#x27;;
+import { MatSliderModule } from &#x27;@angular/material/slider&#x27;;
+import { RouterModule } from &#x27;@angular/router&#x27;;
+import { AnimationControllerComponent } from &#x27;../animation-controller/animation-controller.component&#x27;;
+import { MatFormFieldModule } from &#x27;@angular/material/form-field&#x27;;
+import { MatMenuModule } from &#x27;@angular/material/menu&#x27;;
+import { InteractiveBitmap } from &#x27;../../static/bitmap&#x27;;
+import { FormsModule } from &#x27;@angular/forms&#x27;;
+import { MatDialog } from &#x27;@angular/material/dialog&#x27;;
+import { KernelDialogComponent } from &#x27;../dialogs/kernel-dialog/kernel-dialog.component&#x27;;
+import { BitmapStorageService } from &#x27;../../services/bitmap-storage/bitmap-storage.service&#x27;;
+import { Kernel } from &#x27;../../static/kernel&#x27;;
+import { ColorScale, OutOfRangeHandling, Padding, QuantizationMode } from &#x27;../../static/enums&#x27;;
+import { MatCheckboxModule } from &#x27;@angular/material/checkbox&#x27;;
+import { Point } from &#x27;../../static/point&#x27;;
+import { MatrixDisplayComponent } from &quot;../matrix-display/matrix-display.component&quot;;
+import { MathjaxModule } from &#x27;mathjax-angular&#x27;;
+import { MatSelectModule } from &#x27;@angular/material/select&#x27;;
+
+/** Component to visualize and animate the application of a convolutional filter on a bitmap image.
+ * It allows users to see how the convolutional filter processes each pixel in the image step-by-step.
+ */
+@Component({
+  selector: &#x27;app-convolutional-filter-animation&#x27;,
+  imports: [
+    MatCardModule,
+    MatButtonModule,
+    MatIconModule,
+    MatSliderModule,
+    RouterModule,
+    MatFormFieldModule,
+    MatMenuModule,
+    BitmapComponent,
+    FormsModule,
+    AnimationControllerComponent,
+    MatCheckboxModule,
+    MatSelectModule,
+    MathjaxModule,
+],
+  templateUrl: &#x27;./convolutional-filter-animation.component.html&#x27;,
+  styleUrl: &#x27;./convolutional-filter-animation.component.css&#x27;
+})
+export class ConvolutionalFilterAnimationComponent {
+  /** The original bitmap image to which the convolutional filter is applied. */
+  bitmap: InteractiveBitmap &#x3D; new InteractiveBitmap(16, 9, undefined, 255);
+  /** The bitmap image after applying the convolutional filter. */
+  filteredBitmap: InteractiveBitmap &#x3D; new InteractiveBitmap(16, 9, undefined, 255);
+  /** The result bitmap after the animation. */
+  resultBitmap: InteractiveBitmap &#x3D; new InteractiveBitmap(16, 9, undefined, 255);
+
+
+  /** Used to trigger re-rendering of the bitmap component when the bitmap changes. */
+  tick: number &#x3D; 0;
+  /** Key used to load and save the bitmap in storage. */
+  readonly bitmapKey: string &#x3D; &quot;convolutional-filter&quot;;
+
+  /** The convolutional kernel used for filtering. */
+  kernel: Kernel &#x3D; new Kernel(3);
+  /** The kernel representing the current neighborhood of pixels being processed. */
+  sourceKernel: Kernel &#x3D; new Kernel(3);
+  /** The kernel representing the weighted values used to compute the filtered pixel value. */
+  resultKernel: Kernel &#x3D; new Kernel(3);
+  /** Padding strategy used when accessing pixels outside the bitmap boundaries. */
+  padding: Padding &#x3D; Padding.Edge;
+
+
+  //view
+  /** Size of each pixel in the bitmap display (in pixels). */
+  pixelSize: number &#x3D; 40;
+  /** If true, a grid is displayed over the bitmap. */
+  showGrid: boolean &#x3D; true;
+  /** If true, headers (row/column indices) are displayed around the bitmap. */
+  showHeaders: boolean &#x3D; true;
+  /** If true, pixel values are displayed on the bitmap. */
+  showNumberValues: boolean &#x3D; true;
+  /** If true, the original bitmap is shown under the result for comparison. */
+  showBase: boolean &#x3D; false;
+  /** Color scale used for displaying the bitmap. */
+  selectedColorScale: ColorScale &#x3D; ColorScale.Grayscale;
+  
+  
+  //controls
+  /** Current index of the pixel being processed in the animation. */
+  animationIndex: number &#x3D; 0;
+
+  /** Constructor to initialize the component with necessary services and load initial data. 
+   * @param dialog Service to manage dialog interactions.
+   * @param bitmapStorage Service to load and save bitmaps in storage.
+  */
+  constructor(private dialog: MatDialog, private bitmapStorage: BitmapStorageService) { 
+    let bitmap &#x3D; this.bitmapStorage.load(this.bitmapKey);
+    if (bitmap)
+      this.bitmap &#x3D; new InteractiveBitmap(bitmap.width, bitmap.height, bitmap, 255);
+    else
+      this.bitmapStorage.save(this.bitmapKey, this.bitmap);
+    
+    this.kernel.load(&quot;kernel&quot;);
+    this.refresh();
+  }
+
+  /** Opens a dialog to edit the convolutional kernel. */
+  openDialog(): void {
+    const dialogRef &#x3D; this.dialog.open(KernelDialogComponent, {
+      width: &#x27;650px&#x27;,
+      disableClose: true,
+      // hasBackdrop: false,
+      data: this.kernel.clone()
+    });
+
+    dialogRef.afterClosed().subscribe(result &#x3D;&gt; {
+      if (result) {
+        this.kernel &#x3D; result;
+        this.sourceKernel &#x3D; new Kernel(result.size);
+        this.resultKernel &#x3D; new Kernel(result.size);
+        this.kernel.save(&quot;kernel&quot;);
+        this.refresh();
+      }
+    });
+  }
+  
+  /** Refreshes the filtered and result bitmaps by reapplying the convolutional filter and resets the animation. */
+  refresh(): void {
+    this.resultBitmap &#x3D; new InteractiveBitmap(this.bitmap.width, this.bitmap.height, this.bitmap, 255);
+    this.filteredBitmap &#x3D; new InteractiveBitmap(this.bitmap.width, this.bitmap.height, undefined, 255);
+    this.applyFilter(this.bitmap.length(), this.filteredBitmap, this.bitmap);
+    this.animate();
+  }
+
+  /** Advances the animation by processing the next pixel and updating the selection. */
+  animate(): void {
+    const index &#x3D; this.animationIndex;
+    this.bitmap.clearSelection();
+    this.resultBitmap &#x3D; new InteractiveBitmap(this.bitmap.width, this.bitmap.height, this.showBase?this.bitmap:undefined, 255);
+    this.setValues(index+1, this.resultBitmap, this.filteredBitmap);
+    
+
+    this.sourceKernel &#x3D; this.getSourceKernel()
+    this.resultKernel &#x3D; this.getResultKernel();
+
+    const size &#x3D; this.kernel.size;
+    const r &#x3D; Math.trunc((size - 1) / 2);
+    const cell &#x3D; this.bitmap.getIndexCell(index);
+
+    if (index &lt; this.bitmap.length()) {
+
+    for (let ox &#x3D; -r; ox &lt;&#x3D; r; ox++)
+      for (let oy &#x3D; -r; oy &lt;&#x3D; r; oy++)
+        this.bitmap.select(cell.add(new Point(ox, oy)));
+      this.resultBitmap.select(cell);
+    }
+    this.bitmap.dragArea.dragStart &#x3D; cell;
+    this.bitmap.dragArea.dragEnd &#x3D; cell;
+    this.bitmap.dragArea.dragging &#x3D; true;
+
+
+    this.tick++;
+  }
+
+  /** Handles cell click events to jump to a specific pixel in the animation.
+   * @param $event The event containing the clicked cell and mouse event details.
+   * @param click unused.
+   */
+  onCellClicked($event: { cell: Point; event: MouseEvent; }, click: boolean &#x3D; true): void {
+    if(this.bitmap.isOut($event.cell)) return;
+    if($event.event.buttons &#x3D;&#x3D;&#x3D; 1) {
+      this.animationIndex &#x3D; this.bitmap.getCellIndex($event.cell);
+      this.animate();
+    }
+  }
+  /** Generates a LaTeX representation of the convolution operation for display. */
+  getEquation(): string {
+    const divider &#x3D; this.kernel.divider;
+    return &#x60;\\[
+      ${this.sourceKernel.toLatex()}
+      \\cdot
+      ${divider&lt;0 ? &#x27;-&#x27; : &#x27;&#x27;}\\frac{1}{${Math.abs(divider)}}
+      ${this.kernel.toLatex()}
+      &#x3D;
+      ${this.filteredBitmap.get(this.bitmap.getIndexCell(this.animationIndex))}
+      \\]&#x60;;
+  }
+  /** Applies the convolutional filter to the source bitmap and stores the result in the destination bitmap.
+   * @param length The number of pixels to process.
+   * @param destination The destination bitmap where the filtered result is stored.
+   * @param source The source bitmap to which the convolutional filter is applied.
+  */
+  private applyFilter(length: number, destination: InteractiveBitmap, source: InteractiveBitmap): void {
+    for (let i &#x3D; 0; i &lt; length; i++) {
+      const cell &#x3D; source.getIndexCell(i);
+      if (destination.isOut(cell) || source.isOut(cell)) 
+        continue;
+      let kernelValue &#x3D; this.kernel.apply(source, cell, QuantizationMode.Round, OutOfRangeHandling.Clipping, this.padding);
+      destination.set(cell, kernelValue);
+    }
+  }
+  /** Sets pixel values from the source bitmap to the destination bitmap up to a specified length.
+   * @param length The number of pixels to set.
+   * @param destination The destination bitmap where the pixel values are set.
+   * @param source The source bitmap from which the pixel values are taken.
+  */
+  private setValues(length: number, destination: InteractiveBitmap, source: InteractiveBitmap): void {
+    for (let i &#x3D; 0; i &lt; length; i++) {
+      const cell &#x3D; source.getIndexCell(i);
+      if (destination.isOut(cell) || source.isOut(cell)) 
+        continue;
+      let value &#x3D; source.get(cell)!;
+      destination.set(cell, value);
+    }
+  }
+  /** Retrieves the kernel of pixel values centered around the current animation index.
+   * @returns A Kernel instance containing the pixel values in the neighborhood.
+  */
+  private getSourceKernel(): Kernel {
+    let kernel &#x3D; new Kernel(this.kernel.size);
+    const r &#x3D; Math.trunc((this.kernel.size - 1) / 2);
+    for (let oy &#x3D; -r; oy &lt;&#x3D; r; oy++)
+      for (let ox &#x3D; -r; ox &lt;&#x3D; r; ox++) {
+        const point &#x3D; this.bitmap.getIndexCell(this.animationIndex);
+        const offset &#x3D; point.add(new Point(oy, ox));
+
+        let value &#x3D; this.bitmap.getWithPadding(offset, this.padding);
+        kernel.kernel[ox + r][oy + r] &#x3D; value;
+      }
+    return kernel;
+  }
+  /** Computes the result kernel by multiplying the convolutional kernel with the source kernel.
+   * @returns A Kernel instance containing the weighted values used to compute the filtered pixel value.
+  */
+  private getResultKernel(): Kernel {
+    let kernel &#x3D; new Kernel(this.kernel.size);
+    const r &#x3D; Math.trunc((this.kernel.size - 1) / 2);
+    for (let oy &#x3D; -r; oy &lt;&#x3D; r; oy++)
+      for (let ox &#x3D; -r; ox &lt;&#x3D; r; ox++)
+        kernel.kernel[oy + r][ox + r] &#x3D; this.kernel.kernel[oy + r][ox + r] * this.sourceKernel.kernel[oy + r][ox + r];
+    return kernel;
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;flex-col&quot; style&#x3D;&quot;padding: 8px; height: 100%; box-sizing: border-box;&quot;&gt;
+
+    &lt;mat-card appearance&#x3D;&quot;outlined&quot; class&#x3D;&quot;topbar&quot;&gt;
+        &lt;button mat-button [routerLink]&#x3D;&quot;[&#x27;/edit&#x27;, bitmapKey]&quot;&gt;
+            &lt;mat-icon&gt;edit&lt;/mat-icon&gt;
+            Edit
+        &lt;/button&gt;
+        &lt;button mat-button (click)&#x3D;&quot;openDialog()&quot;&gt;
+            &lt;mat-icon&gt;grid_on&lt;/mat-icon&gt;
+            Kernel
+        &lt;/button&gt;
+        &lt;div class&#x3D;&quot;divider&quot;&gt;&lt;/div&gt;
+        &lt;mat-form-field subscriptSizing&#x3D;&quot;dynamic&quot; class&#x3D;&quot;slim-form-field&quot; appearance&#x3D;&quot;outline&quot;&gt;
+            &lt;mat-label&gt;Padding&lt;/mat-label&gt;
+            &lt;mat-select [(ngModel)]&#x3D;&quot;padding&quot; (ngModelChange)&#x3D;&quot;refresh();&quot;&gt;
+                &lt;mat-option value&#x3D;&quot;zero&quot;&gt;Zero&lt;/mat-option&gt;
+                &lt;mat-option value&#x3D;&quot;edge&quot;&gt;Edge&lt;/mat-option&gt;
+            &lt;/mat-select&gt;
+        &lt;/mat-form-field&gt;
+        &lt;div class&#x3D;&quot;divider&quot;&gt;&lt;/div&gt;
+        &lt;mat-label&gt;Pixel Size&lt;/mat-label&gt;
+        &lt;mat-slider min&#x3D;&quot;25&quot; max&#x3D;&quot;100&quot; step&#x3D;&quot;1&quot; discrete&#x3D;&quot;false&quot;&gt;
+            &lt;input matSliderThumb [(ngModel)]&#x3D;&quot;pixelSize&quot;&gt;
+        &lt;/mat-slider&gt;
+        &lt;div class&#x3D;&quot;divider&quot;&gt;&lt;/div&gt;
+        &lt;mat-checkbox [(ngModel)]&#x3D;&quot;showNumberValues&quot; [disabled]&#x3D;&quot;pixelSize&lt;40&quot;&gt;
+            Numbers
+        &lt;/mat-checkbox&gt;
+        &lt;mat-checkbox [(ngModel)]&#x3D;&quot;showGrid&quot;&gt;
+            Grid
+        &lt;/mat-checkbox&gt;
+        &lt;mat-checkbox [(ngModel)]&#x3D;&quot;showHeaders&quot; [disabled]&#x3D;&quot;pixelSize&lt;40&quot;&gt;
+            Headers
+        &lt;/mat-checkbox&gt;
+        &lt;mat-checkbox [(ngModel)]&#x3D;&quot;showBase&quot; (ngModelChange)&#x3D;&quot;animate()&quot;&gt;
+            Base
+        &lt;/mat-checkbox&gt;
+        &lt;div class&#x3D;&quot;divider&quot;&gt;&lt;/div&gt;
+        &lt;app-animation-controller [showValue]&#x3D;&quot;false&quot; [(value)]&#x3D;&quot;animationIndex&quot; (valueChanged)&#x3D;&quot;animate()&quot; [min]&#x3D;&quot;0&quot;
+            [max]&#x3D;&quot;bitmap.length()-1&quot;&gt;
+        &lt;/app-animation-controller&gt;
+    &lt;/mat-card&gt;
+
+    &lt;div class&#x3D;&quot;flex-row&quot; style&#x3D;&quot;gap: 8px; flex: 1; min-height: 0&quot;&gt;
+
+        &lt;mat-card appearance&#x3D;&quot;outlined&quot; style&#x3D;&quot;width: 50%; overflow: hidden;&quot;&gt;
+            &lt;div class&#x3D;&quot;scrollable&quot;&gt;
+
+                &lt;app-bitmap class&#x3D;&quot;bitmap&quot; [bitmap]&#x3D;&quot;bitmap&quot; [pixelSize]&#x3D;&quot;pixelSize&quot;
+                    [showHeaders]&#x3D;&quot;showHeaders&amp;&amp;pixelSize&gt;&#x3D;40&quot; [showGrid]&#x3D;&quot;showGrid&quot;
+                    [showNumbers]&#x3D;&quot;showNumberValues&amp;&amp;pixelSize&gt;&#x3D;40&quot; [tick]&#x3D;&quot;tick&quot;
+                    [selectedColorScale]&#x3D;&quot;selectedColorScale&quot; [userSelect]&#x3D;&quot;false&quot; style&#x3D;&quot;margin: auto;&quot;
+                    (cellClicked)&#x3D;&quot;onCellClicked($event)&quot;&gt;
+
+                &lt;/app-bitmap&gt;
+            &lt;/div&gt;
+        &lt;/mat-card&gt;
+
+        &lt;mat-card appearance&#x3D;&quot;outlined&quot; style&#x3D;&quot;width: 50%; overflow: hidden;&quot;&gt;
+            &lt;div class&#x3D;&quot;scrollable&quot;&gt;
+
+                &lt;app-bitmap class&#x3D;&quot;bitmap&quot; [bitmap]&#x3D;&quot;resultBitmap&quot; [pixelSize]&#x3D;&quot;pixelSize&quot;
+                    [showHeaders]&#x3D;&quot;showHeaders&amp;&amp;pixelSize&gt;&#x3D;40&quot; [showGrid]&#x3D;&quot;showGrid&quot;
+                    [selectedColorScale]&#x3D;&quot;selectedColorScale&quot; [showNumbers]&#x3D;&quot;showNumberValues&amp;&amp;pixelSize&gt;&#x3D;40&quot;
+                    [tick]&#x3D;&quot;tick&quot; [userSelect]&#x3D;&quot;false&quot; (cellClicked)&#x3D;&quot;onCellClicked($event)&quot;&gt;
+
+                &lt;/app-bitmap&gt;
+            &lt;/div&gt;
+        &lt;/mat-card&gt;
+
+    &lt;/div&gt;
+
+    &lt;mat-card appearance&#x3D;&quot;outlined&quot; style&#x3D;&quot;overflow: hidden; min-height: fit-content;&quot;&gt;
+        &lt;div class&#x3D;&quot;scrollable flex-row&quot; style&#x3D;&quot;padding: 10px; justify-content: center; align-items: center;&quot;&gt;
+            &lt;!-- &lt;app-matrix-display [kernel]&#x3D;&quot;sourceKernel&quot;&gt;&lt;/app-matrix-display&gt; --&gt;
+            &lt;!--           
+            &lt;mat-icon class&#x3D;&quot;sign&quot;&gt;
+                asterisk
+            &lt;/mat-icon&gt; --&gt;
+
+            &lt;!-- &lt;app-matrix-display [kernel]&#x3D;&quot;kernel&quot;&gt;&lt;/app-matrix-display&gt; --&gt;
+            &lt;div [mathjax]&#x3D;&quot;getEquation()&quot;
+                style&#x3D;&quot;font-size: 1.2rem; color: var(--mat-sys-on-surface); font-family: Roboto, &#x27;Helvetica Neue&#x27;, sans-serif;&quot;&gt;
+            &lt;/div&gt;
+            &lt;!--           
+            &lt;mat-icon class&#x3D;&quot;sign&quot;&gt;
+                equal
+            &lt;/mat-icon&gt; --&gt;
+
+            &lt;!-- &lt;app-matrix-display [kernel]&#x3D;&quot;resultKernel&quot;&gt;&lt;/app-matrix-display&gt; --&gt;
+        &lt;/div&gt;
+    &lt;/mat-card&gt;
+
+&lt;/div&gt;</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="flex-col" style="padding: 8px; height: 100%; box-sizing: border-box;">    <mat-card appearance="outlined" class="topbar">        <button mat-button [routerLink]="[\'/edit\', bitmapKey]">            <mat-icon>edit</mat-icon>            Edit        </button>        <button mat-button (click)="openDialog()">            <mat-icon>grid_on</mat-icon>            Kernel        </button>        <div class="divider"></div>        <mat-form-field subscriptSizing="dynamic" class="slim-form-field" appearance="outline">            <mat-label>Padding</mat-label>            <mat-select [(ngModel)]="padding" (ngModelChange)="refresh();">                <mat-option value="zero">Zero</mat-option>                <mat-option value="edge">Edge</mat-option>            </mat-select>        </mat-form-field>        <div class="divider"></div>        <mat-label>Pixel Size</mat-label>        <mat-slider min="25" max="100" step="1" discrete="false">            <input matSliderThumb [(ngModel)]="pixelSize">        </mat-slider>        <div class="divider"></div>        <mat-checkbox [(ngModel)]="showNumberValues" [disabled]="pixelSize<40">            Numbers        </mat-checkbox>        <mat-checkbox [(ngModel)]="showGrid">            Grid        </mat-checkbox>        <mat-checkbox [(ngModel)]="showHeaders" [disabled]="pixelSize<40">            Headers        </mat-checkbox>        <mat-checkbox [(ngModel)]="showBase" (ngModelChange)="animate()">            Base        </mat-checkbox>        <div class="divider"></div>        <app-animation-controller [showValue]="false" [(value)]="animationIndex" (valueChanged)="animate()" [min]="0"            [max]="bitmap.length()-1">        </app-animation-controller>    </mat-card>    <div class="flex-row" style="gap: 8px; flex: 1; min-height: 0">        <mat-card appearance="outlined" style="width: 50%; overflow: hidden;">            <div class="scrollable">                <app-bitmap class="bitmap" [bitmap]="bitmap" [pixelSize]="pixelSize"                    [showHeaders]="showHeaders&&pixelSize>=40" [showGrid]="showGrid"                    [showNumbers]="showNumberValues&&pixelSize>=40" [tick]="tick"                    [selectedColorScale]="selectedColorScale" [userSelect]="false" style="margin: auto;"                    (cellClicked)="onCellClicked($event)">                </app-bitmap>            </div>        </mat-card>        <mat-card appearance="outlined" style="width: 50%; overflow: hidden;">            <div class="scrollable">                <app-bitmap class="bitmap" [bitmap]="resultBitmap" [pixelSize]="pixelSize"                    [showHeaders]="showHeaders&&pixelSize>=40" [showGrid]="showGrid"                    [selectedColorScale]="selectedColorScale" [showNumbers]="showNumberValues&&pixelSize>=40"                    [tick]="tick" [userSelect]="false" (cellClicked)="onCellClicked($event)">                </app-bitmap>            </div>        </mat-card>    </div>    <mat-card appearance="outlined" style="overflow: hidden; min-height: fit-content;">        <div class="scrollable flex-row" style="padding: 10px; justify-content: center; align-items: center;">            <!-- <app-matrix-display [kernel]="sourceKernel"></app-matrix-display> -->            <!--                       <mat-icon class="sign">                asterisk            </mat-icon> -->            <!-- <app-matrix-display [kernel]="kernel"></app-matrix-display> -->            <div [mathjax]="getEquation()"                style="font-size: 1.2rem; color: var(--mat-sys-on-surface); font-family: Roboto, \'Helvetica Neue\', sans-serif;">            </div>            <!--                       <mat-icon class="sign">                equal            </mat-icon> -->            <!-- <app-matrix-display [kernel]="resultKernel"></app-matrix-display> -->        </div>    </mat-card></div></div>'
+    var COMPONENTS = [{'name': 'AccumulatorDialogComponent', 'selector': 'app-accumulator-dialog'},{'name': 'AnimationControllerComponent', 'selector': 'app-animation-controller'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BinaryBitmapEditorComponent', 'selector': 'app-binary-bitmap-editor'},{'name': 'BitmapComponent', 'selector': 'app-bitmap'},{'name': 'BitmapEditorComponent', 'selector': 'app-bitmap-editor'},{'name': 'ConvolutionalFilterAnimationComponent', 'selector': 'app-convolutional-filter-animation'},{'name': 'DocsComponent', 'selector': 'app-docs'},{'name': 'GrassfireAnimationComponent', 'selector': 'app-grassfire-animation'},{'name': 'HelpComponent', 'selector': 'app-help'},{'name': 'HistogramComponent', 'selector': 'app-histogram'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'HoughTransformAnimationComponent', 'selector': 'app-hough-transform-animation'},{'name': 'KernelDialogComponent', 'selector': 'app-kernel-dialog'},{'name': 'MatrixDisplayComponent', 'selector': 'app-matrix-display'},{'name': 'MedianFilterAnimationComponent', 'selector': 'app-median-filter-animation'},{'name': 'MorphologicalOperationsAnimationComponent', 'selector': 'app-morphological-operations-animation'},{'name': 'PageNotFoundComponent', 'selector': 'app-page-not-found'},{'name': 'ShapeBitmapEditorComponent', 'selector': 'app-shape-bitmap-editor'},{'name': 'StructuringElementEditorComponent', 'selector': 'app-structuring-element-editor'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'ConvolutionalFilterAnimationComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'ConvolutionalFilterAnimationComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

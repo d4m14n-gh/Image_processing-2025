@@ -1,0 +1,2355 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Image Processing Lecture Support</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+        <link rel="stylesheet" href="../styles/github.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">Image Processing Lecture Support</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  BitmapEditorComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/components/bitmap-editor/bitmap-editor.component.ts</code>
+</p>
+
+
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Component for editing and manipulating bitmaps using mathematical expressions.</p>
+
+    </p>
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-bitmap-editor</code></td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>MatSliderModule</code>
+                            <code>MatCardModule</code>
+                            <code>MatToolbarModule</code>
+                            <code>MatCheckboxModule</code>
+                            <code>MatButtonToggleModule</code>
+                            <code>MatSlideToggleModule</code>
+                            <code>MatSelectModule</code>
+                            <code>FormsModule</code>
+                            <code>MatDividerModule</code>
+                            <code>MatIconModule</code>
+                            <code>MatButtonModule</code>
+                                <code><a href="../components/BitmapComponent.html" target="_self" >BitmapComponent</a></code>
+                                <code><a href="../components/BitmapComponent.html" target="_self" >BitmapComponent</a></code>
+                            <code>MatTabsModule</code>
+                            <code>MatInputModule</code>
+                            <code>MatListModule</code>
+                            <code>ReactiveFormsModule</code>
+                            <code>MatMenuModule</code>
+                            <code>RouterModule</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./bitmap-editor.component.html</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./bitmap-editor.component.css</code></td>
+            </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#_defaultValue" >_defaultValue</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#_id" >_id</a>
+                            </li>
+                            <li>
+                                <a href="#bitmap" >bitmap</a>
+                            </li>
+                            <li>
+                                <a href="#expressionControl" >expressionControl</a>
+                            </li>
+                            <li>
+                                <a href="#height" >height</a>
+                            </li>
+                            <li>
+                                <a href="#outOfRangeHandling" >outOfRangeHandling</a>
+                            </li>
+                            <li>
+                                <a href="#padding" >padding</a>
+                            </li>
+                            <li>
+                                <a href="#pixelSize" >pixelSize</a>
+                            </li>
+                            <li>
+                                <a href="#quantizationMode" >quantizationMode</a>
+                            </li>
+                            <li>
+                                <a href="#selectedColorScale" >selectedColorScale</a>
+                            </li>
+                            <li>
+                                <a href="#showGrid" >showGrid</a>
+                            </li>
+                            <li>
+                                <a href="#showHeaders" >showHeaders</a>
+                            </li>
+                            <li>
+                                <a href="#showNumberValues" >showNumberValues</a>
+                            </li>
+                            <li>
+                                <a href="#tick" >tick</a>
+                            </li>
+                            <li>
+                                <a href="#undoRedo" >undoRedo</a>
+                            </li>
+                            <li>
+                                <a href="#width" >width</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#apply" >apply</a>
+                            </li>
+                            <li>
+                                <a href="#canSave" >canSave</a>
+                            </li>
+                            <li>
+                                <a href="#getHistory" >getHistory</a>
+                            </li>
+                            <li>
+                                <a href="#load" >load</a>
+                            </li>
+                            <li>
+                                    <span class="modifier"></span>
+                                <a href="#onKeyDown" >onKeyDown</a>
+                            </li>
+                            <li>
+                                <a href="#push" >push</a>
+                            </li>
+                            <li>
+                                <a href="#quit" >quit</a>
+                            </li>
+                            <li>
+                                <a href="#redo" >redo</a>
+                            </li>
+                            <li>
+                                <a href="#resize" >resize</a>
+                            </li>
+                            <li>
+                                <a href="#save" >save</a>
+                            </li>
+                            <li>
+                                <a href="#undo" >undo</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>HostListeners</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#window:keydown" >window:keydown</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#defaultValue" >defaultValue</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(historyService: <a href="../injectables/HistoryService.html" target="_self">HistoryService</a>, route: ActivatedRoute, bitmap_storage: <a href="../injectables/BitmapStorageService.html" target="_self">BitmapStorageService</a>, router: Router)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="114" class="link-to-prism">src/app/components/bitmap-editor/bitmap-editor.component.ts:114</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Initializes the component, loading the bitmap if an ID is provided in the route.</p>
+</div>
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>historyService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/HistoryService.html" target="_self" >HistoryService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <p>The history service for managing expression history.</p>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>route</td>
+                                                  
+                                                        <td>
+                                                                    <code>ActivatedRoute</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <p>The activated route for accessing route parameters.</p>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>bitmap_storage</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/BitmapStorageService.html" target="_self" >BitmapStorageService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <p>The bitmap storage service for saving and loading bitmaps.</p>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                    <code>Router</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <p>The router for navigation.</p>
+
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+    <section data-compodoc="block-methods">
+    <h3>HostListeners</h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="window:keydown"></a>
+                    <span class="name">
+                        <span ><b>window:keydown</b></span>
+                        <a href="#window:keydown"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <i>Arguments : </i><code>'$event' </code>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>window:keydown(event: KeyboardEvent)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="231"
+                                    class="link-to-prism">src/app/components/bitmap-editor/bitmap-editor.component.ts:231</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Listens for keyboard shortcuts for undo (Ctrl+Z) and redo (Ctrl+Y) actions.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>The keyboard event.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="apply"></a>
+                    <span class="name">
+                        <span ><b>apply</b></span>
+                        <a href="#apply"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>apply()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="145"
+                                    class="link-to-prism">src/app/components/bitmap-editor/bitmap-editor.component.ts:145</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Applies the mathematical expression to the current bitmap, updating its pixel values.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="canSave"></a>
+                    <span class="name">
+                        <span ><b>canSave</b></span>
+                        <a href="#canSave"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>canSave()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="179"
+                                    class="link-to-prism">src/app/components/bitmap-editor/bitmap-editor.component.ts:179</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Checks if the bitmap can be saved (i.e., has a valid ID).</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>True if the bitmap can be saved, false otherwise.</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getHistory"></a>
+                    <span class="name">
+                        <span ><b>getHistory</b></span>
+                        <a href="#getHistory"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getHistory()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="166"
+                                    class="link-to-prism">src/app/components/bitmap-editor/bitmap-editor.component.ts:166</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Gets the history in reverse order.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>string[]</code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>The history array in reverse order.</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="load"></a>
+                    <span class="name">
+                        <span ><b>load</b></span>
+                        <a href="#load"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>load(bitmapToLoad: <a href="../classes/Bitmap.html" target="_self">Bitmap</a>, keepSelection: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>, push: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="135"
+                                    class="link-to-prism">src/app/components/bitmap-editor/bitmap-editor.component.ts:135</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Loads a new bitmap into the editor.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Default value</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>bitmapToLoad</td>
+                                            <td>
+                                                            <code><a href="../classes/Bitmap.html" target="_self" >Bitmap</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                            </td>
+
+                                            <td>
+                                                    <p>The bitmap to load.</p>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>keepSelection</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                                    <code>false</code>
+                                            </td>
+
+                                            <td>
+                                                    <p>If true, retains the current selection in the new bitmap.</p>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>push</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                                    <code>true</code>
+                                            </td>
+
+                                            <td>
+                                                    <p>If true, saves the current state to the undo/redo stack.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onKeyDown"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                        <span ><b>onKeyDown</b></span>
+                        <a href="#onKeyDown"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>onKeyDown(event: KeyboardEvent)</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Decorators : </b>
+                    <br />
+                    <code>@HostListener(&#x27;window:keydown&#x27;, [&#x27;$event&#x27;])<br /></code>
+                </td>
+            </tr>
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="231"
+                                    class="link-to-prism">src/app/components/bitmap-editor/bitmap-editor.component.ts:231</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Listens for keyboard shortcuts for undo (Ctrl+Z) and redo (Ctrl+Y) actions.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                        <code>KeyboardEvent</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>The keyboard event.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="push"></a>
+                    <span class="name">
+                        <span ><b>push</b></span>
+                        <a href="#push"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>push()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="202"
+                                    class="link-to-prism">src/app/components/bitmap-editor/bitmap-editor.component.ts:202</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Saves the current bitmap state to the undo/redo stack.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="quit"></a>
+                    <span class="name">
+                        <span ><b>quit</b></span>
+                        <a href="#quit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>quit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="184"
+                                    class="link-to-prism">src/app/components/bitmap-editor/bitmap-editor.component.ts:184</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Navigates back to the previous page or to the home page if no history exists.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="redo"></a>
+                    <span class="name">
+                        <span ><b>redo</b></span>
+                        <a href="#redo"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>redo()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="219"
+                                    class="link-to-prism">src/app/components/bitmap-editor/bitmap-editor.component.ts:219</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Redoes the last undone action, restoring the bitmap state.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>True if the redo was successful, false if there was no state to restore.</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="resize"></a>
+                    <span class="name">
+                        <span ><b>resize</b></span>
+                        <a href="#resize"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>resize()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="170"
+                                    class="link-to-prism">src/app/components/bitmap-editor/bitmap-editor.component.ts:170</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Resizes the bitmap to the current width and height, preserving existing pixel values.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="save"></a>
+                    <span class="name">
+                        <span ><b>save</b></span>
+                        <a href="#save"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>save()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="192"
+                                    class="link-to-prism">src/app/components/bitmap-editor/bitmap-editor.component.ts:192</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Saves the current bitmap to storage if it has a valid ID, then navigates away.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="undo"></a>
+                    <span class="name">
+                        <span ><b>undo</b></span>
+                        <a href="#undo"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>undo()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="208"
+                                    class="link-to-prism">src/app/components/bitmap-editor/bitmap-editor.component.ts:208</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Undoes the last action, reverting to the previous bitmap state.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>True if the undo was successful, false if there was no state to revert to.</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="_defaultValue"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>_defaultValue</b></span>
+                        <a href="#_defaultValue"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>255</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="77" class="link-to-prism">src/app/components/bitmap-editor/bitmap-editor.component.ts:77</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Default pixel value for uninitialized pixels</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="_id"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>_id</b></span>
+                        <a href="#_id"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string | null</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="114" class="link-to-prism">src/app/components/bitmap-editor/bitmap-editor.component.ts:114</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Identifier for the bitmap, used for saving and loading</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="bitmap"></a>
+                    <span class="name">
+                        <span ><b>bitmap</b></span>
+                        <a href="#bitmap"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/InteractiveBitmap.html" target="_self" >InteractiveBitmap</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new InteractiveBitmap(this.width, this.height, undefined, this.defaultValue)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="87" class="link-to-prism">src/app/components/bitmap-editor/bitmap-editor.component.ts:87</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>The bitmap being edited</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="expressionControl"></a>
+                    <span class="name">
+                        <span ><b>expressionControl</b></span>
+                        <a href="#expressionControl"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new FormControl(&quot;b(x, y) + simplex(x, y, RANDOM) * 128 - 128&quot;, [
+    Validators.required,
+    expressionValidator(),
+  ])</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="104" class="link-to-prism">src/app/components/bitmap-editor/bitmap-editor.component.ts:104</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Form control for the mathematical expression input</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="height"></a>
+                    <span class="name">
+                        <span ><b>height</b></span>
+                        <a href="#height"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>9</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="75" class="link-to-prism">src/app/components/bitmap-editor/bitmap-editor.component.ts:75</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Height of the bitmap</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="outOfRangeHandling"></a>
+                    <span class="name">
+                        <span ><b>outOfRangeHandling</b></span>
+                        <a href="#outOfRangeHandling"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../miscellaneous/enumerations.html#OutOfRangeHandling" target="_self" >OutOfRangeHandling</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>OutOfRangeHandling.Clipping</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="94" class="link-to-prism">src/app/components/bitmap-editor/bitmap-editor.component.ts:94</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>How to handle pixel values that go out of the valid range (0-255)</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="padding"></a>
+                    <span class="name">
+                        <span ><b>padding</b></span>
+                        <a href="#padding"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../miscellaneous/enumerations.html#Padding" target="_self" >Padding</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>Padding.Zero</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="96" class="link-to-prism">src/app/components/bitmap-editor/bitmap-editor.component.ts:96</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Padding mode to use when accessing pixel values outside the bitmap bounds</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="pixelSize"></a>
+                    <span class="name">
+                        <span ><b>pixelSize</b></span>
+                        <a href="#pixelSize"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>50</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">src/app/components/bitmap-editor/bitmap-editor.component.ts:67</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Size of each pixel in the bitmap display (in pixels).</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="quantizationMode"></a>
+                    <span class="name">
+                        <span ><b>quantizationMode</b></span>
+                        <a href="#quantizationMode"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../miscellaneous/enumerations.html#QuantizationMode" target="_self" >QuantizationMode</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>QuantizationMode.Round</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="98" class="link-to-prism">src/app/components/bitmap-editor/bitmap-editor.component.ts:98</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Quantization mode to use when applying mathematical expressions</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectedColorScale"></a>
+                    <span class="name">
+                        <span ><b>selectedColorScale</b></span>
+                        <a href="#selectedColorScale"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../miscellaneous/enumerations.html#ColorScale" target="_self" >ColorScale</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>ColorScale.Grayscale</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">src/app/components/bitmap-editor/bitmap-editor.component.ts:65</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Color scale used for displaying the bitmap.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showGrid"></a>
+                    <span class="name">
+                        <span ><b>showGrid</b></span>
+                        <a href="#showGrid"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/components/bitmap-editor/bitmap-editor.component.ts:61</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>If true, a grid is displayed over the bitmap.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showHeaders"></a>
+                    <span class="name">
+                        <span ><b>showHeaders</b></span>
+                        <a href="#showHeaders"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">src/app/components/bitmap-editor/bitmap-editor.component.ts:63</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>If true, headers (row/column indices) are displayed around the bitmap.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showNumberValues"></a>
+                    <span class="name">
+                        <span ><b>showNumberValues</b></span>
+                        <a href="#showNumberValues"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/components/bitmap-editor/bitmap-editor.component.ts:59</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>If true, pixel values are displayed on the bitmap.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="tick"></a>
+                    <span class="name">
+                        <span ><b>tick</b></span>
+                        <a href="#tick"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="112" class="link-to-prism">src/app/components/bitmap-editor/bitmap-editor.component.ts:112</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Used for refreshing the bitmap display</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="undoRedo"></a>
+                    <span class="name">
+                        <span ><b>undoRedo</b></span>
+                        <a href="#undoRedo"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new UndoRedo&lt;Bitmap&gt;(20)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="89" class="link-to-prism">src/app/components/bitmap-editor/bitmap-editor.component.ts:89</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Undo/Redo manager for bitmap states</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="width"></a>
+                    <span class="name">
+                        <span ><b>width</b></span>
+                        <a href="#width"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>16</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="73" class="link-to-prism">src/app/components/bitmap-editor/bitmap-editor.component.ts:73</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Width of the bitmap</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-accessors">
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="defaultValue"></a>
+                        <span class="name"><b>defaultValue</b><a href="#defaultValue"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>defaultValue()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="81" class="link-to-prism">src/app/components/bitmap-editor/bitmap-editor.component.ts:81</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Default pixel value for uninitialized pixels</p>
+</div>
+
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>set</b><code>defaultValue(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="85" class="link-to-prism">src/app/components/bitmap-editor/bitmap-editor.component.ts:85</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Sets the default pixel value, clamped between 0 and 255.</p>
+</div>
+
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <table class="params">
+                                            <thead>
+                                                <tr>
+                                                    <td>Name</td>
+                                                        <td>Type</td>
+                                                    <td>Optional</td>
+                                                        <td>Description</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr>
+                                                            <td>value</td>
+                                                    
+                                                            <td>
+                                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                                            </td>
+                                                    
+                                                        <td>
+                                                                No
+                                                        </td>
+                                                        
+                                                            <td>
+                                                                    <p>The new default pixel value.</p>
+
+                                                            </td>
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+</section>
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, HostListener } from &#x27;@angular/core&#x27;;
+import { FormControl, FormsModule, Validators } from &#x27;@angular/forms&#x27;;
+import { MatButtonToggleModule } from &#x27;@angular/material/button-toggle&#x27;;
+import { MatCardModule } from &#x27;@angular/material/card&#x27;;
+import { MatCheckboxModule } from &#x27;@angular/material/checkbox&#x27;;
+import { MatSelectModule } from &#x27;@angular/material/select&#x27;;
+import { MatSliderModule } from &#x27;@angular/material/slider&#x27;;
+import { MatToolbarModule } from &quot;@angular/material/toolbar&quot;;
+import { Bitmap, InteractiveBitmap } from &#x27;../../static/bitmap&#x27;;
+import { MatSlideToggleModule } from &#x27;@angular/material/slide-toggle&#x27;;
+import { BitmapComponent } from &quot;../bitmap/bitmap.component&quot;;
+import { MatInputModule } from &#x27;@angular/material/input&#x27;;
+import { MatIconModule } from &#x27;@angular/material/icon&#x27;;
+import { MatDividerModule } from &#x27;@angular/material/divider&#x27;;
+import { MatTabsModule } from &#x27;@angular/material/tabs&#x27;;
+import { MatButtonModule } from &#x27;@angular/material/button&#x27;;
+import { ColorScale, OutOfRangeHandling, Padding, QuantizationMode} from &#x27;../../static/enums&#x27;;
+import { expressionValidator, parseAndApply } from &#x27;../../static/expression-utils&#x27;;
+import { ReactiveFormsModule } from &#x27;@angular/forms&#x27;;
+import { HistoryService } from &#x27;../../services/history/history.service&#x27;;
+import { MatListModule } from &#x27;@angular/material/list&#x27;;
+import { MatMenuModule } from &#x27;@angular/material/menu&#x27;;
+import { ActivatedRoute, Router, RouterModule } from &#x27;@angular/router&#x27;;
+import { BitmapStorageService } from &#x27;../../services/bitmap-storage/bitmap-storage.service&#x27;;
+import { UndoRedo } from &#x27;../../static/undoRedo&#x27;;
+
+
+/** Component for editing and manipulating bitmaps using mathematical expressions. */
+@Component({
+  selector: &#x27;app-bitmap-editor&#x27;,
+  imports: [
+    MatSliderModule,
+    MatCardModule,
+    MatToolbarModule,
+    MatCheckboxModule,
+    MatButtonToggleModule,
+    MatSlideToggleModule,
+    MatSelectModule,
+    FormsModule,
+    MatDividerModule,
+    MatIconModule,
+    MatButtonModule,
+    BitmapComponent,
+    BitmapComponent,
+    MatTabsModule,
+    MatInputModule,
+    MatListModule,
+    ReactiveFormsModule,
+    MatMenuModule,
+    RouterModule,
+],
+  templateUrl: &#x27;./bitmap-editor.component.html&#x27;,
+  styleUrl: &#x27;./bitmap-editor.component.css&#x27;
+})
+export class BitmapEditorComponent {
+  //view
+
+  /** If true, pixel values are displayed on the bitmap. */
+  showNumberValues: boolean &#x3D; true;
+  /** If true, a grid is displayed over the bitmap. */
+  showGrid: boolean &#x3D; true;
+  /** If true, headers (row/column indices) are displayed around the bitmap. */
+  showHeaders: boolean &#x3D; true;
+  /** Color scale used for displaying the bitmap. */
+  selectedColorScale: ColorScale &#x3D; ColorScale.Grayscale;
+  /** Size of each pixel in the bitmap display (in pixels). */
+  pixelSize: number &#x3D; 50;
+  
+
+  //properties
+  
+  /** Width of the bitmap */
+  width: number &#x3D; 16;
+  /** Height of the bitmap */
+  height: number &#x3D; 9;
+  /** Default pixel value for uninitialized pixels */
+  private _defaultValue: number &#x3D; 255;
+  /** Default pixel value for uninitialized pixels
+   * @returns The current default pixel value.
+   */
+  get defaultValue(): number { return this._defaultValue; }
+  /** Sets the default pixel value, clamped between 0 and 255.
+   * @param value The new default pixel value.
+   */
+  set defaultValue(value: number) { this._defaultValue &#x3D; Math.max(Math.min(Math.round(value), 255), 0); }
+  /** The bitmap being edited */
+  bitmap: InteractiveBitmap &#x3D; new InteractiveBitmap(this.width, this.height, undefined, this.defaultValue);
+  /** Undo/Redo manager for bitmap states */
+  undoRedo &#x3D; new UndoRedo&lt;Bitmap&gt;(20);
+
+  //behavior
+
+  /** How to handle pixel values that go out of the valid range (0-255) */
+  outOfRangeHandling: OutOfRangeHandling &#x3D; OutOfRangeHandling.Clipping;
+  /** Padding mode to use when accessing pixel values outside the bitmap bounds */
+  padding: Padding &#x3D; Padding.Zero;
+  /** Quantization mode to use when applying mathematical expressions */
+  quantizationMode: QuantizationMode &#x3D; QuantizationMode.Round;
+  
+
+  //expression
+
+  /** Form control for the mathematical expression input */
+  expressionControl &#x3D; new FormControl(&quot;b(x, y) + simplex(x, y, RANDOM) * 128 - 128&quot;, [
+    Validators.required,
+    expressionValidator(),
+  ]);
+  
+  
+  //controls
+  /** Used for refreshing the bitmap display */
+  tick: number &#x3D; 0;
+  /** Identifier for the bitmap, used for saving and loading */
+  private _id: string | null &#x3D; null;
+
+  /** Initializes the component, loading the bitmap if an ID is provided in the route. 
+   * @param historyService The history service for managing expression history.
+   * @param route The activated route for accessing route parameters.
+   * @param bitmap_storage The bitmap storage service for saving and loading bitmaps.
+   * @param router The router for navigation.
+   */
+  constructor(private historyService: HistoryService, private route: ActivatedRoute, private bitmap_storage: BitmapStorageService, private router: Router) {
+    this.expressionControl.setValue(historyService.getHistoryReversed()[0] ?? this.expressionControl.value);
+    this._id &#x3D; this.route.snapshot.paramMap.get(&#x27;id&#x27;);
+    
+    let bitmap &#x3D; this.bitmap_storage.load(this._id);
+    if(bitmap) this.load(bitmap);
+    this.push();
+  }
+  /**  Loads a new bitmap into the editor.
+   * @param bitmapToLoad The bitmap to load.
+   * @param keepSelection If true, retains the current selection in the new bitmap.
+   * @param push If true, saves the current state to the undo/redo stack.
+   */
+  load(bitmapToLoad: Bitmap, keepSelection: boolean &#x3D; false, push: boolean &#x3D; true): void {
+    const newBitmap &#x3D; new InteractiveBitmap(bitmapToLoad.width, bitmapToLoad.height, bitmapToLoad, this.defaultValue);
+    if (keepSelection) this.bitmap.selected.forEach(c&#x3D;&gt;newBitmap.select(c));
+
+    this.bitmap &#x3D; newBitmap;
+    this.height &#x3D; this.bitmap.height;
+    this.width &#x3D; this.bitmap.width;
+    if(push) this.push();
+  }
+  /** Applies the mathematical expression to the current bitmap, updating its pixel values. */
+  apply(): void {
+    if (!this.expressionControl.value) return;
+    
+    this.historyService.addToHistory(this.expressionControl.value);
+    let result &#x3D; parseAndApply(this.expressionControl.value, 
+      this.bitmap,
+      this.padding,
+      this.outOfRangeHandling,
+      this.quantizationMode,
+      this.defaultValue,
+      this.bitmap.selected.length &gt; 0
+    );
+    this.load(result, true);
+  }
+
+
+  //gui helpers
+
+  /** Gets the history in reverse order.
+   * @returns The history array in reverse order.
+   */ 
+  getHistory(): string[] {
+    return this.historyService.getHistoryReversed();
+  }
+  /** Resizes the bitmap to the current width and height, preserving existing pixel values. */
+  resize(): void {
+    this.load(new InteractiveBitmap(this.width, this.height, this.bitmap, this.defaultValue), true);
+  }
+
+
+  //save / quit
+  /** Checks if the bitmap can be saved (i.e., has a valid ID).
+   * @returns True if the bitmap can be saved, false otherwise.
+   */
+  canSave(): boolean {
+    return this._id !&#x3D;&#x3D; null;
+  }
+  
+  /** Navigates back to the previous page or to the home page if no history exists. */
+  quit(): void {
+     if (history.length &gt; 1) {
+      history.back();
+    } else {
+      this.router.navigate([&#x27;/&#x27;]);
+    }
+  }
+  /** Saves the current bitmap to storage if it has a valid ID, then navigates away. */
+  save(): void {
+    if (this._id !&#x3D;&#x3D; null) {
+      this.bitmap_storage.save(this._id, this.bitmap);
+      this.quit();
+    }
+  }
+
+
+  //undo/redo
+  /** Saves the current bitmap state to the undo/redo stack. */
+  push(): void {
+    this.undoRedo.push(new Bitmap(this.bitmap.width, this.bitmap.height, this.bitmap));
+  }
+  /** Undoes the last action, reverting to the previous bitmap state.
+   * @returns True if the undo was successful, false if there was no state to revert to.
+   */
+  undo(): boolean{
+    let state &#x3D; this.undoRedo.undo();
+    if(state){
+      this.load(state, false, false);
+      return true;
+    } 
+    return false;
+  }
+  /** Redoes the last undone action, restoring the bitmap state.
+   * @returns True if the redo was successful, false if there was no state to restore.
+   */
+  redo(): boolean{
+    let state &#x3D; this.undoRedo.redo();
+    if(state){
+      this.load(state, false, false);
+      return true;
+    } 
+    return false;
+  }
+  /** Listens for keyboard shortcuts for undo (Ctrl+Z) and redo (Ctrl+Y) actions. 
+   * @param event The keyboard event.
+  */
+  @HostListener(&#x27;window:keydown&#x27;, [&#x27;$event&#x27;])
+  onKeyDown(event: KeyboardEvent): void {
+    switch(event.key) {
+      case &#x27;z&#x27;:
+        if (event.ctrlKey) 
+          if(this.undo()) event.preventDefault();
+        break;
+      case &#x27;y&#x27;:
+        if (event.ctrlKey) 
+          if(this.redo()) event.preventDefault();
+    }
+  }
+}
+
+
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;main-grid&quot;&gt;
+
+    &lt;!-- LEFT SIDEBAR --&gt;
+    &lt;mat-card appearance&#x3D;&quot;outlined&quot;&gt;
+        &lt;div class&#x3D;&quot;scrollable sidebar&quot;&gt;
+            &lt;mat-card-title class&#x3D;&quot;end&quot;&gt;
+            &lt;mat-icon inline&gt;tune&lt;/mat-icon&gt;
+                Properties
+            &lt;/mat-card-title&gt;
+            &lt;mat-label&gt;Height&lt;/mat-label&gt;
+            &lt;mat-slider min&#x3D;&quot;5&quot; max&#x3D;&quot;40&quot; step&#x3D;&quot;1&quot; discrete&#x3D;&quot;thumbLabel&quot;&gt;
+                &lt;input matSliderThumb [value]&#x3D;&quot;height&quot; (dragEnd)&#x3D;&quot;height &#x3D; $event.value; resize()&quot;&gt;
+            &lt;/mat-slider&gt;
+            &lt;mat-label&gt;Width&lt;/mat-label&gt;
+            &lt;mat-slider class&#x3D;&quot;end&quot; min&#x3D;&quot;5&quot; max&#x3D;&quot;40&quot; step&#x3D;&quot;1&quot; discrete&#x3D;&quot;thumbLabel&quot;&gt;
+                &lt;input matSliderThumb [value]&#x3D;&quot;width&quot; (dragEnd)&#x3D;&quot;width &#x3D; $event.value; resize()&quot;&gt;
+            &lt;/mat-slider&gt;
+            &lt;mat-form-field subscriptSizing&#x3D;&quot;dynamic&quot; appearance&#x3D;&quot;outline&quot;&gt;
+                &lt;mat-label&gt;Default value&lt;/mat-label&gt;
+                &lt;input matInput type&#x3D;&quot;number&quot; placeholder&#x3D;&quot;Ex. 10&quot; [(ngModel)]&#x3D;&quot;defaultValue&quot; min&#x3D;&quot;0&quot; max&#x3D;&quot;255&quot; step&#x3D;&quot;1&quot;&gt;
+            &lt;/mat-form-field&gt;
+            &lt;mat-divider&gt;&lt;/mat-divider&gt;
+            &lt;mat-card-title class&#x3D;&quot;end&quot;&gt;
+                &lt;mat-icon inline&gt;visibility&lt;/mat-icon&gt;
+                View
+            &lt;/mat-card-title&gt;
+            &lt;mat-checkbox [(ngModel)]&#x3D;&quot;showNumberValues&quot; [disabled]&#x3D;&quot;pixelSize&lt;40&quot;&gt;
+                Numbers
+            &lt;/mat-checkbox&gt;
+            &lt;mat-checkbox [(ngModel)]&#x3D;&quot;showGrid&quot;&gt;
+                Grid
+            &lt;/mat-checkbox&gt;
+            &lt;mat-checkbox class&#x3D;&quot;end&quot; [(ngModel)]&#x3D;&quot;showHeaders&quot; [disabled]&#x3D;&quot;pixelSize&lt;40&quot;&gt;
+                Headers
+            &lt;/mat-checkbox&gt;
+            &lt;mat-label&gt;Pixel Size&lt;/mat-label&gt;
+            &lt;mat-slider class&#x3D;&quot;end&quot; min&#x3D;&quot;25&quot; max&#x3D;&quot;100&quot; step&#x3D;&quot;1&quot; discrete&#x3D;&quot;thumbLabel&quot;&gt;
+                &lt;input matSliderThumb [(ngModel)]&#x3D;&quot;pixelSize&quot;&gt;
+            &lt;/mat-slider&gt;
+            &lt;mat-form-field class&#x3D;&quot;end&quot; subscriptSizing&#x3D;&quot;dynamic&quot; appearance&#x3D;&quot;outline&quot;&gt;
+                &lt;mat-label&gt;Color Scale&lt;/mat-label&gt;
+                &lt;mat-select [(ngModel)]&#x3D;&quot;selectedColorScale&quot;&gt;
+                    &lt;mat-option value&#x3D;&quot;none&quot;&gt;None&lt;/mat-option&gt;
+                    &lt;mat-option value&#x3D;&quot;grayscale&quot;&gt;Grayscale&lt;/mat-option&gt;
+                    &lt;mat-option value&#x3D;&quot;heatmap&quot;&gt;YellowOrangeRed&lt;/mat-option&gt;
+                    &lt;mat-option value&#x3D;&quot;spectral&quot;&gt;Spectral&lt;/mat-option&gt;
+                    &lt;mat-option value&#x3D;&quot;viridis&quot;&gt;Viridis&lt;/mat-option&gt;
+                &lt;/mat-select&gt;
+            &lt;/mat-form-field&gt;
+            &lt;div class&#x3D;&quot;spacer&quot;&gt;&lt;/div&gt;
+            &lt;div&gt;
+                &lt;p&gt;
+                    &lt;!-- &lt;mat-icon inline&#x3D;&quot;true&quot; style&#x3D;&quot;vertical-align: middle;&quot;&gt;arrow_range&lt;/mat-icon&gt; --&gt;
+                    Width: {{width}}px
+                &lt;/p&gt;
+                &lt;p&gt;
+                    &lt;!-- &lt;mat-icon inline&#x3D;&quot;true&quot; style&#x3D;&quot;vertical-align: middle;&quot;&gt;height&lt;/mat-icon&gt; --&gt;
+                    Height: {{height}}px
+                &lt;/p&gt;
+                &lt;p&gt;
+                    &lt;!-- &lt;mat-icon inline&#x3D;&quot;true&quot; style&#x3D;&quot;vertical-align: middle;&quot;&gt;open_in_full&lt;/mat-icon&gt; --&gt;
+                    Pixel size: {{pixelSize}}px
+                &lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/mat-card&gt;
+
+
+    &lt;!-- CENTER CANVAS --&gt;
+    &lt;mat-card appearance&#x3D;&quot;outlined&quot; style&#x3D;&quot;overflow: hidden;&quot;&gt;
+        &lt;div class&#x3D;&quot;scrollable&quot;&gt;
+            &lt;app-bitmap class&#x3D;&quot;bitmap&quot; [bitmap]&#x3D;&quot;bitmap&quot; [pixelSize]&#x3D;&quot;pixelSize&quot;
+                [selectedColorScale]&#x3D;&quot;selectedColorScale&quot; [showGrid]&#x3D;&quot;showGrid&quot;
+                [showNumbers]&#x3D;&quot;showNumberValues&amp;&amp;pixelSize&gt;&#x3D;40&quot; [showHeaders]&#x3D;&quot;showHeaders&amp;&amp;pixelSize&gt;&#x3D;40&quot;
+                [tick]&#x3D;&quot;tick&quot;&gt;
+            &lt;/app-bitmap&gt;
+        &lt;/div&gt;
+    &lt;/mat-card&gt;
+
+
+    &lt;!-- RIGHT SIDEBAR --&gt;
+    &lt;mat-card appearance&#x3D;&quot;outlined&quot;&gt;
+        &lt;div class&#x3D;&quot;scrollable sidebar&quot;&gt;
+            &lt;mat-card-title class&#x3D;&quot;end&quot;&gt;
+                &lt;mat-icon inline&gt;build&lt;/mat-icon&gt;
+                Tools
+            &lt;/mat-card-title&gt;
+            &lt;mat-card-subtitle class&#x3D;&quot;end&quot;&gt;
+                &lt;mat-icon inline&gt;dashboard_customize&lt;/mat-icon&gt;
+                Behavior
+            &lt;/mat-card-subtitle&gt;
+            &lt;mat-form-field class&#x3D;&quot;end&quot; subscriptSizing&#x3D;&quot;dynamic&quot; appearance&#x3D;&quot;outline&quot;&gt;
+                &lt;mat-label&gt;Quantization&lt;/mat-label&gt;
+                &lt;mat-select [(ngModel)]&#x3D;&quot;quantizationMode&quot;&gt;
+                    &lt;mat-option value&#x3D;&quot;round&quot;&gt;Round&lt;/mat-option&gt;
+                    &lt;mat-option value&#x3D;&quot;floor&quot;&gt;Floor&lt;/mat-option&gt;
+                    &lt;mat-option value&#x3D;&quot;ceil&quot;&gt;Ceil&lt;/mat-option&gt;
+                &lt;/mat-select&gt;
+            &lt;/mat-form-field&gt;
+            &lt;mat-form-field class&#x3D;&quot;end&quot; subscriptSizing&#x3D;&quot;dynamic&quot; appearance&#x3D;&quot;outline&quot;&gt;
+                &lt;mat-label&gt;Out of Range&lt;/mat-label&gt;
+                &lt;mat-select [(ngModel)]&#x3D;&quot;outOfRangeHandling&quot;&gt;
+                    &lt;mat-option value&#x3D;&quot;zero&quot;&gt;Zero&lt;/mat-option&gt;
+                    &lt;mat-option value&#x3D;&quot;clipping&quot;&gt;Clipping&lt;/mat-option&gt;
+                    &lt;mat-option value&#x3D;&quot;modulo&quot;&gt;Modulo&lt;/mat-option&gt;
+                &lt;/mat-select&gt;
+            &lt;/mat-form-field&gt;
+            &lt;mat-form-field class&#x3D;&quot;end&quot; subscriptSizing&#x3D;&quot;dynamic&quot; appearance&#x3D;&quot;outline&quot;&gt;
+                &lt;mat-label&gt;Padding&lt;/mat-label&gt;
+                &lt;mat-select [(ngModel)]&#x3D;&quot;padding&quot;&gt;
+                    &lt;mat-option value&#x3D;&quot;zero&quot;&gt;Zero&lt;/mat-option&gt;
+                    &lt;mat-option value&#x3D;&quot;default&quot;&gt;Default value&lt;/mat-option&gt;
+                    &lt;mat-option value&#x3D;&quot;edge&quot;&gt;Edge&lt;/mat-option&gt;
+                &lt;/mat-select&gt;
+            &lt;/mat-form-field&gt;
+            &lt;mat-card-subtitle class&#x3D;&quot;start flex-row&quot;&gt;
+                &lt;mat-icon inline&gt;functions&lt;/mat-icon&gt;
+                Expression
+                &lt;span class&#x3D;&quot;spacer&quot;&gt;&lt;/span&gt;
+                &lt;button mat-icon-button [matMenuTriggerFor]&#x3D;&quot;menu&quot; [disabled]&#x3D;&quot;getHistory().length &#x3D;&#x3D; 0&quot;&gt;
+                    &lt;mat-icon style&#x3D;&quot;font-size: 17px;&quot;&gt;history&lt;/mat-icon&gt;
+                &lt;/button&gt;
+            &lt;/mat-card-subtitle&gt;
+
+
+            &lt;mat-form-field class&#x3D;&quot;end&quot; subscriptSizing&#x3D;&quot;dynamic&quot;  appearance&#x3D;&quot;outline&quot;&gt;
+                &lt;mat-label&gt;b&#x27;(x, y)&#x3D;&lt;/mat-label&gt;
+                &lt;textarea matInput [formControl]&#x3D;&quot;expressionControl&quot; placeholder&#x3D;&quot;Ex. b(x, y) * 2&quot;&gt;&lt;/textarea&gt;
+                @if (expressionControl.hasError(&#x27;required&#x27;)) {
+                &lt;mat-error&gt;
+                    Expression is required
+                &lt;/mat-error&gt;
+                }
+                @else if (expressionControl.hasError(&#x27;expression&#x27;)) {
+                &lt;mat-error&gt;
+                    Syntax error
+                &lt;/mat-error&gt;
+                }
+            &lt;/mat-form-field&gt;
+
+            
+            &lt;button mat-flat-button class&#x3D;&quot;end&quot; [disabled]&#x3D;&quot;expressionControl.invalid&quot;
+                (click)&#x3D;&quot;apply()&quot;&gt;
+                &lt;mat-icon&gt;check&lt;/mat-icon&gt;
+                Apply
+            &lt;/button&gt;
+            &lt;div class&#x3D;&quot;spacer&quot;&gt; &lt;/div&gt;
+            @if (canSave()) {
+            &lt;mat-card-subtitle class&#x3D;&quot;end&quot;&gt;
+                &lt;mat-icon inline&gt;commit&lt;/mat-icon&gt;
+                Actions
+            &lt;/mat-card-subtitle&gt;
+            &lt;button mat-flat-button class&#x3D;&quot;end&quot; style&#x3D;&quot;background-color: var(--mat-sys-tertiary); &quot;
+                (click)&#x3D;&quot;save()&quot;&gt;
+                &lt;mat-icon&gt;save&lt;/mat-icon&gt;
+                Save
+            &lt;/button&gt;
+            &lt;button mat-flat-button  class&#x3D;&quot;end&quot; style&#x3D;&quot;background-color: var(--mat-sys-neutral); color: var(--mat-sys-on-primary);&quot;
+                (click)&#x3D;&quot;quit()&quot;&gt;
+                &lt;mat-icon&gt;cancel&lt;/mat-icon&gt;
+                Cancel
+            &lt;/button&gt;
+            }
+        &lt;/div&gt;
+    &lt;/mat-card&gt;
+&lt;/div&gt;
+
+    
+&lt;mat-menu #menu&#x3D;&quot;matMenu&quot;&gt;
+    &lt;mat-nav-list style&#x3D;&quot;width: 232px; max-height: 250px; padding: 5px; box-sizing: border-box;&quot;&gt;
+        @for (action of getHistory(); track $index) {
+        &lt;a mat-list-item (click)&#x3D;&quot;expressionControl.setValue(action);&quot;&gt;
+            {{ action }}
+        &lt;/a&gt;
+        }
+    &lt;/mat-nav-list&gt;
+&lt;/mat-menu&gt;</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="main-grid">    <!-- LEFT SIDEBAR -->    <mat-card appearance="outlined">        <div class="scrollable sidebar">            <mat-card-title class="end">            <mat-icon inline>tune</mat-icon>                Properties            </mat-card-title>            <mat-label>Height</mat-label>            <mat-slider min="5" max="40" step="1" discrete="thumbLabel">                <input matSliderThumb [value]="height" (dragEnd)="height = $event.value; resize()">            </mat-slider>            <mat-label>Width</mat-label>            <mat-slider class="end" min="5" max="40" step="1" discrete="thumbLabel">                <input matSliderThumb [value]="width" (dragEnd)="width = $event.value; resize()">            </mat-slider>            <mat-form-field subscriptSizing="dynamic" appearance="outline">                <mat-label>Default value</mat-label>                <input matInput type="number" placeholder="Ex. 10" [(ngModel)]="defaultValue" min="0" max="255" step="1">            </mat-form-field>            <mat-divider></mat-divider>            <mat-card-title class="end">                <mat-icon inline>visibility</mat-icon>                View            </mat-card-title>            <mat-checkbox [(ngModel)]="showNumberValues" [disabled]="pixelSize<40">                Numbers            </mat-checkbox>            <mat-checkbox [(ngModel)]="showGrid">                Grid            </mat-checkbox>            <mat-checkbox class="end" [(ngModel)]="showHeaders" [disabled]="pixelSize<40">                Headers            </mat-checkbox>            <mat-label>Pixel Size</mat-label>            <mat-slider class="end" min="25" max="100" step="1" discrete="thumbLabel">                <input matSliderThumb [(ngModel)]="pixelSize">            </mat-slider>            <mat-form-field class="end" subscriptSizing="dynamic" appearance="outline">                <mat-label>Color Scale</mat-label>                <mat-select [(ngModel)]="selectedColorScale">                    <mat-option value="none">None</mat-option>                    <mat-option value="grayscale">Grayscale</mat-option>                    <mat-option value="heatmap">YellowOrangeRed</mat-option>                    <mat-option value="spectral">Spectral</mat-option>                    <mat-option value="viridis">Viridis</mat-option>                </mat-select>            </mat-form-field>            <div class="spacer"></div>            <div>                <p>                    <!-- <mat-icon inline="true" style="vertical-align: middle;">arrow_range</mat-icon> -->                    Width: {{width}}px                </p>                <p>                    <!-- <mat-icon inline="true" style="vertical-align: middle;">height</mat-icon> -->                    Height: {{height}}px                </p>                <p>                    <!-- <mat-icon inline="true" style="vertical-align: middle;">open_in_full</mat-icon> -->                    Pixel size: {{pixelSize}}px                </p>            </div>        </div>    </mat-card>    <!-- CENTER CANVAS -->    <mat-card appearance="outlined" style="overflow: hidden;">        <div class="scrollable">            <app-bitmap class="bitmap" [bitmap]="bitmap" [pixelSize]="pixelSize"                [selectedColorScale]="selectedColorScale" [showGrid]="showGrid"                [showNumbers]="showNumberValues&&pixelSize>=40" [showHeaders]="showHeaders&&pixelSize>=40"                [tick]="tick">            </app-bitmap>        </div>    </mat-card>    <!-- RIGHT SIDEBAR -->    <mat-card appearance="outlined">        <div class="scrollable sidebar">            <mat-card-title class="end">                <mat-icon inline>build</mat-icon>                Tools            </mat-card-title>            <mat-card-subtitle class="end">                <mat-icon inline>dashboard_customize</mat-icon>                Behavior            </mat-card-subtitle>            <mat-form-field class="end" subscriptSizing="dynamic" appearance="outline">                <mat-label>Quantization</mat-label>                <mat-select [(ngModel)]="quantizationMode">                    <mat-option value="round">Round</mat-option>                    <mat-option value="floor">Floor</mat-option>                    <mat-option value="ceil">Ceil</mat-option>                </mat-select>            </mat-form-field>            <mat-form-field class="end" subscriptSizing="dynamic" appearance="outline">                <mat-label>Out of Range</mat-label>                <mat-select [(ngModel)]="outOfRangeHandling">                    <mat-option value="zero">Zero</mat-option>                    <mat-option value="clipping">Clipping</mat-option>                    <mat-option value="modulo">Modulo</mat-option>                </mat-select>            </mat-form-field>            <mat-form-field class="end" subscriptSizing="dynamic" appearance="outline">                <mat-label>Padding</mat-label>                <mat-select [(ngModel)]="padding">                    <mat-option value="zero">Zero</mat-option>                    <mat-option value="default">Default value</mat-option>                    <mat-option value="edge">Edge</mat-option>                </mat-select>            </mat-form-field>            <mat-card-subtitle class="start flex-row">                <mat-icon inline>functions</mat-icon>                Expression                <span class="spacer"></span>                <button mat-icon-button [matMenuTriggerFor]="menu" [disabled]="getHistory().length == 0">                    <mat-icon style="font-size: 17px;">history</mat-icon>                </button>            </mat-card-subtitle>            <mat-form-field class="end" subscriptSizing="dynamic"  appearance="outline">                <mat-label>b\'(x, y)=</mat-label>                <textarea matInput [formControl]="expressionControl" placeholder="Ex. b(x, y) * 2"></textarea>                @if (expressionControl.hasError(\'required\')) {                <mat-error>                    Expression is required                </mat-error>                }                @else if (expressionControl.hasError(\'expression\')) {                <mat-error>                    Syntax error                </mat-error>                }            </mat-form-field>                        <button mat-flat-button class="end" [disabled]="expressionControl.invalid"                (click)="apply()">                <mat-icon>check</mat-icon>                Apply            </button>            <div class="spacer"> </div>            @if (canSave()) {            <mat-card-subtitle class="end">                <mat-icon inline>commit</mat-icon>                Actions            </mat-card-subtitle>            <button mat-flat-button class="end" style="background-color: var(--mat-sys-tertiary); "                (click)="save()">                <mat-icon>save</mat-icon>                Save            </button>            <button mat-flat-button  class="end" style="background-color: var(--mat-sys-neutral); color: var(--mat-sys-on-primary);"                (click)="quit()">                <mat-icon>cancel</mat-icon>                Cancel            </button>            }        </div>    </mat-card></div>    <mat-menu #menu="matMenu">    <mat-nav-list style="width: 232px; max-height: 250px; padding: 5px; box-sizing: border-box;">        @for (action of getHistory(); track $index) {        <a mat-list-item (click)="expressionControl.setValue(action);">            {{ action }}        </a>        }    </mat-nav-list></mat-menu></div>'
+    var COMPONENTS = [{'name': 'AccumulatorDialogComponent', 'selector': 'app-accumulator-dialog'},{'name': 'AnimationControllerComponent', 'selector': 'app-animation-controller'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BinaryBitmapEditorComponent', 'selector': 'app-binary-bitmap-editor'},{'name': 'BitmapComponent', 'selector': 'app-bitmap'},{'name': 'BitmapEditorComponent', 'selector': 'app-bitmap-editor'},{'name': 'ConvolutionalFilterAnimationComponent', 'selector': 'app-convolutional-filter-animation'},{'name': 'DocsComponent', 'selector': 'app-docs'},{'name': 'GrassfireAnimationComponent', 'selector': 'app-grassfire-animation'},{'name': 'HelpComponent', 'selector': 'app-help'},{'name': 'HistogramComponent', 'selector': 'app-histogram'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'HoughTransformAnimationComponent', 'selector': 'app-hough-transform-animation'},{'name': 'KernelDialogComponent', 'selector': 'app-kernel-dialog'},{'name': 'MatrixDisplayComponent', 'selector': 'app-matrix-display'},{'name': 'MedianFilterAnimationComponent', 'selector': 'app-median-filter-animation'},{'name': 'MorphologicalOperationsAnimationComponent', 'selector': 'app-morphological-operations-animation'},{'name': 'PageNotFoundComponent', 'selector': 'app-page-not-found'},{'name': 'ShapeBitmapEditorComponent', 'selector': 'app-shape-bitmap-editor'},{'name': 'StructuringElementEditorComponent', 'selector': 'app-structuring-element-editor'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'BitmapEditorComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'BitmapEditorComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

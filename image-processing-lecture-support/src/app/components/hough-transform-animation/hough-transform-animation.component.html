@@ -1,0 +1,109 @@
+<div class="flex-col" style="padding: 8px; height: 100%; box-sizing: border-box;">
+
+
+
+    <mat-card appearance="outlined" class="topbar">
+    
+    
+        <button mat-button [routerLink]="['/binary-edit', bitmapKey]">
+            <mat-icon>edit</mat-icon>
+            Edit
+        </button>
+
+        
+        <button mat-button (click)="openDialog()">
+            <mat-icon>table</mat-icon>
+            Accumulator
+        </button>
+
+        
+        <div class="divider"></div>
+    
+    
+        <mat-label>Pixel Size</mat-label>
+        <mat-slider min="25" max="100" step="1" discrete="false">
+            <input matSliderThumb [(ngModel)]="pixelSize">
+        </mat-slider>
+        <div class="divider"></div>
+        <mat-checkbox [(ngModel)]="showGrid">
+            Grid
+        </mat-checkbox>
+        <mat-checkbox [(ngModel)]="showHeaders" [disabled]="pixelSize<40">
+            Headers
+        </mat-checkbox>
+
+        <div class="divider"></div>
+        
+        <mat-form-field class="slim-form-field" subscriptSizing="dynamic" appearance="outline">
+            <mat-label>Threshold</mat-label>
+            <input matInput type="number" placeholder="Ex. 10" [(ngModel)]="threshold" (ngModelChange)="refresh()" min="3"
+                max="25" step="1">
+        </mat-form-field>
+        
+        <div class="slim-divider"></div>
+        
+        <mat-form-field class="slim-form-field" subscriptSizing="dynamic" appearance="outline">
+            <mat-label>Limit</mat-label>
+            <input matInput type="number" placeholder="Ex. 10" [(ngModel)]="limit" (ngModelChange)="refresh()" min="0" max="25"
+                step="1">
+        </mat-form-field>
+        
+        <div class="divider"></div>
+        
+        <app-animation-controller [showValue]="false" [(value)]="animationIndex" (valueChanged)="animate()" [min]="0" [max]="bitmap.length()-1"></app-animation-controller>
+        
+    
+    </mat-card>
+
+
+
+
+
+
+    <div class="flex-row" style="gap: 8px; flex: 1; min-height: 0">
+
+        <mat-card appearance="outlined" style="overflow: hidden; width: 50%;">
+            <div class="scrollable">
+
+                <app-bitmap class="bitmap" [bitmap]="bitmap" [pixelSize]="pixelSize"
+                    [showHeaders]="showHeaders&&pixelSize>=40" [showGrid]="showGrid"
+                    [showNumbers]="false" [tick]="bitmapTick"
+                    [userSelect]="false" style="margin: auto;"
+                    [selectionColor]="selectionColor"
+                    (cellClicked)="onCellClicked($event)"
+                    >
+
+                </app-bitmap>
+            </div>
+        </mat-card>
+
+      
+       
+
+        <mat-card appearance="outlined"style="height: 100%; width: 50%; overflow: hidden;">
+                <div class="scrollable" style="height: 100%;">
+                    <div class="bitmap" style="position: relative; height: fit-content;">
+                        <canvas id="bitmapChart" [style.width]="getCanvasWidth()+'px'" [style.height]="getCanvasHeight()+'px'"
+                            [style.top]="showHeaders&&pixelSize>=40?'30px':'0'"
+                            [style.left]="showHeaders&&pixelSize>=40?'30px':'0'"
+                            style="position: absolute; z-index: 1; pointer-events: none;"></canvas>
+        
+                        <app-bitmap class="bitmap" [bitmap]="resultBitmap" [pixelSize]="pixelSize"
+                            [showHeaders]="showHeaders&&pixelSize>=40" [showGrid]="showGrid" [showNumbers]="false"
+                            [tick]="bitmapTick" [userSelect]="false" style="margin: auto;" [selectionColor]="selectionColor"
+                            (cellClicked)="onCellClicked($event)">
+        
+                        </app-bitmap>
+                    </div>
+                </div>
+        </mat-card>
+
+    </div>
+
+
+    <mat-card appearance="outlined" style="overflow: hidden; min-height: fit-content;">
+        <div class="scrollable" style="height: 250px;">
+            <canvas id="rhoChart"></canvas>
+        </div>
+    </mat-card> 
+</div>

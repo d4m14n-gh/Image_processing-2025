@@ -1,6 +1,7 @@
-# ImageProcessingLectureSupportSystem
+# Image Processing Lecture Support
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.1.
+This project is an educational web application designed to support the teaching and learning of image processing concepts. Built with Angular and Angular Material, it provides interactive visualizations and tools for exploring various image processing algorithms and techniques. Key features include bitmap editing, step-by-step animation of convolutional and median filters, morphological operations, histogram analysis, and Hough transform visualization. The application allows users to experiment with different parameters, observe algorithm behavior in real time, and gain a deeper understanding of fundamental image processing operations. Its modular structure and user-friendly interface make it suitable for both classroom demonstrations and individual study.
+
 
 ## Development server
 
@@ -44,15 +45,13 @@ To execute unit tests with the [Karma](https://karma-runner.github.io) test runn
 ng test
 ```
 
-## Running end-to-end tests
+## Documentation
 
-For end-to-end (e2e) testing, run:
+To generate documentation, use the following command:
 
 ```bash
-ng e2e
+npm run compodoc
 ```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
 
 ## Additional Resources
 

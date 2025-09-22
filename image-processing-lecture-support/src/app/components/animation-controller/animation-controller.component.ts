@@ -1,4 +1,4 @@
-import { Component, input, OnDestroy, OnInit, output } from '@angular/core';
+import { Component, effect, input, model, OnDestroy, OnInit, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -8,6 +8,10 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSliderModule } from '@angular/material/slider';
 
+/** 
+ * A component that provides controls for animation playback, including play/pause, step forward/backward, and speed adjustment.
+ * It allows users to control the animation frame by frame or continuously, with options for looping and speed changes.
+ */
 @Component({
   selector: 'app-animation-controller',
   imports: [
@@ -24,92 +28,148 @@ import { MatSliderModule } from '@angular/material/slider';
   styleUrl: './animation-controller.component.css'
 })
 export class AnimationControllerComponent implements OnInit, OnDestroy {
+  //public
+  
+  /** If true, the animation will loop continuously. */
   loop: boolean = false;
+  /** If true, the animation is currently playing.
+   * When false, the animation is paused.
+   */
   playing: boolean = false;
+  /** Speed multiplier for the animation playback. Higher values result in faster playback. */
   speed: number = 1;
   
-  
+  /** If true, the value (current frame) is displayed. */
   showValue = input<boolean>(true);
-  min = input<number>(1);
-  max = input<number>(255);
-  step = input<number>(1);
-  startValue = input<number>(0);
 
+  /** Minimum value (first frame) of the animation. */
+  min = input<number>(1);
+  /** Maximum value (last frame) of the animation. */
+  max = input<number>(255);
+  /** Step size for incrementing/decrementing the value (frame). */
+  step = input<number>(1);
+  /** Speed multiplier input for external control of animation speed. */
+  speedMultiplier = input<number>(1);
+
+  /** Current value (frame) of the animation. */
+  value = model<number>(0);
+  /** Event emitted when the value (frame) changes, **overrides default model behavior.** */
   valueChanged = output<number>();
 
-  private _value: number = 0;
+  //private
+
+  /** Timeout ID for managing animation updates */
   private _timeoutId: any;
-  set value(newValue: number) {
-    if(this._value !== newValue)
-      this.valueChanged.emit(newValue);
-    this._value = newValue;
-  }
-  get value(): number {
-    return this._value;
-  }
-  
-  ngOnInit() {
-    this._value = this.startValue();
+  /** Predefined speed levels for the animation */
+  private readonly _speeds = [0.1, 0.25, 0.5, 0.75, 1, 2, 5, 10];
+  /** Current index in the predefined speed levels */
+  private _currentSpeedIndex = 4;
+  /** Interval in milliseconds for animation updates */
+  private readonly _interval = 250;
+
+  /**
+   * Initializes the component and starts the animation.
+   */
+  ngOnInit(): void {
     this.animate();
   }
-  stepFirst() {
-    this.value = this.min();
+
+  /** Sets the current value (frame) of the animation.
+   * If the new value is different from the current value, it updates the value and emits the `valueChanged` event.
+   * @param value The new value (frame) to set.
+   */
+  setValue(value: number): void {
+    if (value !== this.value()) {
+      this.value.set(value);
+      this.valueChanged.emit(value);
+    }
   }
-  stepBackward() {
-    this.value = Math.max(this.min(), this.value - this.step());
+
+  /**
+   * Steps to the first frame of the animation.
+   */
+  stepFirst(): void {
+    this.setValue(this.min());
   }
-  togglePlay() {
+  
+  /**
+   * Steps backward in the animation.
+   */
+  stepBackward(): void {
+    this.setValue(Math.max(this.min(), this.value() - this.step()));
+  }
+  /**
+   * Toggles the play/pause state of the animation.
+   */
+  togglePlay(): void {
     this.playing = !this.playing;
     this.animate();
   }
-  stepForward() {
-    this.value = Math.min(this.max(), this.value + this.step());
+  /**
+   * Steps forward in the animation.
+   */
+  stepForward(): void {
+    this.setValue(Math.min(this.max(), this.value() + this.step()));
   }
-  stepLast(){
-    this.value = this.max();
+  /**
+   * Steps to the last frame of the animation.
+   */
+  stepLast(): void {
+    this.setValue(this.max());
   }
 
-  toggleLoop() {
+  /** Toggles the looping behavior of the animation.
+   * When enabled, the animation will restart from the beginning after reaching the end.
+   */
+  toggleLoop(): void {
     this.loop = !this.loop;
   }
-  setGroupSize(arg0: number) {
-    console.log(arg0);
-  }
+
+
 
   //speedControl
-  private _speeds = [0.1, 0.25, 0.5, 0.75, 1, 2, 5, 10];
-  private _currentSpeedIndex = 4;
-  speedDown(){
+
+  /** Decreases the animation speed to the next lower predefined speed level. */
+  speedDown(): void {
     this._currentSpeedIndex = Math.max(0, this._currentSpeedIndex - 1);
     this.speed = this._speeds[this._currentSpeedIndex];
   }
-  speedUp(){
+  /** Increases the animation speed to the next higher predefined speed level. */
+  speedUp(): void {
     this._currentSpeedIndex = Math.min(this._speeds.length - 1, this._currentSpeedIndex + 1);
     this.speed = this._speeds[this._currentSpeedIndex];
   }
-  maxSpeed(){
+  /** Returns the maximum speed value from the predefined speed levels. */
+  maxSpeed(): number {
     return this._speeds[this._speeds.length - 1];
   }
-  minSpeed(){
+  /** Returns the minimum speed value from the predefined speed levels. */
+  minSpeed(): number {
     return this._speeds[0];
   }
 
-  
-  animate(){
+  /** Continuously updates the animation frame based on the current speed and play state.
+   * If the animation is playing and the current value is less than the maximum value, it increments the value.
+   * If the current value reaches the maximum and looping is enabled, it resets to the minimum value.
+   * The function uses a timeout to control the update frequency based on the speed setting.
+   */
+  animate(): void {
     if(this.playing){
-      if(this.value<this.max())
-        this.value++;
+      if(this.value()<this.max())
+        this.setValue(this.value() + 1);
       else if(this.loop)
-        this.value = this.min();
+        this.setValue(this.min());
 
 
       this._timeoutId = setTimeout(() => {
         this.animate();
-      }, 100 / this.speed);
+      }, this._interval / (this.speed * this.speedMultiplier()));
     }
   }
 
-  ngOnDestroy() {
+  /** Cleans up resources when the component is destroyed.
+   */
+  ngOnDestroy(): void{
     clearTimeout(this._timeoutId);
   }
 }

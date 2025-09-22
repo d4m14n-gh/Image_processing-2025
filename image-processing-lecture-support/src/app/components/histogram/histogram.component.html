@@ -6,59 +6,47 @@
 
         <mat-card style="flex: 1; overflow: hidden; padding: 0;" appearance="outlined">
             <div class="scrollable">
-                <app-bitmap class="bitmap" [bitmap]="bitmap" [tick]="bitmapComponentTick" [pixelSize]="pixelSize"
+                <app-bitmap class="bitmap" [bitmap]="bitmap" [tick]="tick" [pixelSize]="pixelSize"
                     [showHeaders]="showHeaders&&pixelSize>=40" [showNumbers]="showNumberValues&&pixelSize>=40"
                     [showGrid]="showGrid" [selectedColorScale]="selectedColorScale"
                     (bitmapChanged)="prepareChartData(); updateChart()">
                 </app-bitmap>
             </div>
         </mat-card>
- 
+
         <mat-card appearance="outlined" style="overflow: auto;">
+            <div class="scrollable sidebar flex-col">
 
-            <mat-card-content>
-                <mat-label>Pixel Size</mat-label>
-                <br>
-                <mat-slider min="25" max="100" step="1" discrete="thumbLabel" style="width: 120px;">
-                    <input matSliderThumb [(ngModel)]="pixelSize">
-                </mat-slider>
-                <!-- <mat-divider style="margin: 5px 0;"></mat-divider> -->
-            </mat-card-content>
-            <mat-card-content>
-                <div>
-                    <mat-label style="text-wrap: nowrap;">Bin Size </mat-label>
-                    <br>
-                    <mat-slider min="1" max="32" step="1" discrete="thumbLabel" >
-                        <input matSliderThumb [value]="this.histogramBinSize" (dragEnd)="setGroupSize($event.value)" />
-                    </mat-slider>
-                </div>
-            </mat-card-content>
+                <mat-card-title class="end">
+                    <mat-icon inline>visibility</mat-icon>
+                    View
+                </mat-card-title>
 
-
-            <mat-card-content>
+                
                 <mat-checkbox [(ngModel)]="showNumberValues" [disabled]="pixelSize<40">
                     Numbers
                 </mat-checkbox>
-                <br>
                 <mat-checkbox [(ngModel)]="showGrid">
                     Grid
                 </mat-checkbox>
-                <br>
                 <mat-checkbox [(ngModel)]="showHeaders" [disabled]="pixelSize<40">
                     Headers
                 </mat-checkbox>
-                <br>
-                <mat-checkbox [(ngModel)]="enableHistogramColorscale" (ngModelChange)="updateChart(); this.chart?.update('none');">
+                <mat-checkbox  class="end" [(ngModel)]="enableHistogramColorscale" (ngModelChange)="updateChart(); this.chart?.update('none');">
                     Histogram Colorscale
                 </mat-checkbox>
-            </mat-card-content>
-
+                
+                <mat-label>Pixel Size</mat-label>
+                <mat-slider min="25" max="100" step="1" discrete="thumbLabel">
+                    <input matSliderThumb [(ngModel)]="pixelSize">
+                </mat-slider>
             
-
-
-            <mat-card-content>
-                <br>
-                <mat-form-field>
+                <mat-label>Bin Size </mat-label>
+                <mat-slider min="1" max="32" step="1" discrete="thumbLabel">
+                    <input matSliderThumb [value]="this.histogramBinSize" (dragEnd)="setGroupSize($event.value)" />
+                </mat-slider>
+          
+                <mat-form-field class="end" subscriptSizing="dynamic" appearance="outline">
                     <mat-label>Color Scale</mat-label>
                     <mat-select [(ngModel)]="selectedColorScale">
                         <mat-option value="none">None</mat-option>
@@ -68,16 +56,12 @@
                         <mat-option value="viridis">Viridis</mat-option>
                     </mat-select>
                 </mat-form-field>
-            </mat-card-content>
 
-          
-
-            <mat-card-content>
-                <button mat-flat-button [routerLink]="['/edit', bitmapKey]" style="width: 100%;">
+                <button mat-flat-button [routerLink]="['/edit', bitmapKey]">
                     <mat-icon>edit</mat-icon>
                     Edit
                 </button>
-            </mat-card-content>
+            </div>
         </mat-card>
     </div>
 
@@ -95,7 +79,7 @@
                 </div> -->
     </mat-card>
 
-    <mat-card appearance="outlined">
+    <mat-card appearance="outlined" style="padding: 4px;">
         <app-animation-controller (valueChanged)="animate($event)">
         </app-animation-controller>
     </mat-card>

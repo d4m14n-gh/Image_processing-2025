@@ -1,6 +1,6 @@
 import { Bitmap } from "./bitmap";
-import { OutOfBoundsHandling, OutOfRangeHandling, Padding, QuantizationMode } from "./enums";
-import { outOfBoundsHandle, outOfRangeHandle, quantizationHandle } from "./expression-utils";
+import { OutOfRangeHandling, Padding, QuantizationMode } from "./enums";
+import { outOfRangeHandle, quantizationHandle } from "./expression-utils";
 import { Point } from "./point";
 
 export class Kernel {
@@ -12,22 +12,28 @@ export class Kernel {
     set divider(value: number) { this._divider = Math.round(value == 0 ? 1 : value); }
     get divider() { return this._divider; }
 
-    constructor(size: number, kernel?: number[][]) {
+    constructor(size: number, kernel?: number[][], divider: number = 1) {
         this._size = size;
         this._kernel = kernel || Array.from({ length: size }, () =>
             Array.from({ length: size }, () => 0)
         );
+        this._divider = divider;
     }
 
-    apply(bitmap: Bitmap, row: number, col: number, quantization: QuantizationMode, outOfRange: OutOfRangeHandling, padding: Padding): number {
+    apply(bitmap: Bitmap, cell: Point, quantization: QuantizationMode, outOfRange: OutOfRangeHandling, padding: Padding): number {
         const r = Math.trunc((this._size - 1) / 2);
         let sum = 0;
         for (let oy = -r; oy <= r; oy++)
             for (let ox = -r; ox <= r; ox++) {
-                let point = new Point(row + oy, col + ox);
+                let point = cell.add(new Point(ox, oy));
                 sum += bitmap.getWithPadding(point, padding) * this._kernel[oy + r][ox + r] / (this._divider == 0 ? 1 : this._divider);
             }
+        console.log(`Kernel.apply: cell=${cell.toString()}, sum=${sum}, quantization=${quantization}, outOfRange=${outOfRange}`);
         return outOfRangeHandle(quantizationHandle(sum, quantization), outOfRange);
+    }
+
+    values(): number[] {
+        return this._kernel.flat();
     }
 
     clone(): Kernel{
@@ -49,19 +55,24 @@ export class Kernel {
     }
 
 
-    save(): string {
-        return JSON.stringify(this);
+    save(storageKey: string="kernel"): void {
+        localStorage.setItem(storageKey, JSON.stringify(this));
     }
 
-    static tryLoad(raw: string | null): Kernel | null {
-        if (!raw) return null;
+    load(storageKey: string="kernel"): void {
+        const raw = localStorage.getItem(storageKey);
+        if (!raw) return;
         try {
             const obj = JSON.parse(raw) as any;
-            if (!obj || typeof obj !== 'object') return null;
+            if (!obj || typeof obj !== 'object') return;
             const inst = Object.create(Kernel.prototype) as Kernel;
-            return Object.assign(inst, obj);
-        } catch {
-            return null;
-        }
+            let kernel = Object.assign(inst, obj);
+            if (kernel) {
+                if(kernel.kernel)
+                    this._kernel = kernel.kernel;
+                if(kernel.divider)
+                    this._divider = kernel.divider;
+            }
+        } catch { }
     }
 }
