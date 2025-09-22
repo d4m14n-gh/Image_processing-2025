@@ -3,7 +3,6 @@ import { MatCardModule } from '@angular/material/card';
 import { getVar } from '../../static/style-utils';
 import { MatIconModule } from '@angular/material/icon';
 import { AnimationControllerComponent } from '../animation-controller/animation-controller.component';
-import cvReadyPromise from '@techstark/opencv-js';
 
 @Component({
   selector: 'app-shape-bitmap-editor',
@@ -241,11 +240,26 @@ export class ShapeBitmapEditorComponent implements AfterViewInit {
     // }
   }
 
+  async waitForOpenCv(): Promise<void> {
+  return new Promise((resolve, reject) => {
+    const interval = setInterval(() => {
+      if ((window as any).cv && (window as any).cv.Mat) {
+        clearInterval(interval);
+        resolve();
+      }
+    }, 50);
+
+    setTimeout(() => {
+      clearInterval(interval);
+      reject('OpenCV.js loading timed out');
+    }, 10000);
+  });
+}
+
   async ngAfterViewInit() {
     const canvas = this.canvasRef.nativeElement;
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
-
 
     this.drawStartShape();
 
@@ -268,18 +282,19 @@ export class ShapeBitmapEditorComponent implements AfterViewInit {
         }
       }
     }
-    
-    const cv = await cvReadyPromise;
 
-
+    await this.waitForOpenCv(); 
+       
+    const cv: any = window.cv;
+      
     const src = new cv.Mat(imgData.height, imgData.width, cv.CV_8UC4);
     src.data.set(imgData.data);
     const gray = new cv.Mat();
     cv.cvtColor(src, gray, cv.COLOR_RGBA2GRAY);
     const binary = new cv.Mat();
     cv.threshold(gray, binary, 25, 255, cv.THRESH_BINARY);
-
-
+    
+    
     const dst = new cv.Mat();
     cv.distanceTransform(binary, dst, cv.DIST_L2, 5);
     this._dist = [];
@@ -289,13 +304,13 @@ export class ShapeBitmapEditorComponent implements AfterViewInit {
         row.push(dst.floatAt(y, x));
       this._dist.push(row);
     }
-
+    
     for (let y = 1; y < this.height - 1; y++) {
       for (let x = 1; x < this.width - 1; x++) {
         if (!isInside(x, y)) continue;
         const d = this._dist[y][x];
         if(d < 1) continue;
-
+        
         let isMax = true;
         for (let dy = -1; dy <= 1; dy++) {
           for (let dx = -1; dx <= 1; dx++) {
@@ -308,23 +323,23 @@ export class ShapeBitmapEditorComponent implements AfterViewInit {
           }
           if (!isMax) break;
         }
-
+        
         if (isMax)
           this._medial.push([x, y, d]);
-
+        
       }
     }
-
+    
     this.calculateMATAnimationElements();
     this.animate();
   }
-
+  
   animate() {
     if(this.ngZone){
-
+      
       this.ngZone.runOutsideAngular(() => {
         
-        this._frameId = requestAnimationFrame(this.animate);
+        this._frameId = requestAnimationFrame(() => this.animate());
         
         this.drawStartShape();
         this.drawMedialAxis();
