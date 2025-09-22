@@ -28,7 +28,6 @@ export class Kernel {
                 let point = cell.add(new Point(ox, oy));
                 sum += bitmap.getWithPadding(point, padding) * this._kernel[oy + r][ox + r] / (this._divider == 0 ? 1 : this._divider);
             }
-        console.log(`Kernel.apply: cell=${cell.toString()}, sum=${sum}, quantization=${quantization}, outOfRange=${outOfRange}`);
         return outOfRangeHandle(quantizationHandle(sum, quantization), outOfRange);
     }
 
