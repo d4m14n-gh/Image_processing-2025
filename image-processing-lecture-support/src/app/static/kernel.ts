@@ -12,11 +12,12 @@ export class Kernel {
     set divider(value: number) { this._divider = Math.round(value == 0 ? 1 : value); }
     get divider() { return this._divider; }
 
-    constructor(size: number, kernel?: number[][]) {
+    constructor(size: number, kernel?: number[][], divider: number = 1) {
         this._size = size;
         this._kernel = kernel || Array.from({ length: size }, () =>
             Array.from({ length: size }, () => 0)
         );
+        this._divider = divider;
     }
 
     apply(bitmap: Bitmap, cell: Point, quantization: QuantizationMode, outOfRange: OutOfRangeHandling, padding: Padding): number {
@@ -24,9 +25,10 @@ export class Kernel {
         let sum = 0;
         for (let oy = -r; oy <= r; oy++)
             for (let ox = -r; ox <= r; ox++) {
-                let point = cell.add(new Point(oy, ox));
+                let point = cell.add(new Point(ox, oy));
                 sum += bitmap.getWithPadding(point, padding) * this._kernel[oy + r][ox + r] / (this._divider == 0 ? 1 : this._divider);
             }
+        console.log(`Kernel.apply: cell=${cell.toString()}, sum=${sum}, quantization=${quantization}, outOfRange=${outOfRange}`);
         return outOfRangeHandle(quantizationHandle(sum, quantization), outOfRange);
     }
 

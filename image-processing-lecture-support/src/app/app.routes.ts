@@ -11,6 +11,8 @@ import { MorphologicalOperationsAnimationComponent } from './components/morpholo
 import { MedianFilterAnimationComponent } from './components/median-filter-animation/median-filter-animation.component';
 import { HoughTransformAnimationComponent } from './components/hough-transform-animation/hough-transform-animation.component';
 import { ShapeBitmapEditorComponent } from './components/shape-bitmap-editor/shape-bitmap-editor.component';
+import { GrassfireAnimationComponent } from './components/grassfire-animation/grassfire-animation.component';
+import { DocsComponent } from './components/docs/docs.component';
 
 export const routes: Routes = [
     { path: 'editor', component: BitmapEditorComponent },
@@ -19,13 +21,15 @@ export const routes: Routes = [
     { path: 'binary-editor', component: BinaryBitmapEditorComponent },
     { path: 'binary-edit/:id', component: BinaryBitmapEditorComponent },
     
-    { path: 'shape-editor', component: ShapeBitmapEditorComponent },
+    { path: 'mat-animation', component: ShapeBitmapEditorComponent },
+    // { path: 'grassfire-animation', component: GrassfireAnimationComponent },
 
     { path: 'structuring-element', component: StructuringElementEditorComponent },
     
 
     { path: 'help', component: HelpComponent },
     { path: 'home', component: HomeComponent },
+    { path: 'docs', component: DocsComponent },
     
     { path: 'histogram', component: HistogramComponent },
     { path: 'convolutional-filters', component: ConvolutionalFilterAnimationComponent },

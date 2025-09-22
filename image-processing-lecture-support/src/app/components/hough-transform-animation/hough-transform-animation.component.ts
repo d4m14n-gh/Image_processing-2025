@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -15,11 +15,12 @@ import { getVar } from '../../static/style-utils';
 import { ColorScale } from '../../static/enums';
 import { BitmapStorageService } from '../../services/bitmap-storage/bitmap-storage.service';
 import { Point } from '../../static/point';
-import { Chart, LineController, LineElement, PointElement, LinearScale, Title, Tooltip, Legend } from 'chart.js';
+import { Chart, LineController, LineElement, PointElement, LinearScale, Title, Tooltip, Legend, CategoryScale } from 'chart.js';
 import { MatInputModule } from '@angular/material/input';
 import { MatTabsModule } from '@angular/material/tabs';
 import { AccumulatorDialogComponent } from '../dialogs/accumulator-dialog/accumulator-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { ThemeService } from '../../services/theme/theme.service';
 
 
 @Component({
@@ -42,7 +43,7 @@ import { MatDialog } from '@angular/material/dialog';
   templateUrl: './hough-transform-animation.component.html',
   styleUrl: './hough-transform-animation.component.css'
 })
-export class HoughTransformAnimationComponent implements AfterViewInit {
+export class HoughTransformAnimationComponent implements AfterViewInit, OnDestroy {
   bitmap: InteractiveBitmap = new InteractiveBitmap(16, 9, undefined, 255);
   resultBitmap: InteractiveBitmap = new InteractiveBitmap(16, 9, undefined, 255);
   bitmapTick: number = 0;
@@ -57,25 +58,37 @@ export class HoughTransformAnimationComponent implements AfterViewInit {
   showHeaders: boolean = true;
   selectionColor: string = getVar("--selection-color");
 
+  accumulator: number[][] = [];
+  currentAccumulator: Set<string> = new Set();
+  readonly thetaStep = 15;
+
   animationIndex: number = 0;
   readonly colorscale: ColorScale = ColorScale.Binary;
   private chart?: Chart; 
+  private rhoChart?: Chart;
+  private themeSubscription: any;
   
 
-  constructor(private dialog: MatDialog, private bitmapStorage: BitmapStorageService) { 
+  constructor(private dialog: MatDialog, private bitmapStorage: BitmapStorageService, private themeService: ThemeService) { 
     let bitmap = this.bitmapStorage.load(this.bitmapKey);
     if (bitmap)
       this.bitmap = new InteractiveBitmap(bitmap.width, bitmap.height, bitmap, 255);
 
+    this.themeSubscription = this.themeService.themeChanged.subscribe(() => {
+      this.refresh();
+    });
     this.refresh();
   }
   ngAfterViewInit(): void {
     const width = this.bitmap.width;
     const height = this.bitmap.height;
     
-    Chart.register(LineController, LineElement, PointElement, LinearScale, Title, Tooltip, Legend);
+    Chart.register(LineController, LineElement, PointElement, LinearScale, Title, Tooltip, Legend, CategoryScale);
     const canvas: HTMLCanvasElement = document.getElementById('bitmapChart') as HTMLCanvasElement;
     const ctx = canvas.getContext('2d')!;
+
+    
+
     this.chart = new Chart(ctx, {
       type: 'line',
       data: {
@@ -117,23 +130,56 @@ export class HoughTransformAnimationComponent implements AfterViewInit {
         }
       }
     });
+
+    const canvas2: HTMLCanvasElement = document.getElementById('rhoChart') as HTMLCanvasElement;
+    const ctx2 = canvas2.getContext('2d')!;
+    const thetaValues: number[] = []; 
+    const rhoValues: number[] = [];
+    let x0 = 0;
+    let y0 = 0;
+    for (let theta = 0; theta <= 180; theta += 1) {
+      const rad = theta * Math.PI / 180;
+      const rho = x0 * Math.cos(rad) + y0 * Math.sin(rad); 
+      thetaValues.push(theta);
+      rhoValues.push(rho);
+    }
+    this.rhoChart = new Chart(ctx2, {
+      type: 'line',
+      data: {
+        labels: thetaValues,
+        datasets: [{
+          label: 'ρ(θ)',
+          data: rhoValues,
+          borderColor: getVar("--mat-sys-primary"),
+          fill: true,
+          pointRadius: 5,
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          x: { title: { display: true, text: 'θ [deg]' } },
+          y: { title: { display: true, text: 'ρ [px]' } }
+        }
+      }
+    });
     this.refresh();
-  
   }
 
   refresh() {
     // this.resultBitmap = new InteractiveBitmap(this.bitmap.width, this.bitmap.height, this.bitmap, 255);
-    
-    if(this.chart){
+
+    if (this.chart) {
       this.chart.data.datasets = [];
       const width = this.bitmap.width;
       const height = this.bitmap.height;
-    
+
       const lines = this.transform(this.resultBitmap).slice(0, this.limit);
-      for(let line of lines) {
-        let p1 = this.linePoint(line.min.col, line.rho, line.theta*Math.PI/180);
-        let p2 = this.linePoint(line.max.col, line.rho, line.theta*Math.PI/180);
-        if(line.min.col == line.max.col){
+      for (let line of lines) {
+        let p1 = this.linePoint(line.min.col, line.rho, line.theta * Math.PI / 180);
+        let p2 = this.linePoint(line.max.col, line.rho, line.theta * Math.PI / 180);
+        if (line.min.col == line.max.col) {
           p1 = new Point(line.min.row, line.min.col);
           p2 = new Point(line.max.row, line.max.col);
         }
@@ -156,9 +202,24 @@ export class HoughTransformAnimationComponent implements AfterViewInit {
       }
       // this.chart.resize(this.getCanvasWidth()*2, this.getCanvasHeight()*2);
       this.chart.update();
+    }
+    if (this.rhoChart) {
+      const thetaValues: number[] = []; 
+      const rhoValues: number[] = [];
+      let cell = this.bitmap.getIndexCell(this.animationIndex);
+      let x0 = cell.col;
+      let y0 = cell.row;
+      for (let theta = 0; theta <= 180; theta += 15) {
+        const rad = theta * Math.PI / 180;
+        const rho = x0 * Math.cos(rad) + y0 * Math.sin(rad); 
+        thetaValues.push(theta);
+        rhoValues.push(rho);
       }
-    
-    // this.animate();
+      this.rhoChart.data.labels = thetaValues;
+      this.rhoChart.data.datasets[0].data = rhoValues;
+      this.rhoChart.data.datasets[0].borderColor = getVar("--mat-sys-primary");
+      this.rhoChart.update();
+    }
   }
 
   animate() {
@@ -183,8 +244,7 @@ export class HoughTransformAnimationComponent implements AfterViewInit {
     this.bitmapTick++;
   }
 
-  accumulator: number[][] = [];
-  readonly thetaStep = 15;
+
   transform(bitmap: Bitmap): Line[] {
     const thetas: number[] = [];
     const width = bitmap.width;
@@ -214,7 +274,7 @@ export class HoughTransformAnimationComponent implements AfterViewInit {
       Array(thetas.length).fill(Point.zero)
     );
 
-
+    this.currentAccumulator.clear();
     bitmap.cells().forEach(p => {
       if (bitmap.getBinary(p)) {
 
@@ -224,6 +284,8 @@ export class HoughTransformAnimationComponent implements AfterViewInit {
           min[rIdx][tIdx] = min[rIdx][tIdx].min(p);
           max[rIdx][tIdx] = max[rIdx][tIdx].max(p);
           this.accumulator[rIdx][tIdx]++;
+          if(bitmap.getCellIndex(p) == this.animationIndex)
+            this.currentAccumulator.add(`[${rIdx}, ${tIdx}]`);
         });
 
       }
@@ -289,9 +351,12 @@ export class HoughTransformAnimationComponent implements AfterViewInit {
         width: '560px',
         disableClose: false,
         // hasBackdrop: false,
-        data: this.accumulator
+        data: [this.accumulator, this.currentAccumulator]
       });
     }
+  ngOnDestroy(): void {
+    this.themeSubscription.unsubscribe();
+  }
 }
 /** Represents a line in polar coordinates along with its voting information and endpoints. */
 class Line {

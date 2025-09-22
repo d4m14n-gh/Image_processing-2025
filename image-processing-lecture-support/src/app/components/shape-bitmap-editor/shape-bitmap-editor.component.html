@@ -1,3 +1,76 @@
-<mat-card appearance="outlined" class="main-card">
-    <canvas #canvas id="canvas" style="border: 1px solid black; width: 1600px; height: 900px;"></canvas>
-</mat-card>
+<div class="flex-col" style="padding: 8px; height: 100%; box-sizing: border-box;">
+
+
+
+    <mat-card appearance="outlined" class="topbar">
+    
+    
+        <!-- <button mat-button [routerLink]="['/binary-edit', bitmapKey]">
+            <mat-icon>edit</mat-icon>
+            Edit
+        </button>
+
+        
+        <button mat-button (click)="openDialog()">
+            <mat-icon>table</mat-icon>
+            Accumulator
+        </button>
+
+        
+        <div class="divider"></div>
+    
+    
+        <mat-label>Pixel Size</mat-label>
+        <mat-slider min="25" max="100" step="1" discrete="false">
+            <input matSliderThumb [(ngModel)]="pixelSize">
+        </mat-slider>
+        <div class="divider"></div>
+        <mat-checkbox [(ngModel)]="showGrid">
+            Grid
+        </mat-checkbox>
+        <mat-checkbox [(ngModel)]="showHeaders" [disabled]="pixelSize<40">
+            Headers
+        </mat-checkbox>
+
+        <div class="divider"></div>
+        
+        <mat-form-field class="slim-form-field" subscriptSizing="dynamic" appearance="outline">
+            <mat-label>Threshold</mat-label>
+            <input matInput type="number" placeholder="Ex. 10" [(ngModel)]="threshold" (ngModelChange)="refresh()" min="3"
+                max="25" step="1">
+        </mat-form-field>
+        
+        <div class="slim-divider"></div>
+        
+        <mat-form-field class="slim-form-field" subscriptSizing="dynamic" appearance="outline">
+            <mat-label>Limit</mat-label>
+            <input matInput type="number" placeholder="Ex. 10" [(ngModel)]="limit" (ngModelChange)="refresh()" min="0" max="25"
+                step="1">
+        </mat-form-field>
+        
+        <div class="divider"></div> -->
+        
+        <app-animation-controller [showValue]="false" [speedMultiplier]="15" [(value)]="animationIndex" (valueChanged)="animate()" [min]="0" [max]="animationElements.length"></app-animation-controller>
+        
+    
+    </mat-card>
+
+
+
+
+
+
+
+    <mat-card appearance="outlined" style="overflow: hidden; flex: 1;">
+        <div class="scrollable">
+             <canvas #canvas id="canvas" class="bitmap" [style.width.px]="width" [style.height.px]="height"></canvas>
+        </div>
+    </mat-card>
+
+    
+
+
+    <!-- <mat-card class="topbar" appearance="outlined" style="overflow: hidden; min-height: fit-content;">
+    </mat-card> -->
+
+</div>

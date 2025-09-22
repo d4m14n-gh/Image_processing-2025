@@ -11,9 +11,11 @@ import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/materia
 })
 export class AccumulatorDialogComponent {
   accumulator: number[][];
+  currentAccumulator: Set<string>;
   readonly thetaStep = 15;
 
-  constructor(private dialogRef: MatDialogRef<AccumulatorDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: number[][]) {
-    this.accumulator = data;
+  constructor(private dialogRef: MatDialogRef<AccumulatorDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: [number[][], Set<string>]) {
+    this.accumulator = data[0];
+    this.currentAccumulator = data[1];
   }
 }

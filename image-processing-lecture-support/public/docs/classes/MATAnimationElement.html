@@ -1,0 +1,825 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Image Processing Lecture Support</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+        <link rel="stylesheet" href="../styles/github.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">Image Processing Lecture Support</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content class">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Classes</li>
+  <li class="breadcrumb-item" >MATAnimationElement</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/components/shape-bitmap-editor/shape-bitmap-editor.component.ts</code>
+        </p>
+
+
+
+
+
+
+            <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#borderPoints" >borderPoints</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#r" >r</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#x" >x</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#y" >y</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+            <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(x: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, y: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, r: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, borderPoints: [])</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="342" class="link-to-prism">src/app/components/shape-bitmap-editor/shape-bitmap-editor.component.ts:342</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>x</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>y</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>r</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>borderPoints</td>
+                                                  
+                                                        <td>
+                                                                    <code>[]</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+            <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="borderPoints"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>borderPoints</b></span>
+                        <a href="#borderPoints"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>[]</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="343" class="link-to-prism">src/app/components/shape-bitmap-editor/shape-bitmap-editor.component.ts:343</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="r"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>r</b></span>
+                        <a href="#r"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="343" class="link-to-prism">src/app/components/shape-bitmap-editor/shape-bitmap-editor.component.ts:343</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="x"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>x</b></span>
+                        <a href="#x"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="343" class="link-to-prism">src/app/components/shape-bitmap-editor/shape-bitmap-editor.component.ts:343</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="y"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>y</b></span>
+                        <a href="#y"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="343" class="link-to-prism">src/app/components/shape-bitmap-editor/shape-bitmap-editor.component.ts:343</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+
+
+
+
+
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { AfterViewInit, Component, ElementRef, NgZone, ViewChild } from &#x27;@angular/core&#x27;;
+import { MatCardModule } from &#x27;@angular/material/card&#x27;;
+import { getVar } from &#x27;../../static/style-utils&#x27;;
+import { MatIconModule } from &#x27;@angular/material/icon&#x27;;
+import { AnimationControllerComponent } from &#x27;../animation-controller/animation-controller.component&#x27;;
+import cvReadyPromise from &#x27;@techstark/opencv-js&#x27;;
+
+@Component({
+  selector: &#x27;app-shape-bitmap-editor&#x27;,
+  imports: [
+    MatCardModule,
+    MatIconModule,
+    AnimationControllerComponent
+  ],
+  templateUrl: &#x27;./shape-bitmap-editor.component.html&#x27;,
+  styleUrl: &#x27;./shape-bitmap-editor.component.css&#x27;
+})
+export class ShapeBitmapEditorComponent implements AfterViewInit {
+  @ViewChild(&#x27;canvas&#x27;) canvasRef!: ElementRef&lt;HTMLCanvasElement&gt;;
+  readonly width &#x3D; 1050;
+  readonly height &#x3D; 750;
+  // readonly eps &#x3D; 0.01;
+  readonly eps &#x3D; 0.79;
+
+  animationIndex &#x3D; 0;
+  animationElements: MATAnimationElement[] &#x3D; [];
+
+  private _borderPoints: [number, number][] &#x3D; [];
+  private _dist: number[][] &#x3D; [];
+  private _medial: [number, number, number][] &#x3D; [];
+  private _frameId: number &#x3D; 0;
+  private _medialPointsVisited &#x3D; new Set&lt;string&gt;();
+  private _medialPointsBfsQueue: [number, number, number][] &#x3D; [];
+
+
+  constructor(private ngZone: NgZone) { }
+
+  drawStartShape(): void {
+    const canvas &#x3D; this.canvasRef.nativeElement;
+    const ctx &#x3D; canvas.getContext(&#x27;2d&#x27;);
+    if (!ctx) return;
+
+    const padding &#x3D; 50;
+    canvas.width &#x3D; this.width;
+    canvas.height &#x3D; this.height;
+    ctx.imageSmoothingEnabled &#x3D; false;
+    // ctx.fillStyle &#x3D; getVar(&#x27;--mat-sys-primary&#x27;);
+    ctx.fillStyle &#x3D; &quot;#162d59&quot;;
+    // ctx.beginPath();
+    // ctx.ellipse(200, 200, 120, 80, 0, 0, Math.PI * 2);
+    // ctx.fill();
+    // ctx.closePath();
+
+    // ctx.beginPath();
+    // ctx.ellipse(280, 280, 120, 80, 0, 0, Math.PI * 2);
+    // ctx.fill();
+    // ctx.closePath();
+
+    // ctx.beginPath();
+    // ctx.ellipse(290, 150, 120, 80, 0, 0, Math.PI * 2);
+    // ctx.fill();
+    // ctx.closePath();
+
+
+    // ctx.beginPath();
+    // ctx.ellipse(120, 150, 120, 80, 0, 0, Math.PI * 2);
+    // ctx.fill();
+    // ctx.closePath();
+
+    ctx.fillRect(padding, padding, this.width - 2 * padding - 1, this.height - 2 * padding - 1);
+    // ctx.fillRect(10, 150, 501, 601);
+    // ctx.fillRect(350, 250, 401, 201);
+  }
+  drawMedialAxis(): void {
+    const canvas &#x3D; this.canvasRef.nativeElement;
+    const ctx &#x3D; canvas.getContext(&#x27;2d&#x27;);
+    if (!ctx) return;
+    ctx.fillStyle &#x3D; getVar(&#x27;--mat-sys-on-primary&#x27;);
+    ctx.fillStyle &#x3D; &quot;#fcf8f9&quot;;
+    for (const [x, y] of this._medial)
+      ctx.fillRect(x, y, 1, 1);
+  }
+  getHash(x: number, y: number): string {
+    return &#x60;${Math.trunc(x)},${Math.trunc(y)}&#x60;;
+  }
+  calculateMATAnimationElements(): void {
+    const medialLength &#x3D; this._medial.length;
+
+
+    while (this.animationElements.length &lt; medialLength) {
+      if (this._medialPointsBfsQueue.length &#x3D;&#x3D;&#x3D; 0) {
+        for (const p of this._medial)
+          if (!this._medialPointsVisited.has(this.getHash(p[0], p[1]))) {
+            this._medialPointsBfsQueue.push(p);
+            break;
+          }
+      }
+      if (this._medialPointsBfsQueue.length &#x3D;&#x3D;&#x3D; 0) break;
+
+
+      const [x, y, r] &#x3D; this._medialPointsBfsQueue.pop()!;
+      this._medialPointsVisited.add(this.getHash(x, y));
+      let element: MATAnimationElement &#x3D; new MATAnimationElement(x, y, r, []);
+      for (const bp of this._borderPoints) {
+        const dx &#x3D; bp[0] - x;
+        const dy &#x3D; bp[1] - y;
+        const dist &#x3D; Math.sqrt(dx * dx + dy * dy)+1;
+        if (dist-r&lt;0.0001)
+          element.borderPoints.push(bp);
+      }
+      this.animationElements.push(element);
+
+      for (let dr &#x3D; -1; dr &lt;&#x3D; 1; dr++) {
+        for (let dc &#x3D; -1; dc &lt;&#x3D; 1; dc++) {
+          if (dr &#x3D;&#x3D;&#x3D; 0 &amp;&amp; dc &#x3D;&#x3D;&#x3D; 0) continue;
+          if (this._medialPointsVisited.has(this.getHash(x + dc, y + dr))) continue;
+          const index &#x3D; this._medial.map(p &#x3D;&gt; this.getHash(p[0], p[1])).indexOf(this.getHash(x + dc, y + dr));
+          if (index &#x3D;&#x3D;&#x3D; -1) continue;
+          this._medialPointsBfsQueue.push([x + dc, y + dr, this._medial[index][2]]);
+        }
+      }
+    }
+  }
+
+  drawAnimationElement(index: number): void {
+    if (index &lt; 0 || index &gt;&#x3D; this.animationElements.length) return;
+    const element &#x3D; this.animationElements[index];
+    const canvas &#x3D; this.canvasRef.nativeElement;
+    const ctx &#x3D; canvas.getContext(&#x27;2d&#x27;);
+    if (!ctx) return;
+
+
+
+    ctx.fillStyle &#x3D; &quot;rgba(0,255,0,0.125)&quot;;
+    ctx.strokeStyle &#x3D; &quot;rgba(0,255,0,0.5)&quot;;
+    ctx.lineWidth &#x3D; 1;
+    ctx.beginPath();
+    ctx.ellipse(element.x, element.y, element.r, element.r, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.stroke();
+    ctx.closePath();
+
+    const rP &#x3D; 3;
+    ctx.fillStyle &#x3D; &quot;rgba(0,255,0,1)&quot;;
+    ctx.beginPath();
+    ctx.ellipse(element.x, element.y, rP, rP, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.closePath();
+
+    ctx.fillStyle &#x3D; &quot;rgba(235, 32, 32, 1)&quot;;
+    for (const bp of element.borderPoints) {
+      ctx.beginPath();
+      ctx.ellipse(bp[0], bp[1], rP, rP, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.closePath();
+    }
+  }
+
+  drawCircle() {
+    const canvas &#x3D; this.canvasRef.nativeElement;
+    const ctx &#x3D; canvas.getContext(&#x27;2d&#x27;);
+    if (!ctx) return;
+
+
+
+    if (this._medialPointsBfsQueue.length &#x3D;&#x3D;&#x3D; 0) {
+      for (const p of this._medial)
+        if (!this._medialPointsVisited.has(this.getHash(p[0], p[1]))) {
+          this._medialPointsBfsQueue.push(p);
+          break;
+        }
+    }
+    if (this._medialPointsBfsQueue.length &#x3D;&#x3D;&#x3D; 0) return;
+
+
+
+    const [x, y, r] &#x3D; this._medialPointsBfsQueue.pop()!;
+    this._medialPointsVisited.add(this.getHash(x, y));
+
+    // console.log(x, y, r);
+    // ctx.imageSmoothingEnabled &#x3D; true;
+    ctx.fillStyle &#x3D; &quot;rgba(0,255,0,0.125)&quot;;
+    ctx.strokeStyle &#x3D; &quot;rgba(0,255,0,0.5)&quot;;
+    ctx.lineWidth &#x3D; 1;
+    ctx.beginPath();
+    ctx.ellipse(x, y, r, r, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.stroke();
+    ctx.closePath();
+
+    const rP &#x3D; 3;
+    // ctx.fillStyle &#x3D; getVar(&#x27;--mat-sys-error&#x27;);
+    ctx.fillStyle &#x3D; &quot;rgba(0,255,0,1)&quot;;
+    ctx.beginPath();
+    ctx.ellipse(x, y, rP, rP, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.closePath();
+
+    ctx.fillStyle &#x3D; &quot;rgba(235, 32, 32, 1)&quot;;
+    for (const bp of this._borderPoints) {
+      const dx &#x3D; bp[0] - x;
+      const dy &#x3D; bp[1] - y;
+      const dist &#x3D; Math.sqrt(dx * dx + dy * dy);
+      if (dist &#x3D;&#x3D; r) {
+        ctx.beginPath();
+        ctx.ellipse(bp[0], bp[1], rP, rP, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.closePath();
+      }
+    }
+
+
+    for (let dr &#x3D; -1; dr &lt;&#x3D; 1; dr++) {
+      for (let dc &#x3D; -1; dc &lt;&#x3D; 1; dc++) {
+        if (dr &#x3D;&#x3D;&#x3D; 0 &amp;&amp; dc &#x3D;&#x3D;&#x3D; 0) continue;
+        if (this._medialPointsVisited.has(this.getHash(x + dc, y + dr))) continue;
+        const index &#x3D; this._medial.map(p &#x3D;&gt; this.getHash(p[0], p[1])).indexOf(this.getHash(x + dc, y + dr));
+        if (index &#x3D;&#x3D;&#x3D; -1) continue;
+        this._medialPointsBfsQueue.push([x + dc, y + dr, this._medial[index][2]]);
+      }
+    }
+
+    // for(let dr &#x3D; -2; dr &lt;&#x3D; 2; dr++){
+    //   for(let dc &#x3D; -2; dc &lt;&#x3D; 2; dc++){
+    //     if(dr &#x3D;&#x3D;&#x3D; 0 &amp;&amp; dc &#x3D;&#x3D;&#x3D; 0) continue;
+    //     if(this._medialPointsVisited.has(getHash(x+dc, y+dr))) continue;
+    //     const index &#x3D; this._medial.map(p &#x3D;&gt; getHash(p[0], p[1])).indexOf(getHash(x+dc, y+dr));
+    //     if(index &#x3D;&#x3D;&#x3D; -1) continue;
+    //     this._medialPointsBfsQueue.push([x+dc, y+dr, this._medial[index][2]]);
+    //   }
+    // }
+
+    // for(let dr &#x3D; -3; dr &lt;&#x3D; 3; dr++){
+    //   for(let dc &#x3D; -3; dc &lt;&#x3D; 3; dc++){
+    //     if(dr &#x3D;&#x3D;&#x3D; 0 &amp;&amp; dc &#x3D;&#x3D;&#x3D; 0) continue;
+    //     if(this._medialPointsVisited.has(getHash(x+dc, y+dr))) continue;
+    //     const index &#x3D; this._medial.map(p &#x3D;&gt; getHash(p[0], p[1])).indexOf(getHash(x+dc, y+dr));
+    //     if(index &#x3D;&#x3D;&#x3D; -1) continue;
+    //     this._medialPointsBfsQueue.push([x+dc, y+dr, this._medial[index][2]]);
+    //   }
+    // }
+  }
+
+  async ngAfterViewInit() {
+    const canvas &#x3D; this.canvasRef.nativeElement;
+    const ctx &#x3D; canvas.getContext(&#x27;2d&#x27;);
+    if (!ctx) return;
+
+
+    this.drawStartShape();
+
+    // pobieramy dane obrazu
+    const imgData &#x3D; ctx.getImageData(0, 0, canvas.width, canvas.height);
+    const data &#x3D; imgData.data;
+
+    function isInside(x: number, y: number): boolean {
+      const idx &#x3D; (y * canvas.width + x) * 4;
+      return data[idx + 3] &gt; 0; // sprawdzamy alpha kanał
+    }
+    function isBorder(x: number, y: number): boolean {
+      if (!isInside(x, y)) return false;
+      return !(isInside(x - 1, y) &amp;&amp; isInside(x + 1, y) &amp;&amp; isInside(x, y - 1) &amp;&amp; isInside(x, y + 1));
+    }
+    for (let y &#x3D; 1; y &lt; canvas.height - 1; y++) {
+      for (let x &#x3D; 1; x &lt; canvas.width - 1; x++) {
+        if (isBorder(x, y)) {
+          this._borderPoints.push([x, y]);
+        }
+      }
+    }
+    
+    const cv &#x3D; await cvReadyPromise;
+
+
+    const src &#x3D; new cv.Mat(imgData.height, imgData.width, cv.CV_8UC4);
+    src.data.set(imgData.data);
+    const gray &#x3D; new cv.Mat();
+    cv.cvtColor(src, gray, cv.COLOR_RGBA2GRAY);
+    const binary &#x3D; new cv.Mat();
+    cv.threshold(gray, binary, 25, 255, cv.THRESH_BINARY);
+
+
+    const dst &#x3D; new cv.Mat();
+    cv.distanceTransform(binary, dst, cv.DIST_L2, 5);
+    this._dist &#x3D; [];
+    for (let y &#x3D; 0; y &lt; dst.rows; y++) {
+      const row: number[] &#x3D; [];
+      for (let x &#x3D; 0; x &lt; dst.cols; x++)
+        row.push(dst.floatAt(y, x));
+      this._dist.push(row);
+    }
+
+    for (let y &#x3D; 1; y &lt; this.height - 1; y++) {
+      for (let x &#x3D; 1; x &lt; this.width - 1; x++) {
+        if (!isInside(x, y)) continue;
+        const d &#x3D; this._dist[y][x];
+        if(d &lt; 1) continue;
+
+        let isMax &#x3D; true;
+        for (let dy &#x3D; -1; dy &lt;&#x3D; 1; dy++) {
+          for (let dx &#x3D; -1; dx &lt;&#x3D; 1; dx++) {
+            if (dx &#x3D;&#x3D;&#x3D; 0 &amp;&amp; dy &#x3D;&#x3D;&#x3D; 0) continue;
+            if (dx !&#x3D;&#x3D; 0 &amp;&amp; dy !&#x3D;&#x3D; 0) continue;
+            if (d + this.eps &lt;&#x3D; this._dist[y + dy][x + dx]) {
+              isMax &#x3D; false;
+              break;
+            }
+          }
+          if (!isMax) break;
+        }
+
+        if (isMax)
+          this._medial.push([x, y, d]);
+
+      }
+    }
+
+    this.calculateMATAnimationElements();
+    this.animate();
+  }
+
+  animate() {
+    if(this.ngZone){
+
+      this.ngZone.runOutsideAngular(() &#x3D;&gt; {
+        
+        this._frameId &#x3D; requestAnimationFrame(this.animate);
+        
+        this.drawStartShape();
+        this.drawMedialAxis();
+        this.drawAnimationElement(this.animationIndex);
+      });
+    }
+  };
+
+  ngOnDestroy(): void {
+    cancelAnimationFrame(this._frameId);
+  }
+}
+
+
+class MATAnimationElement {
+  constructor(public x: number, public y: number, public r: number, public borderPoints: [number, number][]) { }
+}</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'class';
+            var COMPODOC_CURRENT_PAGE_URL = 'MATAnimationElement.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

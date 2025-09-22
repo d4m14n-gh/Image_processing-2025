@@ -94,7 +94,7 @@ export class HistogramComponent implements AfterViewInit, OnDestroy {
     if(bitmap)
       this.bitmap = new InteractiveBitmap(bitmap.width, bitmap.height, bitmap, 255);
 
-    this._themeSubscription = this.themeService.themeChanged$.subscribe(() => this.updateChart());
+    this._themeSubscription = this.themeService.themeChanged.subscribe(() => this.updateChart());
   }
 
   /** Handles window resize events to update the histogram chart accordingly. 

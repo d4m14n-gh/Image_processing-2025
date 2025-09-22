@@ -1,0 +1,18 @@
+<div class="flex-col" style="padding: 8px; height: 100%; box-sizing: border-box;">
+
+
+
+    <mat-card appearance="outlined" class="topbar">
+        
+        <app-animation-controller [showValue]="false" [speedMultiplier]="15" [(value)]="animationIndex" (valueChanged)="animate()" [min]="0" [max]="250"></app-animation-controller>
+        
+    </mat-card>
+
+    <mat-card appearance="outlined" style="overflow: hidden; flex: 1;">
+        <div class="scrollable">
+             <canvas #canvas id="canvas" class="bitmap" [style.width.px]="width" [style.height.px]="height"></canvas>
+        </div>
+    </mat-card>
+
+
+</div>

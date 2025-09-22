@@ -17,16 +17,21 @@
                     </th>
                 }
             </tr>
-            @for (row of accumulator ; track $index) {
+            @for (row of accumulator ; track $index; let rowIndex = $index) {
                 <tr>
                     <th>
                         {{$index-((accumulator.length-1)/2)}}
                     </th>
                     @for (cell of row ; track $index) {
-                        <td>
-                            <!-- {{cell>0?cell:''}} -->
-                            {{cell}}
-                        </td>
+                        @if (currentAccumulator.has(`[${rowIndex}, ${$index}]`)) {
+                            <th>
+                                {{cell}}
+                            </th>
+                        } @else {
+                            <td>
+                                {{cell}}
+                            </td>
+                        }
                     }
                 </tr>
             }

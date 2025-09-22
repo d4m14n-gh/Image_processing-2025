@@ -91,7 +91,7 @@ export class BitmapComponent implements OnInit, OnDestroy{
    * @param themeService Angular ThemeService for managing theme changes
    */
   constructor(private ngZone: NgZone, private themeService: ThemeService) {
-    this._themeSubscription = this.themeService.themeChanged$.subscribe(theme => {
+    this._themeSubscription = this.themeService.themeChanged.subscribe(theme => {
       this.draw();
     });
   }

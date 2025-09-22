@@ -3,13 +3,14 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>image-processing-lecture-support documentation</title>
+        <title>Image Processing Lecture Support</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
 	   <link rel="stylesheet" href="../styles/style.css">
         <link rel="stylesheet" href="../styles/dark.css">
+        <link rel="stylesheet" href="../styles/github.css">
     </head>
     <body>
           <script>
@@ -78,7 +79,7 @@
 
         <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
                <div class="d-flex">
-                    <a href="../" class="navbar-brand">image-processing-lecture-support documentation</a>
+                    <a href="../" class="navbar-brand">Image Processing Lecture Support</a>
                     <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
                </div>
         </div>
@@ -176,6 +177,8 @@
                             <code>MatButtonToggleModule</code>
                             <code>MatIconModule</code>
                             <code>MatDialogModule</code>
+                            <code>MatSelectModule</code>
+                            <code>MatMenuModule</code>
                 </td>
             </tr>
 
@@ -222,6 +225,10 @@
                             <li>
                                 <a href="#kernel" >kernel</a>
                             </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#kernelType" >kernelType</a>
+                            </li>
                         </ul>
                     </td>
                 </tr>
@@ -236,6 +243,9 @@
                         <ul class="index-list">
                             <li>
                                 <a href="#close" >close</a>
+                            </li>
+                            <li>
+                                <a href="#setKernel" >setKernel</a>
                             </li>
                             <li>
                                 <a href="#submit" >submit</a>
@@ -277,7 +287,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/components/dialogs/kernel-dialog/kernel-dialog.component.ts:36</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/components/dialogs/kernel-dialog/kernel-dialog.component.ts:41</a></div>
                             </td>
                         </tr>
 
@@ -356,8 +366,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="43"
-                                    class="link-to-prism">src/app/components/dialogs/kernel-dialog/kernel-dialog.component.ts:43</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="158"
+                                    class="link-to-prism">src/app/components/dialogs/kernel-dialog/kernel-dialog.component.ts:158</a></div>
                         </td>
                     </tr>
 
@@ -369,6 +379,73 @@
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setKernel"></a>
+                    <span class="name">
+                        <span ><b>setKernel</b></span>
+                        <a href="#setKernel"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>setKernel(type: <a href="../undefineds/KernelType.html" target="_self">KernelType</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="48"
+                                    class="link-to-prism">src/app/components/dialogs/kernel-dialog/kernel-dialog.component.ts:48</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>type</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/enumerations.html#KernelType" target="_self" >KernelType</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -393,8 +470,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="47"
-                                    class="link-to-prism">src/app/components/dialogs/kernel-dialog/kernel-dialog.component.ts:47</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="162"
+                                    class="link-to-prism">src/app/components/dialogs/kernel-dialog/kernel-dialog.component.ts:162</a></div>
                         </td>
                     </tr>
 
@@ -446,7 +523,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/components/dialogs/kernel-dialog/kernel-dialog.component.ts:39</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/components/dialogs/kernel-dialog/kernel-dialog.component.ts:44</a></div>
                         </td>
                     </tr>
 
@@ -472,7 +549,33 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/components/dialogs/kernel-dialog/kernel-dialog.component.ts:30</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/components/dialogs/kernel-dialog/kernel-dialog.component.ts:34</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="kernelType"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>kernelType</b></span>
+                        <a href="#kernelType"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>KernelType</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/components/dialogs/kernel-dialog/kernel-dialog.component.ts:35</a></div>
                         </td>
                     </tr>
 
@@ -501,7 +604,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/components/dialogs/kernel-dialog/kernel-dialog.component.ts:31</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/components/dialogs/kernel-dialog/kernel-dialog.component.ts:36</a></div>
                                 </td>
                             </tr>
 
@@ -512,7 +615,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/components/dialogs/kernel-dialog/kernel-dialog.component.ts:34</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/components/dialogs/kernel-dialog/kernel-dialog.component.ts:39</a></div>
                                 </td>
                             </tr>
                     <tr>
@@ -570,6 +673,8 @@ import { MatIconModule } from &#x27;@angular/material/icon&#x27;;
 import { MatInputModule } from &#x27;@angular/material/input&#x27;;
 import { MatSliderModule } from &#x27;@angular/material/slider&#x27;;
 import { Kernel } from &#x27;../../../static/kernel&#x27;;
+import { MatSelectModule } from &#x27;@angular/material/select&#x27;;
+import { MatMenu, MatMenuModule } from &quot;@angular/material/menu&quot;;
 
 @Component({
   selector: &#x27;app-kernel-dialog&#x27;,
@@ -582,13 +687,16 @@ import { Kernel } from &#x27;../../../static/kernel&#x27;;
     MatButtonModule,
     MatButtonToggleModule,
     MatIconModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSelectModule,
+    MatMenuModule
 ],
   templateUrl: &#x27;./kernel-dialog.component.html&#x27;,
   styleUrl: &#x27;./kernel-dialog.component.css&#x27;
 })
 export class KernelDialogComponent {
   kernel: Kernel;
+  readonly kernelType &#x3D; KernelType;
   get size(): number {
     return this.kernel.size;
   }
@@ -596,10 +704,120 @@ export class KernelDialogComponent {
     this.kernel &#x3D; new Kernel(value);
   }
 
-  
+
   constructor(private dialogRef: MatDialogRef&lt;KernelDialogComponent&gt;, @Inject(MAT_DIALOG_DATA) public data: Kernel) {
     this.kernel &#x3D; data;
   }
+
+  setKernel(type: KernelType) {
+    if (type &#x3D;&#x3D;&#x3D; KernelType.Identity3x3) {
+      this.kernel &#x3D; new Kernel(3,
+        [[0, 0, 0],
+        [0, 1, 0],
+        [0, 0, 0]]
+      );
+    } else if (type &#x3D;&#x3D;&#x3D; KernelType.Sharpen3x3) {
+      this.kernel &#x3D; new Kernel(3,
+        [[0, -1, 0],
+        [-1, 5, -1],
+        [0, -1, 0]]
+      );
+    } else if (type &#x3D;&#x3D;&#x3D; KernelType.EdgeDetect3x3) {
+      this.kernel &#x3D; new Kernel(3,
+        [[-1, -1, -1],
+        [-1, 8, -1],
+        [-1, -1, -1]]
+      );
+    } else if (type &#x3D;&#x3D;&#x3D; KernelType.BoxBlur3x3) {
+      this.kernel &#x3D; new Kernel(3,
+        [[1, 1, 1],
+        [1, 1, 1],
+        [1, 1, 1]], 9
+      );
+    } else if (type &#x3D;&#x3D;&#x3D; KernelType.GaussianBlur3x3) {
+      this.kernel &#x3D; new Kernel(3,
+        [[1, 2, 1],
+        [2, 4, 2],
+        [1, 2, 1]], 16
+      );
+    } else if (type &#x3D;&#x3D;&#x3D; KernelType.Sobel3x3) {
+      this.kernel &#x3D; new Kernel(3,
+        [[-1, 0, 1],
+        [-2, 0, 2],
+        [-1, 0, 1]]
+      );
+    } else if (type &#x3D;&#x3D;&#x3D; KernelType.Prewitt3x3) {
+      this.kernel &#x3D; new Kernel(3,
+        [[-1, 0, 1],
+        [-1, 0, 1],
+        [-1, 0, 1]]
+      );
+    } else if (type &#x3D;&#x3D;&#x3D; KernelType.Laplacian3x3) {
+      this.kernel &#x3D; new Kernel(3,
+        [[0, 1, 0],
+        [1, -4, 1],
+        [0, 1, 0]]
+      );
+    }
+
+    else if (type &#x3D;&#x3D;&#x3D; KernelType.BoxBlur5x5) {
+      this.kernel &#x3D; new Kernel(5,
+        Array(5).fill(Array(5).fill(1)), 25
+      );
+    } else if (type &#x3D;&#x3D;&#x3D; KernelType.GaussianBlur5x5) {
+      this.kernel &#x3D; new Kernel(5,
+        [
+          [1, 4, 6, 4, 1],
+          [4, 16, 24, 16, 4],
+          [6, 24, 36, 24, 6],
+          [4, 16, 24, 16, 4],
+          [1, 4, 6, 4, 1]
+        ], 256
+      );
+    } else if (type &#x3D;&#x3D;&#x3D; KernelType.Sharpen5x5) {
+      this.kernel &#x3D; new Kernel(5,
+        [
+          [0, 0, -1, 0, 0],
+          [0, -1, -2, -1, 0],
+          [-1, -2, 16, -2, -1],
+          [0, -1, -2, -1, 0],
+          [0, 0, -1, 0, 0]
+        ]
+      );
+    } 
+
+    else if (type &#x3D;&#x3D;&#x3D; KernelType.BoxBlur7x7) {
+      this.kernel &#x3D; new Kernel(7,
+        Array(7).fill(Array(7).fill(1)), 49
+      );
+    } else if (type &#x3D;&#x3D;&#x3D; KernelType.GaussianBlur7x7) {
+      this.kernel &#x3D; new Kernel(7,
+        [
+          [0, 0, 1, 2, 1, 0, 0],
+          [0, 3, 13, 22, 13, 3, 0],
+          [1, 13, 59, 97, 59, 13, 1],
+          [2, 22, 97, 159, 97, 22, 2],
+          [1, 13, 59, 97, 59, 13, 1],
+          [0, 3, 13, 22, 13, 3, 0],
+          [0, 0, 1, 2, 1, 0, 0]
+        ], 1003
+      );
+    } else if (type &#x3D;&#x3D;&#x3D; KernelType.Sharpen7x7) {
+      this.kernel &#x3D; new Kernel(7,
+        [
+          [0, 0, 0, -1, 0, 0, 0],
+          [0, 0, -1, -2, -1, 0, 0],
+          [0, -1, -2, -4, -2, -1, 0],
+          [-1, -2, -4, 60, -4, -2, -1],
+          [0, -1, -2, -4, -2, -1, 0],
+          [0, 0, -1, -2, -1, 0, 0],
+          [0, 0, 0, -1, 0, 0, 0]
+        ]
+      );
+    }
+  }
+
+
 
   close() {
     this.dialogRef.close();
@@ -609,7 +827,28 @@ export class KernelDialogComponent {
     this.dialogRef.close(this.kernel);
   }
 }
-</code></pre>
+
+export enum KernelType {
+  // 3x3 - pełny zestaw
+  Identity3x3 &#x3D; &quot;Identity3x3&quot;,
+  Sharpen3x3 &#x3D; &quot;Sharpen3x3&quot;,
+  EdgeDetect3x3 &#x3D; &quot;EdgeDetect3x3&quot;,
+  BoxBlur3x3 &#x3D; &quot;BoxBlur3x3&quot;,
+  GaussianBlur3x3 &#x3D; &quot;GaussianBlur3x3&quot;,
+  Sobel3x3 &#x3D; &quot;Sobel3x3&quot;,
+  Prewitt3x3 &#x3D; &quot;Prewitt3x3&quot;,
+  Laplacian3x3 &#x3D; &quot;Laplacian3x3&quot;,
+
+  // 5x5 - minimalne
+  BoxBlur5x5 &#x3D; &quot;BoxBlur5x5&quot;,
+  GaussianBlur5x5 &#x3D; &quot;GaussianBlur5x5&quot;,
+  Sharpen5x5 &#x3D; &quot;Sharpen5x5&quot;,
+
+  // 7x7 - minimalne
+  BoxBlur7x7 &#x3D; &quot;BoxBlur7x7&quot;,
+  GaussianBlur7x7 &#x3D; &quot;GaussianBlur7x7&quot;,
+  Sharpen7x7 &#x3D; &quot;Sharpen7x7&quot;,
+}</code></pre>
     </div>
 
     <div class="tab-pane fade " id="templateData">
@@ -625,12 +864,44 @@ export class KernelDialogComponent {
         &lt;/header&gt;
 
         &lt;!-- &lt;div class&#x3D;&quot;flex-row&quot; style&#x3D;&quot;align-items: center; border: var(--default-border); border-radius: 10px;&quot;&gt; --&gt;
-            &lt;div style&#x3D;&quot;margin-bottom: 15px;&quot;&gt;
-                &lt;mat-button-toggle-group name&#x3D;&quot;fontStyle&quot; [(ngModel)]&#x3D;&quot;size&quot; style&#x3D;&quot;width: fit-content;&quot;&gt;
-                    &lt;mat-button-toggle [value]&#x3D;&quot;3&quot;&gt;3x3 Kernel&lt;/mat-button-toggle&gt;
-                    &lt;mat-button-toggle [value]&#x3D;&quot;5&quot;&gt;5x5 Kernel&lt;/mat-button-toggle&gt;
-                    &lt;mat-button-toggle [value]&#x3D;&quot;7&quot;&gt;7x7 Kernel&lt;/mat-button-toggle&gt;
-                &lt;/mat-button-toggle-group&gt;
+            &lt;div class&#x3D;&quot;flex-row topbar&quot; style&#x3D;&quot;margin-bottom: 15px;&quot;&gt;
+                &lt;mat-form-field class&#x3D;&quot;slim-form-field&quot; appearance&#x3D;&quot;outline&quot; subscriptSizing&#x3D;&quot;dynamic&quot;&gt;
+                    &lt;mat-select [(ngModel)]&#x3D;&quot;size&quot;&gt;
+                        &lt;mat-option [value]&#x3D;&quot;3&quot;&gt;3x3 Kernel&lt;/mat-option&gt;
+                        &lt;mat-option [value]&#x3D;&quot;5&quot;&gt;5x5 Kernel&lt;/mat-option&gt;
+                        &lt;mat-option [value]&#x3D;&quot;7&quot;&gt;7x7 Kernel&lt;/mat-option&gt;
+                    &lt;/mat-select&gt;
+                &lt;/mat-form-field&gt;
+                &lt;div class&#x3D;&quot;slim-divider&quot;&gt;&lt;/div&gt;
+                &lt;div class&#x3D;&quot;divider&quot;&gt;&lt;/div&gt;
+                &lt;div class&#x3D;&quot;slim-divider&quot;&gt;&lt;/div&gt;
+                &lt;button mat-flat-button style&#x3D;&quot;background-color: var(--mat-sys-tertiary); color: var(--mat-sys-on-primary) !important;&quot;  [matMenuTriggerFor]&#x3D;&quot;matmenu&quot;&gt;
+                    &lt;!-- &lt;mat-icon&gt;grid_on&lt;/mat-icon&gt; --&gt;
+                    Presets
+                &lt;/button&gt;
+                &lt;mat-menu #matmenu&#x3D;&quot;matMenu&quot;&gt;
+                    @if (size &#x3D;&#x3D;&#x3D; 3) {
+                    &lt;button mat-menu-item (click)&#x3D;&quot;setKernel(kernelType.Identity3x3)&quot;&gt;Identity&lt;/button&gt;
+                    &lt;button mat-menu-item (click)&#x3D;&quot;setKernel(kernelType.Sharpen3x3)&quot;&gt;Sharpen&lt;/button&gt;
+                    &lt;button mat-menu-item (click)&#x3D;&quot;setKernel(kernelType.EdgeDetect3x3)&quot;&gt;Edge Detect&lt;/button&gt;
+                    &lt;button mat-menu-item (click)&#x3D;&quot;setKernel(kernelType.BoxBlur3x3)&quot;&gt;Box Blur&lt;/button&gt;
+                    &lt;button mat-menu-item (click)&#x3D;&quot;setKernel(kernelType.GaussianBlur3x3)&quot;&gt;Gaussian Blur&lt;/button&gt;
+                    &lt;button mat-menu-item (click)&#x3D;&quot;setKernel(kernelType.Sobel3x3)&quot;&gt;Sobel&lt;/button&gt;
+                    &lt;button mat-menu-item (click)&#x3D;&quot;setKernel(kernelType.Prewitt3x3)&quot;&gt;Prewitt&lt;/button&gt;
+                    &lt;button mat-menu-item (click)&#x3D;&quot;setKernel(kernelType.Laplacian3x3)&quot;&gt;Laplacian&lt;/button&gt;
+                    }
+                    @if (size &#x3D;&#x3D;&#x3D; 5) {
+                    &lt;button mat-menu-item (click)&#x3D;&quot;setKernel(kernelType.BoxBlur5x5)&quot;&gt;Box Blur&lt;/button&gt;
+                    &lt;button mat-menu-item (click)&#x3D;&quot;setKernel(kernelType.GaussianBlur5x5)&quot;&gt;Gaussian Blur&lt;/button&gt;
+                    &lt;button mat-menu-item (click)&#x3D;&quot;setKernel(kernelType.Sharpen5x5)&quot;&gt;Sharpen&lt;/button&gt;
+                
+                    }
+                    @if (size &#x3D;&#x3D;&#x3D; 7) {
+                    &lt;button mat-menu-item (click)&#x3D;&quot;setKernel(kernelType.BoxBlur7x7)&quot;&gt;Box Blur&lt;/button&gt;
+                    &lt;button mat-menu-item (click)&#x3D;&quot;setKernel(kernelType.GaussianBlur7x7)&quot;&gt;Gaussian Blur&lt;/button&gt;
+                    &lt;button mat-menu-item (click)&#x3D;&quot;setKernel(kernelType.Sharpen7x7)&quot;&gt;Sharpen&lt;/button&gt;
+                    }
+                &lt;/mat-menu&gt;
             &lt;/div&gt;
             
            
@@ -653,7 +924,7 @@ export class KernelDialogComponent {
 &lt;/mat-dialog-content&gt;
 
 &lt;mat-dialog-actions class&#x3D;&quot;flex-row&quot; style&#x3D;&quot;align-items: center;&quot;&gt;
-    &lt;mat-form-field class&#x3D;&quot;example-full-width&quot; appearance&#x3D;&quot;outline&quot; subscriptSizing&#x3D;&quot;dynamic&quot;&gt;
+    &lt;mat-form-field class&#x3D;&quot;example-full-width slim-form-field&quot; appearance&#x3D;&quot;outline&quot; subscriptSizing&#x3D;&quot;dynamic&quot;&gt;
         &lt;mat-label&gt;Divider&lt;/mat-label&gt;
         &lt;input matInput type&#x3D;&quot;number&quot; placeholder&#x3D;&quot;Ex. 9&quot; [(ngModel)]&#x3D;&quot;kernel.divider&quot; step&#x3D;&quot;1&quot;&gt;
     &lt;/mat-form-field&gt;
@@ -697,8 +968,8 @@ export class KernelDialogComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><mat-dialog-content style="min-height: 650px; height: 650px; padding: 0; user-select: none;">    <div class="flex-col"        style="padding: 20px; width: 100%; height: 100%; box-sizing: border-box; align-items: center;">        <header class="flex-row" style="align-items: center; gap: 10px;">            <mat-icon>                grid_on            </mat-icon>            <h3>Enter Kernel Values</h3>        </header>        <!-- <div class="flex-row" style="align-items: center; border: var(--default-border); border-radius: 10px;"> -->            <div style="margin-bottom: 15px;">                <mat-button-toggle-group name="fontStyle" [(ngModel)]="size" style="width: fit-content;">                    <mat-button-toggle [value]="3">3x3 Kernel</mat-button-toggle>                    <mat-button-toggle [value]="5">5x5 Kernel</mat-button-toggle>                    <mat-button-toggle [value]="7">7x7 Kernel</mat-button-toggle>                </mat-button-toggle-group>            </div>                               <!-- </div> -->        <div class="flex-col" style="margin: auto; width: fit-content; gap: 5px;">            @for (row of kernel.kernel; track $index; let i=$index) {            <div class="flex-row" style="gap: 5px">                @for (value of row; track $index; let j=$index) {                <!-- <mat-form-field class="example-full-width" appearance="outline" style="width: 50px; height: 50px;"> -->                <input class="kernel-cell" type="number" [(ngModel)]="kernel.kernel[j][i]" style="text-align: center;"                    step="1">                <!-- </mat-form-field> -->                }            </div>            }        </div>    </div></mat-dialog-content><mat-dialog-actions class="flex-row" style="align-items: center;">    <mat-form-field class="example-full-width" appearance="outline" subscriptSizing="dynamic">        <mat-label>Divider</mat-label>        <input matInput type="number" placeholder="Ex. 9" [(ngModel)]="kernel.divider" step="1">    </mat-form-field>    <span style="flex: 1"></span>    <button mat-flat-button (click)="close()" style="background-color: var(--mat-sys-neutral); color: var(--mat-sys-on-primary);">        <mat-icon>cancel</mat-icon>        Cancel    </button>    <button mat-flat-button style="background-color: var(--mat-sys-tertiary)" (click)="submit()">        <mat-icon>save</mat-icon>        OK    </button></mat-dialog-actions></div>'
-    var COMPONENTS = [{'name': 'AccumulatorDialogComponent', 'selector': 'app-accumulator-dialog'},{'name': 'AnimationControllerComponent', 'selector': 'app-animation-controller'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BinaryBitmapEditorComponent', 'selector': 'app-binary-bitmap-editor'},{'name': 'BitmapComponent', 'selector': 'app-bitmap'},{'name': 'BitmapEditorComponent', 'selector': 'app-bitmap-editor'},{'name': 'ConvolutionalFilterAnimationComponent', 'selector': 'app-convolutional-filter-animation'},{'name': 'HelpComponent', 'selector': 'app-help'},{'name': 'HistogramComponent', 'selector': 'app-histogram'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'HoughTransformAnimationComponent', 'selector': 'app-hough-transform-animation'},{'name': 'KernelDialogComponent', 'selector': 'app-kernel-dialog'},{'name': 'MatrixDisplayComponent', 'selector': 'app-matrix-display'},{'name': 'MedianFilterAnimationComponent', 'selector': 'app-median-filter-animation'},{'name': 'MorphologicalOperationsAnimationComponent', 'selector': 'app-morphological-operations-animation'},{'name': 'PageNotFoundComponent', 'selector': 'app-page-not-found'},{'name': 'ShapeBitmapEditorComponent', 'selector': 'app-shape-bitmap-editor'},{'name': 'StructuringElementEditorComponent', 'selector': 'app-structuring-element-editor'}];
+        var COMPONENT_TEMPLATE = '<div><mat-dialog-content style="min-height: 650px; height: 650px; padding: 0; user-select: none;">    <div class="flex-col"        style="padding: 20px; width: 100%; height: 100%; box-sizing: border-box; align-items: center;">        <header class="flex-row" style="align-items: center; gap: 10px;">            <mat-icon>                grid_on            </mat-icon>            <h3>Enter Kernel Values</h3>        </header>        <!-- <div class="flex-row" style="align-items: center; border: var(--default-border); border-radius: 10px;"> -->            <div class="flex-row topbar" style="margin-bottom: 15px;">                <mat-form-field class="slim-form-field" appearance="outline" subscriptSizing="dynamic">                    <mat-select [(ngModel)]="size">                        <mat-option [value]="3">3x3 Kernel</mat-option>                        <mat-option [value]="5">5x5 Kernel</mat-option>                        <mat-option [value]="7">7x7 Kernel</mat-option>                    </mat-select>                </mat-form-field>                <div class="slim-divider"></div>                <div class="divider"></div>                <div class="slim-divider"></div>                <button mat-flat-button style="background-color: var(--mat-sys-tertiary); color: var(--mat-sys-on-primary) !important;"  [matMenuTriggerFor]="matmenu">                    <!-- <mat-icon>grid_on</mat-icon> -->                    Presets                </button>                <mat-menu #matmenu="matMenu">                    @if (size === 3) {                    <button mat-menu-item (click)="setKernel(kernelType.Identity3x3)">Identity</button>                    <button mat-menu-item (click)="setKernel(kernelType.Sharpen3x3)">Sharpen</button>                    <button mat-menu-item (click)="setKernel(kernelType.EdgeDetect3x3)">Edge Detect</button>                    <button mat-menu-item (click)="setKernel(kernelType.BoxBlur3x3)">Box Blur</button>                    <button mat-menu-item (click)="setKernel(kernelType.GaussianBlur3x3)">Gaussian Blur</button>                    <button mat-menu-item (click)="setKernel(kernelType.Sobel3x3)">Sobel</button>                    <button mat-menu-item (click)="setKernel(kernelType.Prewitt3x3)">Prewitt</button>                    <button mat-menu-item (click)="setKernel(kernelType.Laplacian3x3)">Laplacian</button>                    }                    @if (size === 5) {                    <button mat-menu-item (click)="setKernel(kernelType.BoxBlur5x5)">Box Blur</button>                    <button mat-menu-item (click)="setKernel(kernelType.GaussianBlur5x5)">Gaussian Blur</button>                    <button mat-menu-item (click)="setKernel(kernelType.Sharpen5x5)">Sharpen</button>                                    }                    @if (size === 7) {                    <button mat-menu-item (click)="setKernel(kernelType.BoxBlur7x7)">Box Blur</button>                    <button mat-menu-item (click)="setKernel(kernelType.GaussianBlur7x7)">Gaussian Blur</button>                    <button mat-menu-item (click)="setKernel(kernelType.Sharpen7x7)">Sharpen</button>                    }                </mat-menu>            </div>                               <!-- </div> -->        <div class="flex-col" style="margin: auto; width: fit-content; gap: 5px;">            @for (row of kernel.kernel; track $index; let i=$index) {            <div class="flex-row" style="gap: 5px">                @for (value of row; track $index; let j=$index) {                <!-- <mat-form-field class="example-full-width" appearance="outline" style="width: 50px; height: 50px;"> -->                <input class="kernel-cell" type="number" [(ngModel)]="kernel.kernel[j][i]" style="text-align: center;"                    step="1">                <!-- </mat-form-field> -->                }            </div>            }        </div>    </div></mat-dialog-content><mat-dialog-actions class="flex-row" style="align-items: center;">    <mat-form-field class="example-full-width slim-form-field" appearance="outline" subscriptSizing="dynamic">        <mat-label>Divider</mat-label>        <input matInput type="number" placeholder="Ex. 9" [(ngModel)]="kernel.divider" step="1">    </mat-form-field>    <span style="flex: 1"></span>    <button mat-flat-button (click)="close()" style="background-color: var(--mat-sys-neutral); color: var(--mat-sys-on-primary);">        <mat-icon>cancel</mat-icon>        Cancel    </button>    <button mat-flat-button style="background-color: var(--mat-sys-tertiary)" (click)="submit()">        <mat-icon>save</mat-icon>        OK    </button></mat-dialog-actions></div>'
+    var COMPONENTS = [{'name': 'AccumulatorDialogComponent', 'selector': 'app-accumulator-dialog'},{'name': 'AnimationControllerComponent', 'selector': 'app-animation-controller'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BinaryBitmapEditorComponent', 'selector': 'app-binary-bitmap-editor'},{'name': 'BitmapComponent', 'selector': 'app-bitmap'},{'name': 'BitmapEditorComponent', 'selector': 'app-bitmap-editor'},{'name': 'ConvolutionalFilterAnimationComponent', 'selector': 'app-convolutional-filter-animation'},{'name': 'DocsComponent', 'selector': 'app-docs'},{'name': 'GrassfireAnimationComponent', 'selector': 'app-grassfire-animation'},{'name': 'HelpComponent', 'selector': 'app-help'},{'name': 'HistogramComponent', 'selector': 'app-histogram'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'HoughTransformAnimationComponent', 'selector': 'app-hough-transform-animation'},{'name': 'KernelDialogComponent', 'selector': 'app-kernel-dialog'},{'name': 'MatrixDisplayComponent', 'selector': 'app-matrix-display'},{'name': 'MedianFilterAnimationComponent', 'selector': 'app-median-filter-animation'},{'name': 'MorphologicalOperationsAnimationComponent', 'selector': 'app-morphological-operations-animation'},{'name': 'PageNotFoundComponent', 'selector': 'app-page-not-found'},{'name': 'ShapeBitmapEditorComponent', 'selector': 'app-shape-bitmap-editor'},{'name': 'StructuringElementEditorComponent', 'selector': 'app-structuring-element-editor'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'KernelDialogComponent'};
 </script>

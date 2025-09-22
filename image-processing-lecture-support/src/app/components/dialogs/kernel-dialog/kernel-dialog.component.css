@@ -38,5 +38,19 @@ input[type=number] {
     appearance: none;
     -moz-appearance: textfield;
 }
+ .slim-form-field:focus {
+    outline: none !important;
+    border: var(--default-border) !important;
+}
+
+.slim-form-field {
+    width: 140px;
+    --mat-form-field-container-vertical-padding: 10px;
+    --mat-form-field-container-height: 40px;
+    --mat-form-field-outlined-focus-outline-width: 1px;
+    --mdc-outlined-text-field-focus-outline-width: 1px;
+    --mdc-outlined-text-field-focus-outline-color: var(--mat-sys-primary);
+    --mdc-outlined-text-field-container-shape: 8px;
+}
 
 /* <div class="mat-mdc-form-field-subscript-wrapper mat-mdc-form-field-bottom-align"><div aria-atomic="true" aria-live="polite" class="mat-mdc-form-field-hint-wrapper"><!--container--><!--container--><div class="mat-mdc-form-field-hint-spacer"></div><!--container--></div></div> */

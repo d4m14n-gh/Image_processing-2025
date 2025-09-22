@@ -48,6 +48,8 @@ export class AnimationControllerComponent implements OnInit, OnDestroy {
   max = input<number>(255);
   /** Step size for incrementing/decrementing the value (frame). */
   step = input<number>(1);
+  /** Speed multiplier input for external control of animation speed. */
+  speedMultiplier = input<number>(1);
 
   /** Current value (frame) of the animation. */
   value = model<number>(0);
@@ -161,7 +163,7 @@ export class AnimationControllerComponent implements OnInit, OnDestroy {
 
       this._timeoutId = setTimeout(() => {
         this.animate();
-      }, this._interval / this.speed);
+      }, this._interval / (this.speed * this.speedMultiplier()));
     }
   }
 

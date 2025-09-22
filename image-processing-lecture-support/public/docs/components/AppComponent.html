@@ -3,13 +3,14 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>image-processing-lecture-support documentation</title>
+        <title>Image Processing Lecture Support</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
 	   <link rel="stylesheet" href="../styles/style.css">
         <link rel="stylesheet" href="../styles/dark.css">
+        <link rel="stylesheet" href="../styles/github.css">
     </head>
     <body>
           <script>
@@ -78,7 +79,7 @@
 
         <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
                <div class="d-flex">
-                    <a href="../" class="navbar-brand">image-processing-lecture-support documentation</a>
+                    <a href="../" class="navbar-brand">Image Processing Lecture Support</a>
                     <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
                </div>
         </div>
@@ -422,13 +423,16 @@ export class AppComponent {
         &lt;a mat-list-item routerLink&#x3D;&quot;/home&quot;&gt;Home&lt;/a&gt;
         &lt;!-- &lt;a mat-list-item routerLink&#x3D;&quot;/help&quot;&gt;Help&lt;/a&gt; --&gt;
         &lt;a mat-list-item routerLink&#x3D;&quot;/editor&quot;&gt;Bitmap Editor&lt;/a&gt;
-        &lt;a mat-list-item routerLink&#x3D;&quot;/shape-editor&quot;&gt;Shape Editor #tmp&lt;/a&gt;
         &lt;!-- &lt;a mat-list-item routerLink&#x3D;&quot;/binary-editor&quot;&gt;Binary Bitmap Editor #tmp&lt;/a&gt; --&gt;
         &lt;a mat-list-item routerLink&#x3D;&quot;/histogram&quot;&gt;Histogram&lt;/a&gt;
         &lt;a mat-list-item routerLink&#x3D;&quot;/median-filters&quot;&gt;Median Filters&lt;/a&gt;
         &lt;a mat-list-item routerLink&#x3D;&quot;/convolutional-filters&quot;&gt;Convolutional Filters&lt;/a&gt;
         &lt;a mat-list-item routerLink&#x3D;&quot;/morphological-operations&quot;&gt;Morphological Operations&lt;/a&gt;
         &lt;a mat-list-item routerLink&#x3D;&quot;/hough-transform&quot;&gt;Hough Transform&lt;/a&gt;
+        &lt;a mat-list-item routerLink&#x3D;&quot;/mat-animation&quot;&gt;Medial Axis Transform&lt;/a&gt;
+        &lt;!-- &lt;a mat-list-item routerLink&#x3D;&quot;/grassfire-animation&quot;&gt;Grassfire Algorithm&lt;/a&gt; --&gt;
+        &lt;!-- &lt;a mat-list-item href&#x3D;&quot;/docs&quot;&gt;Technical documentation&lt;/a&gt; --&gt;
+        &lt;a mat-list-item routerLink&#x3D;&quot;/docs&quot;&gt;Technical documentation&lt;/a&gt;
       &lt;/mat-nav-list&gt;
       }
     &lt;/div&gt;
@@ -467,8 +471,8 @@ export class AppComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><header>  <mat-icon class="menu-icon" (click)="sidenav.toggle()">    menu  </mat-icon>  <h4 style="margin: 0;">    {{title}}  </h4>  <span class="spacer"></span>  <mat-icon class="menu-icon" [routerLink]="[\'/home\']">    <mat-icon>help</mat-icon>  </mat-icon>  <mat-icon class="menu-icon" (click)="themeService.toggleTheme()">    {{themeService.getTheme()==\'light\'?\'dark_mode\':\'light_mode\'}}  </mat-icon></header><mat-sidenav-container>  <mat-sidenav #sidenav mode="over" [autoFocus]="false" closed (mouseenter)="sidenav.open()"    (mouseleave)="sidenav.close()">    <div>      @if (sidenav.opened) {      <mat-nav-list>        <a mat-list-item routerLink="/home">Home</a>        <!-- <a mat-list-item routerLink="/help">Help</a> -->        <a mat-list-item routerLink="/editor">Bitmap Editor</a>        <a mat-list-item routerLink="/shape-editor">Shape Editor #tmp</a>        <!-- <a mat-list-item routerLink="/binary-editor">Binary Bitmap Editor #tmp</a> -->        <a mat-list-item routerLink="/histogram">Histogram</a>        <a mat-list-item routerLink="/median-filters">Median Filters</a>        <a mat-list-item routerLink="/convolutional-filters">Convolutional Filters</a>        <a mat-list-item routerLink="/morphological-operations">Morphological Operations</a>        <a mat-list-item routerLink="/hough-transform">Hough Transform</a>      </mat-nav-list>      }    </div>  </mat-sidenav>  <mat-sidenav-content>    <router-outlet />  </mat-sidenav-content></mat-sidenav-container></div>'
-    var COMPONENTS = [{'name': 'AccumulatorDialogComponent', 'selector': 'app-accumulator-dialog'},{'name': 'AnimationControllerComponent', 'selector': 'app-animation-controller'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BinaryBitmapEditorComponent', 'selector': 'app-binary-bitmap-editor'},{'name': 'BitmapComponent', 'selector': 'app-bitmap'},{'name': 'BitmapEditorComponent', 'selector': 'app-bitmap-editor'},{'name': 'ConvolutionalFilterAnimationComponent', 'selector': 'app-convolutional-filter-animation'},{'name': 'HelpComponent', 'selector': 'app-help'},{'name': 'HistogramComponent', 'selector': 'app-histogram'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'HoughTransformAnimationComponent', 'selector': 'app-hough-transform-animation'},{'name': 'KernelDialogComponent', 'selector': 'app-kernel-dialog'},{'name': 'MatrixDisplayComponent', 'selector': 'app-matrix-display'},{'name': 'MedianFilterAnimationComponent', 'selector': 'app-median-filter-animation'},{'name': 'MorphologicalOperationsAnimationComponent', 'selector': 'app-morphological-operations-animation'},{'name': 'PageNotFoundComponent', 'selector': 'app-page-not-found'},{'name': 'ShapeBitmapEditorComponent', 'selector': 'app-shape-bitmap-editor'},{'name': 'StructuringElementEditorComponent', 'selector': 'app-structuring-element-editor'}];
+        var COMPONENT_TEMPLATE = '<div><header>  <mat-icon class="menu-icon" (click)="sidenav.toggle()">    menu  </mat-icon>  <h4 style="margin: 0;">    {{title}}  </h4>  <span class="spacer"></span>  <mat-icon class="menu-icon" [routerLink]="[\'/home\']">    <mat-icon>help</mat-icon>  </mat-icon>  <mat-icon class="menu-icon" (click)="themeService.toggleTheme()">    {{themeService.getTheme()==\'light\'?\'dark_mode\':\'light_mode\'}}  </mat-icon></header><mat-sidenav-container>  <mat-sidenav #sidenav mode="over" [autoFocus]="false" closed (mouseenter)="sidenav.open()"    (mouseleave)="sidenav.close()">    <div>      @if (sidenav.opened) {      <mat-nav-list>        <a mat-list-item routerLink="/home">Home</a>        <!-- <a mat-list-item routerLink="/help">Help</a> -->        <a mat-list-item routerLink="/editor">Bitmap Editor</a>        <!-- <a mat-list-item routerLink="/binary-editor">Binary Bitmap Editor #tmp</a> -->        <a mat-list-item routerLink="/histogram">Histogram</a>        <a mat-list-item routerLink="/median-filters">Median Filters</a>        <a mat-list-item routerLink="/convolutional-filters">Convolutional Filters</a>        <a mat-list-item routerLink="/morphological-operations">Morphological Operations</a>        <a mat-list-item routerLink="/hough-transform">Hough Transform</a>        <a mat-list-item routerLink="/mat-animation">Medial Axis Transform</a>        <!-- <a mat-list-item routerLink="/grassfire-animation">Grassfire Algorithm</a> -->        <!-- <a mat-list-item href="/docs">Technical documentation</a> -->        <a mat-list-item routerLink="/docs">Technical documentation</a>      </mat-nav-list>      }    </div>  </mat-sidenav>  <mat-sidenav-content>    <router-outlet />  </mat-sidenav-content></mat-sidenav-container></div>'
+    var COMPONENTS = [{'name': 'AccumulatorDialogComponent', 'selector': 'app-accumulator-dialog'},{'name': 'AnimationControllerComponent', 'selector': 'app-animation-controller'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BinaryBitmapEditorComponent', 'selector': 'app-binary-bitmap-editor'},{'name': 'BitmapComponent', 'selector': 'app-bitmap'},{'name': 'BitmapEditorComponent', 'selector': 'app-bitmap-editor'},{'name': 'ConvolutionalFilterAnimationComponent', 'selector': 'app-convolutional-filter-animation'},{'name': 'DocsComponent', 'selector': 'app-docs'},{'name': 'GrassfireAnimationComponent', 'selector': 'app-grassfire-animation'},{'name': 'HelpComponent', 'selector': 'app-help'},{'name': 'HistogramComponent', 'selector': 'app-histogram'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'HoughTransformAnimationComponent', 'selector': 'app-hough-transform-animation'},{'name': 'KernelDialogComponent', 'selector': 'app-kernel-dialog'},{'name': 'MatrixDisplayComponent', 'selector': 'app-matrix-display'},{'name': 'MedianFilterAnimationComponent', 'selector': 'app-median-filter-animation'},{'name': 'MorphologicalOperationsAnimationComponent', 'selector': 'app-morphological-operations-animation'},{'name': 'PageNotFoundComponent', 'selector': 'app-page-not-found'},{'name': 'ShapeBitmapEditorComponent', 'selector': 'app-shape-bitmap-editor'},{'name': 'StructuringElementEditorComponent', 'selector': 'app-structuring-element-editor'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'AppComponent'};
 </script>

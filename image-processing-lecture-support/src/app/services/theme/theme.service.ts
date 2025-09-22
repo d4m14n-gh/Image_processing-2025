@@ -12,7 +12,7 @@ export class ThemeService {
   /** Observable to notify subscribers of theme changes. */
   private themeChangedSource = new Subject<string>();
   /** Observable stream for theme changes. */
-  themeChanged$ = this.themeChangedSource.asObservable();
+  themeChanged = this.themeChangedSource.asObservable();
   
   /** Initializes the theme service, setting the theme based on local storage or defaulting to light theme. */
   constructor() {

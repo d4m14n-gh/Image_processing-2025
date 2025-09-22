@@ -15,7 +15,7 @@ customElements.define('compodoc-menu', class extends HTMLElement {
         <nav>
             <ul class="list">
                 <li class="title">
-                    <a href="index.html" data-type="index-link">image-processing-lecture-support documentation</a>
+                    <a href="index.html" data-type="index-link">Image Processing Lecture Support</a>
                 </li>
 
                 <li class="divider"></li>
@@ -78,6 +78,12 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="components/ConvolutionalFilterAnimationComponent.html" data-type="entity-link" >ConvolutionalFilterAnimationComponent</a>
                             </li>
                             <li class="link">
+                                <a href="components/DocsComponent.html" data-type="entity-link" >DocsComponent</a>
+                            </li>
+                            <li class="link">
+                                <a href="components/GrassfireAnimationComponent.html" data-type="entity-link" >GrassfireAnimationComponent</a>
+                            </li>
+                            <li class="link">
                                 <a href="components/HelpComponent.html" data-type="entity-link" >HelpComponent</a>
                             </li>
                             <li class="link">
@@ -137,6 +143,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </li>
                             <li class="link">
                                 <a href="classes/Line.html" data-type="entity-link" >Line</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/MATAnimationElement.html" data-type="entity-link" >MATAnimationElement</a>
                             </li>
                             <li class="link">
                                 <a href="classes/Point.html" data-type="entity-link" >Point</a>

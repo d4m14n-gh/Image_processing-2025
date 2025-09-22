@@ -3,13 +3,14 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>image-processing-lecture-support documentation</title>
+        <title>Image Processing Lecture Support</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
 	   <link rel="stylesheet" href="../styles/style.css">
         <link rel="stylesheet" href="../styles/dark.css">
+        <link rel="stylesheet" href="../styles/github.css">
     </head>
     <body>
           <script>
@@ -78,7 +79,7 @@
 
         <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
                <div class="d-flex">
-                    <a href="../" class="navbar-brand">image-processing-lecture-support documentation</a>
+                    <a href="../" class="navbar-brand">Image Processing Lecture Support</a>
                     <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
                </div>
         </div>
@@ -490,7 +491,7 @@ export class AccumulatorDialogComponent {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><mat-dialog-content style="width: 100%; padding: 10px; padding-top: 22px;">    <div class="scrollable" style="height: 100%;">            <table style="margin: auto;">                <tr>                    <th style="position: relative; width: 45px; height: 45px;">                        <svg width="100%" height="100%">                            <line x1="0" y1="0" x2="100%" y2="100%" stroke="var(--mat-sys-outline)" />                        </svg>                        <div style="position:absolute; bottom:6px; left:10px;">&rho;</div>                        <div style="position:absolute; top:6px; right:10px;">&theta;</div>                    </th>                    @for (_ of accumulator[0]; track $index) {                    <th>                        {{($index)*thetaStep}}&deg;                    </th>                }            </tr>            @for (row of accumulator ; track $index) {                <tr>                    <th>                        {{$index-((accumulator.length-1)/2)}}                    </th>                    @for (cell of row ; track $index) {                        <td>                            <!-- {{cell>0?cell:\'\'}} -->                            {{cell}}                        </td>                    }                </tr>            }        </table>    </div></mat-dialog-content></div>'
-    var COMPONENTS = [{'name': 'AccumulatorDialogComponent', 'selector': 'app-accumulator-dialog'},{'name': 'AnimationControllerComponent', 'selector': 'app-animation-controller'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BinaryBitmapEditorComponent', 'selector': 'app-binary-bitmap-editor'},{'name': 'BitmapComponent', 'selector': 'app-bitmap'},{'name': 'BitmapEditorComponent', 'selector': 'app-bitmap-editor'},{'name': 'ConvolutionalFilterAnimationComponent', 'selector': 'app-convolutional-filter-animation'},{'name': 'HelpComponent', 'selector': 'app-help'},{'name': 'HistogramComponent', 'selector': 'app-histogram'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'HoughTransformAnimationComponent', 'selector': 'app-hough-transform-animation'},{'name': 'KernelDialogComponent', 'selector': 'app-kernel-dialog'},{'name': 'MatrixDisplayComponent', 'selector': 'app-matrix-display'},{'name': 'MedianFilterAnimationComponent', 'selector': 'app-median-filter-animation'},{'name': 'MorphologicalOperationsAnimationComponent', 'selector': 'app-morphological-operations-animation'},{'name': 'PageNotFoundComponent', 'selector': 'app-page-not-found'},{'name': 'ShapeBitmapEditorComponent', 'selector': 'app-shape-bitmap-editor'},{'name': 'StructuringElementEditorComponent', 'selector': 'app-structuring-element-editor'}];
+    var COMPONENTS = [{'name': 'AccumulatorDialogComponent', 'selector': 'app-accumulator-dialog'},{'name': 'AnimationControllerComponent', 'selector': 'app-animation-controller'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BinaryBitmapEditorComponent', 'selector': 'app-binary-bitmap-editor'},{'name': 'BitmapComponent', 'selector': 'app-bitmap'},{'name': 'BitmapEditorComponent', 'selector': 'app-bitmap-editor'},{'name': 'ConvolutionalFilterAnimationComponent', 'selector': 'app-convolutional-filter-animation'},{'name': 'DocsComponent', 'selector': 'app-docs'},{'name': 'GrassfireAnimationComponent', 'selector': 'app-grassfire-animation'},{'name': 'HelpComponent', 'selector': 'app-help'},{'name': 'HistogramComponent', 'selector': 'app-histogram'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'HoughTransformAnimationComponent', 'selector': 'app-hough-transform-animation'},{'name': 'KernelDialogComponent', 'selector': 'app-kernel-dialog'},{'name': 'MatrixDisplayComponent', 'selector': 'app-matrix-display'},{'name': 'MedianFilterAnimationComponent', 'selector': 'app-median-filter-animation'},{'name': 'MorphologicalOperationsAnimationComponent', 'selector': 'app-morphological-operations-animation'},{'name': 'PageNotFoundComponent', 'selector': 'app-page-not-found'},{'name': 'ShapeBitmapEditorComponent', 'selector': 'app-shape-bitmap-editor'},{'name': 'StructuringElementEditorComponent', 'selector': 'app-structuring-element-editor'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'AccumulatorDialogComponent'};
 </script>

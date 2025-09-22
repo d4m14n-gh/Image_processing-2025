@@ -10,12 +10,44 @@
         </header>
 
         <!-- <div class="flex-row" style="align-items: center; border: var(--default-border); border-radius: 10px;"> -->
-            <div style="margin-bottom: 15px;">
-                <mat-button-toggle-group name="fontStyle" [(ngModel)]="size" style="width: fit-content;">
-                    <mat-button-toggle [value]="3">3x3 Kernel</mat-button-toggle>
-                    <mat-button-toggle [value]="5">5x5 Kernel</mat-button-toggle>
-                    <mat-button-toggle [value]="7">7x7 Kernel</mat-button-toggle>
-                </mat-button-toggle-group>
+            <div class="flex-row topbar" style="margin-bottom: 15px;">
+                <mat-form-field class="slim-form-field" appearance="outline" subscriptSizing="dynamic">
+                    <mat-select [(ngModel)]="size">
+                        <mat-option [value]="3">3x3 Kernel</mat-option>
+                        <mat-option [value]="5">5x5 Kernel</mat-option>
+                        <mat-option [value]="7">7x7 Kernel</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <div class="slim-divider"></div>
+                <div class="divider"></div>
+                <div class="slim-divider"></div>
+                <button mat-flat-button style="background-color: var(--mat-sys-tertiary); color: var(--mat-sys-on-primary) !important;"  [matMenuTriggerFor]="matmenu">
+                    <!-- <mat-icon>grid_on</mat-icon> -->
+                    Presets
+                </button>
+                <mat-menu #matmenu="matMenu">
+                    @if (size === 3) {
+                    <button mat-menu-item (click)="setKernel(kernelType.Identity3x3)">Identity</button>
+                    <button mat-menu-item (click)="setKernel(kernelType.Sharpen3x3)">Sharpen</button>
+                    <button mat-menu-item (click)="setKernel(kernelType.EdgeDetect3x3)">Edge Detect</button>
+                    <button mat-menu-item (click)="setKernel(kernelType.BoxBlur3x3)">Box Blur</button>
+                    <button mat-menu-item (click)="setKernel(kernelType.GaussianBlur3x3)">Gaussian Blur</button>
+                    <button mat-menu-item (click)="setKernel(kernelType.Sobel3x3)">Sobel</button>
+                    <button mat-menu-item (click)="setKernel(kernelType.Prewitt3x3)">Prewitt</button>
+                    <button mat-menu-item (click)="setKernel(kernelType.Laplacian3x3)">Laplacian</button>
+                    }
+                    @if (size === 5) {
+                    <button mat-menu-item (click)="setKernel(kernelType.BoxBlur5x5)">Box Blur</button>
+                    <button mat-menu-item (click)="setKernel(kernelType.GaussianBlur5x5)">Gaussian Blur</button>
+                    <button mat-menu-item (click)="setKernel(kernelType.Sharpen5x5)">Sharpen</button>
+                
+                    }
+                    @if (size === 7) {
+                    <button mat-menu-item (click)="setKernel(kernelType.BoxBlur7x7)">Box Blur</button>
+                    <button mat-menu-item (click)="setKernel(kernelType.GaussianBlur7x7)">Gaussian Blur</button>
+                    <button mat-menu-item (click)="setKernel(kernelType.Sharpen7x7)">Sharpen</button>
+                    }
+                </mat-menu>
             </div>
             
            
@@ -38,7 +70,7 @@
 </mat-dialog-content>
 
 <mat-dialog-actions class="flex-row" style="align-items: center;">
-    <mat-form-field class="example-full-width" appearance="outline" subscriptSizing="dynamic">
+    <mat-form-field class="example-full-width slim-form-field" appearance="outline" subscriptSizing="dynamic">
         <mat-label>Divider</mat-label>
         <input matInput type="number" placeholder="Ex. 9" [(ngModel)]="kernel.divider" step="1">
     </mat-form-field>
