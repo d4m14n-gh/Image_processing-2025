@@ -5,6 +5,9 @@
 
 This project is an educational web application designed to support the teaching and learning of image processing concepts. Built with Angular and Angular Material, it provides interactive visualizations and tools for exploring various image processing algorithms and techniques. Key features include bitmap editing, step-by-step animation of convolutional and median filters, morphological operations, histogram analysis, and Hough transform visualization. The application allows users to experiment with different parameters, observe algorithm behavior in real time, and gain a deeper understanding of fundamental image processing operations. Its modular structure and user-friendly interface make it suitable for both classroom demonstrations and individual study.
 
+## Live Demo
+You can try out the application directly in your browser at [Live Demo](https://d4m14n-gh.github.io/Image_processing-2025/).
+
 ## Tech stack
 - Angular 19 + Angular Material
 - Chart.js for charts
